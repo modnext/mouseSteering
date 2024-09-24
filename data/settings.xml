@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<settings>
+  <setting name="sensitivity" float="1.000000"/>
+  <setting name="invertXAxis" boolean="false"/>
+  <setting name="autoSaveVehicle" boolean="false"/>
+  <setting name="linearity" float="1.000000"/>
+  <setting name="smoothness" float="0.000000"/>
+  <setting name="deadzone" float="0.000000"/>
+  <setting name="hud" integer="1" />
+  <setting name="hudText" boolean="true"/>
+  <setting name="hudLookBackInside" boolean="false"/>
+</settings>

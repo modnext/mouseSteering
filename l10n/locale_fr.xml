@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_MS_TOGGLE" v="Activer/Désactiver la direction"/>
+    <e k="input_MS_SAVE" v="Sauvegarder ou Supprimer le véhicule"/>
+    <e k="input_MS_PAUSE" v="Mettre en pause la direction"/>
+    <e k="input_MS_SHOW_MENU" v="Ouvrir le menu de direction"/>
+
+    <!-- Menu Titles and Descriptions -->
+    <e k="mouseSteering_ui_title" v="Direction à la souris"/>
+    <e k="mouseSteering_ui_toolTip" v="Ouvrir le menu de direction à la souris."/>
+    <e k="mouseSteering_ui_subtitle" v="Contrôlez votre véhicule avec la souris."/>
+
+    <!-- Hero Title and Description -->
+    <e k="mouseSteering_ui_heading" v="Personnalisez vos commandes"/>
+    <e k="mouseSteering_ui_details" v="Prenez le contrôle de la direction de votre véhicule avec votre souris. Ajustez la sensibilité, l'accélération, la zone morte, et plus encore pour obtenir un contrôle précis et une expérience de conduite réaliste."/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general_section" v="Général"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensibilité"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Inverser l'axe X"/>
+
+    <!-- Vehicle Storage -->
+    <e k="mouseSteering_ui_vehicles_section" v="Gestion des véhicules"/>
+    <e k="mouseSteering_ui_autoSaveVehicle" v="Activer la sauvegarde automatique"/>
+    <e k="mouseSteering_ui_vehicleDialog" v="Gérer les véhicules"/>
+
+    <!-- Control Attributes -->
+    <e k="mouseSteering_ui_controlAttributes_section" v="Attributs de contrôle"/>
+    <e k="mouseSteering_ui_linearity" v="Linéarité"/>
+    <e k="mouseSteering_ui_smoothness" v="Fluidité"/>
+    <e k="mouseSteering_ui_deadzone" v="Zone morte"/>
+
+    <!-- Head-Up Display -->
+    <e k="mouseSteering_ui_hud_section" v="Affichage tête haute (HUD)"/>
+    <e k="mouseSteering_ui_hud" v="Mode"/>
+    <e k="mouseSteering_ui_both" v="Extérieur et Intérieur"/>
+    <e k="mouseSteering_ui_inside" v="Intérieur"/>
+    <e k="mouseSteering_ui_outside" v="Extérieur"/>
+    <e k="mouseSteering_ui_hudText" v="Texte de l'angle de direction"/>
+    <e k="mouseSteering_ui_hudLookBackInside" v="Afficher l'indicateur en regardant en arrière (vue intérieure)"/>
+
+    <!-- Vehicle List Dialog -->
+    <e k="mouseSteering_ui_vehicleList" v="Liste des véhicules"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Nom du véhicule"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Plaque"/>
+    <e k="mouseSteering_ui_youWantToDeleteAllVehicles" v="Êtes-vous sûr de vouloir supprimer tous les véhicules ?"/>
+    <e k="mouseSteering_ui_allVehiclesDeleted" v="Tous les véhicules ont été supprimés avec succès !"/>
+    <e k="mouseSteering_ui_youWantToSyncVehicles" v="Voulez-vous synchroniser les véhicules avec la ferme ?"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Les véhicules ont été synchronisés avec succès !"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_open" v="Ouvrir"/>
+    <e k="mouseSteering_button_save" v="Sauvegarder"/>
+    <e k="mouseSteering_button_delete" v="Supprimer"/>
+    <e k="mouseSteering_button_deleteAll" v="Tout supprimer"/>
+    <e k="mouseSteering_button_sync" v="Sync"/>
+
+    <!-- Notifications -->
+    <e k="mouseSteering_notification_vehicleLimit" v="Limite de véhicules atteinte. Impossible de sauvegarder des véhicules supplémentaires"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Véhicule ajouté avec succès"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Véhicule supprimé avec succès"/>
+  </elements>
+</l10n>

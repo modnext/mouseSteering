@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="80">
+  <author>aaw3k</author>
+  <version>1.0.0.0</version>
+
+  <title>
+    <en>Mouse Steering</en>
+    <de>Maussteuerung</de>
+    <fr>Contrôle À La Souris</fr>
+    <pl>Sterowanie Myszą</pl>
+  </title>
+
+  <description>
+    <en><![CDATA[Thanks to this modification, you gain precise control over the vehicle's wheels using your mouse, allowing for realistic steering.
+
+For more information or to report a bug, please visit <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></en>
+    <de><![CDATA[Dank dieser Modifikation erhältst du präzise Kontrolle über die Fahrzeugräder mit deiner Maus, was eine realistische Lenkung ermöglicht.
+
+Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></de>
+    <fr><![CDATA[Grâce à cette modification, vous obtenez un contrôle précis des roues du véhicule à l'aide de votre souris, permettant une conduite réaliste.
+
+Pour plus d'informations ou pour signaler un bug, veuillez visiter la page <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></fr>
+    <pl><![CDATA[Dzięki tej modyfikacji zyskujesz precyzyjną kontrolę nad kołami pojazdu za pomocą myszy, co pozwala na realistyczne sterowanie.
+
+Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></pl>
+  </description>
+
+  <l10n filenamePrefix="l10n/locale"/>
+
+  <iconFilename>icon_mouseSteering.dds</iconFilename>
+  <multiplayer supported="true" />
+
+  <extraSourceFiles>
+    <sourceFile filename="src/main.lua" />
+  </extraSourceFiles>
+
+  <specializations>
+    <specialization name="mouseSteeringVehicle" className="MouseSteeringVehicle" filename="src/specializations/vehicles/MouseSteeringVehicle.lua"/>
+  </specializations>
+
+  <actions>
+    <action name="MS_TOGGLE" category="VEHICLE" axisType="HALF"/>
+    <action name="MS_SAVE" category="VEHICLE" axisType="HALF"/>
+    <action name="MS_PAUSE" category="VEHICLE" axisType="HALF"/>
+    <action name="MS_SHOW_MENU" category="VEHICLE" axisType="HALF"/>
+  </actions>
+
+  <inputBinding>
+    <actionBinding action="MS_TOGGLE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_space"/>
+    </actionBinding>
+    <actionBinding action="MS_SAVE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_period"/>
+    </actionBinding>
+    <actionBinding action="MS_PAUSE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt"/>
+    </actionBinding>
+    <actionBinding action="MS_SHOW_MENU">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_slash"/>
+    </actionBinding>
+  </inputBinding>
+</modDesc>

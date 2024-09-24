@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_MS_TOGGLE" v="Włącz/Wyłącz Sterowanie"/>
+    <e k="input_MS_SAVE" v="Zapisz lub Usuń Pojazd"/>
+    <e k="input_MS_PAUSE" v="Wstrzymaj Sterowanie"/>
+    <e k="input_MS_SHOW_MENU" v="Otwórz Menu Sterowania"/>
+
+    <!-- Menu Titles and Descriptions -->
+    <e k="mouseSteering_ui_title" v="Sterowanie Myszą"/>
+    <e k="mouseSteering_ui_toolTip" v="Otwórz menu sterowania myszą."/>
+    <e k="mouseSteering_ui_subtitle" v="Steruj pojazdem za pomocą myszy."/>
+
+    <!-- Hero Title and Description -->
+    <e k="mouseSteering_ui_heading" v="Dostosuj swoje sterowanie"/>
+    <e k="mouseSteering_ui_details" v="Przejmij kontrolę nad kierownicą pojazdu za pomocą myszy. Dostosuj czułość, przyspieszenie, martwą strefę i nie tylko, aby uzyskać precyzyjną kontrolę i realistyczne wrażenia z jazdy."/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general_section" v="Ogólne"/>
+    <e k="mouseSteering_ui_sensitivity" v="Czułość"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Odwróć Oś X"/>
+
+    <!-- Vehicle Storage -->
+    <e k="mouseSteering_ui_vehicles_section" v="Przechowywanie Pojazdów"/>
+    <e k="mouseSteering_ui_autoSaveVehicle" v="Automatyczne Zapisywanie Pojazdu"/>
+    <e k="mouseSteering_ui_vehicleDialog" v="Lista Pojazdów"/>
+
+    <!-- Control Attributes -->
+    <e k="mouseSteering_ui_controlAttributes_section" v="Atrybuty Sterowania"/>
+    <e k="mouseSteering_ui_linearity" v="Liniowość"/>
+    <e k="mouseSteering_ui_smoothness" v="Płynność"/>
+    <e k="mouseSteering_ui_deadzone" v="Martwa Strefa"/>
+
+    <!-- Head-Up Display Settings -->
+    <e k="mouseSteering_ui_hud_section" v="Interfejs Wskaźnika (HUD)"/>
+    <e k="mouseSteering_ui_hud" v="Tryb"/>
+    <e k="mouseSteering_ui_both" v="Zewnątrz i Wewnątrz"/>
+    <e k="mouseSteering_ui_inside" v="Wewnątrz"/>
+    <e k="mouseSteering_ui_outside" v="Na Zewnątrz"/>
+    <e k="mouseSteering_ui_hudText" v="Tekst Wskaźnika Kąta Skrętu"/>
+    <e k="mouseSteering_ui_hudLookBackInside" v="Pokaż wskaźnik patrząc wstecz (widok wnętrza)"/>
+
+    <!-- Vehicle List Dialog -->
+    <e k="mouseSteering_ui_vehicleList" v="Lista Pojazdów"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Nazwa Pojazdu"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Tablica Rej."/>
+    <e k="mouseSteering_ui_youWantToDeleteAllVehicles" v="Czy na pewno chcesz usunąć wszystkie pojazdy?"/>
+    <e k="mouseSteering_ui_allVehiclesDeleted" v="Wszystkie pojazdy zostały pomyślnie usunięte!"/>
+    <e k="mouseSteering_ui_youWantToSyncVehicles" v="Czy chcesz zsynchronizować pojazdy z farmą?"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Pojazdy zostały pomyślnie zsynchronizowane!"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_open" v="Otwórz"/>
+    <e k="mouseSteering_button_save" v="Zapisz"/>
+    <e k="mouseSteering_button_delete" v="Usuń"/>
+    <e k="mouseSteering_button_deleteAll" v="Usuń Wszystko"/>
+    <e k="mouseSteering_button_sync" v="Synchronizuj"/>
+
+    <!-- Notifications -->
+    <e k="mouseSteering_notification_vehicleLimit" v="Osiągnięto limit pojazdów. Nie można zapisać dodatkowych pojazdów"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Pojazd został pomyślnie dodany"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Pojazd został pomyślnie usunięty"/>
+  </elements>
+</l10n>

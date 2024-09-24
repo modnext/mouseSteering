@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+
+  <!-- New Layer and Background -->
+  <GuiElement type="empty" profile="newLayer" />
+  <GuiElement type="bitmap" profile="dialogFullscreenBg" />
+
+  <!-- Main Dialog Container -->
+  <GuiElement type="bitmap" profile="mouseSteeringVehiclesDialogBg" id="dialogElement">
+    <!-- Dialog Header -->
+    <GuiElement type="bitmap" profile="dialogHeaderDocked">
+      <GuiElement type="flowLayout" autoValidateLayout="true">
+        <GuiElement type="bitmap" profile="mouseSteeringVehiclesDialogHeaderIcon" />
+        <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeaderText" text="$l10n_mouseSteering_ui_vehicleList" />
+      </GuiElement>
+    </GuiElement>
+
+    <!-- Dialog Content -->
+    <GuiElement type="boxLayout" profile="mouseSteeringVehiclesDialogBox">
+      <!-- Table Vehicle Header -->
+      <GuiElement type="boxLayout" profile="mouseSteeringVehiclesDialogHeaderBox">
+        <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeader" text="$l10n_mouseSteering_ui_nameVehicle" size="534px 48px" textOffset="10.5px 0"/>
+        <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeader" text="$l10n_mouseSteering_ui_plateVehicle" size="225px 48px" textAlignment="center" />
+      </GuiElement>
+
+      <!-- Table Vehicle List -->
+      <GuiElement type="smoothList" profile="mouseSteeringVehiclesDialogList" id="vehiclesList" onDoubleClick="onDoubleClickVehiclesListItem" listDelegate="self" showHighlights="true">
+        <GuiElement type="listItem" profile="mouseSteeringVehiclesDialogListItem">
+          <GuiElement type="bitmap" profile="mouseSteeringVehiclesDialogItemIcon" name="icon"/>
+          <GuiElement type="text" profile="mouseSteeringVehiclesDialogItemName" name="name"/>
+          <GuiElement type="text" profile="mouseSteeringVehiclesDialogItemLicensePlate" name="licensePlate"/>
+        </GuiElement>
+      </GuiElement>
+
+      <!-- Table Vehicle List Scrollbar -->
+      <GuiElement type="threePartBitmap" profile="verticalListSliderRightDocked" position="24px -48px" size="12px 532px">
+        <GuiElement type="slider" profile="verticalListSliderBar" dataElementId="vehiclesList" size="6px 524px"/>
+      </GuiElement>
+    </GuiElement>
+
+    <!-- Dialog Buttons -->
+    <GuiElement type="flowLayout" profile="buttonBoxDialog" id="buttonsPC">
+      <GuiElement type="button" profile="buttonBack" text="$l10n_button_back" onClick="onClickBack" id="backButton" />
+      <GuiElement type="button" profile="buttonOK" text="$l10n_mouseSteering_button_save" onClick="onClickToggle" id="toggleButton" />
+      <GuiElement type="button" profile="buttonExtra1" text="$l10n_mouseSteering_button_deleteAll" onClick="onClickDeleteAll" id="deleteAllButton" />
+      <GuiElement type="button" profile="buttonExtra2" text="$l10n_mouseSteering_button_sync" onClick="onClickSync" id="syncButton" />
+    </GuiElement>
+
+    <!-- Dialog Message -->
+    <GuiElement type="empty" profile="newLayer" />
+    <GuiElement type="flowLayout" profile="mouseSteeringVehiclesDialogMessageBg" id="messageBackground">
+      <GuiElement type="bitmap" profile="mouseSteeringVehiclesDialogMessageIcon" />
+      <GuiElement type="text" profile="mouseSteeringVehiclesDialogMessage" text="$l10n_mouseSteering_notification_vehicleLimit" />
+    </GuiElement>
+  </GuiElement>
+</GUI>

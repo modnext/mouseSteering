@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_MS_TOGGLE" v="Lenkung Ein-/Ausschalten"/>
+    <e k="input_MS_SAVE" v="Fahrzeug speichern oder entfernen"/>
+    <e k="input_MS_PAUSE" v="Lenkung pausieren"/>
+    <e k="input_MS_SHOW_MENU" v="Lenkungsmenü öffnen"/>
+
+    <!-- Menu Titles and Descriptions -->
+    <e k="mouseSteering_ui_title" v="Mauslenkung"/>
+    <e k="mouseSteering_ui_toolTip" v="Das Mauslenkungsmenü öffnen."/>
+    <e k="mouseSteering_ui_subtitle" v="Steuere dein Fahrzeug mit der Maus."/>
+
+    <!-- Hero Title and Description -->
+    <e k="mouseSteering_ui_heading" v="Passen Sie Ihre Steuerung an"/>
+    <e k="mouseSteering_ui_details" v="Übernehmen Sie die Kontrolle über das Lenkrad des Fahrzeugs mit Ihrer Maus. Passen Sie Empfindlichkeit, Beschleunigung, Totzone und mehr an, um präzise Kontrolle und realistische Fahrerlebnisse zu erzielen."/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general_section" v="Allgemein"/>
+    <e k="mouseSteering_ui_sensitivity" v="Empfindlichkeit"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X-Achse umkehren"/>
+
+    <!-- Vehicle Storage -->
+    <e k="mouseSteering_ui_vehicles_section" v="Fahrzeugverwaltung"/>
+    <e k="mouseSteering_ui_autoSaveVehicle" v="Auto-Speichern aktivieren"/>
+    <e k="mouseSteering_ui_vehicleDialog" v="Fahrzeuge verwalten"/>
+
+    <!-- Control Attributes -->
+    <e k="mouseSteering_ui_controlAttributes_section" v="Steuerungsattribute"/>
+    <e k="mouseSteering_ui_linearity" v="Linearität"/>
+    <e k="mouseSteering_ui_smoothness" v="Sanftheit"/>
+    <e k="mouseSteering_ui_deadzone" v="Totzone"/>
+
+    <!-- Head-Up Display -->
+    <e k="mouseSteering_ui_hud_section" v="Head-Up-Display (HUD)"/>
+    <e k="mouseSteering_ui_hud" v="Modus"/>
+    <e k="mouseSteering_ui_both" v="Außen und Innen"/>
+    <e k="mouseSteering_ui_inside" v="Innen"/>
+    <e k="mouseSteering_ui_outside" v="Außen"/>
+    <e k="mouseSteering_ui_hudText" v="Lenkwinkel-Text"/>
+    <e k="mouseSteering_ui_hudLookBackInside" v="Indikator beim Blick zurück anzeigen (Innenansicht)"/>
+
+    <!-- Vehicle List Dialog -->
+    <e k="mouseSteering_ui_vehicleList" v="Fahrzeugliste"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Fahrzeugname"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Kennzeichen"/>
+    <e k="mouseSteering_ui_youWantToDeleteAllVehicles" v="Sind Sie sicher, dass Sie alle Fahrzeuge löschen möchten?"/>
+    <e k="mouseSteering_ui_allVehiclesDeleted" v="Alle Fahrzeuge wurden erfolgreich gelöscht!"/>
+    <e k="mouseSteering_ui_youWantToSyncVehicles" v="Möchten Sie die Fahrzeuge mit dem Hof synchronisieren?"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Fahrzeuge wurden erfolgreich synchronisiert!"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_open" v="Öffnen"/>
+    <e k="mouseSteering_button_save" v="Speichern"/>
+    <e k="mouseSteering_button_delete" v="Löschen"/>
+    <e k="mouseSteering_button_deleteAll" v="Alle löschen"/>
+    <e k="mouseSteering_button_sync" v="Sync"/>
+
+    <!-- Notifications -->
+    <e k="mouseSteering_notification_vehicleLimit" v="Fahrzeuglimit erreicht. Keine zusätzlichen Fahrzeuge speicherbar"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Fahrzeug erfolgreich hinzugefügt"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Fahrzeug erfolgreich entfernt"/>
+  </elements>
+</l10n>
