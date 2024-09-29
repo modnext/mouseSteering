@@ -13,6 +13,12 @@ function MouseSteeringVehicle.prerequisitesPresent(specializations)
   return SpecializationUtil.hasSpecialization(Drivable, specializations)
 end
 
+function MouseSteeringVehicle.initSpecialization()
+  local schemaSavegame = Vehicle.xmlSchemaSavegame
+
+  schemaSavegame:register(XMLValueType.STRING, "vehicles.vehicle(?)." .. modName .. ".mouseSteeringVehicle#id", "ID of the vehicle")
+end
+
 function MouseSteeringVehicle.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "updateSteering", MouseSteeringVehicle.updateSteering)
   SpecializationUtil.registerFunction(vehicleType, "isHudVisible", MouseSteeringVehicle.isHudVisible)
@@ -24,18 +30,13 @@ end
 
 function MouseSteeringVehicle.registerEventListeners(vehicleType)
   SpecializationUtil.registerEventListener(vehicleType, "onLoad", MouseSteeringVehicle)
-  SpecializationUtil.registerEventListener(vehicleType, "onPostLoad", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onDelete", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onUpdate", MouseSteeringVehicle)
+  SpecializationUtil.registerEventListener(vehicleType, "onReadStream", MouseSteeringVehicle)
+  SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onEnterVehicle", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", MouseSteeringVehicle)
-end
-
-function MouseSteeringVehicle.initSpecialization()
-  local schemaSavegame = Vehicle.xmlSchemaSavegame
-
-  schemaSavegame:register(XMLValueType.STRING, "vehicles.vehicle(?)." .. modName .. ".mouseSteeringVehicle#id", "ID of the vehicle")
 end
 
 function MouseSteeringVehicle:onLoad(savegame)
@@ -62,29 +63,30 @@ function MouseSteeringVehicle:saveToXMLFile(xmlFile, key, usedModNames)
   xmlFile:setValue(key .. "#id", spec.vehicleId)
 end
 
-function MouseSteeringVehicle:onPostLoad(savegame)
-  local spec = self.spec_mouseSteeringVehicle
-
-  spec.enabled = spec.mouseSteering:isVehicleSaved(self)
-end
-
 function MouseSteeringVehicle:onDelete()
   local spec = self.spec_mouseSteeringVehicle
 
   spec.mouseSteering:removeVehicle(self)
+  spec.mouseSteering, spec.settings = nil, nil
+end
 
-  -- Clear any remaining references
-  spec.mouseSteering = nil
-  spec.settings = nil
+function MouseSteeringVehicle:onReadStream(streamId, connection)
+  local spec = self.spec_mouseSteeringVehicle
+
+  spec.vehicleId = streamReadString(streamId)
+end
+
+function MouseSteeringVehicle:onWriteStream(streamId, connection)
+  local spec = self.spec_mouseSteeringVehicle
+
+  streamWriteString(streamId, spec.vehicleId)
 end
 
 function MouseSteeringVehicle:onUpdate(dt)
-  if not self:getIsEntered() then
-    return
+  if self:getIsEntered() then
+    self:updateSteering(dt)
+    self:updateHudDisplay()
   end
-
-  self:updateSteering(dt)
-  self:updateHudDisplay()
 end
 
 function MouseSteeringVehicle:updateSteering(dt)
@@ -159,15 +161,15 @@ end
 function MouseSteeringVehicle:updateControlledVehicle(isEntering)
   local spec = self.spec_mouseSteeringVehicle
 
-  if not spec.mouseSteering:getHudVisible() then
-    return
+  if spec.mouseSteering:getHudVisible() then
+    spec.mouseSteering:setControlledVehicle(isEntering and self or nil)
   end
-
-  local controlledVehicle = isEntering and self or nil
-  spec.mouseSteering:setControlledVehicle(controlledVehicle)
 end
 
 function MouseSteeringVehicle:onEnterVehicle()
+  local spec = self.spec_mouseSteeringVehicle
+
+  spec.enabled = spec.mouseSteering:isVehicleSaved(self)
   self:updateControlledVehicle(true)
 end
 
