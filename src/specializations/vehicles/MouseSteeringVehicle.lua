@@ -97,18 +97,20 @@ function MouseSteeringVehicle:updateSteering(dt)
   end
 
   local showMouseCursor = g_inputBinding:getShowMouseCursor()
-  if not (spec.paused or showMouseCursor) then
-    -- Calculate steering
-    local invertMultiplier = spec.settings.invertXAxis and -1 or 1
-    local axisSteer = spec.mouseSteering:getMovedSide() * invertMultiplier
-    spec.axisSide = spec.mouseSteering:normalizeAxis(spec.axisSide, axisSteer, spec.settings.sensitivity)
+  if self:getIsMotorStarted() then
+    if not (spec.paused or showMouseCursor) then
+      -- Calculate steering
+      local invertMultiplier = spec.settings.invertXAxis and -1 or 1
+      local axisSteer = spec.mouseSteering:getMovedSide() * invertMultiplier
+      spec.axisSide = spec.mouseSteering:normalizeAxis(spec.axisSide, axisSteer, spec.settings.sensitivity)
 
-    -- Apply filtering - deadzone and linearity
-    local filteredAxis = spec.mouseSteering:applyDeadzone(spec.axisSide, spec.settings.deadzone)
-    filteredAxis = spec.mouseSteering:applyLinearity(filteredAxis, spec.settings.linearity)
+      -- Apply filtering - deadzone and linearity
+      local filteredAxis = spec.mouseSteering:applyDeadzone(spec.axisSide, spec.settings.deadzone)
+      filteredAxis = spec.mouseSteering:applyLinearity(filteredAxis, spec.settings.linearity)
 
-    -- Apply smoothing
-    spec.axisSideSend = spec.mouseSteering:applySmoothness(spec.axisSideSend, filteredAxis, spec.settings.smoothness, dt)
+      -- Apply smoothing
+      spec.axisSideSend = spec.mouseSteering:applySmoothness(spec.axisSideSend, filteredAxis, spec.settings.smoothness, dt)
+    end
   end
 
   -- Send steering input to vehicle
@@ -119,7 +121,7 @@ end
 function MouseSteeringVehicle:isHudVisible(spec, isInside, activeCamera)
   local isObstructed = g_currentMission.hud.popupMessage:getVisible() or g_currentMission.hud.contextActionDisplay:getVisible()
 
-  if not spec.enabled or isObstructed then
+  if not spec.enabled or isObstructed or not self:getIsMotorStarted() then
     return false
   end
 
