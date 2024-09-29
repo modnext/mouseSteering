@@ -2,18 +2,18 @@
 <l10n>
   <elements>
     <!-- Input Bindings -->
-    <e k="input_MS_TOGGLE" v="Attiva/Disattiva la direzione."/>
-    <e k="input_MS_SAVE" v="Salva o cancella il veicolo."/>
-    <e k="input_MS_PAUSE" v="Metti in pausa lo sterzo."/>
-    <e k="input_MS_SHOW_MENU" v="Apri il menu di direzione."/>
+    <e k="input_MS_TOGGLE" v="Attiva/Disattiva la direzione"/>
+    <e k="input_MS_SAVE" v="Salva o cancella il veicolo"/>
+    <e k="input_MS_PAUSE" v="Metti in pausa lo sterzo"/>
+    <e k="input_MS_SHOW_MENU" v="Apri il menu di direzione"/>
 
     <!-- Menu Titles and Descriptions -->
-    <e k="mouseSteering_ui_title" v="Sterza con il mouse."/>
+    <e k="mouseSteering_ui_title" v="Sterza con il mouse"/>
     <e k="mouseSteering_ui_toolTip" v="Apri il menu di direzione con il mouse."/>
     <e k="mouseSteering_ui_subtitle" v="Controlla il tuo veicolo con il mouse."/>
 
     <!-- Hero Title and Description -->
-    <e k="mouseSteering_ui_heading" v="Personalizzare i controlli di gioco."/>
+    <e k="mouseSteering_ui_heading" v="Personalizzare i controlli di gioco"/>
     <e k="mouseSteering_ui_details" v="Controllate lo sterzo del vostro veicolo con il mouse. Regolate la sensibilità, l'accelerazione, la zona morta e altro ancora per un controllo preciso e un'esperienza di guida realistica."/>
 
     <!-- General Settings -->
