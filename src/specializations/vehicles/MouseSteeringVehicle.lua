@@ -96,24 +96,27 @@ function MouseSteeringVehicle:updateSteering(dt)
     return
   end
 
-  local showMouseCursor = g_inputBinding:getShowMouseCursor()
-  if self:getIsMotorStarted() then
-    if not (spec.paused or showMouseCursor) then
-      -- Calculate steering
-      local invertMultiplier = spec.settings.invertXAxis and -1 or 1
-      local axisSteer = spec.mouseSteering:getMovedSide() * invertMultiplier
-      spec.axisSide = spec.mouseSteering:normalizeAxis(spec.axisSide, axisSteer, spec.settings.sensitivity)
+  if not g_inputBinding:getShowMouseCursor() then
+    local isMotorStarted = self.getIsMotorStarted ~= nil and self:getIsMotorStarted()
+    local mouseMoved = spec.mouseSteering:getMovedSide() ~= 0 and not spec.paused
 
-      -- Apply filtering - deadzone and linearity
+    if isMotorStarted then
+      if not spec.paused then
+        local invertMultiplier = spec.settings.invertXAxis and -1 or 1
+        local axisSteer = spec.mouseSteering:getMovedSide() * invertMultiplier
+
+        spec.axisSide = spec.mouseSteering:normalizeAxis(spec.axisSide, axisSteer, spec.settings.sensitivity)
+      end
+
       local filteredAxis = spec.mouseSteering:applyDeadzone(spec.axisSide, spec.settings.deadzone)
       filteredAxis = spec.mouseSteering:applyLinearity(filteredAxis, spec.settings.linearity)
 
-      -- Apply smoothing
       spec.axisSideSend = spec.mouseSteering:applySmoothness(spec.axisSideSend, filteredAxis, spec.settings.smoothness, dt)
+    elseif not isMotorStarted and mouseMoved then
+      g_currentMission:showBlinkingWarning(g_i18n:getText("warning_motorNotStarted"), 2000)
     end
   end
 
-  -- Send steering input to vehicle
   Drivable.actionEventSteer(self, nil, spec.axisSideSend, nil, true, nil, InputDevice.CATEGORY.GAMEPAD)
 end
 
