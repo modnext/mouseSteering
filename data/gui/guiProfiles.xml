@@ -244,10 +244,10 @@
     <Value name="iconFilename" value="g_mouseSteeringUIFilename"/>
     <Value name="iconUVs" value="450px 0 48px 48px"/>
   </Profile>
-  
+
   <!-- Vehicles Dialog -->
   <Profile name="mouseSteeringVehiclesDialogBg" extends="dialogBg">
-    <Value name="size" value="760px 580px"/>
+    <Value name="size" value="824px 580px"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogHeaderIcon" extends="ingameMenuPriceGoodsIcon">
     <Value name="position" value="0"/>
@@ -262,7 +262,7 @@
     <Value name="textAutoWidth" value="true"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogHeaderBox" extends="ingameCalendarHeaderBox" with="anchorTopLeft">
-    <Value name="size" value="760px 48px"/>
+    <Value name="size" value="824px 48px"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogHeader" extends="ingameMenuPriceHeader">
     <Value name="size" value="380px 48px"/>
@@ -270,15 +270,15 @@
     <Value name="textOffset" value="0 0"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogBox" with="anchorMiddleCenter">
-    <Value name="size" value="760px 580px"/>
+    <Value name="size" value="824px 580px"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogList" extends="ingameMenuPriceList">
     <Value name="position" value="0 -48px"/>
-    <Value name="size" value="760px 532px"/>
+    <Value name="size" value="824px 532px"/>
     <Value name="imageColor" value="$preset_colorTransparent"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogListItem" extends="ingameMenuPriceListItem">
-    <Value name="size" value="760px 40px"/>
+    <Value name="size" value="824px 40px"/>
   </Profile>
   <Profile name="mouseSteeringVehiclesDialogItemIcon" extends="baseReference" with="anchorMiddleLeft">
     <Value name="position" value="10.5px 0"/>

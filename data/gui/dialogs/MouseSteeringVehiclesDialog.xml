@@ -19,7 +19,7 @@
     <GuiElement type="boxLayout" profile="mouseSteeringVehiclesDialogBox">
       <!-- Table Vehicle Header -->
       <GuiElement type="boxLayout" profile="mouseSteeringVehiclesDialogHeaderBox">
-        <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeader" text="$l10n_mouseSteering_ui_nameVehicle" size="534px 48px" textOffset="10.5px 0"/>
+        <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeader" text="$l10n_mouseSteering_ui_nameVehicle" size="598px 48px" textOffset="10.5px 0"/>
         <GuiElement type="text" profile="mouseSteeringVehiclesDialogHeader" text="$l10n_mouseSteering_ui_plateVehicle" size="225px 48px" textAlignment="center" />
       </GuiElement>
 
