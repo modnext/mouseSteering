@@ -322,32 +322,62 @@ function MouseSteering:normalizeAxis(axis, input, sensitivity)
   return math.min(math.max(axis + input * sensitivity, -1), 1)
 end
 
-function MouseSteering:applyDeadzone(axis, deadzone)
+function MouseSteering:bezier(t, p0, p1, p2, p3)
+  local u = 1 - t
+  return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3
+end
+
+function MouseSteering:applyLinearity(axis, params)
+  local linearity = params.linearity
+  local deadzone = params.deadzone
+
   if math.abs(axis) < deadzone then
     return 0
   end
 
-  local normalizedAxis = (math.abs(axis) - deadzone) / (1 - deadzone)
-  return (axis > 0 and 1 or -1) * normalizedAxis
+  local sign = (axis > 0) and 1 or -1
+  local adjustedAxis = (math.abs(axis) - deadzone) / (1 - deadzone)
+
+  if linearity == 1 then
+    return sign * adjustedAxis
+  end
+
+  local exponent = math.min(math.max(linearity, 0.25), 5)
+  local result = self:bezier(adjustedAxis ^ exponent, 0, 0.05, 0.15, 1)
+
+  return sign * math.min(1, math.max(0, result))
 end
 
-function MouseSteering:applyLinearity(axis, linearity)
-  if linearity == 1 then
-    return axis
+function MouseSteering:reverseLinearity(axis, params)
+  if math.abs(axis) < 1e-6 then
+    return 0
   end
 
-  local function bezier(t, p0, p1, p2, p3)
-    local u = 1 - t
-    return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3
-  end
-
-  local exponent = math.max(0.65, math.min(linearity, 5)) or 2
-  local bezierPoints = { 0, 0.05, 0.15, 1 }
-
+  local sign = (axis > 0) and 1 or -1
   local absAxis = math.abs(axis)
-  local result = bezier(math.pow(absAxis, exponent), unpack(bezierPoints))
 
-  return (axis >= 0 and 1 or -1) * math.max(0, math.min(1, result))
+  local linearity = params.linearity
+  local deadzone = params.deadzone
+
+  if linearity == 1 then
+    return sign * (absAxis * (1 - deadzone) + deadzone)
+  end
+
+  local exponent = math.min(math.max(linearity, 0.25), 5)
+  local low, high = 0, 1
+
+  while (high - low) > 1e-8 do
+    local mid = (low + high) / 2
+    local value = self:bezier(mid ^ exponent, 0, 0.05, 0.15, 1)
+
+    if value < absAxis then
+      low = mid
+    else
+      high = mid
+    end
+  end
+
+  return sign * (low * (1 - deadzone) + deadzone)
 end
 
 function MouseSteering:applySmoothness(current, target, smoothness, dt)
@@ -355,8 +385,10 @@ function MouseSteering:applySmoothness(current, target, smoothness, dt)
     return target
   end
 
-  local smoothingFactor = (1 - math.min(math.max(smoothness, 0.65), 0.85)) ^ 2
-  local smoothing = 1 - math.exp(-smoothingFactor * dt / 16.67)
+  smoothness = math.min(math.max(smoothness, 0.65), 0.85)
+  local smoothingFactor = (1 - smoothness) ^ 2
+  local decay = -dt / 16.67
+  local smoothing = 1 - math.exp(smoothingFactor * decay)
 
   return current + (target - current) * smoothing
 end
