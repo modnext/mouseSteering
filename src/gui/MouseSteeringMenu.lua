@@ -124,6 +124,34 @@ function MouseSteeringMenu:updateTexts()
   self.vehicleCountDisplay:setText(string.format("%s / %s", self.mouseSteering.vehicles.count, MouseSteering.MAX_VEHICLES))
 end
 
+function MouseSteeringMenu:onClickOpenPageSettingsControls()
+  self:changeScreen(InGameMenu)
+
+  local ingameMenu = g_currentMission.inGameMenu
+  ingameMenu:goToPage(ingameMenu.pageSettingsControls)
+  local settingsControlsFrame = ingameMenu.pageSettingsControls
+  local keyboardData = settingsControlsFrame.keyboardData
+
+  local mod = g_modManager:getModByName(self.mouseSteering.modName)
+  local title = mod and mod.title or "Mouse Steering"
+
+  for i, data in ipairs(keyboardData) do
+    if data.name == title then
+      local listElement = settingsControlsFrame.keyboardMouseTable
+
+      -- Smooth scrolling
+      listElement:setSelectedItem(i, 1)
+      listElement:makeSelectedCellVisible()
+
+      -- Lack of smooth scrolling
+      -- listElement:makeCellVisible(i, 1, true)
+      -- listElement:setSelectedItem(i, 1)
+
+      break
+    end
+  end
+end
+
 function MouseSteeringMenu:onSliderSensitivity(slider, value)
   if slider ~= self.sensitivity then
     return

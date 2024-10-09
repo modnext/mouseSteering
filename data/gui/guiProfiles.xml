@@ -240,7 +240,11 @@
     <Value name="iconFilename" value="g_mouseSteeringUIFilename"/>
     <Value name="iconUVs" value="250px 0 48px 48px"/>
   </Profile>
-
+  <Profile name="mouseSteeringMenuControlsKeyboard" extends="ingameMenuSettingsPauseButton" with="anchorMiddleLeft">
+    <Value name="iconFilename" value="g_mouseSteeringUIFilename"/>
+    <Value name="iconUVs" value="450px 0 48px 48px"/>
+  </Profile>
+  
   <!-- Vehicles Dialog -->
   <Profile name="mouseSteeringVehiclesDialogBg" extends="dialogBg">
     <Value name="size" value="760px 580px"/>

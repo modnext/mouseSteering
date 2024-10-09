@@ -31,6 +31,10 @@
           <GuiElement type="scrollingLayout" profile="mouseSteeringMenuBoxLayout" id="boxLayout" topClipperElementName="topClipper" bottomClipperElementName="bottomClipper">
             <!-- General Settings -->
             <GuiElement type="boxLayout" profile="mouseSteeringMenuWrapper">
+              <GuiElement type="text" profile="mouseSteeringMenuWrapperTitle" text="$l10n_mouseSteering_ui_controlsKeyboard"/>
+              <GuiElement type="button" profile="mouseSteeringMenuControlsKeyboard" text="$l10n_mouseSteering_button_open" onClick="onClickOpenPageSettingsControls"/>
+            </GuiElement>
+            <GuiElement type="boxLayout" profile="mouseSteeringMenuWrapper">
               <GuiElement type="text" profile="mouseSteeringMenuWrapperTitle" text="$l10n_mouseSteering_ui_sensitivity"/>
               <GuiElement type="mouseSteeringSlider" profile="mouseSteeringMenuSlider" onChanged="onSliderSensitivity" id="sensitivity" minValue="0.01" maxValue="8">
                 <GuiElement type="text" profile="mouseSteeringMenuSliderText" name="text" />
