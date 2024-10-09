@@ -102,7 +102,7 @@ function MouseSteeringMenu:setData(data)
   self.autoSaveVehicle:setState(data.autoSaveVehicle and 2 or 1)
   self.invertXAxis:setState(data.invertXAxis and 2 or 1)
 
-  local textDeadzone = data.smoothness == 0 and self.i18n:getText("ui_off") or string.format("%.2f", data.deadzone)
+  local textDeadzone = data.deadzone == 0 and self.i18n:getText("ui_off") or string.format("%.2f", data.deadzone)
   self.deadzone:setValue(data.deadzone)
   self.deadzone:setText(textDeadzone)
 
