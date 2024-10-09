@@ -55,21 +55,16 @@ function MouseSteeringVehiclesDialog:onOpen()
   FocusManager:setFocus(self.vehiclesList)
 end
 
--- TODO: This method needs refactoring
 function MouseSteeringVehiclesDialog:isValidVehicle(vehicle)
-  if vehicle == nil then
-    return false
+  if vehicle ~= nil and not vehicle.isDeleted and not vehicle.isDeleting and vehicle.getIsControlled ~= nil and vehicle.getSellPrice ~= nil and vehicle.price ~= nil and vehicle.price > 0 and self:isProperty(vehicle) and self:isType(vehicle) then
+    local mission = self.mouseSteering.mission
+
+    if mission ~= nil and mission.accessHandler ~= nil and mission.accessHandler:canPlayerAccess(vehicle) then
+      return true
+    end
   end
 
-  local mission = self.mouseSteering.mission
-  return not (vehicle.isDeleted or vehicle.isDeleting)
-    and mission.accessHandler:canPlayerAccess(vehicle)
-    and vehicle.getIsControlled ~= nil
-    and self:isProperty(vehicle)
-    and self:isType(vehicle)
-    and vehicle.getSellPrice ~= nil
-    and vehicle.price ~= nil
-    and vehicle.price > 0
+  return false
 end
 
 function MouseSteeringVehiclesDialog:isProperty(vehicle)

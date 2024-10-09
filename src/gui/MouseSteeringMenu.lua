@@ -102,7 +102,7 @@ function MouseSteeringMenu:setData(data)
   self.autoSaveVehicle:setState(data.autoSaveVehicle and 2 or 1)
   self.invertXAxis:setState(data.invertXAxis and 2 or 1)
 
-  local textDeadzone = data.smoothness == 0 and self.i18n:getText("ui_off") or string.format("%.2f", data.deadzone)
+  local textDeadzone = data.deadzone == 0 and self.i18n:getText("ui_off") or string.format("%.2f", data.deadzone)
   self.deadzone:setValue(data.deadzone)
   self.deadzone:setText(textDeadzone)
 
@@ -122,6 +122,34 @@ end
 
 function MouseSteeringMenu:updateTexts()
   self.vehicleCountDisplay:setText(string.format("%s / %s", self.mouseSteering.vehicles.count, MouseSteering.MAX_VEHICLES))
+end
+
+function MouseSteeringMenu:onClickOpenPageSettingsControls()
+  self:changeScreen(InGameMenu)
+
+  local ingameMenu = g_currentMission.inGameMenu
+  ingameMenu:goToPage(ingameMenu.pageSettingsControls)
+  local settingsControlsFrame = ingameMenu.pageSettingsControls
+  local keyboardData = settingsControlsFrame.keyboardData
+
+  local mod = g_modManager:getModByName(self.mouseSteering.modName)
+  local title = mod and mod.title or "Mouse Steering"
+
+  for i, data in ipairs(keyboardData) do
+    if data.name == title then
+      local listElement = settingsControlsFrame.keyboardMouseTable
+
+      -- Smooth scrolling
+      listElement:setSelectedItem(i, 1)
+      listElement:makeSelectedCellVisible()
+
+      -- Lack of smooth scrolling
+      -- listElement:makeCellVisible(i, 1, true)
+      -- listElement:setSelectedItem(i, 1)
+
+      break
+    end
+  end
 end
 
 function MouseSteeringMenu:onSliderSensitivity(slider, value)
