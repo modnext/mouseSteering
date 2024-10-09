@@ -24,6 +24,7 @@ function MouseSteeringVehicle.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "isHudVisible", MouseSteeringVehicle.isHudVisible)
   SpecializationUtil.registerFunction(vehicleType, "updateHudDisplay", MouseSteeringVehicle.updateHudDisplay)
   SpecializationUtil.registerFunction(vehicleType, "updateControlledVehicle", MouseSteeringVehicle.updateControlledVehicle)
+  SpecializationUtil.registerFunction(vehicleType, "getAxisSideForSteeringSync", MouseSteeringVehicle.getAxisSideForSteeringSync)
   SpecializationUtil.registerFunction(vehicleType, "getAxisSide", MouseSteeringVehicle.getAxisSide)
   SpecializationUtil.registerFunction(vehicleType, "getVehicleId", MouseSteeringVehicle.getVehicleId)
 end
@@ -31,9 +32,9 @@ end
 function MouseSteeringVehicle.registerEventListeners(vehicleType)
   SpecializationUtil.registerEventListener(vehicleType, "onLoad", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onDelete", MouseSteeringVehicle)
-  SpecializationUtil.registerEventListener(vehicleType, "onUpdate", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onReadStream", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", MouseSteeringVehicle)
+  SpecializationUtil.registerEventListener(vehicleType, "onUpdate", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onEnterVehicle", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onRegisterActionEvents", MouseSteeringVehicle)
@@ -46,8 +47,8 @@ function MouseSteeringVehicle:onLoad(savegame)
   spec.mouseSteering = g_currentMission.mouseSteering
   spec.settings = spec.mouseSteering.settings
 
-  spec.enabled, spec.paused = false, false
-  spec.axisSide, spec.axisSideSend = 0, 0
+  spec.enabled, spec.paused, spec.isRotating = false, false, false
+  spec.steerRaw, spec.axisSide = 0, 0
 
   -- Generate a unique identifier for the vehicle if it doesn't have one yet
   spec.vehicleId = string.format("%05x", math.random(0, 0xfffff)) or "unknown"
@@ -66,7 +67,6 @@ end
 function MouseSteeringVehicle:onDelete()
   local spec = self.spec_mouseSteeringVehicle
 
-  spec.mouseSteering:removeVehicle(self)
   spec.mouseSteering, spec.settings = nil, nil
 end
 
@@ -82,10 +82,24 @@ function MouseSteeringVehicle:onWriteStream(streamId, connection)
   streamWriteString(streamId, spec.vehicleId)
 end
 
-function MouseSteeringVehicle:onUpdate(dt)
-  if self:getIsEntered() then
+function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
+  local spec = self.spec_mouseSteeringVehicle
+
+  spec.isRotating = true
+
+  if not (self.getIsEntered ~= nil and self:getIsEntered()) then
+    return
+  end
+
+  if self.getIsControlled ~= nil and self:getIsControlled() then
     self:updateSteering(dt)
     self:updateHudDisplay()
+
+    if self.isActiveForInputIgnoreSelectionIgnoreAI and self:getIsVehicleControlledByPlayer() then
+      spec.isRotating = false
+    elseif spec.isRotating and spec.enabled then
+      self:getAxisSideForSteeringSync()
+    end
   end
 end
 
@@ -93,6 +107,8 @@ function MouseSteeringVehicle:updateSteering(dt)
   local spec = self.spec_mouseSteeringVehicle
 
   if not spec.enabled then
+    self:getAxisSideForSteeringSync()
+
     return
   end
 
@@ -103,28 +119,29 @@ function MouseSteeringVehicle:updateSteering(dt)
     if isMotorStarted then
       if not spec.paused then
         local invertMultiplier = spec.settings.invertXAxis and -1 or 1
-        local axisSteer = spec.mouseSteering:getMovedSide() * invertMultiplier
+        local mousePosY = spec.mouseSteering:getMovedSide() * invertMultiplier
 
-        spec.axisSide = spec.mouseSteering:normalizeAxis(spec.axisSide, axisSteer, spec.settings.sensitivity)
+        spec.steerRaw = spec.mouseSteering:normalizeAxis(spec.steerRaw, mousePosY, spec.settings.sensitivity)
       end
 
-      local filteredAxis = spec.mouseSteering:applyDeadzone(spec.axisSide, spec.settings.deadzone)
-      filteredAxis = spec.mouseSteering:applyLinearity(filteredAxis, spec.settings.linearity)
+      local linearity = spec.mouseSteering:applyLinearity(spec.steerRaw, {
+        linearity = spec.settings.linearity,
+        deadzone = spec.settings.deadzone,
+      })
 
-      spec.axisSideSend = spec.mouseSteering:applySmoothness(spec.axisSideSend, filteredAxis, spec.settings.smoothness, dt)
+      spec.axisSide = spec.mouseSteering:applySmoothness(spec.axisSide, linearity, spec.settings.smoothness, dt)
     elseif not isMotorStarted and mouseMoved then
       g_currentMission:showBlinkingWarning(g_i18n:getText("warning_motorNotStarted"), 2000)
     end
   end
 
-  Drivable.actionEventSteer(self, nil, spec.axisSideSend, nil, true, nil, InputDevice.CATEGORY.GAMEPAD)
+  Drivable.actionEventSteer(self, nil, spec.axisSide, nil, true, nil, InputDevice.CATEGORY.GAMEPAD)
 end
 
--- TODO: Refactor HUD to work seamlessly with popup message and context action display
 function MouseSteeringVehicle:isHudVisible(spec, isInside, activeCamera)
   local isObstructed = g_currentMission.hud.popupMessage:getVisible() or g_currentMission.hud.contextActionDisplay:getVisible()
 
-  if not spec.enabled or isObstructed or not self:getIsMotorStarted() then
+  if not spec.enabled or isObstructed or not self:getIsMotorStarted() or self:getIsAIActive() or not self:getIsControlled() then
     return false
   end
 
@@ -176,6 +193,10 @@ function MouseSteeringVehicle:onEnterVehicle()
 
   spec.enabled = spec.mouseSteering:isVehicleSaved(self)
   self:updateControlledVehicle(true)
+
+  if spec.enabled then
+    self:getAxisSideForSteeringSync()
+  end
 end
 
 function MouseSteeringVehicle:onLeaveVehicle()
@@ -197,8 +218,9 @@ function MouseSteeringVehicle:actionEventToggleSteering(actionName, inputValue)
     spec.mouseSteering:saveVehicleToXMLFile()
   end
 
-  if not spec.enabled then
-    spec.axisSide, spec.axisSideSend = 0, 0
+  local warning = self:getMotorNotAllowedWarning()
+  if warning ~= nil then
+    g_currentMission:showBlinkingWarning(warning, 2000)
   end
 end
 
@@ -234,10 +256,23 @@ function MouseSteeringVehicle:actionEventShowMenu(actionName, inputValue)
   g_gui:showGui("MouseSteeringMenu")
 end
 
+function MouseSteeringVehicle:getAxisSideForSteeringSync()
+  local spec = self.spec_mouseSteeringVehicle
+  local drivable = self.spec_drivable
+
+  local linearity = spec.mouseSteering:reverseLinearity(drivable.axisSide, {
+    linearity = spec.settings.linearity,
+    deadzone = spec.settings.deadzone,
+  })
+
+  spec.steerRaw = linearity
+  spec.axisSide = drivable.axisSide
+end
+
 function MouseSteeringVehicle:getAxisSide()
   local spec = self.spec_mouseSteeringVehicle
 
-  return spec.axisSideSend
+  return spec.axisSide
 end
 
 function MouseSteeringVehicle:getVehicleId()

@@ -37,7 +37,7 @@ function VehicleCameraExtension:canSteerWithMouse(isMouse, camera)
   end
 
   local spec = camera.vehicle.spec_mouseSteeringVehicle
-  return not (spec ~= nil and spec.enabled and not spec.paused)
+  return not (spec ~= nil and spec.enabled and not spec.paused and not spec.isRotating)
 end
 
 function VehicleCameraExtension:actionEventLookLeftRight(superFunc, object, actionName, inputValue, callbackState, isAnalog, isMouse)
@@ -45,7 +45,7 @@ function VehicleCameraExtension:actionEventLookLeftRight(superFunc, object, acti
     return superFunc(object, actionName, inputValue, callbackState, isAnalog, isMouse)
   end
 
-  self.movedSide = inputValue * (1 / 60)
+  self.movedSide = inputValue * 0.001 * 16.666
 end
 
 function VehicleCameraExtension:actionEventLookUpDown(superFunc, object, actionName, inputValue, callbackState, isAnalog, isMouse)
