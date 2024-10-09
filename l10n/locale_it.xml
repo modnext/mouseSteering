@@ -20,6 +20,7 @@
     <e k="mouseSteering_ui_general_section" v="Generali"/>
     <e k="mouseSteering_ui_sensitivity" v="Sensibilità"/>
     <e k="mouseSteering_ui_invertXAxis" v="Inverti l'asse X"/>
+    <e k="mouseSteering_ui_controlsKeyboard" v="Comandi Tastiera"/>
 
     <!-- Vehicle Storage -->
     <e k="mouseSteering_ui_vehicles_section" v="Gestione dei veicoli"/>
