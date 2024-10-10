@@ -30,6 +30,7 @@ local sourceFiles = {
   "src/gui/hud/MouseSteeringDisplay.lua",
   "src/gui/hud/HUDExtension.lua",
   -- Main
+  "src/MouseSteeringStore.lua",
   "src/MouseSteering.lua",
 }
 

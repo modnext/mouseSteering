@@ -26,13 +26,11 @@ function MouseSteering.new(modName, modDirectory, modSettingsDirectory, mission,
   self.modDesc = {}
   self.settings = {}
 
-  -- TODO: Create a class for Vehicle Storage
-  self.vehicles = {
-    count = 0,
-    data = {},
-  }
-
+  -- store and camera extensions
+  self.store = MouseSteeringStore.new()
   self.camera = VehicleCameraExtension.new()
+
+  -- gui menu and hud
   self.gui = MouseSteeringGui.new(nil, modDirectory, mission, gui, i18n)
   self.hud = MouseSteeringHud.new(nil, modDirectory, mission, gui, i18n)
 
@@ -158,13 +156,9 @@ function MouseSteering:saveSettingsToXMLFile()
 end
 
 function MouseSteering:reset()
-  self.vehicles = {
-    count = 0,
-    data = {},
-  }
+  self.store:clearVehicles()
 
   if fileExists(self.modSettingsDirectory .. "settings.xml") then
-    -- deleteFile(self.modSettingsDirectory .. "settings.xml")
     deleteFolder(self.modSettingsDirectory)
   end
 
@@ -206,77 +200,53 @@ function MouseSteering:setXMLSetting(xmlFile, key, setting)
 end
 
 function MouseSteering:loadVehicleFromXMLFile()
-  local xmlFile = XMLFile.loadIfExists("MouseSteeringXML", self.modSettingsDirectory .. "vehicles.xml", "vehicles")
+  local path = self.modSettingsDirectory .. "vehicles.xml"
 
-  if xmlFile == nil then
-    return
-  end
-
-  xmlFile:iterate("vehicles.vehicle", function(_, key)
-    local id = xmlFile:getString(key .. "#id")
-    local xmlFilename = xmlFile:getString(key .. "#xmlFilename")
-
-    if id ~= nil and xmlFilename ~= nil then
-      self:addVehicle(self:combineVehicleKey(id, xmlFilename))
-    end
-  end)
-
-  xmlFile:delete()
+  self.store:loadFromXMLFile(path)
 end
 
 function MouseSteering:saveVehicleToXMLFile()
-  local xmlFile = XMLFile.create("MouseSteeringXML", self.modSettingsDirectory .. "vehicles.xml", "vehicles")
+  local path = self.modSettingsDirectory .. "vehicles.xml"
 
-  if xmlFile == nil then
-    Logging.error("Mouse Steering: Failed to save vehicles to (%s) path!", self.modSettingsDirectory .. "vehicles.xml")
-
-    return
-  end
-
-  local i = 0
-
-  for vehicle in pairs(self.vehicles.data) do
-    local key = string.format("vehicles.vehicle(%s)", i)
-    local id, xmlFilename = self:splitVehicleKey(vehicle)
-
-    xmlFile:setString(key .. "#id", id)
-    xmlFile:setString(key .. "#xmlFilename", xmlFilename)
-
-    i = i + 1
-  end
-
-  xmlFile:save()
-  xmlFile:delete()
+  self.store:saveToXMLFile(path)
 end
 
 function MouseSteering:addVehicle(param)
-  local vehicleKey = type(param) == "table" and self:getVehicleKey(param) or param
+  local result = self.store:addVehicle(param)
 
-  if self.vehicles.data[vehicleKey] ~= nil or self:isMaxVehiclesReached() then
-    if self.vehicles.data[vehicleKey] == nil then
-      self:showNotification("mouseSteering_notification_vehicleLimit", true)
-    end
-
-    return false
+  if result ~= nil and self.store:isMaxVehiclesReached() then
+    self:showNotification("mouseSteering_notification_vehicleLimit", true)
   end
 
-  self.vehicles.data[vehicleKey] = true
-  self.vehicles.count = self.vehicles.count + 1
-
-  return true
+  return result
 end
 
 function MouseSteering:removeVehicle(param)
-  local vehicleKey = type(param) == "table" and self:getVehicleKey(param) or param
+  return self.store:removeVehicle(param)
+end
 
-  if self.vehicles.data[vehicleKey] == nil then
-    return false
-  end
+function MouseSteering:getVehicleKey(vehicle)
+  return self.store:getVehicleKey(vehicle)
+end
 
-  self.vehicles.data[vehicleKey] = nil
-  self.vehicles.count = self.vehicles.count - 1
+function MouseSteering:isVehicleSaved(vehicle)
+  return self.store:isVehicleSaved(vehicle)
+end
 
-  return true
+function MouseSteering:isMaxVehiclesReached()
+  return self.store:isMaxVehiclesReached()
+end
+
+function MouseSteering:getVehicleCount()
+  return self.store:getVehicleCount()
+end
+
+function MouseSteering:getVehicles()
+  return self.store:getVehicles()
+end
+
+function MouseSteering:setControlledVehicle(vehicle)
+  self.hud:setControlledVehicle(vehicle, true)
 end
 
 function MouseSteering:showNotification(textKey, ...)
@@ -288,34 +258,6 @@ function MouseSteering:showNotification(textKey, ...)
 
   local text = self.i18n:getText(textKey):format(...)
   self.mission.hud:addSideNotification(config.type, text, config.duration, config.sound)
-end
-
-function MouseSteering:combineVehicleKey(vehicleId, vehicleName)
-  return string.format("%s:%s", vehicleId, vehicleName)
-end
-
-function MouseSteering:splitVehicleKey(vehicleKey)
-  return vehicleKey:match("([^:]+):(.+)")
-end
-
-function MouseSteering:getVehicleKey(vehicle)
-  local vehicleId = vehicle:getVehicleId()
-  local configFileName = vehicle.configFileName
-
-  return self:combineVehicleKey(vehicleId, configFileName)
-end
-
-function MouseSteering:isVehicleSaved(vehicle)
-  local vehicleKey = self:getVehicleKey(vehicle)
-  return self.vehicles.data[vehicleKey] ~= nil
-end
-
-function MouseSteering:isMaxVehiclesReached()
-  return self.vehicles.count >= MouseSteering.MAX_VEHICLES
-end
-
-function MouseSteering:setControlledVehicle(vehicle)
-  self.hud:setControlledVehicle(vehicle, true)
 end
 
 function MouseSteering:normalizeAxis(axis, input, sensitivity)

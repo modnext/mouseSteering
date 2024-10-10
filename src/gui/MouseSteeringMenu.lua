@@ -121,7 +121,7 @@ function MouseSteeringMenu:onGuiSetupFinished()
 end
 
 function MouseSteeringMenu:updateTexts()
-  self.vehicleCountDisplay:setText(string.format("%s / %s", self.mouseSteering.vehicles.count, MouseSteering.MAX_VEHICLES))
+  self.vehicleCountDisplay:setText(string.format("%s / %s", self.mouseSteering:getVehicleCount(), MouseSteeringStore.MAX_VEHICLES))
 end
 
 function MouseSteeringMenu:onClickOpenPageSettingsControls()

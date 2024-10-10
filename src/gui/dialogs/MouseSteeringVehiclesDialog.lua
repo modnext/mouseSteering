@@ -228,7 +228,7 @@ function MouseSteeringVehiclesDialog:onYesNoSyncVehicle(yes)
     end
   end
 
-  for vehicleKey in pairs(self.mouseSteering.vehicles.data) do
+  for vehicleKey in pairs(self.mouseSteering:getVehicles()) do
     if not vehiclesToKeep[vehicleKey] then
       self.mouseSteering:removeVehicle(vehicleKey)
     end
