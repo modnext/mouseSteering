@@ -6,7 +6,7 @@
 --
 
 MouseSteeringStore = {
-  MAX_VEHICLES = 2,
+  MAX_VEHICLES = 100,
 }
 
 local MouseSteeringStore_mt = Class(MouseSteeringStore)
