@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_MS_TOGGLE" v="Direksiyonu Etkinleştir/Kapat"/>
+    <e k="input_MS_SAVE" v="Aracı Kaydet veya Kaldır"/>
+    <e k="input_MS_PAUSE" v="Direksiyonu Durdur"/>
+    <e k="input_MS_SHOW_MENU" v="Direksiyon Menüsünü Aç"/>
+
+    <!-- Menu Titles and Descriptions -->
+    <e k="mouseSteering_ui_title" v="Fareyle Direksiyon"/>
+    <e k="mouseSteering_ui_toolTip" v="Fareyle Direksiyon menüsünü aç."/>
+    <e k="mouseSteering_ui_subtitle" v="Aracınızı fareyle kontrol edin."/>
+
+    <!-- Hero Title and Description -->
+    <e k="mouseSteering_ui_heading" v="Kontrollerinizi Özelleştirin"/>
+    <e k="mouseSteering_ui_details" v="Aracınızın direksiyonunu fareyle kontrol edin. Hassasiyeti, ivmeyi, ölü alanı ve daha fazlasını ayarlayarak hassas kontrol ve gerçekçi bir sürüş deneyimi elde edin."/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general_section" v="Genel"/>
+    <e k="mouseSteering_ui_sensitivity" v="Hassasiyet"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X-Ekseni Ters Çevir"/>
+    <e k="mouseSteering_ui_controlsKeyboard" v="Klavye Kontrolleri"/>
+
+    <!-- Vehicle Storage -->
+    <e k="mouseSteering_ui_vehicles_section" v="Araç Yönetimi"/>
+    <e k="mouseSteering_ui_autoSaveVehicle" v="Otomatik Kaydetmeyi Etkinleştir"/>
+    <e k="mouseSteering_ui_vehicleDialog" v="Araçları Yönet"/>
+
+    <!-- Control Attributes -->
+    <e k="mouseSteering_ui_controlAttributes_section" v="Kontrol Özellikleri"/>
+    <e k="mouseSteering_ui_linearity" v="Doğrusallık"/>
+    <e k="mouseSteering_ui_smoothness" v="Yumuşaklık"/>
+    <e k="mouseSteering_ui_deadzone" v="Ölü Bölge"/>
+
+    <!-- Head-Up Display -->
+    <e k="mouseSteering_ui_hud_section" v="Gösterge Ekranı (HUD)"/>
+    <e k="mouseSteering_ui_hud" v="Mod"/>
+    <e k="mouseSteering_ui_both" v="Dış ve İç"/>
+    <e k="mouseSteering_ui_inside" v="İç"/>
+    <e k="mouseSteering_ui_outside" v="Dış"/>
+    <e k="mouseSteering_ui_hudText" v="Direksiyon Açısı Metni"/>
+    <e k="mouseSteering_ui_hudLookBackInside" v="Geri Bakarken Göstergenin Görünmesini Sağla (İç Mekan Görüşü)"/>
+
+    <!-- Vehicle List Dialog -->
+    <e k="mouseSteering_ui_vehicleList" v="Araç Listesi"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Araç Adı"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Plaka"/>
+    <e k="mouseSteering_ui_youWantToDeleteAllVehicles" v="Tüm araçları silmek istediğinizden emin misiniz?"/>
+    <e k="mouseSteering_ui_allVehiclesDeleted" v="Tüm araçlar başarıyla silindi!"/>
+    <e k="mouseSteering_ui_youWantToSyncVehicles" v="Araçları çiftlik ile senkronize etmek istiyor musunuz?"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Araçlar başarıyla senkronize edildi!"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_open" v="Aç"/>
+    <e k="mouseSteering_button_save" v="Kaydet"/>
+    <e k="mouseSteering_button_delete" v="Sil"/>
+    <e k="mouseSteering_button_deleteAll" v="Hepsini Sil"/>
+    <e k="mouseSteering_button_sync" v="Senkronize Et"/>
+
+    <!-- Notifications -->
+    <e k="mouseSteering_notification_vehicleLimit" v="Araç limiti aşıldı. Ekstra araç kaydedilemiyor"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Araç başarıyla eklendi"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Araç başarıyla kaldırıldı"/>
+  </elements>
+</l10n>
