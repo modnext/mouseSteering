@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="80">
   <author>aaw3k</author>
-  <version>1.1.0.0</version>
+  <version>1.1.1.0</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -13,8 +13,12 @@
   <description>
     <en><![CDATA[Thanks to this modification, you gain precise control over the vehicle's wheels using your mouse, allowing for realistic steering.
 
-Changelog 1.1.0.0
+Changelog 1.1.1.0
+- Added localization TR
+- Improved steering input method for mouse steering
+- Improved motor start warning logic for vehicle
 
+Changelog 1.1.0.0
 - Added localization IT
 - Added support for multiplayer
 - Added synchronization of vehicle wheel steering
@@ -28,8 +32,12 @@ Changelog 1.1.0.0
 For more information or to report a bug, please visit <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></en>
     <de><![CDATA[Dank dieser Modifikation erhältst du präzise Kontrolle über die Fahrzeugräder mit deiner Maus, was eine realistische Lenkung ermöglicht.
 
-Änderungsprotokoll 1.1.0.0
+Änderungsprotokoll 1.1.1.0
+- Lokalisierung TR hinzugefügt
+- Verbesserte Eingabemethode für Maussteuerung
+- Verbesserte Motorstart-Warnlogik für Fahrzeuge
 
+Änderungsprotokoll 1.1.0.0
 - Italienische Lokalisierung hinzugefügt
 - Multiplayer-Unterstützung hinzugefügt
 - Synchronisierung der Lenkung der Fahrzeugräder hinzugefügt
@@ -43,8 +51,12 @@ For more information or to report a bug, please visit <a href="https://github.co
 Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></de>
     <fr><![CDATA[Grâce à cette modification, vous obtenez un contrôle précis des roues du véhicule à l'aide de votre souris, permettant une conduite réaliste.
 
-Journal des modifications 1.1.0.0
+Journal des modifications 1.1.1.0
+- Ajout de la localisation TR
+- Amélioration de la méthode d'entrée de direction pour la commande à la souris
+- Amélioration de la logique d'avertissement de démarrage du moteur pour le véhicule
 
+Journal des modifications 1.1.0.0
 - Ajout de la localisation IT
 - Ajout du support multijoueur
 - Ajout de la synchronisation de la direction des roues du véhicule
@@ -59,8 +71,12 @@ Journal des modifications 1.1.0.0
 Pour plus d'informations ou pour signaler un bug, veuillez visiter la page <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></fr>
     <pl><![CDATA[Dzięki tej modyfikacji zyskujesz precyzyjną kontrolę nad kołami pojazdu za pomocą myszy, co pozwala na realistyczne sterowanie.
 
-Dziennik zmian 1.1.0.0
+Dziennik zmian 1.1.1.0
+- Dodano lokalizację TR
+- Udoskonalono metodę sterowania dla sterowania myszą
+- Poprawiono logikę ostrzegania o uruchomieniu silnika dla pojazdów
 
+Dziennik zmian 1.1.0.0
 - Dodano lokalizację IT
 - Dodano wsparcie dla trybu wieloosobowego
 - Dodano synchronizację skrętu kół pojazdu
