@@ -20,13 +20,13 @@ function MouseSteeringVehicle.initSpecialization()
 end
 
 function MouseSteeringVehicle.registerFunctions(vehicleType)
-  SpecializationUtil.registerFunction(vehicleType, "updateSteering", MouseSteeringVehicle.updateSteering)
-  SpecializationUtil.registerFunction(vehicleType, "isHudVisible", MouseSteeringVehicle.isHudVisible)
-  SpecializationUtil.registerFunction(vehicleType, "updateHudDisplay", MouseSteeringVehicle.updateHudDisplay)
-  SpecializationUtil.registerFunction(vehicleType, "updateControlledVehicle", MouseSteeringVehicle.updateControlledVehicle)
-  SpecializationUtil.registerFunction(vehicleType, "getAxisSideForSteeringSync", MouseSteeringVehicle.getAxisSideForSteeringSync)
-  SpecializationUtil.registerFunction(vehicleType, "getAxisSide", MouseSteeringVehicle.getAxisSide)
-  SpecializationUtil.registerFunction(vehicleType, "getVehicleId", MouseSteeringVehicle.getVehicleId)
+  SpecializationUtil.registerFunction(vehicleType, "isMouseSteeringHudVisible", MouseSteeringVehicle.isMouseSteeringHudVisible)
+  SpecializationUtil.registerFunction(vehicleType, "updateMouseSteeringControl", MouseSteeringVehicle.updateMouseSteeringControl)
+  SpecializationUtil.registerFunction(vehicleType, "updateMouseSteeringHudDisplay", MouseSteeringVehicle.updateMouseSteeringHudDisplay)
+  SpecializationUtil.registerFunction(vehicleType, "updateMouseSteeringControlledVehicle", MouseSteeringVehicle.updateMouseSteeringControlledVehicle)
+  SpecializationUtil.registerFunction(vehicleType, "syncMouseSteeringAxis", MouseSteeringVehicle.syncMouseSteeringAxis)
+  SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringAxisSide", MouseSteeringVehicle.getMouseSteeringAxisSide)
+  SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringVehicleId", MouseSteeringVehicle.getMouseSteeringVehicleId)
 end
 
 function MouseSteeringVehicle.registerEventListeners(vehicleType)
@@ -92,22 +92,22 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
   end
 
   if self.getIsControlled ~= nil and self:getIsControlled() then
-    self:updateSteering(dt)
-    self:updateHudDisplay()
+    self:updateMouseSteeringControl(dt)
+    self:updateMouseSteeringHudDisplay()
 
     if self.isActiveForInputIgnoreSelectionIgnoreAI and self:getIsVehicleControlledByPlayer() then
       spec.isRotating = false
     elseif spec.isRotating and spec.enabled then
-      self:getAxisSideForSteeringSync()
+      self:syncMouseSteeringAxis()
     end
   end
 end
 
-function MouseSteeringVehicle:updateSteering(dt)
+function MouseSteeringVehicle:updateMouseSteeringControl(dt)
   local spec = self.spec_mouseSteeringVehicle
 
   if not spec.enabled then
-    self:getAxisSideForSteeringSync()
+    self:syncMouseSteeringAxis()
 
     return
   end
@@ -144,7 +144,7 @@ function MouseSteeringVehicle:updateSteering(dt)
   end
 end
 
-function MouseSteeringVehicle:isHudVisible(spec, isInside, activeCamera)
+function MouseSteeringVehicle:isMouseSteeringHudVisible(spec, isInside, activeCamera)
   local isObstructed = g_currentMission.hud.popupMessage:getVisible() or g_currentMission.hud.contextActionDisplay:getVisible()
 
   if not spec.enabled or isObstructed or not self:getIsMotorStarted() or self:getIsAIActive() or not self:getIsControlled() then
@@ -167,7 +167,7 @@ function MouseSteeringVehicle:isHudVisible(spec, isInside, activeCamera)
   return showHud
 end
 
-function MouseSteeringVehicle:updateHudDisplay()
+function MouseSteeringVehicle:updateMouseSteeringHudDisplay()
   local spec = self.spec_mouseSteeringVehicle
   local activeCamera = self:getActiveCamera()
 
@@ -175,7 +175,7 @@ function MouseSteeringVehicle:updateHudDisplay()
     return
   end
 
-  local isVisible = self:isHudVisible(spec, activeCamera.isInside, activeCamera)
+  local isVisible = self:isMouseSteeringHudVisible(spec, activeCamera.isInside, activeCamera)
   local currentlyVisible = spec.mouseSteering:getHudVisible()
 
   if isVisible ~= currentlyVisible then
@@ -186,7 +186,7 @@ function MouseSteeringVehicle:updateHudDisplay()
   spec.mouseSteering:setHudTextVisible(hudTextVisible and isVisible)
 end
 
-function MouseSteeringVehicle:updateControlledVehicle(isEntering)
+function MouseSteeringVehicle:updateMouseSteeringControlledVehicle(isEntering)
   local spec = self.spec_mouseSteeringVehicle
 
   if spec.mouseSteering:getHudVisible() then
@@ -198,15 +198,15 @@ function MouseSteeringVehicle:onEnterVehicle()
   local spec = self.spec_mouseSteeringVehicle
 
   spec.enabled = spec.mouseSteering:isVehicleSaved(self)
-  self:updateControlledVehicle(true)
+  self:updateMouseSteeringControlledVehicle(true)
 
   if spec.enabled then
-    self:getAxisSideForSteeringSync()
+    self:syncMouseSteeringAxis()
   end
 end
 
 function MouseSteeringVehicle:onLeaveVehicle()
-  self:updateControlledVehicle(false)
+  self:updateMouseSteeringControlledVehicle(false)
 end
 
 function MouseSteeringVehicle:actionEventToggleSteering(actionName, inputValue)
@@ -262,7 +262,7 @@ function MouseSteeringVehicle:actionEventShowMenu(actionName, inputValue)
   g_gui:showGui("MouseSteeringMenu")
 end
 
-function MouseSteeringVehicle:getAxisSideForSteeringSync()
+function MouseSteeringVehicle:syncMouseSteeringAxis()
   local spec = self.spec_mouseSteeringVehicle
   local drivable = self.spec_drivable
 
@@ -275,16 +275,12 @@ function MouseSteeringVehicle:getAxisSideForSteeringSync()
   spec.axisSide = drivable.axisSide
 end
 
-function MouseSteeringVehicle:getAxisSide()
-  local spec = self.spec_mouseSteeringVehicle
-
-  return spec.axisSide
+function MouseSteeringVehicle:getMouseSteeringAxisSide()
+  return self.spec_mouseSteeringVehicle.axisSide
 end
 
-function MouseSteeringVehicle:getVehicleId()
-  local spec = self.spec_mouseSteeringVehicle
-
-  return spec.vehicleId
+function MouseSteeringVehicle:getMouseSteeringVehicleId()
+  return self.spec_mouseSteeringVehicle.vehicleId
 end
 
 function MouseSteeringVehicle:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnoreSelection)
