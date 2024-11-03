@@ -135,7 +135,9 @@ function MouseSteeringVehicle:updateSteering(dt)
     end
   end
 
-  Drivable.actionEventSteer(self, nil, spec.axisSide, nil, true, nil, InputDevice.CATEGORY.GAMEPAD)
+  if self.setSteeringInput ~= nil then
+    self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
+  end
 end
 
 function MouseSteeringVehicle:isHudVisible(spec, isInside, activeCamera)
