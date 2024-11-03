@@ -131,7 +131,11 @@ function MouseSteeringVehicle:updateSteering(dt)
 
       spec.axisSide = spec.mouseSteering:applySmoothness(spec.axisSide, linearity, spec.settings.smoothness, dt)
     elseif not isMotorStarted and mouseMoved then
-      g_currentMission:showBlinkingWarning(g_i18n:getText("warning_motorNotStarted"), 2000)
+      local warning = self:getCanMotorRun() and g_i18n:getText("warning_motorNotStarted") or self:getMotorNotAllowedWarning()
+
+      if warning ~= nil then
+        g_currentMission:showBlinkingWarning(warning, 2000)
+      end
     end
   end
 
