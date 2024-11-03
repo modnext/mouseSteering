@@ -102,7 +102,7 @@ function MouseSteeringStore:isMaxVehiclesReached()
 end
 
 function MouseSteeringStore:getVehicleKey(vehicle)
-  local vehicleId = vehicle:getVehicleId()
+  local vehicleId = vehicle:getMouseSteeringVehicleId()
   local configFileName = vehicle.configFileName
 
   return vehicleId .. ":" .. configFileName

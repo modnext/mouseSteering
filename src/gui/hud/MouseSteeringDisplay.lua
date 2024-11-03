@@ -30,7 +30,7 @@ function MouseSteeringDisplay:delete()
 end
 
 function MouseSteeringDisplay:setVehicle(vehicle)
-  if vehicle ~= nil and vehicle.getAxisSide == nil then
+  if vehicle ~= nil and vehicle.getMouseSteeringAxisSide == nil then
     vehicle = nil
   end
 
