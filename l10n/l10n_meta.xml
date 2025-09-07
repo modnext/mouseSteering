@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v=""/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v=""/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v=""/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v=""/>
+    <e k="mouseSteering_modeSteering_deactivate" v=""/>
+    <e k="mouseSteering_mode_format" v="" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v=""/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v=""/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v=""/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v=""/>
+    <e k="mouseSteering_welcome_text" v=""/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v=""/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v=""/>
+    <e k="mouseSteering_ui_default" v=""/>
+    <e k="mouseSteering_ui_autoSave" v=""/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v=""/>
+    <e k="mouseSteering_ui_sensitivity" v=""/>
+    <e k="mouseSteering_ui_invertXAxis" v=""/>
+    <e k="mouseSteering_ui_speedBasedSteering" v=""/>
+    <e k="mouseSteering_ui_linearity" v=""/>
+    <e k="mouseSteering_ui_smoothness" v=""/>
+    <e k="mouseSteering_ui_deadzone" v=""/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v=""/>
+    <e k="mouseSteering_ui_steeringAssistMode" v=""/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v=""/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v=""/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v=""/>
+    <e k="mouseSteering_ui_autoSave_desc" v=""/>
+    <e k="mouseSteering_ui_sensitivity_desc" v=""/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v=""/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v=""/>
+    <e k="mouseSteering_ui_linearity_desc" v=""/>
+    <e k="mouseSteering_ui_smoothness_desc" v=""/>
+    <e k="mouseSteering_ui_deadzone_desc" v=""/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v=""/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v=""/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v=""/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v=""/>
+    <e k="mouseSteering_ui_indicatorMode" v=""/>
+    <e k="mouseSteering_ui_both" v=""/>
+    <e k="mouseSteering_ui_inside" v=""/>
+    <e k="mouseSteering_ui_outside" v=""/>
+    <e k="mouseSteering_ui_indicatorText" v=""/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v=""/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v=""/>
+    <e k="mouseSteering_ui_indicatorText_desc" v=""/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v=""/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v=""/>
+    <e k="mouseSteering_ui_nameVehicle" v=""/>
+    <e k="mouseSteering_ui_plateVehicle" v=""/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v=""/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="" tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v=""/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v=""/>
+    <e k="mouseSteering_ui_syncConfirmText" v=""/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="" tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v=""/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v=""/>
+    <e k="mouseSteering_ui_singleplayer" v=""/>
+    <e k="mouseSteering_ui_multiplayer" v=""/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v=""/>
+    <e k="mouseSteering_button_save" v=""/>
+    <e k="mouseSteering_button_unsave" v=""/>
+    <e k="mouseSteering_button_viewDetails" v=""/>
+    <e k="mouseSteering_button_hideDetails" v=""/>
+    <e k="mouseSteering_button_viewOnMap" v=""/>
+    <e k="mouseSteering_button_sync" v=""/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v=""/>
+    <e k="mouseSteering_ui_saved" v=""/>
+    <e k="mouseSteering_ui_unsaved" v=""/>
+    <e k="mouseSteering_ui_owned" v=""/>
+    <e k="mouseSteering_ui_leased" v=""/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v=""/>
+    <e k="mouseSteering_notification_vehicleAdded" v=""/>
+    <e k="mouseSteering_notification_vehicleRemoved" v=""/>
+  </elements>
+</l10n>

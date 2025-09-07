@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controllo sterzo"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salva/Rimuovi veicolo"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Ruota telecamera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Attiva"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Disattiva"/>
+    <e k="mouseSteering_mode_format" v="%s Sterzo con mouse" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Ruota telecamera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Sterzo con mouse"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Impostazioni"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Benvenuto nello sterzo con mouse"/>
+    <e k="mouseSteering_welcome_text" v="Ecco alcune note importanti:&#10;&#10;- Le impostazioni e i dati sono separati per il giocatore singolo (host) e il multiplayer (client)&#10;- La modalità di sterzo per veicolo viene salvata per mappa (non per salvataggio di gioco)&#10;- Come client multiplayer, lo sterzo potrebbe risultare meno fluido a causa della sincronizzazione di rete&#10;- Se esaurisci gli slot, puoi sincronizzare i veicoli con la farm per rimuovere le voci perse&#10;&#10;Clicca su &quot;Sì&quot; per confermare. Questa finestra di dialogo non apparirà più."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Impostazioni Mouse Steering"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Generale"/>
+    <e k="mouseSteering_ui_default" v="Abilitato di default"/>
+    <e k="mouseSteering_ui_autoSave" v="Salvataggio automatico"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Regolazione dei controlli"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensibilità"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Inverti asse X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Sterzo basato sulla velocità"/>
+    <e k="mouseSteering_ui_linearity" v="Linearità"/>
+    <e k="mouseSteering_ui_smoothness" v="Scorrevolezza"/>
+    <e k="mouseSteering_ui_deadzone" v="Zona morta"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Assistenza allo sterzo"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Annulla sterzo AI all'input"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Blocca sterzo AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Soglia di input"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Abilita lo sterzo con il mouse per impostazione predefinita su tutti i veicoli."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Memorizza e riapplica automaticamente la modalità di sterzo per ogni veicolo."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Regola la rapidità con cui lo sterzo risponde al movimento del mouse."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inverte l'asse orizzontale (X) per lo sterzo."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Regola la sensibilità in base alla velocità e all'angolo di sterzata per un controllo migliore."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Regola la curva di risposta dello sterzo. Valori più alti offrono un controllo più preciso vicino al centro."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Rende più fluido l'input del mouse per ridurre i cambiamenti bruschi dello sterzo."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignora i piccoli movimenti del mouse vicino al centro per evitare sterzate involontarie."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Quando è abilitato, qualsiasi input annulla immediatamente lo sterzo AI."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Blocca lo sterzo AI per 2,5 secondi dopo l'attivazione per impedire la cancellazione accidentale."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Cancella lo sterzo AI quando la velocità del mouse supera questo valore."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interfaccia"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Modalità indicatore"/>
+    <e k="mouseSteering_ui_both" v="Esterno e interno"/>
+    <e k="mouseSteering_ui_inside" v="Interno"/>
+    <e k="mouseSteering_ui_outside" v="Esterno"/>
+    <e k="mouseSteering_ui_indicatorText" v="Mostra l'angolo nell'indicatore"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Mostra l'indicatore quando si guarda indietro (interno)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Seleziona la modalità di visualizzazione dell'indicatore di sterzata sull'HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Mostra l'angolo di sterzata corrente come testo sullo schermo nell'indicatore."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra l'indicatore quando si guarda indietro nella vista interna."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Controlli dati"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Veicolo"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Targa"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nessun veicolo trovato"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d di %d righe selezionate." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Slot rimanenti"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Sincronizza veicoli"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Sincronizzare i veicoli salvati con la fattoria? Questo rimuoverà le voci relative ai veicoli che non esistono più."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Veicoli sincronizzati: %d rimossi." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Nessun veicolo da sincronizzare."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Impostazioni per:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Giocatore singolo (Host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multigiocatore (Client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Salva e torna indietro"/>
+    <e k="mouseSteering_button_save" v="Salva"/>
+    <e k="mouseSteering_button_unsave" v="Annulla salvataggio"/>
+    <e k="mouseSteering_button_viewDetails" v="Visualizza dettagli"/>
+    <e k="mouseSteering_button_hideDetails" v="Nascondi dettagli"/>
+    <e k="mouseSteering_button_viewOnMap" v="Visualizza sulla mappa"/>
+    <e k="mouseSteering_button_sync" v="Sincronizza veicoli con la fattoria"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Tutti"/>
+    <e k="mouseSteering_ui_saved" v="Salvati"/>
+    <e k="mouseSteering_ui_unsaved" v="Non salvato"/>
+    <e k="mouseSteering_ui_owned" v="Di proprietà"/>
+    <e k="mouseSteering_ui_leased" v="In leasing"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Numero massimo di veicoli raggiunto"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Veicolo aggiunto con successo"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Veicolo rimosso con successo"/>
+  </elements>
+</l10n>

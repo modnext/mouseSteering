@@ -1,96 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="80">
+<modDesc descVersion="101">
   <author>aaw3k</author>
-  <version>1.1.1.0</version>
+  <version>1.2.0.0</version>
 
   <title>
     <en>Mouse Steering</en>
     <de>Maussteuerung</de>
     <fr>Contrôle À La Souris</fr>
-    <pl>Sterowanie Myszą</pl>
+    <pl>Sterowanie Myszką</pl>
+    <ru>Управление Мышью</ru>
   </title>
 
   <description>
-    <en><![CDATA[Thanks to this modification, you gain precise control over the vehicle's wheels using your mouse, allowing for realistic steering.
+    <en><![CDATA[Enables mouse-based control of vehicle steering, with fully configurable sensitivity, linearity, dead zone, smoothness, and more.
 
-Changelog 1.1.1.0
-- Added localization TR
-- Improved steering input method for mouse steering
-- Improved motor start warning logic for vehicle
+Changelog Version 1.2.0.0:
+- Migration to FS25 and codebase rebuild
 
-Changelog 1.1.0.0
-- Added localization IT
-- Added support for multiplayer
-- Added synchronization of vehicle wheel steering
-- Added logic considering engine status
-- Added information when wheels cannot be turned
-- Added option to open keyboard control settings from the control menu
-- Improved vehicle dialog layout for longer text
-- Fixed camera rotation for worker and passenger
-- Fixed incorrect text formatting in the mouse control menu slider
+For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
+    <de><![CDATA[Ermöglicht die Steuerung der Fahrzeuglenkung per Maus mit vollständig konfigurierbarer Empfindlichkeit, Linearität, Totzone, Laufruhe und mehr.
 
-For more information or to report a bug, please visit <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></en>
-    <de><![CDATA[Dank dieser Modifikation erhältst du präzise Kontrolle über die Fahrzeugräder mit deiner Maus, was eine realistische Lenkung ermöglicht.
+Änderungsprotokoll Version 1.2.0.0:
+- Migration zu FS25 und Neuerstellung der Codebasis
 
-Änderungsprotokoll 1.1.1.0
-- Lokalisierung TR hinzugefügt
-- Verbesserte Eingabemethode für Maussteuerung
-- Verbesserte Motorstart-Warnlogik für Fahrzeuge
+Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die GitHub (modnext/mouseSteering).]]></de>
+    <fr><![CDATA[Permet de contrôler la direction du véhicule à l'aide de la souris, avec une sensibilité, une linéarité, une zone morte, une fluidité et bien plus encore entièrement configurables.
 
-Änderungsprotokoll 1.1.0.0
-- Italienische Lokalisierung hinzugefügt
-- Multiplayer-Unterstützung hinzugefügt
-- Synchronisierung der Lenkung der Fahrzeugräder hinzugefügt
-- Logik hinzugefügt, die den Motorstatus berücksichtigt
-- Information hinzugefügt, wenn die Räder nicht gedreht werden können
-- Option hinzugefügt, die Tastatursteuerungseinstellungen aus dem Steuerungsmenü zu öffnen
-- Fahrzeugdialoglayout für längere Texte verbessert
-- Kameradrehung für Arbeiter und Passagier behoben
-- Falsche Textformatierung im Maussteuerungsmenü-Schieberegler behoben
+Journal des modifications version 1.2.0.0:
+- Migration vers FS25 et reconstruction du code source
 
-Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></de>
-    <fr><![CDATA[Grâce à cette modification, vous obtenez un contrôle précis des roues du véhicule à l'aide de votre souris, permettant une conduite réaliste.
+Pour plus d'informations ou pour signaler un bug, veuillez visiter la page GitHub (modnext/mouseSteering).]]></fr>
+    <pl><![CDATA[Umożliwia sterowanie kierownicą pojazdu za pomocą myszy, z możliwością pełnej konfiguracji czułości, liniowości, martwej strefy, płynności i nie tylko.
 
-Journal des modifications 1.1.1.0
-- Ajout de la localisation TR
-- Amélioration de la méthode d'entrée de direction pour la commande à la souris
-- Amélioration de la logique d'avertissement de démarrage du moteur pour le véhicule
+Lista zmian w wersji 1.2.0.0:
+- Migracja do FS25 i przebudowa kodu źródłowego
 
-Journal des modifications 1.1.0.0
-- Ajout de la localisation IT
-- Ajout du support multijoueur
-- Ajout de la synchronisation de la direction des roues du véhicule
-- Ajout de la logique tenant compte de l'état du moteur
-- Ajout d'une information lorsque les roues ne peuvent pas être tournées
-- Ajout de l'option d'ouvrir les paramètres de contrôle du clavier depuis le menu de contrôle
-- Amélioration de la disposition des dialogues des véhicules pour les textes plus longs
-- Correction de la rotation de la caméra pour le travailleur et le passager
-- Correction du formatage incorrect du texte dans le curseur du menu de contrôle de la souris
+Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (modnext/mouseSteering).]]></pl>
+    <ru><![CDATA[Обеспечивает управление рулевым управлением автомобиля с помощью мыши с полностью настраиваемой чувствительностью, линейностью, мертвой зоной, плавностью и другими параметрами.
 
+Журнал изменений версии версии 1.2.0.0:
+- Переход на FS25 и перестройка кодовой базы
 
-Pour plus d'informations ou pour signaler un bug, veuillez visiter la page <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></fr>
-    <pl><![CDATA[Dzięki tej modyfikacji zyskujesz precyzyjną kontrolę nad kołami pojazdu za pomocą myszy, co pozwala na realistyczne sterowanie.
-
-Dziennik zmian 1.1.1.0
-- Dodano lokalizację TR
-- Udoskonalono metodę sterowania dla sterowania myszą
-- Poprawiono logikę ostrzegania o uruchomieniu silnika dla pojazdów
-
-Dziennik zmian 1.1.0.0
-- Dodano lokalizację IT
-- Dodano wsparcie dla trybu wieloosobowego
-- Dodano synchronizację skrętu kół pojazdu
-- Dodano logikę uwzględniającą stan silnika
-- Dodano informację, gdy nie można skręcać kołami
-- Dodano opcję otwierania ustawień sterowania klawiaturą z menu sterowania
-- Poprawiono układ dialogów pojazdów dla dłuższego tekstu
-- Naprawiono obrót kamery dla pracownika i pasażera
-- Naprawiono nieprawidłowe formatowanie tekstu w suwaku menu sterowania myszą
-
-Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę <a href="https://github.com/modnext/mouseSteering">GitHub</a>.]]></pl>
+Для получения дополнительной информации или для сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>
 
-  <l10n filenamePrefix="l10n/locale"/>
+  <l10n filenamePrefix="l10n/l10n"/>
 
   <iconFilename>icon_mouseSteering.dds</iconFilename>
   <multiplayer supported="true" />
@@ -104,24 +58,20 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę <a href="
   </specializations>
 
   <actions>
-    <action name="MS_TOGGLE" category="VEHICLE" axisType="HALF"/>
-    <action name="MS_SAVE" category="VEHICLE" axisType="HALF"/>
-    <action name="MS_PAUSE" category="VEHICLE" axisType="HALF"/>
-    <action name="MS_SHOW_MENU" category="VEHICLE" axisType="HALF"/>
+    <action name="TOGGLE_MOUSE_STEERING_CONTROL" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
+    <action name="TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
+    <action name="TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
   </actions>
 
   <inputBinding>
-    <actionBinding action="MS_TOGGLE">
-      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_space"/>
-    </actionBinding>
-    <actionBinding action="MS_SAVE">
+    <actionBinding action="TOGGLE_MOUSE_STEERING_CONTROL">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_period"/>
     </actionBinding>
-    <actionBinding action="MS_PAUSE">
-      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt"/>
-    </actionBinding>
-    <actionBinding action="MS_SHOW_MENU">
+    <actionBinding action="TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_slash"/>
+    </actionBinding>
+    <actionBinding action="TOGGLE_MOUSE_STEERING_ROTATE_CAMERA">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt"/>
     </actionBinding>
   </inputBinding>
 </modDesc>

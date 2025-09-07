@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Steering Control"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Save/Remove Vehicle"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotate Camera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Activate"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deactivate"/>
+    <e k="mouseSteering_mode_format" v="%s Mouse Steering" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Rotate Camera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Mouse Steering"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Settings"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Welcome to Mouse Steering"/>
+    <e k="mouseSteering_welcome_text" v="Here are a few important notes:&#10;&#10;- Settings and data are separate for Singleplayer (host) and Multiplayer (client)&#10;- Per-vehicle steering mode is saved per map (not per savegame)&#10;- As a multiplayer client, steering may feel less smooth due to network sync&#10;- If you run out of slots, you can sync vehicles with the farm to remove lost entries&#10;&#10;Click 'Yes' to confirm. This dialog will not appear again."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Mouse Steering Settings"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="General"/>
+    <e k="mouseSteering_ui_default" v="Enabled by Default"/>
+    <e k="mouseSteering_ui_autoSave" v="Autosave"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Control Tuning"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensitivity"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Invert X-Axis"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Speed-Based Steering"/>
+    <e k="mouseSteering_ui_linearity" v="Linearity"/>
+    <e k="mouseSteering_ui_smoothness" v="Smoothness"/>
+    <e k="mouseSteering_ui_deadzone" v="Deadzone"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Steering Assist"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Cancel AI Steering on Input"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Lock AI Steering"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Input Threshold"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Enables mouse steering by default on all vehicles."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Automatically remembers and reapplies the steering mode per vehicle."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Adjusts how quickly steering responds to mouse movement."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inverts the horizontal (X) axis for steering."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Adjusts sensitivity based on speed and steering angle for better control."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Adjusts the steering response curve. Higher values give finer control near center."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Smooths mouse input to reduce abrupt steering changes."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignores small mouse movements near center to prevent unintentional steering."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="When enabled, any input cancels AI steering immediately."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Locks AI steering for 2.5 seconds after activation to prevent accidental cancellation."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Cancels AI steering when mouse speed exceeds this value."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="HUD"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Indicator Mode"/>
+    <e k="mouseSteering_ui_both" v="Outside and Inside"/>
+    <e k="mouseSteering_ui_inside" v="Inside"/>
+    <e k="mouseSteering_ui_outside" v="Outside"/>
+    <e k="mouseSteering_ui_indicatorText" v="Show Angle in Indicator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Show Indicator When Looking Back (Inside)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Selects how the steering indicator is shown on the HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Shows the current steering angle as on-screen text in the indicator."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Shows the indicator when looking back in inside view."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Data Controls"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Vehicle"/>
+    <e k="mouseSteering_ui_plateVehicle" v="License Plate"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="No vehicles found"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d of %d row(s) selected." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Slots Left"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Sync Vehicles"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Sync saved vehicles with the farm? This will remove entries for vehicles that no longer exist."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Vehicles synced: %d removed." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="No vehicles to sync."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Settings for:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Save and Back"/>
+    <e k="mouseSteering_button_save" v="Save"/>
+    <e k="mouseSteering_button_unsave" v="Unsave"/>
+    <e k="mouseSteering_button_viewDetails" v="View Details"/>
+    <e k="mouseSteering_button_hideDetails" v="Hide Details"/>
+    <e k="mouseSteering_button_viewOnMap" v="View on Map"/>
+    <e k="mouseSteering_button_sync" v="Sync vehicles with farm"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="All"/>
+    <e k="mouseSteering_ui_saved" v="Saved"/>
+    <e k="mouseSteering_ui_unsaved" v="Unsaved"/>
+    <e k="mouseSteering_ui_owned" v="Owned"/>
+    <e k="mouseSteering_ui_leased" v="Leased"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maximum number of vehicles reached"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Vehicle added successfully"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Vehicle removed successfully"/>
+  </elements>
+</l10n>

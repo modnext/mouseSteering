@@ -17,9 +17,7 @@ body:
       label: Version
       description: Select the version of the modification where you encountered the issue.
       options:
-        - 1.1.1.0
-        - 1.1.0.0
-        - 1.0.0.0
+        - 1.2.0.0
       default: 0
     validations:
       required: true
@@ -30,27 +28,8 @@ body:
       label: Game Version
       description: What version of the game are you playing?
       options:
-        - 1.14.0.0
-        - 1.13.1.1
-        - 1.13.1.0
-        - 1.12.0.0
-        - 1.10.1.1
-        - 1.10.1.0
-        - 1.9.1.0
-        - 1.9.0.0
-        - 1.8.2.0
-        - 1.8.1.0
-        - 1.7.1.0
-        - 1.7.0.1
-        - 1.7.0.0
-        - 1.6.0.0
-        - 1.5.0.0
-        - 1.4.1.0
-        - 1.4.0.0
-        - 1.3.1.0
-        - 1.3.0.0
-        - 1.2.0.2
-        - 1.2.0.0
+        - 1.11.0.1
+        - Legacy (< 1.11.0.1)
       default: 0
     validations:
       required: true
@@ -68,5 +47,5 @@ body:
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste any relevant log output. File path ("C:\\Users\\<USER_NAME>\\Documents\\My Games\\FarmingSimulator2022\\log.txt").
+      description: Please copy and paste any relevant log output. File path ("C:\\Users\\<USER_NAME>\\Documents\\My Games\\FarmingSimulator2025\\log.txt"). You can also paste the entire log on [pastebin.com](https://pastebin.com) and share the link.
       render: shell

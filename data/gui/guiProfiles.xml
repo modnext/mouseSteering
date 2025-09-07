@@ -1,336 +1,273 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUIProfiles>
-  <!-- Game Menu Settings -->
-  <Profile name="mouseSteeringOpenMenuButton" extends="ingameMenuSettingsPauseButton">
-    <Value name="iconUVs" value="866px 146px 43px 43px"/>
+  <!-- Base Reference -->
+  <Profile name="mouseSteeringSettingsMenuButton" extends="fs25_settingsPauseButton">
+    <iconSliceId value="gui.storeAttribute_tireName"/>
   </Profile>
 
-  <!-- Mouse Steering Menu -->
-  <Profile name="mouseSteeringMenuBackground" extends="baseReference">
-    <Value name="anchors" value="0 1 0 1" />
-    <Value name="size" value="1920px 1080px"/>
+  <!-- Dialog Background -->
+  <Profile name="mouseSteeringDialogFullscreenBg" extends="dialogFullscreenBg"/>
+  <Profile name="mouseSteeringDialogBgMiddle" extends="fs25_dialogBgMiddle"/>
+  <Profile name="mouseSteeringDialogBgTop" extends="fs25_dialogBgTop"/>
+  <Profile name="mouseSteeringDialogBgBottom" extends="fs25_dialogBgBottom"/>
 
-    <Value name="imageUVs" value="0 0 1920px 1080px"/>
-    <Value name="imageSize" value="2048 2048"/>
+  <!-- Dialog Content -->
+  <Profile name="mouseSteeringDialogContentContainer" extends="fs25_dialogContentContainer"/>
 
-    <Value name="imageFilename" value="data/gui/images/background.png"/>
-    <Value name="imageColor" value="1 1 1 0.06"/>
-  </Profile>
-
-  <!-- Mouse Steering Menu - Header and Details -->
-  <Profile name="mouseSteeringMenuHeaderCta" extends="emptyPanel" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="550px 32px"/>
-    <Value name="useFullVisibility" value="false"/>
-    <Value name="autoValidateLayout" value="true"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuHeaderCtaIcon" extends="baseReference" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="18px 18px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="imageColor" value="$preset_colorMainUI" />
-    <Value name="imageUVs" value="150px 0 48px 48px"/>
-    <Value name="imageFilename" value="g_mouseSteeringUIFilename"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuHeaderCtaText" extends="textDefault" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="364px 16px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="textSize" value="15px"/>
-    <Value name="textAlignment" value="left"/>
-    <Value name="textMaxWidth" value="200px"/>
-    <Value name="textMaxNumLines" value="1"/>
-    <Value name="textVerticalAlignment" value="middle"/>
-    <Value name="textAutoWidth" value="true"/>
+  <!-- Line Separator -->
+  <Profile name="mouseSteeringLineSeparatorBottom" extends="baseReference" with="anchorBottomStretchingX">
+    <size value="100% 1dp"/>
+    <imageColor value="$preset_fs25_colorGreyLight_20"/>
   </Profile>
 
-  <!-- Badge -->
-  <Profile name="mouseSteeringMenuBadge" extends="buttonBase" with="anchorMiddleLeft">
-    <Value name="handleFocus" value="false" />
-    <Value name="fitToContent" value="true" />
-    <Value name="fitExtraWidth" value="10px" />
-    <Value name="size" value="80px 20px" />
-    <Value name="textSize" value="14px" />
-    <Value name="textAutoWidth" value="true" />
-    <Value name="textColor" value="$preset_colorWhite_80" />
-    <Value name="imageColor" value="0 0 0 0.25" />
-    <Value name="hasFrame" value="true" />
-    <Value name="frameThickness" value="1dp 1dp 1dp 1dp" />
-    <Value name="frameTopColor" value="1 1 1 0.05" />
-    <Value name="frameLeftColor" value="1 1 1 0.05" />
-    <Value name="frameRightColor" value="1 1 1 0.05" />
-    <Value name="frameBottomColor" value="1 1 1 0.05" />
+  <!-- Progress Bar -->
+  <Profile name="mouseSteeringProgressBarBackground" extends="baseReference" with="anchorTopStretchingX pivotTopLeft">
+    <size value="100% 6px"/>
+    <position value="0px -30px"/>
+    <imageColor value="$preset_fs25_colorMainDark"/>
+    <imageSliceId value="gui.progressbar_middle"/>
+    <startImageSize value="5px 0"/>
+    <startImageColor value="$preset_fs25_colorMainDark"/>
+    <startImageSliceId value="gui.progressbar_left"/>
+    <endImageSize value="5px 0"/>
+    <endImageColor value="$preset_fs25_colorMainDark"/>
+    <endImageSliceId value="gui.progressbar_right"/>
   </Profile>
-  <Profile name="mouseSteeringMenuHeading" extends="baseReference">
-    <Value name="position" value="0"/>
-    <Value name="size" value="550px 130px"/>
-    <Value name="textSize" value="64px" />
-    <Value name="textBold" value="false"/>
-    <Value name="textAlignment" value="left"/>
-    <Value name="textVerticalAlignment" value="middle" />
-    <Value name="textAutoWidth" value="true" />
-    <Value name="textMaxWidth" value="500px" />
-    <Value name="textMaxNumLines" value="4" />
-    <Value name="textLineHeightScale" value="1"/>
+  <Profile name="mouseSteeringProgressBar" extends="mouseSteeringProgressBarBackground" with="anchorMiddleStretchingX pivotMiddleLeft">
+    <position value="0px 0px"/>
+    <imageColor value="$preset_fs25_colorMainHighlight"/>
+    <startImageColor value="$preset_fs25_colorMainHighlight"/>
+    <endImageColor value="$preset_fs25_colorMainHighlight"/>
   </Profile>
-  <Profile name="mouseSteeringMenuDetails" extends="mouseSteeringMenuHeading">
-    <Value name="margin" value="0 16px"/>
-    <Value name="size" value="550px 130px"/>
-    <Value name="textSize" value="19px" />
-    <Value name="textMaxNumLines" value="10" />
-    <Value name="textLineHeightScale" value="1.5"/>
-    <Value name="textMaxWidth" value="450px" />
-    <Value name="textColor" value="$preset_colorWhite_50"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuDetailsBold" extends="mouseSteeringMenuDetails">
-    <Value name="textBold" value="true"/>
+  <Profile name="mouseSteeringProgressBarDanger" extends="mouseSteeringProgressBar">
+    <imageColor value="$preset_colorRed"/>
+    <startImageColor value="$preset_colorRed"/>
+    <endImageColor value="$preset_colorRed"/>
   </Profile>
 
-  <!-- Mouse Steering Menu - Layout -->
-  <Profile name="mouseSteeringMenuColumnStart" extends="emptyPanel" with="anchorTopLeft">
-    <Value name="position" value="0" />
-    <Value name="size" value="589px 770px" />
-    <Value name="alignmentY" value="top" />
-    <Value name="alignmentX" value="left" />
-    <Value name="flowDirection" value="vertical" />
+  <!-- Options -->
+  <Profile name="mouseSteeringSettingsContainer" extends="baseReference" with="anchorTopLeft">
+    <size value="815px 90px"/>
+    <hasFrame value="true"/>
+    <frameColor value="transparent"/>
+    <frameThickness value="0 0 0 1dp"/>
+    <frameBottomColor value="$preset_fs25_colorGreyLight_20"/>
+    <imageColor value="$preset_colorTransparent"/>
   </Profile>
-  <Profile name="mouseSteeringMenuColumnEnd" extends="mouseSteeringMenuColumnStart" with="anchorTopLeft">
-    <Value name="anchors" value="1 1 1 1" />
-    <Value name="size" value="733px 770px" />
+  <Profile name="mouseSteeringSettingsTitle" extends="fs25_settingsMultiTextOptionTitle" with="anchorStretchingYLeft">
+    <width value="450px"/>
+    <position value="20px 12px"/>
+    <textSize value="17px"/>
+    <textBold value="true"/>
   </Profile>
-  <Profile name="mouseSteeringMenuBoxLayout" extends="baseReference" with="anchorTopLeft">
-    <Value name="size" value="733px 770px"/>
-    <Value name="fitFlowToElements" value="true"/>
-    <Value name="flowDirection" value="vertical" />
-    <Value name="imageColor" value="$preset_colorTransparent" />
+  <Profile name="mouseSteeringSettingsDescription" extends="fs25_settingsMultiTextOptionTitle" with="anchorStretchingYLeft">
+    <width value="450px"/>
+    <position value="20px -10px"/>
+    <textSize value="16px"/>
+    <textBold value="false"/>
+    <textMaxNumLines value="1"/>
+    <textColor value="$preset_fs25_colorGreyText"/>
   </Profile>
-  <Profile name="mouseSteeringMenuBox" extends="baseReference" with="anchorTopLeft">
-    <Value name="size" value="733px 770px"/>
-    <Value name="margin" value="0 0 0 12px"/>
-    <Value name="imageColor" value="0 0 0 0"/>
+  <Profile name="mouseSteeringSettingsContainerNumLines2" extends="mouseSteeringSettingsContainer">
+    <height value="105px"/>
   </Profile>
-  <Profile name="mouseSteeringMenuWrapper" extends="emptyPanel" with="anchorTopLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="733px 48px"/>
-    <Value name="margin" value="0 12px 0 12px"/>
-    <Value name="alignmentX" value="left"/>
-    <Value name="alignmentY" value="middle"/>
-    <Value name="flowDirection" value="horizontal"/>
-    <Value name="fitFlowToElements" value="true"/>
+  <Profile name="mouseSteeringSettingsTitleNumLines2" extends="mouseSteeringSettingsTitle">
+    <position value="20px 20px"/>
   </Profile>
-  <Profile name="mouseSteeringMenuWrapperTitle" extends="textDefault" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="417px 48px"/>
-    <Value name="textSize" value="20px"/>
-    <Value name="textAlignment" value="left"/>
-    <Value name="textMaxWidth" value="360px"/>
-    <Value name="textMaxNumLines" value="2"/>
-    <Value name="textVerticalAlignment" value="middle"/>
-    <Value name="textAutoWidth" value="true"/>
+  <Profile name="mouseSteeringSettingsDescriptionNumLines2" extends="mouseSteeringSettingsDescription">
+    <position value="20px -11px"/>
+    <textMaxNumLines value="2"/>
+  </Profile>
+  <Profile name="mouseSteeringSettingsSectionHeader" extends="fs25_textDefault" with="anchorTopStretchingX">
+    <size value="100% 60px"/>
+    <textSize value="28px"/>
+    <textUpperCase value="true"/>
+    <textColor value="$preset_fs25_colorMainHighlight"/>
   </Profile>
 
-  <!-- Mouse Steering Menu - SubTitle -->
-  <Profile name="mouseSteeringMenuColumns" extends="baseReference" with="anchorTopLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="733px 48px"/>
-    <Value name="alignmentX" value="left"/>
-    <Value name="alignmentY" value="bottom"/>
-    <Value name="flowDirection" value="horizontal"/>
-    <Value name="useFullVisibility" value="false"/>
-    <Value name="autoValidateLayout" value="true"/>
-    <Value name="imageColor" value="$preset_colorTransparent"/>
+  <!-- Slider option -->
+  <Profile name="mouseSteeringSliderOption" extends="fs25_multiTextOption" with="anchorMiddleRight">
+    <size value="276px 32px"/>
+    <margin value="0 0 0 20px"/>
+    <position value="-10px 0px"/>
+    <sliderOffset value="0px"/>
+    <continuousInputStep value="9"/>
+    <updateTextPosition value="false"/>
+    <hideLeftRightButtons value="false"/>
+    <useFillingBar value="true"/>
+    <defaultProfileButtonLeft value="mouseSteeringSliderOptionLeft"/>
+    <defaultProfileButtonRight value="mouseSteeringSliderOptionRight"/>
+    <defaultProfileBgThreePart value="mouseSteeringSliderOptionBg"/>
+    <defaultProfileText value="mouseSteeringSliderOptionText"/>
+    <defaultTextColor value="$preset_fs25_colorMainLight"/>
+    <overlapTextColor value="$preset_fs25_colorMainDark"/>
+    <defaultProfileSlider value="mouseSteeringSliderOptionIcon"/>
+    <defaultProfileFillingBarThreePart value="mouseSteeringSliderOptionFillingBar"/>
   </Profile>
-  <Profile name="mouseSteeringMenuSubtitleWrapper" extends="baseReference" with="anchorTopLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="733px 48px"/>
-    <Value name="useFullVisibility" value="false"/>
-    <Value name="autoValidateLayout" value="true"/>
-    <Value name="imageColor" value="$preset_colorTransparent"/>
+  <Profile name="mouseSteeringSliderOptionLeft" extends="buttonBase" with="anchorStretchingYLeft">
+    <size value="40px 100%"/>
+    <position value="-25px 0px"/>
+    <clickSound value="NONE"/>
+    <sendActionOnRelease value="false"/>
+    <iconRotation value="180"/>
+    <iconSize value="7px 8px"/>
+    <iconTextOffset value="-7px 0px"/>
+    <iconSliceId value="gui.3dShop_arrow"/>
+    <iconColor value="$preset_colorTransparent"/>
+    <iconHighlightedColor value="$preset_fs25_colorGreyLight"/>
+    <iconFocusedColor value="$preset_fs25_colorGreyLight"/>
+    <iconPressedColor value="$preset_fs25_colorMainHighlight"/>
+    <iconDisabledColor value="$preset_colorTransparent"/>
+    <imageSliceId value="noSlice"/>
+    <imageColor value="0 0 0 0"/>
+    <imageHighlightedColor value="0 0 0 0"/>
+    <imageFocusedColor value="0 0 0 0"/>
+    <imageSelectedColor value="0 0 0 0"/>
+    <imageDisabledColor value="0 0 0 0"/>
   </Profile>
-  <Profile name="mouseSteeringMenuSubtitleIcon" extends="ingameMenuPriceGoodsIcon" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="24px 24px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="imageUVs" value="200px 0 48px 48px"/>
-    <Value name="imageFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="imageColor" value="$preset_colorWhite" />
+  <Profile name="mouseSteeringSliderOptionRight" extends="mouseSteeringSliderOptionLeft" with="anchorStretchingYRight">
+    <position value="25px 0px"/>
+    <iconRotation value="0"/>
+    <iconTextOffset value="7px 0px"/>
   </Profile>
-  <Profile name="mouseSteeringMenuSubtitle" extends="textDefault" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="366px 24px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="textSize" value="20px"/>
-    <Value name="textBold" value="true"/>
-    <Value name="textAlignment" value="left"/>
-    <Value name="textMaxWidth" value="340px"/>
-    <Value name="textMaxNumLines" value="1"/>
-    <Value name="textVerticalAlignment" value="middle"/>
-    <Value name="textAutoWidth" value="true"/>
+  <Profile name="mouseSteeringSliderOptionBg" extends="baseReference" with="anchorMiddleStretchingX">
+    <imageSliceId value="gui.3dShop_button_middle"/>
+    <imageColor value="$preset_fs25_colorGrey"/>
+    <startImageSize value="6px 0"/>
+    <startImageSliceId value="gui.3dShop_button_left"/>
+    <startImageColor value="$preset_fs25_colorGrey"/>
+    <endImageSize value="6px 0"/>
+    <endImageSliceId value="gui.3dShop_button_right"/>
+    <endImageColor value="$preset_fs25_colorGrey"/>
   </Profile>
-  <Profile name="mouseSteeringMenuValues" extends="mouseSteeringMenuSubtitle" with="anchorMiddleRight">
-    <Value name="textBold" value="false"/>
-    <Value name="textAlignment" value="right"/>
+  <Profile name="mouseSteeringSliderOptionFillingBar" extends="baseReference" with="anchorMiddleStretchingX pivotMiddleLeft">
+    <imageSliceId value="gui.3dShop_button_middle"/>
+    <imageColor value="$preset_fs25_colorGreyBinarySlider"/>
+    <imageFocusedColor value="$preset_fs25_colorMainHighlight"/>
+    <imageHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+    <startImageSize value="6px 0"/>
+    <startImageSliceId value="gui.3dShop_button_left"/>
+    <startImageColor value="$preset_fs25_colorGreyBinarySlider"/>
+    <startImageFocusedColor value="$preset_fs25_colorMainHighlight"/>
+    <startImageHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+    <endImageSize value="6px 0"/>
+    <endImageSliceId value="gui.3dShop_button_right"/>
+    <endImageColor value="$preset_fs25_colorGreyBinarySlider"/>
+    <endImageFocusedColor value="$preset_fs25_colorMainHighlight"/>
+    <endImageHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+    <imageDisabledColor value="$preset_fs25_colorGreyBinarySlider_20"/>
+    <startImageDisabledColor value="$preset_fs25_colorGreyBinarySlider_20"/>
+    <endImageDisabledColor value="$preset_fs25_colorGreyBinarySlider_20"/>
   </Profile>
-  <Profile name="mouseSteeringMenuSubtitleIconVehicleStorage" extends="mouseSteeringMenuSubtitleIcon" with="anchorMiddleLeft">
-    <Value name="imageUVs" value="0 0 48px 48px"/>
+  <Profile name="mouseSteeringSliderOptionIcon" extends="baseReference" with="anchorStretchingYLeft">
+    <width value="0"/>
+    <absoluteSizeOffset value="0 0"/>
+    <imageColor value="$preset_fs25_colorGreyBinarySlider"/>
+    <imageFocusedColor value="$preset_fs25_colorMainHighlight"/>
+    <imageHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+    <imageDisabledColor value="$preset_fs25_colorGreyBinarySlider_20"/>
   </Profile>
-  <Profile name="mouseSteeringMenuSubtitleIconGeneral" extends="mouseSteeringMenuSubtitleIcon" with="anchorMiddleLeft">
-    <Value name="imageUVs" value="300px 0 48px 48px"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuSubtitleIconControlAttributes" extends="mouseSteeringMenuSubtitleIcon" with="anchorMiddleLeft">
-    <Value name="imageUVs" value="350px 0 48px 48px"/>
-  </Profile>
-
-  <!-- Mouse Steering Menu - Multi Text Option -->
-  <Profile name="mouseSteeringMenuMultiTextOption" extends="multiTextOption" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="316px 48px"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuMultiTextOptionLeft" extends="multiTextOptionLeft" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuMultiTextOptionRight" extends="multiTextOptionRight" with="anchorMiddleRight">
-    <Value name="position" value="0"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuMultiTextOptionText" extends="multiTextOptionText" with="anchorMiddleCenter">
-    <Value name="pivot" value="0.5 0.5" />
-    <Value name="position" value="0"/>
-    <Value name="size" value="0 48px"/>
-    <Value name="textSize" value="20px"/>
-    <Value name="textMaxWidth" value="340px"/>
-    <Value name="textAlignment" value="center"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuMultiTextOptionBg" extends="multiTextOptionBg" with="anchorMiddleCenter">
-    <Value name="position" value="0 0"/>
-    <Value name="size" value="220px 48px"/>
-  </Profile>
-
-  <!-- Mouse Steering Menu - Slider -->
-  <Profile name="mouseSteeringMenuSlider" extends="sliderHorizontal" with="anchorMiddleLeft">
-    <Value name="handleFocus" value="true"/>
-    <Value name="position" value="0"/>
-    <Value name="size" value="316px 48px"/>
-    <Value name="sliderSize" value="0"/>
-    <Value name="stepSize" value="0.01"/>
-    <Value name="currentValue" value="-1"/>
-    <Value name="minValue" value="0"/>
-    <Value name="maxValue" value="2"/>
-    <Value name="useStepRounding" value="true"/>
-    <Value name="imageColor" value="$preset_colorMainUI_10"/>
-    <Value name="imageHighlightedColor" value="$preset_colorMainUI_20"/>
-    <Value name="imageFocusedColor" value="$preset_colorMainUI_20"/>
-    <Value name="trackImageUVs" value="$preset_colorUVs"/>
-    <Value name="trackImageColor" value="$preset_colorMainUI_30"/>
-    <Value name="trackImageFilename" value="g_baseUIFilename"/>
-    <Value name="trackImageDisabledColor" value="$preset_colorGlass"/>
-    <Value name="trackImageFocusedColor" value="$preset_colorMainUI"/>
-    <Value name="trackImageHighlightedColor" value="$preset_colorMainUI"/>
-  </Profile>
-  <Profile name="mouseSteeringMenuSliderText" extends="textDefault" with="anchorMiddleCenter">
-    <Value name="position" value="0"/>
-    <Value name="size" value="200px 23px"/>
-    <Value name="textSize" value="20px"/>
-    <Value name="textAlignment" value="center"/>
-    <Value name="textVerticalAlignment" value="middle"/>
-    <Value name="textBold" value="true"/>
+  <Profile name="mouseSteeringSliderOptionText" extends="fs25_multiTextOptionText">
+    <position value="0px 0"/>
+    <textSize value="16px"/>
   </Profile>
 
-  <!-- Mouse Steering Menu - Button -->
-  <Profile name="mouseSteeringMenuVehicleButton" extends="ingameMenuSettingsPauseButton" with="anchorMiddleLeft">
-    <Value name="iconFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="iconUVs" value="250px 0 48px 48px"/>
+  <!-- Multi text option -->
+  <Profile name="mouseSteeringMultiTextOption" extends="fs25_multiTextOption" with="anchorMiddleRight">
+    <size value="276px 32px"/>
+    <defaultProfileBgThreePart value="mouseSteeringMultiTextOptionBg"/>
+    <defaultProfileText value="mouseSteeringMultiTextOptionText"/>
   </Profile>
-  <Profile name="mouseSteeringMenuControlsKeyboard" extends="ingameMenuSettingsPauseButton" with="anchorMiddleLeft">
-    <Value name="iconFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="iconUVs" value="450px 0 48px 48px"/>
+  <Profile name="mouseSteeringMultiTextOptionBg" extends="fs25_multiTextOptionBg">
+    <imageSliceId value="gui.3dShop_button_middle"/>
+    <imageColor value="$preset_fs25_colorGrey"/>
+    <startImageSize value="6px 0"/>
+    <startImageSliceId value="gui.3dShop_button_left"/>
+    <startImageColor value="$preset_fs25_colorGrey"/>
+    <endImageSize value="6px 0"/>
+    <endImageSliceId value="gui.3dShop_button_right"/>
+    <endImageColor value="$preset_fs25_colorGrey"/>
   </Profile>
-
-  <!-- Vehicles Dialog -->
-  <Profile name="mouseSteeringVehiclesDialogBg" extends="dialogBg">
-    <Value name="size" value="824px 580px"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogHeaderIcon" extends="ingameMenuPriceGoodsIcon">
-    <Value name="position" value="0"/>
-    <Value name="size" value="38px 38px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="imageUVs" value="250px 0 48px 48px"/>
-    <Value name="imageFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="imageColor" value="$preset_colorMainUI"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogHeaderText" extends="dialogHeaderText">
-    <Value name="textMaxWidth" value="494px"/>
-    <Value name="textAutoWidth" value="true"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogHeaderBox" extends="ingameCalendarHeaderBox" with="anchorTopLeft">
-    <Value name="size" value="824px 48px"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogHeader" extends="ingameMenuPriceHeader">
-    <Value name="size" value="380px 48px"/>
-    <Value name="textAlignment" value="left"/>
-    <Value name="textOffset" value="0 0"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogBox" with="anchorMiddleCenter">
-    <Value name="size" value="824px 580px"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogList" extends="ingameMenuPriceList">
-    <Value name="position" value="0 -48px"/>
-    <Value name="size" value="824px 532px"/>
-    <Value name="imageColor" value="$preset_colorTransparent"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogListItem" extends="ingameMenuPriceListItem">
-    <Value name="size" value="824px 40px"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogItemIcon" extends="baseReference" with="anchorMiddleLeft">
-    <Value name="position" value="10.5px 0"/>
-    <Value name="size" value="24px 24px"/>
-    <Value name="imageFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="imageUVs" value="50px 0 48px 48px"/>
-    <Value name="imageColor" value="$preset_colorWhite_25"/>
-    <Value name="imageSelectedColor" value="$preset_colorWhite_25"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogItemIconActive" extends="mouseSteeringVehiclesDialogItemIcon">
-    <Value name="imageUVs" value="100px 0 48px 48px"/>
-    <Value name="imageColor" value="$preset_colorMainUI"/>
-    <Value name="imageSelectedColor" value="$preset_colorWhite"/>
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogItemName" extends="textDefault">
-    <Value name="position" value="45px 0" />
-    <Value name="size" value="500px 40px" />
-    <Value name="textVerticalAlignment" value="middle" />
-    <Value name="textAutoWidth" value="true" />
-  </Profile>
-  <Profile name="mouseSteeringVehiclesDialogItemLicensePlate" extends="textDefault" with="anchorMiddleRight">
-    <Value name="size" value="226px 40px" />
-    <Value name="textVerticalAlignment" value="middle" />
-    <Value name="textAutoWidth" value="false" />
-    <Value name="textAlignment" value="center" />
+  <Profile name="mouseSteeringMultiTextOptionText" extends="fs25_multiTextOptionText">
+    <textColor value="$preset_fs25_colorMainLight"/>
+    <textSelectedColor value="$preset_fs25_colorMainDark"/>
+    <textFocusedColor value="$preset_fs25_colorMainDark"/>
+    <textHighlightedColor value="$preset_fs25_colorMainDark"/>
   </Profile>
 
-  <!-- Message Dialog -->
-  <Profile name="mouseSteeringVehiclesDialogMessageBg" extends="baseReference" with="anchorBottomCenter">
-    <Value name="position" value="0 40px"/>
-    <Value name="size" value="650px 40px"/>
-    <Value name="alignmentX" value="center"/>
-    <Value name="alignmentY" value="bottom"/>
-    <Value name="useFullVisibility" value="false"/>
-    <Value name="autoValidateLayout" value="true"/>
-    <Value name="imageColor" value="$preset_colorDarkRed"/>
+  <!-- Settings options -->
+  <Profile name="mouseSteeringSettingsSliderOption" extends="mouseSteeringSliderOption" with="anchorMiddleRight">
+    <position value="-12px 0px"/>
+    <focusOnHighlight value="true"/>
   </Profile>
-  <Profile name="mouseSteeringVehiclesDialogMessageIcon" extends="ingameMenuPriceGoodsIcon" with="anchorMiddleLeft">
-    <Value name="position" value="0"/>
-    <Value name="size" value="24px 24px"/>
-    <Value name="margin" value="0 0 8px 0"/>
-    <Value name="imageUVs" value="400px 0 48px 48px"/>
-    <Value name="imageFilename" value="g_mouseSteeringUIFilename"/>
-    <Value name="imageColor" value="$preset_colorWhite" />
+  <Profile name="mouseSteeringSettingsBinaryOption" extends="fs25_binaryOption" with="anchorMiddleRight">
+    <position value="-12px 0px"/>
+    <focusOnHighlight value="true"/>
   </Profile>
-  <Profile name="mouseSteeringVehiclesDialogMessage" extends="textDefault" with="anchorMiddleLeft">
-    <Value name="size" value="498px 40px"/>
-    <Value name="textMaxWidth" value="420px"/>
-    <Value name="textAutoWidth" value="true"/>
-    <Value name="textSize" value="16px"/>
-    <Value name="textColor" value="$preset_colorWhite"/>
-    <Value name="textAlignment" value="center"/>
-    <Value name="textVerticalAlignment" value="middle"/>
+  <Profile name="mouseSteeringSettingsMultiTextOption" extends="mouseSteeringMultiTextOption">
+    <position value="-12px 0px"/>
+    <focusOnHighlight value="true"/>
+    <wrap value="false"/>
+    <hideButtonOnLimitReached value="true"/>
+  </Profile>
+  <Profile name="mouseSteeringSettingsOptionLocked" extends="emptyPanel" with="anchorMiddleRight">
+    <size value="20px 27px"/>
+    <imageSliceId value="gui.multiplayer_lock"/>
+    <imageColor value="$preset_fs25_colorMainHighlight"/>
+    <position value="-300px 0px"/>
+  </Profile>
+
+  <!-- Slider box -->
+  <Profile name="mouseSteeringListSliderBox" extends="fs25_listSliderBox">
+    <position value="-15px 0px"/>
+  </Profile>
+  <Profile name="mouseSteeringListSlider" extends="fs25_listSlider"/>
+
+  <!-- Dialog buttons -->
+  <Profile name="mouseSteeringDialogButtonBox" extends="fs25_dialogButtonBox"/>
+  <Profile name="mouseSteeringDialogButtonBoxSeparator" extends="fs25_dialogButtonBoxSeparator"/>
+
+  <!-- Tabs -->
+  <Profile name="mouseSteeringTabbed" extends="fs25_subCategorySelector">
+    <size value="0 0"/>
+    <defaultProfileText value="fs25_subCategorySelectorTabbedText"/>
+    <hideLeftRightButtons value="true"/>
+  </Profile>
+  <Profile name="mouseSteeringTabbedBox" extends="emptyPanel" with="anchorTopStretchingX">
+    <height value="40px"/>
+    <handleFocus value="false"/>
+    <alignmentX value="left"/>
+    <alignmentY value="bottom"/>
+  </Profile>
+  <Profile name="mouseSteeringTabbedTab" extends="emptyPanel">
+    <size value="200px 36px"/>
+    <handleFocus value="false"/>
+    <fitExtraWidth value="40px"/>
+    <ignorePressedOverlayState value="true"/>
+    <textSize value="16px"/>
+    <textBold value="true"/>
+    <textUpperCase value="true"/>
+    <textAutoWidth value="true"/>
+    <textAlignment value="center"/>
+    <textOffset value="0px 0"/>
+    <textColor value="$preset_fs25_colorMainLight"/>
+    <textSelectedColor value="$preset_fs25_colorMainDark"/>
+    <textDisabledColor value="$preset_colorDisabled"/>
+  </Profile>
+  <Profile name="mouseSteeringTabbedTabBg" extends="emptyPanel">
+    <handleFocus value="false"/>
+    <imageSelectedColor value="$preset_colorWhite"/>
+    <imageSelectedSliceId value="gui.tab_selected_middle"/>
+    <startImageSize value="12px 0"/>
+    <startImageSliceId value="gui.empty"/>
+    <startImageSelectedColor value="$preset_colorWhite"/>
+    <startImageSelectedSliceId value="gui.tab_selected_left"/>
+    <endImageSize value="12px 0"/>
+    <endImageSliceId value="gui.empty"/>
+    <endImageSelectedColor value="$preset_colorWhite"/>
+    <endImageSelectedSliceId value="gui.tab_selected_right"/>
   </Profile>
 </GUIProfiles>
+
+
+

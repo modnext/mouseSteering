@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controlul direcției"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salvare/Eliminare vehicul"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotire cameră"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Activare"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Dezactivare"/>
+    <e k="mouseSteering_mode_format" v="%s Comandă mouse" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Rotire cameră"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Comandă mouse"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Setări"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Bun venit la Comanda mouse"/>
+    <e k="mouseSteering_welcome_text" v="Iată câteva note importante:&#10;&#10;- Setările și datele sunt separate pentru Singleplayer (Gazdă) și Multiplayer (Client)&#10;- Modul de direcție per vehicul este salvat per hartă (nu per joc salvat)&#10;- Ca client multiplayer, direcția poate părea mai puțin fluidă din cauza sincronizării rețelei&#10; - Dacă rămâneți fără sloturi, puteți sincroniza vehiculele cu ferma pentru a elimina intrările pierdute&#10;&#10;Faceți clic pe „Da” pentru a confirma. Această fereastră de dialog nu va mai apărea."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Setări Mouse Steering"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="General"/>
+    <e k="mouseSteering_ui_default" v="Activat implicit"/>
+    <e k="mouseSteering_ui_autoSave" v="Salvare automată"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Reglarea controlului"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensibilitate"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Inversare axă X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Direcție bazată pe viteză"/>
+    <e k="mouseSteering_ui_linearity" v="Linearitate"/>
+    <e k="mouseSteering_ui_smoothness" v="Fluiditate"/>
+    <e k="mouseSteering_ui_deadzone" v="Zona moartă"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Asistență la direcție"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Anulează direcția AI la introducerea datelor"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Blochează direcția AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Prag de introducere"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Activează direcția cu mouse-ul în mod implicit pe toate vehiculele."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Memorează și reaplică automat modul de direcție pentru fiecare vehicul."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Reglează rapiditatea cu care direcția răspunde la mișcarea mouse-ului."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inversează axa orizontală (X) pentru direcție."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Reglează sensibilitatea în funcție de viteză și unghiul de direcție pentru un control mai bun."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Reglează curba de răspuns a direcției. Valorile mai mari oferă un control mai fin în apropierea centrului."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Netezește mișcările mouse-ului pentru a reduce schimbările bruște ale direcției."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignoră mișcările mici ale mouse-ului în apropierea centrului pentru a preveni virarea accidentală."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Când este activată, orice mișcare anulează imediat direcția AI."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Blochează direcția AI timp de 2,5 secunde după activare pentru a preveni anularea accidentală."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Anulează direcția AI când viteza mouse-ului depășește această valoare."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interfață"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Mod indicator"/>
+    <e k="mouseSteering_ui_both" v="Exterior și interior"/>
+    <e k="mouseSteering_ui_inside" v="Interior"/>
+    <e k="mouseSteering_ui_outside" v="Exterior"/>
+    <e k="mouseSteering_ui_indicatorText" v="Afișează unghiul în indicator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Afișează indicatorul când te uiți înapoi (interior)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Selectează modul în care indicatorul de direcție este afișat pe HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Afișează unghiul actual de direcție ca text pe ecran în indicator."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Afișează indicatorul când te uiți înapoi în vizualizarea interioară."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Comenzi date"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Vehicul"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Plăcuță de înmatriculare"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nu s-au găsit vehicule"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d din %d rânduri selectate." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Locuri rămase"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Sincronizare vehicule"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Sincronizați vehiculele salvate cu ferma? Aceasta va elimina intrările pentru vehiculele care nu mai există."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Vehicule sincronizate: %d eliminate." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Nu există vehicule de sincronizat."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Setări pentru:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (Gazdă)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (Client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Salvare și Înapoi"/>
+    <e k="mouseSteering_button_save" v="Salvare"/>
+    <e k="mouseSteering_button_unsave" v="Anulează salvarea"/>
+    <e k="mouseSteering_button_viewDetails" v="Vezi detalii"/>
+    <e k="mouseSteering_button_hideDetails" v="Ascunde detalii"/>
+    <e k="mouseSteering_button_viewOnMap" v="Vezi pe hartă"/>
+    <e k="mouseSteering_button_sync" v="Sincronizează vehiculele cu ferma"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Toate"/>
+    <e k="mouseSteering_ui_saved" v="Salvate"/>
+    <e k="mouseSteering_ui_unsaved" v="Nesalvat"/>
+    <e k="mouseSteering_ui_owned" v="Deținut"/>
+    <e k="mouseSteering_ui_leased" v="Închiriat"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Numărul maxim de vehicule atins"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Vehicul adăugat cu succes"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Vehicul eliminat cu succes"/>
+  </elements>
+</l10n>

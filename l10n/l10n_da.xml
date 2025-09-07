@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Styring"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Gem/fjern køretøj"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Drej kamera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktiver"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deaktiver"/>
+    <e k="mouseSteering_mode_format" v="%s Musestyring" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Drej kamera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Musestyring"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Indstillinger"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Velkommen til musestyring"/>
+    <e k="mouseSteering_welcome_text" v="Her er et par vigtige bemærkninger:&#10;&#10;- Indstillinger og data er separate for Singleplayer (Host) og Multiplayer (Client)&#10;- Styringstilstand pr. køretøj gemmes pr. kort (ikke pr. gemt spil)&#10;- Som multiplayer-klient kan styringen føles mindre jævn på grund af netværkssynkronisering&#10; - Hvis du løber tør for pladser, kan du synkronisere køretøjer med farmen for at fjerne mistede poster&#10;&#10;Klik på ›Ja‹ for at bekræfte. Denne dialog vises ikke igen."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Indstillinger for musestyring"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Generelt"/>
+    <e k="mouseSteering_ui_default" v="Aktiveret som standard"/>
+    <e k="mouseSteering_ui_autoSave" v="Autosave"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Kontrolindstilling"/>
+    <e k="mouseSteering_ui_sensitivity" v="Følsomhed"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Inverter X-akse"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Hastighedsbaseret styring"/>
+    <e k="mouseSteering_ui_linearity" v="Linearitet"/>
+    <e k="mouseSteering_ui_smoothness" v="Glidende"/>
+    <e k="mouseSteering_ui_deadzone" v="Dødzone"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Styrehjælp"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Annuller AI-styring ved indtastning"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Lås AI-styring"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Indgangstærskel"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Aktiverer musestyring som standard på alle køretøjer."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Husker og genanvender automatisk styremodus for hvert køretøj."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Justerer, hvor hurtigt styringen reagerer på musens bevægelser."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inverterer den vandrette (X) akse for styring."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Justerer følsomheden baseret på hastighed og styrevinkel for bedre kontrol."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Justerer styrekurven. Højere værdier giver finere kontrol nær midten."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Udjævner musens input for at reducere pludselige ændringer i styringen."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignorerer små musebevægelser nær midten for at forhindre utilsigtet styring."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Når denne funktion er aktiveret, annullerer ethvert input straks AI-styringen."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Låser AI-styringen i 2,5 sekunder efter aktivering for at forhindre utilsigtet annullering."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Annullerer AI-styringen, når musens hastighed overskrider denne værdi."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interface"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Indikator-tilstand"/>
+    <e k="mouseSteering_ui_both" v="Udenfor og indenfor"/>
+    <e k="mouseSteering_ui_inside" v="Indenfor"/>
+    <e k="mouseSteering_ui_outside" v="Udenfor"/>
+    <e k="mouseSteering_ui_indicatorText" v="Vis vinkel i indikator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Vis indikator, når du kigger bagud (indenfor)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Vælger, hvordan styreindikatoren vises på HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Viser den aktuelle styrevinkel som tekst på skærmen i indikatoren."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Viser indikatoren, når man kigger bagud i indvendig visning."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Datakontrol"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Køretøj"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Nummerplade"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Ingen køretøjer fundet"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d af %d række(r) valgt." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Pladser tilbage"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Synkroniser køretøjer"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Synkroniser gemte køretøjer med gården? Dette vil fjerne poster for køretøjer, der ikke længere eksisterer."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Synkroniserede køretøjer: %d fjernet." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Ingen køretøjer at synkronisere."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Indstillinger for:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (vært)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (klient)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Gem og tilbage"/>
+    <e k="mouseSteering_button_save" v="Gem"/>
+    <e k="mouseSteering_button_unsave" v="Fortryd gemning"/>
+    <e k="mouseSteering_button_viewDetails" v="Vis detaljer"/>
+    <e k="mouseSteering_button_hideDetails" v="Skjul detaljer"/>
+    <e k="mouseSteering_button_viewOnMap" v="Vis på kort"/>
+    <e k="mouseSteering_button_sync" v="Synkroniser køretøjer med gård"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Alle"/>
+    <e k="mouseSteering_ui_saved" v="Gemt"/>
+    <e k="mouseSteering_ui_unsaved" v="Ikke gemt"/>
+    <e k="mouseSteering_ui_owned" v="Ejet"/>
+    <e k="mouseSteering_ui_leased" v="Lejet"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maksimalt antal køretøjer nået"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Køretøj tilføjet"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Køretøj fjernet"/>
+  </elements>
+</l10n>

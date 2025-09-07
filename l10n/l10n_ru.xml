@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Управление рулем"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Сохранить/удалить транспортное средство"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Поворот камеры"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Активировать"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Деактивировать"/>
+    <e k="mouseSteering_mode_format" v="%s Управление мышью" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Поворот камеры"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Управление мышью"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Настройки"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Добро пожаловать в Управление мышью"/>
+    <e k="mouseSteering_welcome_text" v="Вот несколько важных замечаний:&#10;&#10;- Настройки и данные отделены для одиночной игры (хост) и многопользовательской игры (клиент)&#10;- Режим управления для каждого транспортного средства сохраняется для каждой карты (а не для каждой сохраненной игры)&#10;- В качестве многопользовательского клиента управление может казаться менее плавным из-за сетевой синхронизации&#10; - Если у вас закончились слоты, вы можете синхронизировать транспортные средства с фермой, чтобы удалить потерянные записи&#10;&#10;Нажмите «Да», чтобы подтвердить. Это диалоговое окно больше не будет появляться."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Настройки управления мышью"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Общие"/>
+    <e k="mouseSteering_ui_default" v="Включено по умолчанию"/>
+    <e k="mouseSteering_ui_autoSave" v="Автосохранение"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Настройка управления"/>
+    <e k="mouseSteering_ui_sensitivity" v="Чувствительность"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Инвертировать ось X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Управление по скорости"/>
+    <e k="mouseSteering_ui_linearity" v="Линейность"/>
+    <e k="mouseSteering_ui_smoothness" v="Плавная работа"/>
+    <e k="mouseSteering_ui_deadzone" v="Мертвая зона"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Помощь в управлении"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Отмена управления ИИ при вводе"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Блокировка управления ИИ"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Порог ввода"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="По умолчанию включает управление мышью на всех транспортных средствах."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Автоматически запоминает и повторно применяет режим управления для каждого транспортного средства."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Регулирует скорость реакции управления на движение мыши."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Инвертирует горизонтальную (X) ось для управления."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Регулирует чувствительность в зависимости от скорости и угла поворота для лучшего управления."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Регулирует кривую отклика рулевого управления. Более высокие значения обеспечивают более точное управление вблизи центра."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="сглаживает ввод мыши, чтобы уменьшить резкие изменения рулевого управления."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="игнорирует небольшие движения мыши вблизи центра, чтобы предотвратить непреднамеренное рулевое управление."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="при включении любой ввод немедленно отменяет рулевое управление ИИ."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Блокирует управление ИИ на 2,5 секунды после активации, чтобы предотвратить случайную отмену."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Отменяет управление ИИ, когда скорость мыши превышает это значение."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Интерфейс"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Режим индикатора"/>
+    <e k="mouseSteering_ui_both" v="Снаружи и внутри"/>
+    <e k="mouseSteering_ui_inside" v="Внутри"/>
+    <e k="mouseSteering_ui_outside" v="Снаружи"/>
+    <e k="mouseSteering_ui_indicatorText" v="Показать угол в индикаторе"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Показать индикатор при взгляде назад (внутри)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Выбирает способ отображения индикатора рулевого управления на HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Отображает текущий угол поворота руля в виде текста на экране в индикаторе."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Отображает индикатор при взгляде назад в режиме внутреннего обзора."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Элементы управления данными"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Транспортное средство"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Номерной знак"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Транспортные средства не найдены"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d из %d строк." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Оставшиеся слоты"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Синхронизация транспортных средств"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Синхронизировать сохраненные транспортные средства с фермой? Это удалит записи о транспортных средствах, которые больше не существуют."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Синхронизировано транспортных средств: %d удалено." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Нет транспортных средств для синхронизации."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Настройки для:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Одиночная игра (хост)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Многопользовательская игра (клиент)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Сохранить и назад"/>
+    <e k="mouseSteering_button_save" v="Сохранить"/>
+    <e k="mouseSteering_button_unsave" v="Отменить сохранение"/>
+    <e k="mouseSteering_button_viewDetails" v="Просмотреть детали"/>
+    <e k="mouseSteering_button_hideDetails" v="Скрыть детали"/>
+    <e k="mouseSteering_button_viewOnMap" v="Просмотреть на карте"/>
+    <e k="mouseSteering_button_sync" v="Синхронизировать транспортные средства с фермой"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Все"/>
+    <e k="mouseSteering_ui_saved" v="Сохранены"/>
+    <e k="mouseSteering_ui_unsaved" v="Не сохраненные"/>
+    <e k="mouseSteering_ui_owned" v="Собственные"/>
+    <e k="mouseSteering_ui_leased" v="Арендованные"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Достигнуто максимальное количество транспортных средств"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Транспортное средство добавлено успешно"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Транспортное средство удалено успешно"/>
+  </elements>
+</l10n>

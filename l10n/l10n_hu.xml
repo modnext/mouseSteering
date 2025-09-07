@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kormányzás vezérlése"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Jármű mentése/eltávolítása"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera forgatása"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktiválás"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deaktiválás"/>
+    <e k="mouseSteering_mode_format" v="%s Egérvezérlés" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Kamera forgatása"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Egérvezérlés"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Beállítások"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Üdvözöljük az Egérvezérlésben"/>
+    <e k="mouseSteering_welcome_text" v="Néhány fontos megjegyzés:&#10;&#10;- A beállítások és adatok külön vannak az egyjátékos (gazda) és a többjátékos (kliens) módban&#10;- Az egyes járművek kormányzási módja térképenként (nem mentésenként) kerül mentésre&#10;- Többjátékos kliensként a kormányzás a hálózati szinkronizálás miatt kevésbé lehet sima&#10; - Ha elfogynak a helyek, szinkronizálhatja a járműveket a farmmal, hogy eltávolítsa az elveszett bejegyzéseket&#10;&#10;A megerősítéshez kattintson az „Igen” gombra. Ez a párbeszédablak többé nem jelenik meg."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Egérvezérlés beállítások"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Általános"/>
+    <e k="mouseSteering_ui_default" v="Alapértelmezés szerint engedélyezve"/>
+    <e k="mouseSteering_ui_autoSave" v="Automatikus mentés"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Vezérlés beállítása"/>
+    <e k="mouseSteering_ui_sensitivity" v="Érzékenység"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X-tengely megfordítása"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Sebességalapú kormányzás"/>
+    <e k="mouseSteering_ui_linearity" v="Linearitás"/>
+    <e k="mouseSteering_ui_smoothness" v="Sima"/>
+    <e k="mouseSteering_ui_deadzone" v="Holtzóna"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Kormányzás-segítés"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="AI kormányzás visszavonása bevitelkor"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="AI kormányzás zárolása"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Bemeneti küszöbérték"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Alapértelmezés szerint engedélyezi az egérvezérlést minden járműnél."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Automatikusan megjegyzi és újraalkalmazza a járművek kormányzási módját."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Beállítja, hogy a kormányzás milyen gyorsan reagáljon az egér mozgására."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Megfordítja a kormányzás vízszintes (X) tengelyét."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="A sebesség és a kormányzási szög alapján állítja be az érzékenységet a jobb irányítás érdekében."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Beállítja a kormányzás reakciógörbéjét. A magasabb értékek finomabb irányítást biztosítanak a középpont közelében."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Kisimítja az egér bevitelét, hogy csökkentsék a hirtelen kormányváltozásokat."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Figyelmen kívül hagyja a középpont közelében végzett apró egérmozgásokat, hogy megakadályozza a véletlen kormányzást."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Ha engedélyezve van, bármilyen bevitel azonnal megszünteti az AI kormányzást."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Az aktiválás után 2,5 másodpercre lezárja az AI kormányzást, hogy megakadályozza a véletlen törlést."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Törli az AI kormányzást, ha az egér sebessége meghaladja ezt az értéket."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Felület"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Jelző mód"/>
+    <e k="mouseSteering_ui_both" v="Kívül és belül"/>
+    <e k="mouseSteering_ui_inside" v="Belül"/>
+    <e k="mouseSteering_ui_outside" v="Kívül"/>
+    <e k="mouseSteering_ui_indicatorText" v="Szög megjelenítése a jelzőn"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Jelző megjelenítése hátrafelé nézéskor (belül)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Kiválasztja, hogyan jelenik meg a kormányzási jelző a HUD-on."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Megjeleníti az aktuális kormányzási szöget szövegként a jelzőben."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Megjeleníti a jelzőt, ha hátrafelé nézünk a belső nézetben."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Adatvezérlők"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Jármű"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Rendszám"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nincs jármű"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d / %d sor kiválasztva." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Maradt helyek"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Járművek szinkronizálása"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="A mentett járműveket szinkronizálni szeretné a farmmal? Ezzel eltávolítja a már nem létező járművek bejegyzéseit."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Szinkronizált járművek: %d eltávolítva." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Nincs szinkronizálandó jármű."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Beállítások:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Egyjátékos (gazda)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Többjátékos (kliens)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Mentés és vissza"/>
+    <e k="mouseSteering_button_save" v="Mentés"/>
+    <e k="mouseSteering_button_unsave" v="Mentés visszavonása"/>
+    <e k="mouseSteering_button_viewDetails" v="Részletek megtekintése"/>
+    <e k="mouseSteering_button_hideDetails" v="Részletek elrejtése"/>
+    <e k="mouseSteering_button_viewOnMap" v="Megtekintés a térképen"/>
+    <e k="mouseSteering_button_sync" v="Járművek szinkronizálása a farmmal"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Összes"/>
+    <e k="mouseSteering_ui_saved" v="Mentve"/>
+    <e k="mouseSteering_ui_unsaved" v="Nem mentett"/>
+    <e k="mouseSteering_ui_owned" v="Saját"/>
+    <e k="mouseSteering_ui_leased" v="Bérelt"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Elérte a járművek maximális számát"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="A jármű hozzáadása sikeres volt"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="A jármű eltávolítása sikeres volt"/>
+  </elements>
+</l10n>

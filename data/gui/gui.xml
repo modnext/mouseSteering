@@ -1,0 +1,29 @@
+<texture>
+  <meta>
+    <filename>gui.png</filename>
+    <size width="512" height="512"/>
+  </meta>
+  <slices>
+    <!-- Navigation Button -->
+    <slice id="nav_selected_left" uvs="2px 2px 12px 42px"/>
+    <slice id="nav_selected_middle" uvs="14px 2px 4px 42px"/>
+    <slice id="nav_selected_right" uvs="18px 2px 12px 42px"/>
+
+    <!-- Icons -->
+    <slice id="icon_ring" uvs="32px 2px 24px 24px"/>
+    <slice id="icon_checkmark" uvs="32px 28px 24px 24px"/>
+
+    <!-- Detail Box -->
+    <slice id="detailBox_start" uvs="2px 54px 252px 27px"/>
+    <slice id="detailBox_mid" uvs="2px 81px 252px 8px"/>
+    <slice id="detailBox_end" uvs="2px 89px 252px 27px"/>
+    <slice id="detailBoxMask" uvs="2px 118px 234px 125px"/>
+
+    <!-- Indicator -->
+    <slice id="indicatorBackground" uvs="58px 2px 326px 10px"/>
+    <slice id="indicatorBar_left" uvs="10px 46px 4px 4px"/>
+    <slice id="indicatorBar_middle" uvs="14px 46px 4px 4px"/>
+    <slice id="indicatorBar_right" uvs="18px 46px 4px 4px"/>
+    <slice id="indicatorTextBackground" uvs="58px 14px 40px 17px"/>
+  </slices>
+</texture>

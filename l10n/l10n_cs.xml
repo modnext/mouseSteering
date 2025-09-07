@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="方向控制"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="保存/移除车辆"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋转摄像机"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="启用"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="停用"/>
+    <e k="mouseSteering_mode_format" v="%s 鼠标转向" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="旋转摄像机"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="鼠标转向"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="设置"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="欢迎使用鼠标转向"/>
+    <e k="mouseSteering_welcome_text" v="以下是一些重要提示：&#10;&#10;- 单人游戏（主机）和多人游戏（客户端）的设置和数据是分开的&#10;- 每辆车的转向模式会按地图保存（而不是按存档）&#10;- 作为多人游戏客户端时，由于网络同步，转向可能不够流畅&#10;- 如果槽位用完，可以与农场同步车辆以移除丢失的条目&#10;&#10;点击“是”以确认。本对话框将不再出现。"/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="鼠标转向设置"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="常规"/>
+    <e k="mouseSteering_ui_default" v="默认启用"/>
+    <e k="mouseSteering_ui_autoSave" v="自动保存"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="控制调节"/>
+    <e k="mouseSteering_ui_sensitivity" v="灵敏度"/>
+    <e k="mouseSteering_ui_invertXAxis" v="反转X轴"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="基于速度的转向"/>
+    <e k="mouseSteering_ui_linearity" v="线性度"/>
+    <e k="mouseSteering_ui_smoothness" v="平滑度"/>
+    <e k="mouseSteering_ui_deadzone" v="死区"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="转向辅助"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="输入时取消AI转向"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="锁定AI转向"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="输入阈值"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="默认在所有车辆上启用鼠标转向。"/>
+    <e k="mouseSteering_ui_autoSave_desc" v="自动记住并重新应用每辆车的转向模式。"/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="调整转向对鼠标移动的响应速度。"/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="反转转向的水平（X）轴。"/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="根据速度和转向角调整灵敏度，以获得更好的控制。"/>
+    <e k="mouseSteering_ui_linearity_desc" v="调整转向响应曲线。较高数值在中间位置提供更精细的控制。"/>
+    <e k="mouseSteering_ui_smoothness_desc" v="平滑鼠标输入，减少突然的转向变化。"/>
+    <e k="mouseSteering_ui_deadzone_desc" v="忽略靠近中心的小幅鼠标移动，防止无意的转向。"/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="启用时，任何输入都会立即取消AI转向。"/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="激活后锁定AI转向2.5秒，防止意外取消。"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="当鼠标速度超过该值时取消AI转向。"/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="界面"/>
+    <e k="mouseSteering_ui_indicatorMode" v="指示器模式"/>
+    <e k="mouseSteering_ui_both" v="内外视角"/>
+    <e k="mouseSteering_ui_inside" v="内视角"/>
+    <e k="mouseSteering_ui_outside" v="外视角"/>
+    <e k="mouseSteering_ui_indicatorText" v="在指示器中显示角度"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="内视角回头时显示指示器"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="选择在HUD上如何显示转向指示器。"/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="在指示器上以屏幕文本显示当前转向角度。"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="在内视角回头时显示指示器。"/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="数据控制"/>
+    <e k="mouseSteering_ui_nameVehicle" v="车辆"/>
+    <e k="mouseSteering_ui_plateVehicle" v="车牌"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="未找到车辆"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="已选择 %d 行，共 %d 行。" tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="剩余槽位"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="同步车辆"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="将已保存的车辆与农场同步？这将移除已不存在的车辆条目。"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="已同步车辆：移除 %d 个。" tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="没有可同步的车辆。"/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="设置对象："/>
+    <e k="mouseSteering_ui_singleplayer" v="单人游戏（主机）"/>
+    <e k="mouseSteering_ui_multiplayer" v="多人游戏（客户端）"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="保存并返回"/>
+    <e k="mouseSteering_button_save" v="保存"/>
+    <e k="mouseSteering_button_unsave" v="取消保存"/>
+    <e k="mouseSteering_button_viewDetails" v="查看详情"/>
+    <e k="mouseSteering_button_hideDetails" v="隐藏详情"/>
+    <e k="mouseSteering_button_viewOnMap" v="在地图上查看"/>
+    <e k="mouseSteering_button_sync" v="与农场同步车辆"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="全部"/>
+    <e k="mouseSteering_ui_saved" v="已保存"/>
+    <e k="mouseSteering_ui_unsaved" v="未保存"/>
+    <e k="mouseSteering_ui_owned" v="已拥有"/>
+    <e k="mouseSteering_ui_leased" v="已租赁"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="已达到车辆数量上限"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="车辆添加成功"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="车辆移除成功"/>
+  </elements>
+</l10n>

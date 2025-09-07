@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kontrol Kemudi"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Simpan/Hapus Kendaraan"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Putar Kamera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktifkan"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Nonaktifkan"/>
+    <e k="mouseSteering_mode_format" v="%s Pengendalian Mouse" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Putar Kamera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Pengendalian Mouse"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Pengaturan"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Selamat datang di Pengendalian Mouse"/>
+    <e k="mouseSteering_welcome_text" v="Berikut beberapa catatan penting:&#10;&#10;- Pengaturan dan data terpisah untuk Singleplayer (Host) dan Multiplayer (Client)&#10;- Mode pengendalian per kendaraan disimpan per peta (bukan per file save game)&#10;- Sebagai klien multiplayer, pengendalian mungkin terasa kurang halus karena sinkronisasi jaringan&#10; - Jika Anda kehabisan slot, Anda dapat menyinkronkan kendaraan dengan server untuk menghapus entri yang hilang&#10;&#10;Klik 'Ya' untuk mengonfirmasi. Dialog ini tidak akan muncul lagi."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Pengaturan Mouse Steering"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Umum"/>
+    <e k="mouseSteering_ui_default" v="Diaktifkan secara default"/>
+    <e k="mouseSteering_ui_autoSave" v="Simpan Otomatis"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Penyesuaian Kontrol"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensitivitas"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Balik Sumbu X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Pengendalian Berbasis Kecepatan"/>
+    <e k="mouseSteering_ui_linearity" v="Linearitas"/>
+    <e k="mouseSteering_ui_smoothness" v="Kelancaran"/>
+    <e k="mouseSteering_ui_deadzone" v="Zona Mati"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Bantuan Kemudi"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Membatalkan Kemudi AI saat Masukan"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Mengunci Kemudi AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Ambang Batas Masukan"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Mengaktifkan pengendalian mouse secara default pada semua kendaraan."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Secara otomatis mengingat dan menerapkan kembali mode pengendalian per kendaraan."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Menyesuaikan seberapa cepat pengendalian merespons gerakan mouse."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Membalik sumbu horizontal (X) untuk kemudi."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Menyesuaikan sensitivitas berdasarkan kecepatan dan sudut kemudi untuk kontrol yang lebih baik."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Menyesuaikan kurva respons kemudi. Nilai yang lebih tinggi memberikan kontrol yang lebih halus di sekitar pusat."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Meratakan masukan mouse untuk mengurangi perubahan kemudi yang tiba-tiba."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Mengabaikan gerakan mouse kecil di dekat pusat untuk mencegah kemudi yang tidak disengaja."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Saat diaktifkan, masukan apa pun akan membatalkan kemudi AI secara instan."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Mengunci kemudi AI selama 2,5 detik setelah diaktifkan untuk mencegah pembatalan yang tidak disengaja."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Membatalkan kemudi AI saat kecepatan mouse melebihi nilai ini."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Antarmuka"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Mode Indikator"/>
+    <e k="mouseSteering_ui_both" v="Luar dan Dalam"/>
+    <e k="mouseSteering_ui_inside" v="Dalam"/>
+    <e k="mouseSteering_ui_outside" v="Luar"/>
+    <e k="mouseSteering_ui_indicatorText" v="Tampilkan Sudut di Indikator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Tampilkan Indikator Saat Melihat ke Belakang (Dalam)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Memilih cara indikator kemudi ditampilkan di HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Menampilkan sudut kemudi saat ini sebagai teks di layar dalam indikator."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Menampilkan indikator saat melihat ke belakang dalam tampilan dalam."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Kontrol Data"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Kendaraan"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Plat Nomor"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Tidak ada kendaraan yang ditemukan"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d dari %d baris dipilih." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Slot Tersisa"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Sinkronisasi Kendaraan"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Sinkronisasi kendaraan yang disimpan dengan peternakan? Ini akan menghapus entri untuk kendaraan yang tidak lagi ada."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Kendaraan yang disinkronkan: %d dihapus." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Tidak ada kendaraan yang perlu disinkronkan."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Pengaturan untuk:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (Host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (Client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Simpan dan Kembali"/>
+    <e k="mouseSteering_button_save" v="Simpan"/>
+    <e k="mouseSteering_button_unsave" v="Batalkan Simpan"/>
+    <e k="mouseSteering_button_viewDetails" v="Lihat Rincian"/>
+    <e k="mouseSteering_button_hideDetails" v="Sembunyikan Rincian"/>
+    <e k="mouseSteering_button_viewOnMap" v="Lihat di Peta"/>
+    <e k="mouseSteering_button_sync" v="Sinkronkan kendaraan dengan peternakan"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Semua"/>
+    <e k="mouseSteering_ui_saved" v="Tersimpan"/>
+    <e k="mouseSteering_ui_unsaved" v="Belum disimpan"/>
+    <e k="mouseSteering_ui_owned" v="Dimiliki"/>
+    <e k="mouseSteering_ui_leased" v="Disewa"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Jumlah maksimum kendaraan tercapai"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Kendaraan ditambahkan dengan sukses"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Kendaraan dihapus dengan sukses"/>
+  </elements>
+</l10n>
