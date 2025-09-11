@@ -14,7 +14,7 @@ function MouseSteeringController.new()
   local self = setmetatable({}, MouseSteeringController_mt)
 
   -- bezier curve parameters for smooth linearity transitions
-  self.bezierPoints = { p0 = 0, p1 = 0.05, p2 = 0.15, p3 = 1 }
+  self.bezierPoints = { p0 = 0, p1 = 0.02, p2 = 0.08, p3 = 1 }
 
   -- linearity exponent bounds
   self.minLinearityExponent = 0.25
