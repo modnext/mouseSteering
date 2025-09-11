@@ -722,6 +722,10 @@ end
 
 ---
 function MouseSteeringSettingsDialog:onDoubleClickVehiclesListItem(list, section, index, element)
+  if index <= 0 or index > #self.visibleVehicles then
+    return
+  end
+
   local selectedVehicleEntry = self.visibleVehicles[index]
   local selectedVehicle = selectedVehicleEntry.vehicle
 
@@ -879,7 +883,7 @@ end
 function MouseSteeringSettingsDialog:onClickToggle()
   local selectedIndex = self.vehiclesList.selectedIndex
 
-  if selectedIndex > 0 then
+  if selectedIndex > 0 and selectedIndex <= #self.visibleVehicles then
     local selectedVehicleEntry = self.visibleVehicles[selectedIndex]
     local selectedVehicle = selectedVehicleEntry.vehicle
     local isVehicleSaved = self.mouseSteering:isVehicleSaved(selectedVehicle)
