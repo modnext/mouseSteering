@@ -285,7 +285,8 @@ function MouseSteeringController:update(context, dt)
   end
 
   -- apply linearity transformation
-  local linearitySetting = settings.linearity or 1.0
+  local linearitySetting = (settings.speedBasedSteering and 1.0) or (settings.linearity or 1.0)
+
   local processedSteeringValue
 
   if deadzoneThreshold > 0 then
