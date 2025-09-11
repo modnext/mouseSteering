@@ -482,7 +482,7 @@
       <textSize value="14px"/>
       <margin value="0px 0px 5px 0px"/>
       <textAutoWidth value="true"/>
-      <textUpperCase vaöue="true"/>
+      <textUpperCase value="true"/>
     </Profile>
 
     <!-- Vehicles list: Selection box -->

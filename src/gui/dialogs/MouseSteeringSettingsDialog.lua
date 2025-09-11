@@ -32,16 +32,14 @@ local MouseSteeringSettingsDialog_mt = Class(MouseSteeringSettingsDialog, Messag
 
 ---
 function MouseSteeringSettingsDialog.show(callback, target, callbackArgs, disableOpenSound)
-  if MouseSteeringSettingsDialog.INSTANCE == nil then
-    return nil
-  end
-
   local dialog = MouseSteeringSettingsDialog.INSTANCE
 
-  dialog:setCallback(callback, target, callbackArgs)
-  dialog:setDisableOpenSound(disableOpenSound)
+  if dialog ~= nil then
+    dialog:setCallback(callback, target, callbackArgs)
+    dialog:setDisableOpenSound(disableOpenSound)
 
-  g_gui:showDialog("MouseSteeringSettingsDialog")
+    g_gui:showDialog("MouseSteeringSettingsDialog")
+  end
 
   return dialog
 end
@@ -1024,6 +1022,8 @@ end
 
 ---Handles the back button click to save settings and close the dialog
 function MouseSteeringSettingsDialog:onClickBack()
+  g_messageCenter:unsubscribeAll(self)
+
   self.mouseSteering:saveSettingsToXMLFile()
   self.mouseSteering:saveVehicleToXMLFile()
 

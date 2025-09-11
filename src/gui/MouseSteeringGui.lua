@@ -54,4 +54,7 @@ function MouseSteeringGui:load()
 
   -- load the in-game menu settings frame extension
   self.inGameMenuSettingsFrameExtension:load()
+
+  -- set focus to the loading screen
+  FocusManager:setGui("MPLoadingScreen")
 end
