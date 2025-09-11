@@ -26,8 +26,8 @@ function MouseSteeringController.new()
   self.reverseLinearityMaxIterations = 16
 
   -- smoothness system bounds
-  self.minSmoothness = 0.50
-  self.maxSmoothness = 0.75
+  self.minSmoothness = 0.65
+  self.maxSmoothness = 0.85
   self.smoothingDecayFactor = 0.06
 
   -- deadzone scale for GUI settings
