@@ -44,6 +44,9 @@ function MouseSteering.new(modName, modDirectory, modSettingsDirectory, mission,
   -- subscribe to network messages
   g_messageCenter:subscribe(MouseSteeringMessageType.VEHICLE_SOLD, self.onVehicleSoldNetworkMessage, self)
 
+  -- create mod settings directory
+  createFolder(self.modSettingsDirectory)
+
   return self
 end
 
