@@ -37,16 +37,6 @@ end
 function InGameMenuSettingsFrameExtension:createButton(frame)
   local button = frame.buttonPauseGame:clone(frame)
 
-  button.onClickCallback = function()
-    local dialogCallback = function(confirmed)
-      if not confirmed then
-        return
-      end
-    end
-
-    MouseSteeringSettingsDialog.show(dialogCallback, nil, nil, true)
-  end
-
   if button.parent ~= nil then
     button.parent:removeElement(button)
   end
@@ -66,6 +56,31 @@ function InGameMenuSettingsFrameExtension:createButton(frame)
   buttonFrame.elements[2].focusId = nil
   buttonFrame.elements[2].id = "buttonMenu"
   buttonFrame.elements[2]:applyProfile(InGameMenuSettingsFrameExtension.PROFILE.BUTTON_MENU)
+
+  -- setup click callback
+  buttonFrame.elements[2].onClickCallback = function()
+    local dialogCallback = function(confirmed)
+      if not confirmed then
+        return
+      end
+    end
+
+    MouseSteeringSettingsDialog.show(dialogCallback, nil, nil, true)
+  end
+
+  -- override input event - use onFocusActivate for proper sound and behavior
+  buttonFrame.elements[2].inputEvent = function(self, action, value, eventUsed)
+    if action == InputAction.MENU_ACCEPT then
+      if self:getIsActive() then
+        self:onFocusActivate()
+        return true
+      end
+    end
+
+    return eventUsed
+  end
+
+  -- leave focus
   buttonFrame.elements[2]:onFocusLeave()
 
   -- insert into UI and setup focus
