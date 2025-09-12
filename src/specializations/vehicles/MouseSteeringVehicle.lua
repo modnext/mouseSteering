@@ -166,6 +166,9 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     spec.aiSteeringWasActive = false
   end
 
+  -- passenger rotation camera
+  spec.isCameraRotating = true
+
   if isEntered and isControlled then
     local isAIActive = (AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE) or false
 
