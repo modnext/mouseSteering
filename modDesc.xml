@@ -15,31 +15,36 @@
     <en><![CDATA[Enables mouse-based control of vehicle steering, with fully configurable sensitivity, linearity, dead zone, smoothness, and more.
 
 Changelog Version 1.2.0.0:
-- Migration to FS25 and codebase rebuild
+- Migrated to FS25
+- Codebase reworked
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
     <de><![CDATA[Ermöglicht die Steuerung der Fahrzeuglenkung per Maus mit vollständig konfigurierbarer Empfindlichkeit, Linearität, Totzone, Laufruhe und mehr.
 
 Änderungsprotokoll Version 1.2.0.0:
-- Migration zu FS25 und Neuerstellung der Codebasis
+- Migration zu FS25
+- Codebasis überarbeitet
 
 Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die GitHub (modnext/mouseSteering).]]></de>
     <fr><![CDATA[Permet de contrôler la direction du véhicule à l'aide de la souris, avec une sensibilité, une linéarité, une zone morte, une fluidité et bien plus encore entièrement configurables.
 
 Journal des modifications version 1.2.0.0:
-- Migration vers FS25 et reconstruction du code source
+- Migration vers FS25
+- Révision du code
 
 Pour plus d'informations ou pour signaler un bug, veuillez visiter la page GitHub (modnext/mouseSteering).]]></fr>
     <pl><![CDATA[Umożliwia sterowanie kierownicą pojazdu za pomocą myszy, z możliwością pełnej konfiguracji czułości, liniowości, martwej strefy, płynności i nie tylko.
 
 Lista zmian w wersji 1.2.0.0:
-- Migracja do FS25 i przebudowa kodu źródłowego
+- Migracja do FS25
+- Przebudowa kodu
 
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (modnext/mouseSteering).]]></pl>
     <ru><![CDATA[Обеспечивает управление рулевым управлением автомобиля с помощью мыши с полностью настраиваемой чувствительностью, линейностью, мертвой зоной, плавностью и другими параметрами.
 
-Журнал изменений версии версии 1.2.0.0:
-- Переход на FS25 и перестройка кодовой базы
+Журнал изменений версии 1.2.0.0:
+- Переход на FS25
+- Доработка кода
 
 Для получения дополнительной информации или для сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>
