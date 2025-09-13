@@ -465,7 +465,8 @@ function MouseSteeringVehicle:setMouseSteeringSaved()
 
   -- show notification if applicable
   if notification ~= nil then
-    spec.mouseSteering:showNotification("mouseSteering_notification_" .. notification)
+    local notificationType = notification == "vehicleAdded" and FSBaseMission.INGAME_NOTIFICATION_OK or FSBaseMission.INGAME_NOTIFICATION_CRITICAL
+    spec.mouseSteering:showNotification("mouseSteering_notification_" .. notification, notificationType)
   end
 
   -- execute action and save
@@ -571,7 +572,7 @@ function MouseSteeringVehicle.updateActionEvents(self)
     local rotateAction = spec.actionEvents[InputAction.TOGGLE_MOUSE_STEERING_ROTATE_CAMERA]
     if rotateAction ~= nil then
       binding:setActionEventActive(rotateAction.actionEventId, true)
-      binding:setActionEventTextVisibility(rotateAction.actionEventId, spec.settings.default)
+      binding:setActionEventTextVisibility(rotateAction.actionEventId, spec.isUsed)
     end
   end
 end

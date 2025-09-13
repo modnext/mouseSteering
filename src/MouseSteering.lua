@@ -484,10 +484,11 @@ end
 
 ---Shows a notification to the user
 -- @param textKey string the i18n text key
+-- @param notificationType number optional notification type (INGAME_NOTIFICATION_INFO, INGAME_NOTIFICATION_OK, INGAME_NOTIFICATION_CRITICAL)
 -- @param ... any additional arguments for formatting
-function MouseSteering:showNotification(textKey, ...)
+function MouseSteering:showNotification(textKey, notificationType, ...)
   local config = {
-    type = FSBaseMission.INGAME_NOTIFICATION_INFO,
+    type = notificationType or FSBaseMission.INGAME_NOTIFICATION_INFO,
     duration = MouseSteering.NOTIFICATION_DURATION,
     sound = GuiSoundPlayer.SOUND_SAMPLES.NOTIFICATION,
   }
