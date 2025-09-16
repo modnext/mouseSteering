@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Sterowanie Kierownicą"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Zapisz/Usuń Pojazd"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Obróć Kamerę"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktywuj"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Dezaktywuj"/>
+    <e k="mouseSteering_mode_format" v="%s Sterowanie Myszką" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Obróć Kamerę"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Sterowanie Myszką"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Ustawienia"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Witamy w Sterowaniu Myszką"/>
+    <e k="mouseSteering_welcome_text" v="Oto kilka ważnych uwag:&#10;&#10;- Ustawienia i dane są oddzielne dla Trybu Jednoosobowego (host) i Trybu Wieloosobowego (klient)&#10;- Tryb sterowania dla poszczególnych pojazdów jest zapisywany dla każdej mapy (a nie dla każdego zapisanego stanu gry)&#10;- W Trybie Wieloosobowym sterowanie może wydawać się mniej płynne z powodu synchronizacji sieciowej&#10;- Jeśli zabraknie Ci miejsc, możesz zsynchronizować pojazdy z farmą, aby usunąć utracone pojazdy&#10;&#10;Kliknij „Tak”, aby potwierdzić. To okno dialogowe nie pojawi się ponownie."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Ustawienia Sterowania Myszką"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Ogólne"/>
+    <e k="mouseSteering_ui_default" v="Włączone Domyślnie"/>
+    <e k="mouseSteering_ui_autoSave" v="Automatyczne Zapisywanie"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Regulacja Sterowania"/>
+    <e k="mouseSteering_ui_sensitivity" v="Czułość"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Odwróć Oś X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Sterowanie Oparte na Prędkości"/>
+    <e k="mouseSteering_ui_linearity" v="Liniowość"/>
+    <e k="mouseSteering_ui_smoothness" v="Płynność"/>
+    <e k="mouseSteering_ui_deadzone" v="Martwa Strefa"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Pomoc w Sterowaniu"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Anuluj Sterowanie AI po Wprowadzeniu Danych"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Zablokuj Sterowanie AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Próg Wejściowy"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Domyślnie włącza sterowanie myszką we wszystkich pojazdach."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Automatycznie zapamiętuje i ponownie stosuje tryb sterowania dla każdego pojazdu."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Reguluje szybkość reakcji sterowania na ruch myszy."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Odwraca poziomą oś (X) kierowania."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Dostosowuje czułość w oparciu o prędkość i kąt skrętu kierownicy, zapewniając lepszą kontrolę."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Dostosowuje krzywą reakcji kierownicy. Wyższe wartości zapewniają większą precyzję sterowania w pobliżu środka."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Wygładza ruchy myszy, aby ograniczyć gwałtowne zmiany kierowania."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignoruje niewielkie ruchy myszy w pobliżu środka, aby zapobiec niezamierzonemu kierowaniu."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Po włączeniu każde wprowadzenie danych natychmiast anuluje kierowanie AI."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Blokuje sterowanie AI na 2,5 sekundy po aktywacji, aby zapobiec przypadkowemu anulowaniu."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Anuluje sterowanie AI, gdy prędkość myszy przekroczy tę wartość."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interfejs"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Tryb Wskaźnika"/>
+    <e k="mouseSteering_ui_both" v="Na Zewnątrz i Wewnątrz"/>
+    <e k="mouseSteering_ui_inside" v="Wewnątrz"/>
+    <e k="mouseSteering_ui_outside" v="Na Zewnątrz"/>
+    <e k="mouseSteering_ui_indicatorText" v="Pokaż Kąt we Wskaźniku"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Pokaż Wskaźnik Podczas Patrzenia do Tyłu (Wewnątrz)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Wybiera sposób wyświetlania wskaźnika skrętu na HUDzie."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Pokazuje aktualny kąt skrętu jako tekst na ekranie we wskaźniku."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Pokazuje wskaźnik podczas patrzenia do tyłu w widoku wewnętrznym."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Kontrola Danych"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Pojazd"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Tablica Rejestracyjna"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nie znaleziono pojazdów"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="Wybrano %d z %d wierszy." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Pozostałe Miejsca"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Synchronizuj Pojazdy"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Synchronizować zapisane pojazdy z farmą? Spowoduje to usunięcie wpisów dotyczących pojazdów, które już nie istnieją."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Zsynchronizowane pojazdy: %d usuniętych." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Brak pojazdów do synchronizacji."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Ustawienia dla:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Gra Jednoosobowa (host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Gra Wieloosobowa (klient)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Zapisz i Wróć"/>
+    <e k="mouseSteering_button_save" v="Zapisz"/>
+    <e k="mouseSteering_button_unsave" v="Cofnij Zapisanie"/>
+    <e k="mouseSteering_button_viewDetails" v="Wyświetl Szczegóły"/>
+    <e k="mouseSteering_button_hideDetails" v="Ukryj Szczegóły"/>
+    <e k="mouseSteering_button_viewOnMap" v="Wyświetl na Mapie"/>
+    <e k="mouseSteering_button_sync" v="Zsynchronizuj Pojazdy z Farmą"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Wszystkie"/>
+    <e k="mouseSteering_ui_saved" v="Zapisane"/>
+    <e k="mouseSteering_ui_unsaved" v="Nie zapisane"/>
+    <e k="mouseSteering_ui_owned" v="Własne"/>
+    <e k="mouseSteering_ui_leased" v="Wynajęte"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Osiągnięto maksymalną liczbę pojazdów"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Pojazd dodany pomyślnie"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Pojazd usunięty pomyślnie"/>
+  </elements>
+</l10n>

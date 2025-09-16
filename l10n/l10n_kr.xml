@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="조향 제어"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="차량 저장/제거"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="카메라 회전"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="활성화"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="비활성화"/>
+    <e k="mouseSteering_mode_format" v="%s 마우스 조향" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="카메라 회전"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="마우스 조향"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="설정"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="마우스 조향에 오신 것을 환영합니다"/>
+    <e k="mouseSteering_welcome_text" v="몇 가지 중요한 사항:&#10;&#10;- 싱글플레이어(호스트)와 멀티플레이어(클라이언트)의 설정 및 데이터는 별도로 관리됩니다&#10;- 차량별 조향 모드는 맵별로 저장됩니다(세이브게임별로 저장되지 않음)&#10;- 멀티플레이어 클라이언트에서는 네트워크 동기화로 인해 조향이 덜 부드럽게 느껴질 수 있습니다&#10; - 슬롯이 부족할 경우, 차량을 팜과 동기화하여 손실된 항목을 제거할 수 있습니다&#10;&#10;확인하려면 '예'를 클릭하세요. 이 대화 상자는 다시 표시되지 않습니다."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="마우스 조향 설정"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="일반"/>
+    <e k="mouseSteering_ui_default" v="기본적으로 활성화됨"/>
+    <e k="mouseSteering_ui_autoSave" v="자동 저장"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="컨트롤 조정"/>
+    <e k="mouseSteering_ui_sensitivity" v="감도"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X축 반전"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="속도 기반 조향"/>
+    <e k="mouseSteering_ui_linearity" v="선형성"/>
+    <e k="mouseSteering_ui_smoothness" v="부드러움"/>
+    <e k="mouseSteering_ui_deadzone" v="데드존"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="조향 보조"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="입력 시 AI 조향 취소"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="AI 조향 잠금"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="입력 임계값"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="모든 차량에서 기본적으로 마우스 조향을 활성화합니다."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="차량별 조향 모드를 자동으로 기억하고 재적용합니다."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="마우스 움직임에 대한 조향 반응 속도를 조정합니다."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="조향 시 수평(X) 축을 반전합니다."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="속도와 조향 각도에 따라 감도를 조정하여 제어력을 향상시킵니다."/>
+    <e k="mouseSteering_ui_linearity_desc" v="조향 반응 곡선을 조정합니다. 높은 값일수록 중앙 근처에서 정밀한 제어가 가능합니다."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="갑작스러운 조향 변화를 줄이기 위해 마우스 입력을 부드럽게 합니다."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="의도하지 않은 조향을 방지하기 위해 중앙 근처의 작은 마우스 움직임을 무시합니다."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="활성화 시, 모든 입력이 AI 조향을 즉시 취소합니다."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="활성화 후 2.5초 동안 AI 조향을 잠가 실수로 취소되는 것을 방지합니다."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="마우스 속도가 이 값을 초과하면 AI 조향을 취소합니다."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="인터페이스"/>
+    <e k="mouseSteering_ui_indicatorMode" v="표시기 모드"/>
+    <e k="mouseSteering_ui_both" v="외부 및 내부"/>
+    <e k="mouseSteering_ui_inside" v="내부"/>
+    <e k="mouseSteering_ui_outside" v="외부"/>
+    <e k="mouseSteering_ui_indicatorText" v="표시기에 각도 표시"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="뒤돌아볼 때 표시기 표시 (내부)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="HUD에 스티어링 표시기가 표시되는 방식을 선택합니다."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="표시기에 현재 스티어링 각도를 화면 텍스트로 표시합니다."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="내부 시점으로 뒤를 돌아볼 때 표시기를 표시합니다."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="데이터 컨트롤"/>
+    <e k="mouseSteering_ui_nameVehicle" v="차량"/>
+    <e k="mouseSteering_ui_plateVehicle" v="번호판"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="차량을 찾을 수 없습니다"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d 개 중 %d 개 선택됨." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="남은 슬롯"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="차량 동기화"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="저장된 차량을 농장과 동기화하시겠습니까? 더 이상 존재하지 않는 차량 항목이 삭제됩니다."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="동기화된 차량: %d개 삭제됨." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="동기화할 차량이 없습니다."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="설정 대상:"/>
+    <e k="mouseSteering_ui_singleplayer" v="싱글플레이어 (호스트)"/>
+    <e k="mouseSteering_ui_multiplayer" v="멀티플레이어 (클라이언트)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="저장 후 뒤로"/>
+    <e k="mouseSteering_button_save" v="저장"/>
+    <e k="mouseSteering_button_unsave" v="저장 취소"/>
+    <e k="mouseSteering_button_viewDetails" v="상세 정보 보기"/>
+    <e k="mouseSteering_button_hideDetails" v="상세 정보 숨기기"/>
+    <e k="mouseSteering_button_viewOnMap" v="지도에서 보기"/>
+    <e k="mouseSteering_button_sync" v="차량을 농장과 동기화"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="모두"/>
+    <e k="mouseSteering_ui_saved" v="저장됨"/>
+    <e k="mouseSteering_ui_unsaved" v="저장되지 않음"/>
+    <e k="mouseSteering_ui_owned" v="소유"/>
+    <e k="mouseSteering_ui_leased" v="임대"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="최대 차량 수에 도달했습니다"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="차량이 성공적으로 추가되었습니다"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="차량이 성공적으로 제거되었습니다"/>
+  </elements>
+</l10n>

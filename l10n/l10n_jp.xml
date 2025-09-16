@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="ステアリング制御"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="車両の保存/削除"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="カメラの回転"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="有効化"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="無効化"/>
+    <e k="mouseSteering_mode_format" v="%s マウスステアリング" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="カメラの回転"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="マウスステアリング"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="設定"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="マウスステアリングへようこそ"/>
+    <e k="mouseSteering_welcome_text" v="重要な注意事項をいくつかご紹介します:&#10;&#10;- 設定とデータはシングルプレイヤー（ホスト）とマルチプレイヤー（クライアント）で別々に管理されます&#10;- 車両ごとのステアリングモードはマップごとに保存されます（セーブデータごとではありません）&#10;- マルチプレイヤーのクライアント側では、ネットワーク同期の影響でステアリングの滑らかさが低下する場合があります&#10; - スロットが不足した場合、ファームと車両を同期させて失われたエントリを削除できます&#10;&#10;確認のため「はい」をクリックしてください。このダイアログは再度表示されません。"/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="マウスステアリング設定"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="基本設定"/>
+    <e k="mouseSteering_ui_default" v="デフォルトで有効"/>
+    <e k="mouseSteering_ui_autoSave" v="自動保存"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="コントロール調整"/>
+    <e k="mouseSteering_ui_sensitivity" v="感度"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X軸反転"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="速度連動ステアリング"/>
+    <e k="mouseSteering_ui_linearity" v="直線性"/>
+    <e k="mouseSteering_ui_smoothness" v="スムースネス"/>
+    <e k="mouseSteering_ui_deadzone" v="デッドゾーン"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="ステアリングアシスト"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="入力時にAIステアリングをキャンセル"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="AIステアリングをロックアウト"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="入力閾値"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="全車両でデフォルトにマウス操舵を有効化します。"/>
+    <e k="mouseSteering_ui_autoSave_desc" v="車両ごとに操舵モードを自動記憶・再適用します。"/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="マウス操作に対する操舵反応速度を調整します。"/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="ステアリングの水平（X）軸を反転します。"/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="速度とステアリング角度に基づいて感度を調整し、操作性を向上させます。"/>
+    <e k="mouseSteering_ui_linearity_desc" v="ステアリング応答曲線を調整します。値が高いほど中央付近での微細な操作が可能になります。"/>
+    <e k="mouseSteering_ui_smoothness_desc" v="マウス入力を滑らかにし、急激なステアリング変化を軽減します。"/>
+    <e k="mouseSteering_ui_deadzone_desc" v="意図しないステアリングを防ぐため、中央付近の微小なマウス操作を無視します。"/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="有効時、あらゆる入力でAIステアリングを即時解除します。"/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="誤操作による解除を防ぐため、有効化後2.5秒間AIステアリングをロックします。"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="マウス速度がこの値を超えるとAIステアリングを解除します。"/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="インターフェース"/>
+    <e k="mouseSteering_ui_indicatorMode" v="インジケーターモード"/>
+    <e k="mouseSteering_ui_both" v="外側と内側"/>
+    <e k="mouseSteering_ui_inside" v="内側"/>
+    <e k="mouseSteering_ui_outside" v="外側"/>
+    <e k="mouseSteering_ui_indicatorText" v="インジケーターに角度を表示"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="振り返った時（内側）にインジケーターを表示"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="HUD上のステアリングインジケーターの表示方法を選択します。"/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="インジケーター内に現在のステアリング角度を画面上のテキストとして表示します。"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="室内ビューで後ろを振り返った際にインジケーターを表示します。"/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="データコントロール"/>
+    <e k="mouseSteering_ui_nameVehicle" v="車両"/>
+    <e k="mouseSteering_ui_plateVehicle" v="ナンバープレート"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="車両が見つかりません"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d 件中 %d 件を選択しました。" tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="残りスロット数"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="車両を同期"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="保存車両をファームと同期しますか？これにより、存在しない車両のエントリが削除されます。"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="同期済み車両: %d 削除。" tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="同期する車両はありません。"/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="設定対象:"/>
+    <e k="mouseSteering_ui_singleplayer" v="シングルプレイヤー (ホスト)"/>
+    <e k="mouseSteering_ui_multiplayer" v="マルチプレイヤー (クライアント)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="保存して戻る"/>
+    <e k="mouseSteering_button_save" v="保存"/>
+    <e k="mouseSteering_button_unsave" v="保存解除"/>
+    <e k="mouseSteering_button_viewDetails" v="詳細を表示"/>
+    <e k="mouseSteering_button_hideDetails" v="詳細を非表示"/>
+    <e k="mouseSteering_button_viewOnMap" v="地図上で表示"/>
+    <e k="mouseSteering_button_sync" v="車両を農場と同期"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="すべて"/>
+    <e k="mouseSteering_ui_saved" v="保存済み"/>
+    <e k="mouseSteering_ui_unsaved" v="未保存"/>
+    <e k="mouseSteering_ui_owned" v="所有済み"/>
+    <e k="mouseSteering_ui_leased" v="リース中"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="車両の最大数に達しました"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="車両が正常に追加されました"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="車両が正常に削除されました"/>
+  </elements>
+</l10n>

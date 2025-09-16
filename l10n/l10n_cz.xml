@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ovládání řízení"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Uložit/odstranit vozidlo"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Otočit kameru"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktivovat"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deaktivovat"/>
+    <e k="mouseSteering_mode_format" v="%s Řízení myší" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Otočit kameru"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Řízení myší"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Nastavení"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Vítejte v řízení myší"/>
+    <e k="mouseSteering_welcome_text" v="Zde je několik důležitých poznámek:&#10;&#10;- Nastavení a data jsou oddělená pro Singleplayer (Host) a Multiplayer (Client)&#10;- Režim řízení pro jednotlivá vozidla se ukládá pro každou mapu (ne pro každou uloženou hru)&#10;- Jako multiplayerový klient může být řízení méně plynulé kvůli synchronizaci sítě&#10; - Pokud vám dojdou sloty, můžete synchronizovat vozidla s farmou a odstranit ztracené položky&#10;&#10;Klikněte na „Ano“ pro potvrzení. Toto dialogové okno se již znovu nezobrazí."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Nastavení Mouse Steering"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Obecné"/>
+    <e k="mouseSteering_ui_default" v="Výchozí nastavení"/>
+    <e k="mouseSteering_ui_autoSave" v="Automatické ukládání"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Nastavení ovládání"/>
+    <e k="mouseSteering_ui_sensitivity" v="Citlivost"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Obrátit osu X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Řízení založené na rychlosti"/>
+    <e k="mouseSteering_ui_linearity" v="Linearita"/>
+    <e k="mouseSteering_ui_smoothness" v="Plynulost"/>
+    <e k="mouseSteering_ui_deadzone" v="Mrtvá zóna"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Asistence řízení"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Zrušit řízení AI při vstupu"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Zamknout řízení AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Prahová hodnota vstupu"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Ve výchozím nastavení povoluje řízení myší u všech vozidel."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Automaticky zapamatuje a znovu použije režim řízení pro každé vozidlo."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Upravuje rychlost reakce řízení na pohyb myši."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Invertuje vodorovnou osu (X) pro řízení."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Upravuje citlivost na základě rychlosti a úhlu řízení pro lepší ovládání."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Upravuje křivku odezvy řízení. Vyšší hodnoty poskytují jemnější ovládání v blízkosti středu."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Vyhlazuje vstupy myši, aby se omezily náhlé změny řízení."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignoruje malé pohyby myši v blízkosti středu, aby se zabránilo neúmyslnému řízení."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Pokud je tato funkce zapnutá, jakýkoli vstup okamžitě zruší řízení AI."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Po aktivaci uzamkne řízení AI na 2,5 sekundy, aby se zabránilo náhodnému zrušení."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Zruší řízení AI, když rychlost myši překročí tuto hodnotu."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Rozhraní"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Režim indikátoru"/>
+    <e k="mouseSteering_ui_both" v="Venku a uvnitř"/>
+    <e k="mouseSteering_ui_inside" v="Uvnitř"/>
+    <e k="mouseSteering_ui_outside" v="Venku"/>
+    <e k="mouseSteering_ui_indicatorText" v="Zobrazit úhel v indikátoru"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Zobrazit indikátor při pohledu zpět (uvnitř)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Vybere, jak se indikátor řízení zobrazí na HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Zobrazí aktuální úhel řízení jako text na obrazovce v indikátoru."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zobrazí indikátor při pohledu zpět ve vnitřním zobrazení."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Ovládací prvky dat"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Vozidlo"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Poznávací značka"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nebylo nalezeno žádné vozidlo"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="Vybráno %d z %d řádků." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Zbývající místa"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Synchronizovat vozidla"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Synchronizovat uložená vozidla s farmou? Tím se odstraní záznamy o vozidlech, která již neexistují."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Synchronizovaná vozidla: %d odstraněno." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Žádná vozidla k synchronizaci."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Nastavení pro:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (hostitel)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (klient)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Uložit a zpět"/>
+    <e k="mouseSteering_button_save" v="Uložit"/>
+    <e k="mouseSteering_button_unsave" v="Zrušit uložení"/>
+    <e k="mouseSteering_button_viewDetails" v="Zobrazit podrobnosti"/>
+    <e k="mouseSteering_button_hideDetails" v="Skrýt podrobnosti"/>
+    <e k="mouseSteering_button_viewOnMap" v="Zobrazit na mapě"/>
+    <e k="mouseSteering_button_sync" v="Synchronizovat vozidla s farmou"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Vše"/>
+    <e k="mouseSteering_ui_saved" v="Uloženo"/>
+    <e k="mouseSteering_ui_unsaved" v="Neuloženo"/>
+    <e k="mouseSteering_ui_owned" v="Vlastněno"/>
+    <e k="mouseSteering_ui_leased" v="Pronajato"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Dosáhlo se maximálního počtu vozidel"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Vozidlo bylo úspěšně přidáno"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Vozidlo bylo úspěšně odstraněno"/>
+  </elements>
+</l10n>

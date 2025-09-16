@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Lenksteuerung"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Fahrzeug speichern/entfernen"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera drehen"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktivieren"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deaktivieren"/>
+    <e k="mouseSteering_mode_format" v="%s Maussteuerung" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Kamera drehen"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Maussteuerung"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Einstellungen"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Willkommen bei der Maussteuerung"/>
+    <e k="mouseSteering_welcome_text" v="Hier sind einige wichtige Hinweise:&#10;&#10;- Einstellungen und Daten sind für Einzelspieler (Host) und Mehrspieler (Client) getrennt.&#10;- Der Lenkmodus pro Fahrzeug wird pro Karte (nicht pro Spielstand) gespeichert.&#10;- Als Mehrspieler-Client kann sich die Lenkung aufgrund der Netzwerksynchronisation weniger flüssig anfühlen.&#10; - Wenn Ihnen die Slots ausgehen, können Sie Fahrzeuge mit der Farm synchronisieren, um verlorene Einträge zu entfernen&#10;&#10;Klicken Sie auf „Ja“, um zu bestätigen. Dieser Dialog wird nicht erneut angezeigt."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Maussteuerungseinstellungen"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Allgemein"/>
+    <e k="mouseSteering_ui_default" v="Standardmäßig aktiviert"/>
+    <e k="mouseSteering_ui_autoSave" v="Automatisches Speichern"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Steuerungseinstellungen"/>
+    <e k="mouseSteering_ui_sensitivity" v="Empfindlichkeit"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X-Achse umkehren"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Geschwindigkeitsabhängige Lenkung"/>
+    <e k="mouseSteering_ui_linearity" v="Linearität"/>
+    <e k="mouseSteering_ui_smoothness" v="Glätte"/>
+    <e k="mouseSteering_ui_deadzone" v="Totzone"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Lenkunterstützung"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="KI-Lenkung bei Eingabe abbrechen"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="KI-Lenkung sperren"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Eingabeschwelle"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Aktiviert standardmäßig die Maussteuerung für alle Fahrzeuge."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Speichert automatisch den Lenkmodus für jedes Fahrzeug und wendet ihn erneut an."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Passt an, wie schnell die Lenkung auf Mausbewegungen reagiert."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Kehrt die horizontale (X-)Achse für die Lenkung um."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Passt die Empfindlichkeit basierend auf Geschwindigkeit und Lenkwinkel an, um eine bessere Kontrolle zu ermöglichen."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Passt die Lenkungsreaktionskurve an. Höhere Werte ermöglichen eine feinere Steuerung in der Mitte."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Glättet die Mauseingabe, um abrupte Lenkänderungen zu reduzieren."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignoriert kleine Mausbewegungen in der Mitte, um unbeabsichtigtes Lenken zu verhindern."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Wenn aktiviert, wird jede Eingabe die KI-Lenkung sofort aufheben."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Sperrt die KI-Lenkung nach der Aktivierung für 2,5 Sekunden, um ein versehentliches Aufheben zu verhindern."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Hebt die KI-Lenkung auf, wenn die Eingabestärke diesen Wert überschreitet."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Anzeige"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Anzeigemodus"/>
+    <e k="mouseSteering_ui_both" v="Außen und innen"/>
+    <e k="mouseSteering_ui_inside" v="Innen"/>
+    <e k="mouseSteering_ui_outside" v="Außen"/>
+    <e k="mouseSteering_ui_indicatorText" v="Winkel in Anzeige anzeigen"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Anzeige beim Zurückblicken (innen) anzeigen"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Wählt aus, wie die Lenkungsanzeige auf dem HUD angezeigt wird."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Zeigt den aktuellen Lenkwinkel als Text auf dem Bildschirm in der Anzeige an."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zeigt die Anzeige beim Blick zurück in die Innenansicht an."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Datensteuerung"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Fahrzeug"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Kennzeichen"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Keine Fahrzeuge gefunden"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d von %d Zeilen ausgewählt." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Verbleibende Plätze"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Fahrzeuge synchronisieren"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Gespeicherte Fahrzeuge mit der Farm synchronisieren? Dadurch werden Einträge für Fahrzeuge entfernt, die nicht mehr existieren."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Fahrzeuge synchronisiert: %d entfernt." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Keine Fahrzeuge zum Synchronisieren."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Einstellungen für:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Einzelspieler (Host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Mehrspieler (Client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Speichern und Zurück"/>
+    <e k="mouseSteering_button_save" v="Speichern"/>
+    <e k="mouseSteering_button_unsave" v="Nicht speichern"/>
+    <e k="mouseSteering_button_viewDetails" v="Details anzeigen"/>
+    <e k="mouseSteering_button_hideDetails" v="Details ausblenden"/>
+    <e k="mouseSteering_button_viewOnMap" v="Auf Karte anzeigen"/>
+    <e k="mouseSteering_button_sync" v="Fahrzeuge mit Farm synchronisieren"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Alle"/>
+    <e k="mouseSteering_ui_saved" v="Gespeichert"/>
+    <e k="mouseSteering_ui_unsaved" v="Nicht gespeichert"/>
+    <e k="mouseSteering_ui_owned" v="Im Besitz"/>
+    <e k="mouseSteering_ui_leased" v="Geleast"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maximale Anzahl an Fahrzeugen erreicht"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Fahrzeug erfolgreich hinzugefügt"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Fahrzeug erfolgreich entfernt"/>
+  </elements>
+</l10n>

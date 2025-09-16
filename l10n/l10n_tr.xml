@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Direksiyon Kontrolü"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Aracı Kaydet/Sil"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamerayı Döndür"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Etkinleştir"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Devre Dışı Bırak"/>
+    <e k="mouseSteering_mode_format" v="%s Fare Direksiyon" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Kamerayı döndür"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Fare Direksiyon"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Ayarlar"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Fare Direksiyonuna Hoş Geldiniz"/>
+    <e k="mouseSteering_welcome_text" v="İşte birkaç önemli not:&#10;&#10;- Ayarlar ve veriler Tek Oyuncu (Ana Bilgisayar) ve Çok Oyuncu (İstemci) için ayrıdır&#10;- Araç başına direksiyon modu harita başına kaydedilir (oyun kaydı başına değil)&#10;- Çok oyunculu istemci olarak, ağ senkronizasyonu nedeniyle direksiyon daha az pürüzsüz hissedilebilir&#10; - Yuvalarınız dolarsa, kaybolan girişleri kaldırmak için araçları çiftlikle senkronize edebilirsiniz&#10;&#10;Onaylamak için 'Evet'i tıklayın. Bu iletişim kutusu bir daha görünmeyecektir."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Mouse Steering Ayarları"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Genel"/>
+    <e k="mouseSteering_ui_default" v="Varsayılan olarak etkin"/>
+    <e k="mouseSteering_ui_autoSave" v="Otomatik Kaydetme"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Kontrol Ayarı"/>
+    <e k="mouseSteering_ui_sensitivity" v="Hassasiyet"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X Ekseni Ters Çevir"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Hıza Dayalı Direksiyon"/>
+    <e k="mouseSteering_ui_linearity" v="Doğrusallık"/>
+    <e k="mouseSteering_ui_smoothness" v="Pürüzsüzlük"/>
+    <e k="mouseSteering_ui_deadzone" v="Ölü Bölge"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Direksiyon Yardımı"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Girişte AI Direksiyonunu İptal Et"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="AI Direksiyonunu Kilitle"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Giriş Eşiği"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Varsayılan olarak tüm araçlarda fare direksiyonunu etkinleştirir."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Her araç için direksiyon modunu otomatik olarak hatırlar ve yeniden uygular."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Direksiyonun fare hareketine ne kadar hızlı tepki vereceğini ayarlar."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Direksiyon için yatay (X) ekseni ters çevirir."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Daha iyi kontrol için hız ve direksiyon açısına göre hassasiyeti ayarlar."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Direksiyon tepki eğrisini ayarlar. Daha yüksek değerler, merkezde daha hassas kontrol sağlar."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Ani direksiyon değişikliklerini azaltmak için fare girişini yumuşatır."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="İstenmeyen direksiyon hareketlerini önlemek için merkezin yakınındaki küçük fare hareketlerini yok sayar."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Etkinleştirildiğinde, herhangi bir giriş AI direksiyonunu hemen iptal eder."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Yanlışlıkla iptal edilmesini önlemek için etkinleştirildikten sonra AI direksiyonunu 2,5 saniye boyunca kilitler."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Fare hızı bu değeri aştığında AI direksiyonunu iptal eder."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Arayüz"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Gösterge Modu"/>
+    <e k="mouseSteering_ui_both" v="Dış ve İç"/>
+    <e k="mouseSteering_ui_inside" v="İç"/>
+    <e k="mouseSteering_ui_outside" v="Dış"/>
+    <e k="mouseSteering_ui_indicatorText" v="Gösterge de Açı Göster"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Geriye Bakarken Göstergeyi Göster (İç)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Direksiyon göstergesinin HUD'da nasıl gösterileceğini seçer."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Mevcut direksiyon açısını göstergede ekran metni olarak gösterir."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="İç görüşte geriye bakarken göstergeyi gösterir."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Veri Denetimleri"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Araç"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Plaka"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Araç bulunamadı"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d satırın %d'si seçildi." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Kalan Yuvalar"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Araçları Senkronize Et"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Kaydedilen araçları çiftlikle senkronize etmek ister misiniz? Bu, artık mevcut olmayan araçların girişlerini silecektir."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Senkronize edilen araçlar: %d kaldırıldı." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Senkronize edilecek araç yok."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Ayarlar:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Tek Oyuncu (Ana Bilgisayar)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Çok Oyuncu (İstemci)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Kaydet ve Geri Dön"/>
+    <e k="mouseSteering_button_save" v="Kaydet"/>
+    <e k="mouseSteering_button_unsave" v="Kaydetme"/>
+    <e k="mouseSteering_button_viewDetails" v="Ayrıntıları Görüntüle"/>
+    <e k="mouseSteering_button_hideDetails" v="Ayrıntıları Gizle"/>
+    <e k="mouseSteering_button_viewOnMap" v="Haritada Görüntüle"/>
+    <e k="mouseSteering_button_sync" v="Araçları çiftlikle senkronize et"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Tümü"/>
+    <e k="mouseSteering_ui_saved" v="Kaydedildi"/>
+    <e k="mouseSteering_ui_unsaved" v="Kaydedilmemiş"/>
+    <e k="mouseSteering_ui_owned" v="Sahip olunan"/>
+    <e k="mouseSteering_ui_leased" v="Kiralanan"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maksimum araç sayısına ulaşıldı"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Araç başarıyla eklendi"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Araç başarıyla kaldırıldı"/>
+  </elements>
+</l10n>

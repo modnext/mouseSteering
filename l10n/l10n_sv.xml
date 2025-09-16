@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Styrkontroll"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Spara/ta bort fordon"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotera kamera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktivera"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Inaktivera"/>
+    <e k="mouseSteering_mode_format" v="%s Musstyrning" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Rotera kamera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Musstyrning"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Inställningar"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Välkommen till musstyrning"/>
+    <e k="mouseSteering_welcome_text" v="Här är några viktiga anmärkningar:&#10;&#10;- Inställningar och data är separata för enkelspelare (värd) och flerspelare (klient)&#10;- Styrningsläget per fordon sparas per karta (inte per sparat spel)&#10;- Som flerspelarklient kan styrningen kännas mindre smidig på grund av nätverkssynkronisering&#10; - Om du har slut på platser kan du synkronisera fordon med farmen för att ta bort förlorade poster&#10;&#10;Klicka på ”Ja” för att bekräfta. Denna dialogruta visas inte igen."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Inställningar för musstyrning"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Allmänt"/>
+    <e k="mouseSteering_ui_default" v="Aktiverat som standard"/>
+    <e k="mouseSteering_ui_autoSave" v="Autosave"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Kontrollinställningar"/>
+    <e k="mouseSteering_ui_sensitivity" v="Känslighet"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Invertera X-axeln"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Hastighetsbaserad styrning"/>
+    <e k="mouseSteering_ui_linearity" v="Linjäritet"/>
+    <e k="mouseSteering_ui_smoothness" v="Smidighet"/>
+    <e k="mouseSteering_ui_deadzone" v="Dödzon"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Styrassistans"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Avbryt AI-styrning vid inmatning"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Lås AI-styrning"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Tröskelvärde för inmatning"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Aktiverar musstyrning som standard på alla fordon."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Kommer automatiskt ihåg och återanvänder styrläget per fordon."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Justerar hur snabbt styrningen reagerar på musrörelser."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inverterar den horisontella (X) axeln för styrning."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Justerar känsligheten baserat på hastighet och styrvinkel för bättre kontroll."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Justerar styrresponskurvan. Högre värden ger finare kontroll nära mitten."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Jämnar ut musinmatningen för att minska plötsliga styrförändringar."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignorerar små musrörelser nära mitten för att förhindra oavsiktlig styrning."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="När denna funktion är aktiverad avbryts AI-styrningen omedelbart vid varje inmatning."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Låser AI-styrningen i 2,5 sekunder efter aktivering för att förhindra oavsiktlig avbrytning."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Avbryter AI-styrningen när musens hastighet överstiger detta värde."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Gränssnitt"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Indikatorläge"/>
+    <e k="mouseSteering_ui_both" v="Utanför och inuti"/>
+    <e k="mouseSteering_ui_inside" v="Inuti"/>
+    <e k="mouseSteering_ui_outside" v="Utanför"/>
+    <e k="mouseSteering_ui_indicatorText" v="Visa vinkel i indikator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Visa indikator när du tittar bakåt (inuti)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Väljer hur styrindikatorn visas på HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Visar aktuell styrvinkel som text på skärmen i indikatorn."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Visar indikatorn när du tittar bakåt i invändig vy."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Datakontroller"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Fordon"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Registreringsskylt"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Inga fordon hittades"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d av %d rader valda." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Återstående platser"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Synkronisera fordon"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Synkronisera sparade fordon med gården? Detta kommer att ta bort poster för fordon som inte längre finns."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Fordon synkroniserade: %d borttagna." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Inga fordon att synkronisera."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Inställningar för:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Enspelare (värd)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Flerspelare (klient)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Spara och tillbaka"/>
+    <e k="mouseSteering_button_save" v="Spara"/>
+    <e k="mouseSteering_button_unsave" v="Ångra spara"/>
+    <e k="mouseSteering_button_viewDetails" v="Visa detaljer"/>
+    <e k="mouseSteering_button_hideDetails" v="Dölj detaljer"/>
+    <e k="mouseSteering_button_viewOnMap" v="Visa på karta"/>
+    <e k="mouseSteering_button_sync" v="Synkronisera fordon med gården"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Alla"/>
+    <e k="mouseSteering_ui_saved" v="Sparade"/>
+    <e k="mouseSteering_ui_unsaved" v="Osavade"/>
+    <e k="mouseSteering_ui_owned" v="Ägda"/>
+    <e k="mouseSteering_ui_leased" v="Leasade"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maximalt antal fordon uppnått"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Fordon tillagt"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Fordon borttaget"/>
+  </elements>
+</l10n>

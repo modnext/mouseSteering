@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<settings>
-  <setting name="sensitivity" float="1.000000"/>
-  <setting name="invertXAxis" boolean="false"/>
-  <setting name="autoSaveVehicle" boolean="false"/>
-  <setting name="linearity" float="1.000000"/>
-  <setting name="smoothness" float="0.000000"/>
-  <setting name="deadzone" float="0.000000"/>
-  <setting name="hud" integer="1" />
-  <setting name="hudText" boolean="true"/>
-  <setting name="hudLookBackInside" boolean="false"/>
+<settings revision="1">
+  <default>false</default>
+  <autoSave>false</autoSave>
+
+  <!-- Control Tuning -->
+  <sensitivity>1.000000</sensitivity>
+  <invertXAxis>false</invertXAxis>
+  <speedBasedSteering>false</speedBasedSteering>
+  <linearity>1.000000</linearity>
+  <smoothness>0.000000</smoothness>
+  <deadzone>0.000000</deadzone>
+
+  <!-- HUD Indicator -->
+  <indicatorMode>both</indicatorMode>  <!-- Options: both, inside, outside, off -->
+  <indicatorText>true</indicatorText>
+  <indicatorLookBackInside>false</indicatorLookBackInside>
+
+  <!-- Steering Assist Extensions -->
+  <steeringAssist>false</steeringAssist>
+  <steeringAssistLockout>true</steeringAssistLockout>
+  <steeringAssistThreshold>0.100000</steeringAssistThreshold>
 </settings>

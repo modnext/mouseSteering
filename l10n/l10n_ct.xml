@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="方向控制"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="儲存/移除載具"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋轉鏡頭"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="啟用"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="停用"/>
+    <e k="mouseSteering_mode_format" v="%s 滑鼠操控模式" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="旋轉鏡頭"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="滑鼠操控"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="設定"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="歡迎使用滑鼠操控"/>
+    <e k="mouseSteering_welcome_text" v="以下為重要注意事項：&#10;&#10;- 單人模式（主機）與多人模式（客戶端）的設定及資料各自獨立&#10;- 每輛載具的轉向模式依地圖儲存（非依存檔儲存）&#10;- 作為多人模式客戶端時，轉向操作可能因網路同步而較不流暢&#10; - 若槽位用罄，可同步車輛至農場以清除遺失條目&#10;&#10;點擊「是」確認。此對話框將不再顯示。"/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="滑鼠操控設定"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="基本設定"/>
+    <e k="mouseSteering_ui_default" v="預設啟用"/>
+    <e k="mouseSteering_ui_autoSave" v="自動儲存"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="操控調校"/>
+    <e k="mouseSteering_ui_sensitivity" v="靈敏度"/>
+    <e k="mouseSteering_ui_invertXAxis" v="反轉X軸"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="速度導向轉向"/>
+    <e k="mouseSteering_ui_linearity" v="線性度"/>
+    <e k="mouseSteering_ui_smoothness" v="平滑度"/>
+    <e k="mouseSteering_ui_deadzone" v="死區"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="操控輔助"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="輸入時取消 AI 操控"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="鎖定 AI 操控"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="輸入閾值"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="預設於所有載具啟用滑鼠轉向功能。"/>
+    <e k="mouseSteering_ui_autoSave_desc" v="自動記憶並重新套用各載具專屬轉向模式。"/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="調整滑鼠移動時轉向反應的靈敏度。"/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="反轉橫向（X軸）方向盤操作。"/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="依據車速與轉向角度調節靈敏度，提升操控精準度。"/>
+    <e k="mouseSteering_ui_linearity_desc" v="調整方向盤反應曲線。數值越高，中心位置操控越精細。"/>
+    <e k="mouseSteering_ui_smoothness_desc" v="平滑滑鼠輸入以減少方向盤的突兀轉向變化。"/>
+    <e k="mouseSteering_ui_deadzone_desc" v="忽略中心附近的小幅度滑鼠移動，防止意外轉向。"/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="啟用時，任何輸入都會立即取消 AI 轉向輔助。"/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="啟用後鎖定AI方向盤2.5秒，防止意外取消。"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="當滑鼠速度超過此值時取消AI方向盤控制。"/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="介面"/>
+    <e k="mouseSteering_ui_indicatorMode" v="指示器模式"/>
+    <e k="mouseSteering_ui_both" v="外部與內部"/>
+    <e k="mouseSteering_ui_inside" v="內部模式"/>
+    <e k="mouseSteering_ui_outside" v="外部模式"/>
+    <e k="mouseSteering_ui_indicatorText" v="在指示器中顯示角度"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="回頭查看時顯示指示器（內部模式）"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="選擇方向指示器在HUD上的顯示方式。"/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="在指示器中以螢幕文字顯示當前轉向角度。"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="於內視角回頭時顯示指示器。"/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="資料控制項"/>
+    <e k="mouseSteering_ui_nameVehicle" v="車輛"/>
+    <e k="mouseSteering_ui_plateVehicle" v="車牌"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="未找到車輛"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="已選取 %d 筆中的 %d 筆。" tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="剩餘槽位"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="同步車輛"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="是否將儲存車輛同步至農場？此操作將移除已不存在的車輛記錄。"/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="已同步車輛：移除 %d 輛。" tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="無車輛可同步。"/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="設定適用於："/>
+    <e k="mouseSteering_ui_singleplayer" v="單人模式（主機）"/>
+    <e k="mouseSteering_ui_multiplayer" v="多人模式（客戶端）"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="儲存並返回"/>
+    <e k="mouseSteering_button_save" v="儲存"/>
+    <e k="mouseSteering_button_unsave" v="取消儲存"/>
+    <e k="mouseSteering_button_viewDetails" v="查看詳情"/>
+    <e k="mouseSteering_button_hideDetails" v="隱藏詳情"/>
+    <e k="mouseSteering_button_viewOnMap" v="地圖檢視"/>
+    <e k="mouseSteering_button_sync" v="與農場同步車輛"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="全部"/>
+    <e k="mouseSteering_ui_saved" v="已儲存"/>
+    <e k="mouseSteering_ui_unsaved" v="未儲存"/>
+    <e k="mouseSteering_ui_owned" v="已擁有"/>
+    <e k="mouseSteering_ui_leased" v="已租賃"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="達到車輛上限"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="車輛新增成功"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="車輛移除成功"/>
+  </elements>
+</l10n>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Điều khiển lái"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Lưu/Xóa phương tiện"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Xoay camera"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Kích hoạt"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Vô hiệu hóa"/>
+    <e k="mouseSteering_mode_format" v="%s Điều khiển chuột" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Xoay camera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Điều khiển chuột"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Cài đặt"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Chào mừng đến với Điều khiển chuột"/>
+    <e k="mouseSteering_welcome_text" v="Dưới đây là một số lưu ý quan trọng:&#10;&#10;- Cài đặt và dữ liệu được tách biệt cho Chế độ đơn (Host) và Chế độ đa người chơi (Client)&#10;- Chế độ điều khiển theo xe được lưu trữ theo bản đồ (không theo tệp lưu trữ)&#10;- Khi là client đa người chơi, việc điều khiển có thể không mượt mà do đồng bộ mạng&#10; - Nếu hết slot, bạn có thể đồng bộ phương tiện với máy chủ để xóa các mục bị mất&#10;&#10;Nhấp 'Có' để xác nhận. Cửa sổ này sẽ không hiển thị lại."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Cài đặt Điều khiển Chuột"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Chung"/>
+    <e k="mouseSteering_ui_default" v="Được bật mặc định"/>
+    <e k="mouseSteering_ui_autoSave" v="Tự động lưu"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Điều chỉnh điều khiển"/>
+    <e k="mouseSteering_ui_sensitivity" v="Độ nhạy"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Đảo ngược trục X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Điều khiển dựa trên tốc độ"/>
+    <e k="mouseSteering_ui_linearity" v="Độ tuyến tính"/>
+    <e k="mouseSteering_ui_smoothness" v="Độ mượt"/>
+    <e k="mouseSteering_ui_deadzone" v="Vùng chết"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Hỗ trợ điều khiển"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Hủy điều khiển AI khi nhập liệu"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Khóa điều khiển AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Ngưỡng đầu vào"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Kích hoạt điều khiển chuột theo mặc định trên tất cả phương tiện."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Tự động lưu và áp dụng lại chế độ điều khiển cho từng phương tiện."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Điều chỉnh tốc độ phản hồi của điều khiển theo chuyển động chuột."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Đảo ngược trục ngang (X) cho điều khiển."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Điều chỉnh độ nhạy dựa trên tốc độ và góc điều khiển để kiểm soát tốt hơn."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Điều chỉnh đường cong phản hồi điều khiển. Giá trị cao hơn cho phép kiểm soát chính xác hơn gần trung tâm."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Làm mịn đầu vào chuột để giảm thay đổi đột ngột của hệ thống lái."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Bỏ qua các chuyển động chuột nhỏ gần trung tâm để tránh thay đổi hệ thống lái không mong muốn."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Khi bật, bất kỳ đầu vào nào cũng hủy bỏ hệ thống lái AI ngay lập tức."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Khóa hệ thống lái AI trong 2,5 giây sau khi kích hoạt để tránh hủy bỏ vô tình."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Hủy bỏ hệ thống lái AI khi tốc độ chuột vượt quá giá trị này."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Giao diện"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Chế độ hiển thị chỉ báo"/>
+    <e k="mouseSteering_ui_both" v="Bên ngoài và bên trong"/>
+    <e k="mouseSteering_ui_inside" v="Bên trong"/>
+    <e k="mouseSteering_ui_outside" v="Bên ngoài"/>
+    <e k="mouseSteering_ui_indicatorText" v="Hiển thị góc lái trên chỉ báo"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Hiển thị chỉ báo khi nhìn lại (bên trong)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Chọn cách hiển thị chỉ báo lái trên HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Hiển thị góc lái hiện tại dưới dạng văn bản trên màn hình trong chỉ báo."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Hiển thị chỉ báo khi nhìn lại trong chế độ xem bên trong."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Điều khiển dữ liệu"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Xe"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Biển số xe"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Không tìm thấy xe nào"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d trong %d hàng đã được chọn." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Số ô còn lại"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Đồng bộ hóa xe"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Đồng bộ hóa xe đã lưu với trang trại? Điều này sẽ xóa các mục cho các xe không còn tồn tại."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Số xe đã đồng bộ hóa: %d đã bị xóa." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Không có phương tiện nào để đồng bộ."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Cài đặt cho:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Chế độ đơn (Chủ nhà)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Chế độ đa người chơi (Khách)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Lưu và quay lại"/>
+    <e k="mouseSteering_button_save" v="Lưu"/>
+    <e k="mouseSteering_button_unsave" v="Hủy lưu"/>
+    <e k="mouseSteering_button_viewDetails" v="Xem chi tiết"/>
+    <e k="mouseSteering_button_hideDetails" v="Ẩn chi tiết"/>
+    <e k="mouseSteering_button_viewOnMap" v="Xem trên bản đồ"/>
+    <e k="mouseSteering_button_sync" v="Đồng bộ hóa phương tiện với trang trại"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Tất cả"/>
+    <e k="mouseSteering_ui_saved" v="Đã lưu"/>
+    <e k="mouseSteering_ui_unsaved" v="Chưa lưu"/>
+    <e k="mouseSteering_ui_owned" v="Sở hữu"/>
+    <e k="mouseSteering_ui_leased" v="Thuê"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Đã đạt số lượng xe tối đa"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Xe đã được thêm thành công"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Xe đã được xóa thành công"/>
+  </elements>
+</l10n>

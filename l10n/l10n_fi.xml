@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ohjaus"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Tallenna/poista ajoneuvo"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kierrä kameraa"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Aktivoi"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deaktivoi"/>
+    <e k="mouseSteering_mode_format" v="%s Hiiren ohjaus" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Kierrä kameraa"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Hiiren ohjaus"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Asetukset"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Tervetuloa hiiren ohjaukseen"/>
+    <e k="mouseSteering_welcome_text" v="Tässä muutamia tärkeitä huomautuksia:&#10;&#10;- Asetukset ja tiedot ovat erilliset yksinpelissä (isäntä) ja moninpelissä (asiakas)&#10;- Ajoneuvokohtainen ohjausmoodi tallennetaan karttakohtaisesti (ei tallennuskohtaisesti)&#10;- Moninpelin asiakkaana ohjaus voi tuntua vähemmän sujuvalta verkon synkronoinnin vuoksi&#10; - Jos paikat loppuvat, voit synkronoida ajoneuvot farmilla poistaaksesi kadonneet merkinnät&#10;&#10;Vahvista valitsemalla ”Kyllä”. Tämä valintaikkuna ei tule näkyviin uudelleen."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Hiiren ohjauksen asetukset"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Yleiset"/>
+    <e k="mouseSteering_ui_default" v="Oletusarvoisesti käytössä"/>
+    <e k="mouseSteering_ui_autoSave" v="Automaattinen tallennus"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Ohjauksen säätö"/>
+    <e k="mouseSteering_ui_sensitivity" v="Herkkyys"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Käännä X-akseli"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Nopeuteen perustuva ohjaus"/>
+    <e k="mouseSteering_ui_linearity" v="Lineaarisuus"/>
+    <e k="mouseSteering_ui_smoothness" v="Sujuva"/>
+    <e k="mouseSteering_ui_deadzone" v="Kuollut alue"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Ohjausavustin"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Peruuta AI-ohjaus syötettäessä"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Lukitse AI-ohjaus"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Syötön kynnysarvo"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Ota hiiren ohjaus käyttöön oletuksena kaikissa ajoneuvoissa."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Muistaa ja ottaa automaattisesti uudelleen käyttöön ajoneuvokohtaisen ohjausmoodin."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Säätää, kuinka nopeasti ohjaus reagoi hiiren liikkeisiin."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Kääntää vaakasuoran (X) akselin ohjausta varten."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Säätää herkkyyttä nopeuden ja ohjauskulman perusteella paremman hallinnan saavuttamiseksi."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Säätää ohjauksen vastekäyrää. Suuremmat arvot antavat tarkemman hallinnan keskiasennon lähellä."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Tasoittaa hiiren liikkeitä jyrkkien ohjausmuutosten vähentämiseksi."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ohittaa pienet hiiren liikkeet keskikohdan lähellä tahattoman ohjauksen estämiseksi."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Kun tämä on käytössä, mikä tahansa liike peruuttaa AI-ohjauksen välittömästi."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Lukitsee AI-ohjauksen 2,5 sekunniksi aktivoinnin jälkeen estääkseen tahattoman peruuttamisen."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Peruuttaa AI-ohjauksen, kun hiiren nopeus ylittää tämän arvon."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Käyttöliittymä"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Ilmaisintila"/>
+    <e k="mouseSteering_ui_both" v="Ulkopuoli ja sisäpuoli"/>
+    <e k="mouseSteering_ui_inside" v="Sisäpuoli"/>
+    <e k="mouseSteering_ui_outside" v="Ulkopuoli"/>
+    <e k="mouseSteering_ui_indicatorText" v="Näytä kulma ilmaisimessa"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Näytä ilmaisin, kun katsot taakse (sisäpuoli)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Valitsee, miten ohjausindikaattori näytetään HUD:ssa."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Näyttää nykyisen ohjauskulman tekstinä indikaattorissa."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Näyttää indikaattorin, kun katsotaan taaksepäin sisäkuvassa."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Tietojen hallinta"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Ajoneuvo"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Rekisterikilpi"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Ajoneuvoja ei löytynyt"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d valittuna %d rivistä." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Jäljellä olevat paikat"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Synkronoi ajoneuvot"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Synkronoitko tallennetut ajoneuvot maatilan kanssa? Tämä poistaa merkinnät ajoneuvoista, joita ei enää ole olemassa."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Synkronoidut ajoneuvot: %d poistettu." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Ei synkronoitavia ajoneuvoja."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Asetukset:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Yksinpeli (isäntä)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Moninpeli (asiakas)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Tallenna ja takaisin"/>
+    <e k="mouseSteering_button_save" v="Tallenna"/>
+    <e k="mouseSteering_button_unsave" v="Peruuta tallennus"/>
+    <e k="mouseSteering_button_viewDetails" v="Näytä tiedot"/>
+    <e k="mouseSteering_button_hideDetails" v="Piilota tiedot"/>
+    <e k="mouseSteering_button_viewOnMap" v="Näytä kartalla"/>
+    <e k="mouseSteering_button_sync" v="Synkronoi ajoneuvot tilan kanssa"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Kaikki"/>
+    <e k="mouseSteering_ui_saved" v="Tallennettu"/>
+    <e k="mouseSteering_ui_unsaved" v="Tallentamatta"/>
+    <e k="mouseSteering_ui_owned" v="Omistettu"/>
+    <e k="mouseSteering_ui_leased" v="Vuokrattu"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Ajoneuvojen enimmäismäärä saavutettu"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Ajoneuvo lisätty onnistuneesti"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Ajoneuvo poistettu onnistuneesti"/>
+  </elements>
+</l10n>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Stuurbesturing"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Voertuig opslaan/verwijderen"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Camera draaien"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Activeren"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Deactiveren"/>
+    <e k="mouseSteering_mode_format" v="%s Muisbesturing" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Camera draaien"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Muisbesturing"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Instellingen"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Welkom bij Muisbesturing"/>
+    <e k="mouseSteering_welcome_text" v="Hier zijn een paar belangrijke opmerkingen:&#10;&#10;- Instellingen en gegevens zijn gescheiden voor Singleplayer (Host) en Multiplayer (Client)&#10;- De stuurmodus per voertuig wordt per kaart opgeslagen (niet per opgeslagen spel)&#10;- Als multiplayer-client kan het sturen minder soepel aanvoelen vanwege de netwerksynchronisatie&#10; - Als je geen slots meer hebt, kun je voertuigen synchroniseren met de farm om verloren items te verwijderen&#10;&#10;Klik op 'Ja' om te bevestigen. Dit dialoogvenster verschijnt niet meer."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Mouse Steering-instellingen"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Algemeen"/>
+    <e k="mouseSteering_ui_default" v="Standaard ingeschakeld"/>
+    <e k="mouseSteering_ui_autoSave" v="Automatisch opslaan"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Besturing afstemmen"/>
+    <e k="mouseSteering_ui_sensitivity" v="Gevoeligheid"/>
+    <e k="mouseSteering_ui_invertXAxis" v="X-as omkeren"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Op snelheid gebaseerd sturen"/>
+    <e k="mouseSteering_ui_linearity" v="Lineariteit"/>
+    <e k="mouseSteering_ui_smoothness" v="Soepelheid"/>
+    <e k="mouseSteering_ui_deadzone" v="Dode zone"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Stuurhulp"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="AI-besturing annuleren bij invoer"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="AI-besturing vergrendelen"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Invoerdrempel"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Schakelt standaard muissturing in op alle voertuigen."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Onthoudt automatisch de stuurmodus per voertuig en past deze opnieuw toe."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Past aan hoe snel de besturing reageert op muisbewegingen."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Keert de horizontale (X) as voor sturen om."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Past de gevoeligheid aan op basis van snelheid en stuurhoek voor betere controle."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Past de stuurresponscurve aan. Hogere waarden zorgen voor fijnere controle in het midden."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Maakt muisinvoer vloeiender om abrupte stuurveranderingen te verminderen."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Negeert kleine muisbewegingen in het midden om onbedoeld sturen te voorkomen."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Wanneer deze optie is ingeschakeld, wordt AI-sturen onmiddellijk geannuleerd bij elke invoer."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Vergrendelt AI-besturing gedurende 2,5 seconden na activering om onbedoelde annulering te voorkomen."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Annuleert AI-besturing wanneer de muissnelheid deze waarde overschrijdt."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interface"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Indicatormodus"/>
+    <e k="mouseSteering_ui_both" v="Buiten en binnen"/>
+    <e k="mouseSteering_ui_inside" v="Binnen"/>
+    <e k="mouseSteering_ui_outside" v="Buiten"/>
+    <e k="mouseSteering_ui_indicatorText" v="Hoek weergeven in indicator"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Indicator weergeven bij achterom kijken (binnen)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Selecteert hoe de stuurindicator wordt weergegeven op de HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Toont de huidige stuurhoek als tekst op het scherm in de indicator."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Toont de indicator bij achteruitkijken in het binnenzicht."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Gegevensbesturing"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Voertuig"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Kentekenplaat"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Geen voertuigen gevonden"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d van %d rij(en) geselecteerd." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Resterende plaatsen"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Voertuigen synchroniseren"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Opgeslagen voertuigen synchroniseren met de boerderij? Hiermee worden vermeldingen voor voertuigen die niet meer bestaan verwijderd."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Voertuigen gesynchroniseerd: %d verwijderd." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Geen voertuigen om te synchroniseren."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Instellingen voor:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Singleplayer (host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multiplayer (client)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Opslaan en terug"/>
+    <e k="mouseSteering_button_save" v="Opslaan"/>
+    <e k="mouseSteering_button_unsave" v="Ongeslagen"/>
+    <e k="mouseSteering_button_viewDetails" v="Details bekijken"/>
+    <e k="mouseSteering_button_hideDetails" v="Details verbergen"/>
+    <e k="mouseSteering_button_viewOnMap" v="Bekijken op kaart"/>
+    <e k="mouseSteering_button_sync" v="Voertuigen synchroniseren met boerderij"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Alles"/>
+    <e k="mouseSteering_ui_saved" v="Opgeslagen"/>
+    <e k="mouseSteering_ui_unsaved" v="Niet opgeslagen"/>
+    <e k="mouseSteering_ui_owned" v="In bezit"/>
+    <e k="mouseSteering_ui_leased" v="Geleased"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Maximaal aantal voertuigen bereikt"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Voertuig succesvol toegevoegd"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Voertuig succesvol verwijderd"/>
+  </elements>
+</l10n>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<l10n>
+  <elements>
+    <!-- Input Bindings -->
+    <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controlo de direção"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Guardar/Remover veículo"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rodar câmara"/>
+
+    <!-- Actions -->
+    <e k="mouseSteering_modeSteering_activate" v="Ativar"/>
+    <e k="mouseSteering_modeSteering_deactivate" v="Desativar"/>
+    <e k="mouseSteering_mode_format" v="%s Controle do mouse" tag="format"/>
+    <e k="mouseSteering_rotateCamera" v="Rodar câmera"/>
+
+    <!-- General Settings Extension -->
+    <e k="mouseSteering_ui_extensionTitle" v="Controle do mouse"/>
+    <e k="mouseSteering_ui_extensionOpenSettings" v="Configurações"/>
+
+    <!-- Welcome Dialog -->
+    <e k="mouseSteering_welcome_title" v="Bem-vindo ao Controle do mouse"/>
+    <e k="mouseSteering_welcome_text" v="Aqui estão algumas notas importantes:&#10;&#10;- As definições e os dados são separados para o modo Singleplayer (Host) e Multiplayer (Cliente)&#10;- O modo de direção por veículo é guardado por mapa (não por jogo guardado)&#10;- Como cliente multiplayer, a direção pode parecer menos suave devido à sincronização da rede&#10; - Se ficar sem vagas, pode sincronizar os veículos com a quinta para remover entradas perdidas&#10;&#10;Clique em «Sim» para confirmar. Esta caixa de diálogo não aparecerá novamente."/>
+
+    <!-- Dialog Settings Title -->
+    <e k="mouseSteering_ui_title" v="Definições do Mouse Steering"/>
+
+    <!-- General Settings -->
+    <e k="mouseSteering_ui_general" v="Geral"/>
+    <e k="mouseSteering_ui_default" v="Ativado por predefinição"/>
+    <e k="mouseSteering_ui_autoSave" v="Autoguardar"/>
+
+    <!-- General Settings: Control Tuning -->
+    <e k="mouseSteering_ui_controlAttributes" v="Ajuste do controlo"/>
+    <e k="mouseSteering_ui_sensitivity" v="Sensibilidade"/>
+    <e k="mouseSteering_ui_invertXAxis" v="Inverter eixo X"/>
+    <e k="mouseSteering_ui_speedBasedSteering" v="Direção baseada na velocidade"/>
+    <e k="mouseSteering_ui_linearity" v="Linearidade"/>
+    <e k="mouseSteering_ui_smoothness" v="Suavidade"/>
+    <e k="mouseSteering_ui_deadzone" v="Zona morta"/>
+
+    <!-- General Settings: Steering Assist -->
+    <e k="mouseSteering_ui_steeringAssist" v="Assistência à direção"/>
+    <e k="mouseSteering_ui_steeringAssistMode" v="Cancelar direção AI na entrada"/>
+    <e k="mouseSteering_ui_steeringAssistLockout" v="Bloquear direção AI"/>
+    <e k="mouseSteering_ui_steeringAssistThreshold" v="Limite de entrada"/>
+
+    <!-- Descriptions: General Settings -->
+    <e k="mouseSteering_ui_default_desc" v="Ativa a direção do rato por predefinição em todos os veículos."/>
+    <e k="mouseSteering_ui_autoSave_desc" v="Memoriza e reaplica automaticamente o modo de direção por veículo."/>
+    <e k="mouseSteering_ui_sensitivity_desc" v="Ajusta a rapidez com que a direção responde ao movimento do rato."/>
+    <e k="mouseSteering_ui_invertXAxis_desc" v="Inverte o eixo horizontal (X) para a direção."/>
+    <e k="mouseSteering_ui_speedBasedSteering_desc" v="Ajusta a sensibilidade com base na velocidade e no ângulo de direção para um melhor controlo."/>
+    <e k="mouseSteering_ui_linearity_desc" v="Ajusta a curva de resposta da direção. Valores mais altos proporcionam um controlo mais preciso perto do centro."/>
+    <e k="mouseSteering_ui_smoothness_desc" v="Suaviza a entrada do rato para reduzir mudanças bruscas na direção."/>
+    <e k="mouseSteering_ui_deadzone_desc" v="Ignora pequenos movimentos do rato perto do centro para evitar mudanças involuntárias na direção."/>
+    <e k="mouseSteering_ui_steeringAssistMode_desc" v="Quando ativado, qualquer entrada cancela imediatamente a direção da IA."/>
+    <e k="mouseSteering_ui_steeringAssistLockout_desc" v="Bloqueia a direção da IA por 2,5 segundos após a ativação para evitar o cancelamento acidental."/>
+    <e k="mouseSteering_ui_steeringAssistThreshold_desc" v="Cancela a direção da IA quando a velocidade do mouse excede este valor."/>
+
+    <!-- HUD Settings -->
+    <e k="mouseSteering_ui_hud" v="Interface"/>
+    <e k="mouseSteering_ui_indicatorMode" v="Modo Indicador"/>
+    <e k="mouseSteering_ui_both" v="Exterior e Interior"/>
+    <e k="mouseSteering_ui_inside" v="Interior"/>
+    <e k="mouseSteering_ui_outside" v="Exterior"/>
+    <e k="mouseSteering_ui_indicatorText" v="Mostrar Ângulo no Indicador"/>
+    <e k="mouseSteering_ui_indicatorLookBackInside" v="Mostrar Indicador ao Olhar para Trás (Interior)"/>
+
+    <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_indicatorMode_desc" v="Seleciona como o indicador de direção é mostrado no HUD."/>
+    <e k="mouseSteering_ui_indicatorText_desc" v="Mostra o ângulo de direção atual como texto na tela no indicador."/>
+    <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra o indicador ao olhar para trás na vista interna."/>
+
+    <!-- Data Controls -->
+    <e k="mouseSteering_ui_dataControls" v="Controlos de dados"/>
+    <e k="mouseSteering_ui_nameVehicle" v="Veículo"/>
+    <e k="mouseSteering_ui_plateVehicle" v="Matrícula"/>
+    <e k="mouseSteering_ui_vehiclesListEmpty" v="Nenhum veículo encontrado"/>
+    <e k="mouseSteering_ui_vehiclesSelectionName" v="%d de %d linha(s) selecionada(s)." tag="format"/>
+
+    <!-- Status Bar & Sync -->
+    <e k="mouseSteering_ui_vehicleCounter" v="Vagas restantes"/>
+    <e k="mouseSteering_ui_syncConfirmTitle" v="Sincronizar veículos"/>
+    <e k="mouseSteering_ui_syncConfirmText" v="Sincronizar veículos guardados com a quinta? Isto irá remover entradas de veículos que já não existem."/>
+    <e k="mouseSteering_ui_vehiclesSynced" v="Veículos sincronizados: %d removidos." tag="format"/>
+    <e k="mouseSteering_ui_noVehiclesToSync" v="Nenhum veículo para sincronizar."/>
+
+    <!-- Mode Settings -->
+    <e k="mouseSteering_ui_modeSettingsLabel" v="Configurações para:"/>
+    <e k="mouseSteering_ui_singleplayer" v="Jogador único (Host)"/>
+    <e k="mouseSteering_ui_multiplayer" v="Multijogador (Cliente)"/>
+
+    <!-- Button Labels -->
+    <e k="mouseSteering_button_saveBack" v="Guardar e voltar"/>
+    <e k="mouseSteering_button_save" v="Guardar"/>
+    <e k="mouseSteering_button_unsave" v="Desfazer"/>
+    <e k="mouseSteering_button_viewDetails" v="Ver detalhes"/>
+    <e k="mouseSteering_button_hideDetails" v="Ocultar detalhes"/>
+    <e k="mouseSteering_button_viewOnMap" v="Ver no mapa"/>
+    <e k="mouseSteering_button_sync" v="Sincronizar veículos com a quinta"/>
+
+    <!-- Inner Text -->
+    <e k="mouseSteering_ui_all" v="Todos"/>
+    <e k="mouseSteering_ui_saved" v="Guardado"/>
+    <e k="mouseSteering_ui_unsaved" v="Não guardado"/>
+    <e k="mouseSteering_ui_owned" v="Propriedade própria"/>
+    <e k="mouseSteering_ui_leased" v="Alugado"/>
+
+    <!-- Notifications & Warnings -->
+    <e k="mouseSteering_warning_vehicleLimit" v="Número máximo de veículos atingido"/>
+    <e k="mouseSteering_notification_vehicleAdded" v="Veículo adicionado com sucesso"/>
+    <e k="mouseSteering_notification_vehicleRemoved" v="Veículo removido com sucesso"/>
+  </elements>
+</l10n>

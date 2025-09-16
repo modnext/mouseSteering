@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+  <GuiElement profile="newLayer"/>
+  <Bitmap profile="mouseSteeringDialogFullscreenBg"/>
+
+  <GuiElement profile="mouseSteeringSettingsDialogContainer" id="dialogElement">
+    <ThreePartBitmap profile="mouseSteeringDialogBgMiddle"/>
+    <ThreePartBitmap profile="mouseSteeringDialogBgTop"/>
+    <ThreePartBitmap profile="mouseSteeringDialogBgBottom"/>
+
+    <GuiElement profile="mouseSteeringDialogContentContainer" id="contentContainer">
+      <!-- Header -->
+      <Text profile="mouseSteeringSettingsDialogTitle" id="dialogTitle" text="$l10n_mouseSteering_ui_title"/>
+      <GuiElement profile="mouseSteeringControlsButtonContainer" id="controlsButtonContainer">
+        <ThreePartBitmap profile="mouseSteeringControlsButtonBgLight"/>
+        <Text profile="mouseSteeringControlsButtonText" id="controlsButtonText" text="$l10n_ui_settingsControls"/>
+        <Button profile="mouseSteeringControlsButtonAction1" id="controlsButton" onClick="onClickOpenPageSettingsControls"/>
+      </GuiElement>
+      <ThreePartBitmap profile="mouseSteeringSettingsDialogLineSeparatorTop"/>
+
+      <!-- Sub category selector -->
+      <MultiTextOption profile="mouseSteeringSettingsDialogTabSelector" id="pageSelector" onClick="updateSubCategoryPages" buttonLRChange="true"/>
+      <BoxLayout profile="mouseSteeringSettingsDialogTabSelectorBox" id="subCategoryBox">
+        <Button profile="mouseSteeringSettingsDialogTabSelectorTab" id="subCategoryTabs[1]" onClick="onClickGeneral" text="$l10n_mouseSteering_ui_general">
+          <ThreePartBitmap profile="mouseSteeringSettingsDialogTabSelectorTabBg" name="background"/>
+        </Button>
+        <Button profile="mouseSteeringSettingsDialogTabSelectorTab" id="subCategoryTabs[2]" onClick="onClickHud" text="$l10n_mouseSteering_ui_hud">
+          <ThreePartBitmap profile="mouseSteeringSettingsDialogTabSelectorTabBg" name="background"/>
+        </Button>
+        <Button profile="mouseSteeringSettingsDialogTabSelectorTab" id="subCategoryTabs[3]" onClick="onClickManage" text="$l10n_mouseSteering_ui_dataControls">
+          <ThreePartBitmap profile="mouseSteeringSettingsDialogTabSelectorTabBg" name="background"/>
+        </Button>
+      </BoxLayout>
+
+      <!-- Vehicle status -->
+      <Bitmap profile="mouseSteeringSettingsDialogVehicleStatus">
+        <GuiElement profile="mouseSteeringSettingsDialogVehicleStatusIndicator" id="vehicleStatusIndicator">
+          <Text profile="mouseSteeringSettingsDialogVehicleStatusName" text="$l10n_mouseSteering_ui_vehicleCounter"/>
+          <Text profile="mouseSteeringSettingsDialogVehicleStatusFillLevel" name="fillLevel"/>
+
+          <ThreePartBitmap profile="mouseSteeringProgressBarBackground">
+            <ThreePartBitmap profile="mouseSteeringProgressBar" name="bar"/>
+          </ThreePartBitmap>
+
+          <Button profile="mouseSteeringSettingsDialogVehicleStatusSyncButton" id="syncVehiclesButton" onClick="onClickSyncVehicles" text="$l10n_mouseSteering_button_sync"/>
+        </GuiElement>
+      </Bitmap>
+
+      <!-- Page: General settings -->
+      <GuiElement profile="mouseSteeringSettingsDialogBoxContainer" id="subCategoryPages[1]">
+        <ScrollingLayout profile="mouseSteeringSettingsDialogLayout" id="generalSettingsLayout">
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="default" onClick="onToggleChanged" focusInit="onOpen"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_default"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_default_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="autoSave" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_autoSave"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_autoSave_desc"/>
+            <Bitmap profile="mouseSteeringSettingsOptionLocked" name="iconDisabled"/>
+          </Bitmap>
+          <Text profile="mouseSteeringSettingsSectionHeader" name="sectionHeader" text="$l10n_mouseSteering_ui_controlAttributes"/>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="sensitivity" onClick="onSliderChanged" minValue="0.10" stepSize="0.10" maxValue="4"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_sensitivity"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_sensitivity_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="invertXAxis" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_invertXAxis"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_invertXAxis_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="speedBasedSteering" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_speedBasedSteering"/>
+            <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_speedBasedSteering_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="linearity" onClick="onSliderChanged" minValue="0.10" stepSize="0.05" maxValue="3"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_linearity"/>
+            <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_linearity_desc"/>
+            <Bitmap profile="mouseSteeringSettingsOptionLocked" name="iconDisabled"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="smoothness" onClick="onSliderChanged" minValue="0" stepSize="0.05" maxValue="1"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_smoothness"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_smoothness_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="deadzone" onClick="onSliderChanged" minValue="0" stepSize="0.05" maxValue="1"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_deadzone"/>
+            <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_deadzone_desc"/>
+          </Bitmap>
+          <Text profile="mouseSteeringSettingsSectionHeader" name="sectionHeader" text="$l10n_mouseSteering_ui_steeringAssist"/>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="steeringAssist" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_steeringAssistMode"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_steeringAssistMode_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="steeringAssistLockout" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_steeringAssistLockout"/>
+            <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_steeringAssistLockout_desc"/>
+            <Bitmap profile="mouseSteeringSettingsOptionLocked" name="iconDisabled"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="steeringAssistThreshold" onClick="onSliderChanged" minValue="0" stepSize="0.05" maxValue="1"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_steeringAssistThreshold"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_steeringAssistThreshold_desc"/>
+            <Bitmap profile="mouseSteeringSettingsOptionLocked" name="iconDisabled"/>
+          </Bitmap>
+        </ScrollingLayout>
+      </GuiElement>
+
+      <!-- Page: HUD settings -->
+      <GuiElement profile="mouseSteeringSettingsDialogBoxContainer" id="subCategoryPages[2]">
+        <ScrollingLayout profile="mouseSteeringSettingsDialogLayout" id="hudSettingsLayout">
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringMultiTextOption profile="mouseSteeringSettingsMultiTextOption" id="indicatorMode" onClick="onMultiChanged" texts="$l10n_mouseSteering_ui_both|$l10n_mouseSteering_ui_inside|$l10n_mouseSteering_ui_outside|$l10n_ui_off"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_indicatorMode"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_indicatorMode_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="indicatorText" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_indicatorText"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_indicatorText_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="indicatorLookBackInside" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_indicatorLookBackInside"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_indicatorLookBackInside_desc"/>
+          </Bitmap>
+        </ScrollingLayout>
+      </GuiElement>
+
+      <!-- Page: Manage vehicles -->
+      <GuiElement profile="mouseSteeringSettingsDialogBoxContainer" id="subCategoryPages[3]">
+        <BoxLayout profile="mouseSteeringSettingsDialogLayout" id="manageSettingsLayout">
+          <!-- Filter -->
+          <MultiTextOption profile="mouseSteeringTabbed" id="filterSelector" onClick="updateFilterPages"/>
+          <BoxLayout profile="mouseSteeringTabbedBox" id="filterBox">
+            <Button profile="mouseSteeringTabbedTab" id="filterSelectorTab[1]" text="$l10n_mouseSteering_ui_all" onClick="onClickFilterAll">
+              <ThreePartBitmap profile="mouseSteeringTabbedTabBg" name="background"/>
+            </Button>
+            <Button profile="mouseSteeringTabbedTab" id="filterSelectorTab[2]" text="$l10n_mouseSteering_ui_saved" onClick="onClickFilterSaved">
+              <ThreePartBitmap profile="mouseSteeringTabbedTabBg" name="background"/>
+            </Button>
+            <Button profile="mouseSteeringTabbedTab" id="filterSelectorTab[3]" text="$l10n_mouseSteering_ui_unsaved" onClick="onClickFilterUnsaved">
+              <ThreePartBitmap profile="mouseSteeringTabbedTabBg" name="background"/>
+            </Button>
+          </BoxLayout>
+
+          <ThreePartBitmap profile="mouseSteeringLineSeparatorBottom"/>
+          <GuiElement profile="mouseSteeringVehiclesDialogHeaderBox">
+            <Text profile="mouseSteeringVehiclesDialogHeaderText" text="$l10n_mouseSteering_ui_nameVehicle"/>
+            <Text profile="mouseSteeringVehiclesDialogHeaderText" position="452px 0" textAlignment="right" text="$l10n_mouseSteering_ui_plateVehicle"/>
+            <ThreePartBitmap profile="mouseSteeringLineSeparatorBottom"/>
+          </GuiElement>
+
+          <SmoothList profile="mouseSteeringVehiclesDialogList" id="vehiclesList" onDoubleClick="onDoubleClickVehiclesListItem">
+            <ListItem profile="mouseSteeringVehiclesDialogListItem">
+              <ThreePartBitmap profile="mouseSteeringVehiclesDialogListItemBg" name="alternating"/>
+              <Bitmap profile="mouseSteeringVehiclesDialogListItemIcon" name="icon"/>
+              <Text profile="mouseSteeringVehiclesDialogListItemName" name="name"/>
+              <Text profile="mouseSteeringVehiclesDialogListItemInfo" name="licensePlate"/>
+            </ListItem>
+          </SmoothList>
+        </BoxLayout>
+
+        <BoxLayout profile="mouseSteeringVehiclesDialogLegendBox" id="vehiclesLegend">
+          <Bitmap profile="mouseSteeringVehiclesDialogLegendIcon" imageSliceId="mouseSteering.icon_checkmark"/>
+          <Text profile="mouseSteeringVehiclesDialogLegendName" text="$l10n_mouseSteering_ui_saved"/>
+          <Bitmap profile="mouseSteeringVehiclesDialogLegendIcon" imageSliceId="mouseSteering.icon_ring"/>
+          <Text profile="mouseSteeringVehiclesDialogLegendName" text="$l10n_mouseSteering_ui_unsaved"/>
+        </BoxLayout>
+
+        <BoxLayout profile="mouseSteeringVehiclesDialogSelectionBox">
+          <Text profile="mouseSteeringVehiclesDialogSelectionName" id="vehiclesSelectionName" text="$l10n_mouseSteering_ui_vehiclesSelectionName"/>
+        </BoxLayout>
+
+        <GuiElement profile="mouseSteeringVehiclesDialogDetailsBox" id="vehicleDetailBox" newLayer="true">
+          <ThreePartBitmap profile="mouseSteeringVehiclesDialogDetailsBoxBg"/>
+
+          <Bitmap profile="mouseSteeringVehiclesDialogDetailsImageBox">
+            <Bitmap profile="mouseSteeringVehiclesDialogDetailsImage" id="vehicleDetailImage"/>
+          </Bitmap>
+
+          <InGameMapPreview profile="mouseSteeringVehiclesDialogDetailsIngameMap" id="vehicleDetailMap"/>
+          <Bitmap profile="mouseSteeringVehiclesDialogDetailsIngameMapMask"/>
+          <Button profile="mouseSteeringVehiclesDialogDetailsButtonAction1" id="viewOnMapButton" onClick="onVehicleViewOnMap" text="$l10n_mouseSteering_button_viewOnMap"/>
+
+          <BoxLayout profile="mouseSteeringVehiclesDialogDetailsInfoBox" id="vehicleDetailAttributesLayout">
+            <GuiElement profile="mouseSteeringVehiclesDialogDetailsInfoItem">
+              <Bitmap profile="mouseSteeringVehiclesDialogDetailsInfoIcon" imageSliceId="gui.storeAttribute_maintenanceCost"/>
+              <Text profile="mouseSteeringVehiclesDialogDetailsInfoText" id="status"/>
+            </GuiElement>
+            <GuiElement profile="mouseSteeringVehiclesDialogDetailsInfoItem">
+              <Bitmap profile="mouseSteeringVehiclesDialogDetailsInfoIcon" imageSliceId="gui.storeAttribute_licensePlate"/>
+              <Text profile="mouseSteeringVehiclesDialogDetailsInfoText" id="licensePlate"/>
+            </GuiElement>
+            <GuiElement profile="mouseSteeringVehiclesDialogDetailsInfoItem">
+              <Bitmap profile="mouseSteeringVehiclesDialogDetailsInfoIcon" imageSliceId="gui.storeAttribute_condition"/>
+              <Text profile="mouseSteeringVehiclesDialogDetailsInfoText" id="damage"/>
+            </GuiElement>
+            <GuiElement profile="mouseSteeringVehiclesDialogDetailsInfoItem">
+              <Bitmap profile="mouseSteeringVehiclesDialogDetailsInfoIcon" imageSliceId="gui.storeAttribute_operatingHours"/>
+              <Text profile="mouseSteeringVehiclesDialogDetailsInfoText" id="operatingTime"/>
+            </GuiElement>
+            <GuiElement profile="mouseSteeringVehiclesDialogDetailsInfoItem">
+              <Bitmap profile="mouseSteeringVehiclesDialogDetailsInfoIcon" imageSliceId="gui.storeAttribute_time"/>
+              <Text profile="mouseSteeringVehiclesDialogDetailsInfoText" id="lastSaved"/>
+            </GuiElement>
+          </BoxLayout>
+        </GuiElement>
+
+        <Text profile="mouseSteeringVehiclesDialogListEmptyText" id="vehicleDetailEmptyText" text="$l10n_mouseSteering_ui_vehiclesListEmpty"/>
+      </GuiElement>
+
+      <ThreePartBitmap profile="mouseSteeringListSliderBox" position="-15px -35px" absoluteSizeOffset="0 150px">
+        <Slider profile="mouseSteeringListSlider" id="settingsSlider" dataElementId="generalSettingsLayout"/>
+      </ThreePartBitmap>
+    </GuiElement>
+
+    <!-- Footer -->
+    <Text profile="mouseSteeringSettingsDialogModeSettings" id="modeSettings" text="$l10n_mouseSteering_ui_modeSettingsLabel"/>
+    <Text profile="mouseSteeringSettingsDialogModeSettingsValue" id="modeSettingsValue" text="$l10n_mouseSteering_ui_singleplayer"/>
+    <BoxLayout profile="mouseSteeringDialogButtonBox" id="buttonsBox">
+      <Button profile="buttonActivate" id="viewDetailButton" text="$l10n_mouseSteering_button_viewDetails" onClick="onClickViewDetail">
+        <Bitmap profile="mouseSteeringDialogButtonBoxSeparator"/>
+      </Button>
+      <Button profile="buttonOK" id="toggleButton" text="$l10n_mouseSteering_button_save" onClick="onClickToggle">
+        <Bitmap profile="mouseSteeringDialogButtonBoxSeparator"/>
+      </Button>
+      <Button profile="buttonExtra1" id="resetButton" text="$l10n_button_defaults" onClick="onClickReset">
+        <Bitmap profile="mouseSteeringDialogButtonBoxSeparator"/>
+      </Button>
+      <Button profile="buttonBack" id="backButton" text="$l10n_mouseSteering_button_saveBack" onClick="onClickBack" />
+    </BoxLayout>
+  </GuiElement>
+
+  <GUIProfiles>
+    <Profile name="mouseSteeringSettingsDialogContainer" extends="emptyPanel" with="anchorMiddleCenter">
+      <size value="1200px 740px"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogLineSeparatorTop" extends="fs25_lineSeparatorTopHighlighted">
+      <position value="0 -77px"/>
+      <absoluteSizeOffset value="60px 0"/>
+    </Profile>
+
+    <!-- Header -->
+    <Profile name="mouseSteeringSettingsDialogTitle" extends="fs25_textDefault" with="anchorTopLeft">
+      <position value="40px -28px"/>
+      <textBold value="true"/>
+      <textSize value="24px"/>
+      <textMaxNumLines value="1"/>
+      <textUpperCase value="true"/>
+      <textLayoutMode value="resize"/>
+      <size value="620px 20px"/>
+      <textAlignment value="left"/>
+      <textLineHeightScale value="1.5"/>
+      <textVerticalAlignment value="top"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButtonAction1" extends="mouseSteeringControlsButton">
+      <inputAction value="MENU_MAP_ACTION_1"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButtonContainer" extends="emptyPanel" with="anchorTopRight">
+      <size value="170px 25px"/>
+      <position value="-26px -28px"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButtonBgLight" extends="mouseSteeringControlsButtonBg">
+      <imageColor value="$preset_fs25_colorMainDark_40"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButtonText" extends="fs25_textDefault" with="anchorStretchingYStretchingX pivotMiddleLeft">
+      <width value="100%"/>
+      <absoluteSizeOffset value="50px 0px"/>
+      <textSize value="16px"/>
+      <textBold value="true"/>
+      <textUpperCase value="true"/>
+      <textOffset value="10px 0px"/>
+      <textLayoutMode value="resize"/>
+      <textSelectedColor value="$preset_fs25_colorMainHighlight"/>
+      <textFocusedColor value="$preset_fs25_colorMainHighlight"/>
+      <textHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButton" extends="emptyPanel" with="anchorStretchingYStretchingX">
+      <handleFocus value="false"/>
+      <textAlignment value="right"/>
+      <iconSize value="25px 25px"/>
+      <iconColor value="$preset_fs25_colorMainHighlight"/>
+      <iconFocusedColor value="$preset_fs25_colorMainDark"/>
+      <iconHighlightedColor value="$preset_fs25_colorMainDark"/>
+      <iconSelectedColor value="$preset_fs25_colorMainDark"/>
+      <iconDisabledColor value="$preset_colorDisabled"/>
+      <iconBgColor value="$preset_fs25_colorGreenDark"/>
+      <iconBgFocusedColor value="$preset_fs25_colorMainHighlight"/>
+      <iconBgHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+      <iconBgSelectedColor value="$preset_fs25_colorMainHighlight"/>
+      <iconBgDisabledColor value="$preset_colorTransparent"/>
+    </Profile>
+    <Profile name="mouseSteeringControlsButtonBg" extends="baseReference" with="anchorStretchingYStretchingX">
+      <imageColor value="$preset_fs25_colorMainDark_90"/>
+      <imageSliceId value="gui.button_middle"/>
+      <startImageSize value="6px 0"/>
+      <startImageSliceId value="gui.button_left"/>
+      <endImageSize value="6px 0"/>
+      <endImageSliceId value="gui.button_right"/>
+    </Profile>
+
+    <!-- Sub category selector -->
+    <Profile name="mouseSteeringSettingsDialogTabSelector" extends="fs25_subCategorySelector">
+      <size value="0 0"/>
+      <defaultProfileText value="fs25_subCategorySelectorTabbedText"/>
+      <hideLeftRightButtons value="true"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogTabSelectorBox" extends="emptyPanel">
+      <handleFocus value="false"/>
+      <size value="250px 510px"/>
+      <flowDirection value="vertical"/>
+      <position value="40px 40px"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogTabSelectorTab" extends="emptyPanel">
+      <size value="100% 42px"/>
+      <handleFocus value="false"/>
+      <ignorePressedOverlayState value="true"/>
+      <textSize value="18px"/>
+      <textBold value="true"/>
+      <textUpperCase value="true"/>
+      <textAlignment value="left"/>
+      <textOffset value="20px 0"/>
+      <textMaxWidth value="200px"/>
+      <textColor value="$preset_fs25_colorMainLight"/>
+      <textSelectedColor value="$preset_fs25_colorMainDark"/>
+      <textDisabledColor value="$preset_colorDisabled"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogTabSelectorTabBg" extends="emptyPanel">
+      <handleFocus value="false"/>
+      <imageSelectedColor value="$preset_colorWhite"/>
+      <imageSelectedSliceId value="mouseSteering.nav_selected_middle"/>
+      <startImageSize value="12px 0"/>
+      <startImageSliceId value="gui.empty"/>
+      <startImageSelectedColor value="$preset_colorWhite"/>
+      <startImageSelectedSliceId value="mouseSteering.nav_selected_left"/>
+      <endImageSize value="12px 0"/>
+      <endImageSliceId value="gui.empty"/>
+      <endImageSelectedColor value="$preset_colorWhite"/>
+      <endImageSelectedSliceId value="mouseSteering.nav_selected_right"/>
+    </Profile>
+
+    <!-- Vehicle counter -->
+    <Profile name="mouseSteeringSettingsDialogVehicleStatus" extends="emptyPanel" with="anchorBottomLeft">
+      <size value="250px 40px"/>
+      <position value="40px 60px"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogVehicleStatusIndicator" extends="emptyPanel" with="anchorTopStretchingX pivotTopRight">
+      <height value="40px"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogVehicleStatusName" extends="fs25_textDefault" with="anchorTopLeft">
+      <position value="0 0"/>
+      <textBold value="true"/>
+      <textUpperCase value="true"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogVehicleStatusFillLevel" extends="fs25_textDefault" with="anchorTopRight">
+      <position value="0 0"/>
+      <textUpperCase value="true"/>
+      <textAlignment value="right"/>
+      <textColor value="$preset_fs25_colorMainHighlight"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogVehicleStatusFillLevelDanger" extends="mouseSteeringSettingsDialogVehicleStatusFillLevel">
+      <textColor value="$preset_colorRed"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogVehicleStatusSyncButton" extends="fs25_wideButton" with="anchorBottomLeft">
+      <inputAction value="MENU_CANCEL"/>
+      <textMaxNumLines value="1"/>
+      <textMaxWidth value="210px"/>
+      <textAlignment value="left"/>
+      <iconTextOffset value="-6px -1px"/>
+      <textSize value="12px"/>
+      <iconSize value="18px 18px"/>
+      <position value="-3px -23px"/>
+      <textColor value="$preset_fs25_colorGreyText"/>
+    </Profile>
+
+    <!-- Pages -->
+    <Profile name="mouseSteeringSettingsDialogBoxContainer" extends="emptyPanel" with="anchorBottomRight">
+      <size value="905px 510px"/>
+      <position value="0 40px"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogLayout" extends="baseReference" with="anchorStretchingYStretchingX pivotTopCenter">
+      <size value="100% 100%"/>
+      <absoluteSizeOffset value="90px 0px"/>
+      <wrapAround value="false"/>
+      <fitFlowToElements value="true"/>
+      <flowDirection value="vertical"/>
+      <imageColor value="$preset_colorTransparent"/>
+    </Profile>
+
+    <!-- Vehicles list: Header -->
+    <Profile name="mouseSteeringVehiclesDialogHeaderBox" extends="emptyPanel" with="anchorTopStretchingX">
+      <height value="32px"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogHeaderText" extends="fs25_textDefault" with="anchorStretchingYLeft">
+      <textSize value="16px"/>
+      <textBold value="true"/>
+      <textUpperCase value="true"/>
+      <textOffset value="57px 0px"/>
+      <textColor value="$preset_colorWhite_50"/>
+    </Profile>
+
+    <!-- Vehicles list: Body -->
+    <Profile name="mouseSteeringVehiclesDialogList" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopCenter">
+      <position value="0px -70px"/>
+      <itemizedScrollDelta value="3"/>
+      <absoluteSizeOffset value="0px 70px"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItem" extends="baseReference" with="anchorTopStretchingX">
+      <height value="45px"/>
+      <alternateChildren value="true"/>
+      <imageSliceId value="gui.empty"/>
+      <imageColor value="$preset_fs25_colorGreyListItem"/>
+      <alternateBackgroundColor value="$preset_colorTransparent"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItemBg" extends="baseReference" with="anchorStretchingYStretchingX">
+      <imageSelectedColor value="$preset_fs25_colorMainHighlight"/>
+      <startImageSize value="100px 30px"/>
+      <startImageSliceId value="gui.list_gradient"/>
+      <startImageSelectedColor value="$preset_fs25_colorMainHighlight"/>
+      <endImageSize value="100px 30px"/>
+      <endImageSliceId value="gui.list_gradient"/>
+      <endImageSelectedColor value="$preset_fs25_colorMainHighlight"/>
+      <endImageInvertX value="true"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItemIcon" extends="baseReference" with="anchorMiddleLeft">
+      <position value="12px 0px"/>
+      <size value="24px 24px"/>
+      <imageSliceId value="mouseSteering.icon_ring"/>
+      <imageColor value="$preset_fs25_colorGreyText"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItemIconActive" extends="mouseSteeringVehiclesDialogListItemIcon">
+      <imageSliceId value="mouseSteering.icon_checkmark"/>
+      <imageColor value="$preset_fs25_colorMainHighlight"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItemName" extends="fs25_textDarkHighlight" with="anchorStretchingYLeft">
+      <width value="450px"/>
+      <position value="12px 0px"/>
+      <textSize value="16px"/>
+      <textBold value="true"/>
+      <textOffset value="45px 0px"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListItemInfo" extends="mouseSteeringVehiclesDialogListItemName" with="anchorStretchingYLeft">
+      <width value="200px"/>
+      <position value="560px 0px"/>
+      <textBold value="false"/>
+      <textAlignment value="right"/>
+      <textOffset value="0 0"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogListEmptyText" extends="fs25_textDefault" with="anchorMiddleCenter">
+      <textSize value="20px"/>
+      <textAlignment value="center"/>
+      <textAutoWidth value="true"/>
+      <textMaxNumLines value="3"/>
+      <textMaxWidth value="500px"/>
+    </Profile>
+
+    <!-- Vehicles list: Legend -->
+    <Profile name="mouseSteeringVehiclesDialogLegendBox" extends="emptyPanel" with="anchorBottomStretchingX">
+      <height value="30px"/>
+      <absoluteSizeOffset value="100px 0px"/>
+      <position value="0 -35px"/>
+      <alignmentX value="right"/>
+      <alignmentY value="middle"/>
+      <elementSpacing value="5px"/>
+      <autoValidateLayout value="true"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogLegendIcon" extends="baseReference">
+      <size value="18px 18px"/>
+      <imageSliceId value="mouseSteering.icon_ring"/>
+      <imageColor value="$preset_fs25_colorGreyText"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogLegendName" extends="fs25_textDefault">
+      <textColor value="$preset_fs25_colorGreyText"/>
+      <textSize value="14px"/>
+      <margin value="0px 0px 5px 0px"/>
+      <textAutoWidth value="true"/>
+      <textUpperCase value="true"/>
+    </Profile>
+
+    <!-- Vehicles list: Selection box -->
+    <Profile name="mouseSteeringVehiclesDialogSelectionBox" extends="emptyPanel" with="anchorBottomStretchingX">
+      <height value="30px"/>
+      <absoluteSizeOffset value="120px 0px"/>
+      <position value="0 -35px"/>
+      <alignmentY value="middle"/>
+      <elementSpacing value="5px"/>
+      <autoValidateLayout value="true"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogSelectionName" extends="fs25_textDefault" with="anchorBottomLeft">
+      <textColor value="$preset_fs25_colorGreyText"/>
+      <height value="20px"/>
+      <textAutoWidth value="true"/>
+    </Profile>
+
+    <!-- Vehicles list: Details box -->
+    <Profile name="mouseSteeringVehiclesDialogDetailsBox" extends="emptyPanel" with="anchorTopRight">
+      <size value="252px 100%"/>
+      <absoluteSizeOffset value="0 75px"/>
+      <position value="-50px -75px"/>
+      <visible value="false"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsBoxBg" extends="baseReference">
+      <size value="252px 100%"/>
+      <position value="0 0px"/>
+      <isHorizontal value="false"/>
+      <imageSliceId value="mouseSteering.detailBox_mid"/>
+      <startImageSliceId value="mouseSteering.detailBox_start"/>
+      <startImageSize value="252px 27px"/>
+      <endImageSliceId value="mouseSteering.detailBox_end"/>
+      <endImageSize value="252px 27px"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsImageBox" extends="emptyPanel" with="anchorTopLeft">
+      <size value="238px 119px"/>
+      <position value="0px 0"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsImage" extends="baseReference" with="anchorMiddleCenter">
+      <size value="119px 119px"/>
+      <imageSliceId value="noSlice"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsIngameMap" extends="baseReference" with="anchorBottomLeft">
+      <size value="231px 125px"/>
+      <position value="11px 11px"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsIngameMapMask" extends="baseReference" with="anchorBottomLeft">
+      <size value="233px 127px"/>
+      <position value="10px 10px"/>
+      <imageSliceId value="mouseSteering.detailBoxMask"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsButtonAction1" extends="fs25_wideButton" with="anchorBottomLeft">
+      <size value="200px 20px"/>
+      <inputAction value="MENU_EXTRA_2"/>
+      <textSize value="13px"/>
+      <iconSize value="20px 20px"/>
+      <position value="3px 20px"/>
+      <iconTextOffset value="-6px -1px"/>
+      <textColor value="$preset_fs25_colorMainLight"/>
+      <text2Color value="$preset_colorBlack"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsInfoBox" extends="emptyPanel" with="anchorTopLeft">
+      <size value="238px 100%"/>
+      <absoluteSizeOffset value="20px 125px"/>
+      <position value="20px -135px"/>
+      <fitFlowToElements value="true"/>
+      <flowDirection value="vertical"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsInfoItem" extends="emptyPanel">
+      <size value="150px 20px"/>
+      <margin value="0 10px 15px 0"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsInfoIcon" extends="baseReference" with="anchorMiddleLeft">
+      <size value="20px 20px"/>
+      <margin value="5px 0 0 0"/>
+      <imageColor value="$preset_fs25_colorMainHighlight"/>
+    </Profile>
+    <Profile name="mouseSteeringVehiclesDialogDetailsInfoText" extends="fs25_textGrey" with="anchorMiddleLeft">
+      <size value="0 20px"/>
+      <textSize value="16px"/>
+      <position value="30px 0px"/>
+      <disallowFlowCut value="true"/>
+      <textMinWidth value="35px"/>
+      <textAutoWidth value="true"/>
+    </Profile>
+
+    <!-- Mode settings -->
+    <Profile name="mouseSteeringSettingsDialogModeSettings" extends="fs25_textDefault" with="anchorBottomLeft">
+      <position value="20px 49px"/>
+      <absoluteSizeOffset value="50px 0px"/>
+      <textBold value="true"/>
+      <textSize value="14px"/>
+      <textMaxNumLines value="1"/>
+      <textUpperCase value="true"/>
+      <textAlignment value="left"/>
+      <textColor value="$preset_fs25_colorGreyLight"/>
+    </Profile>
+    <Profile name="mouseSteeringSettingsDialogModeSettingsValue" extends="mouseSteeringSettingsDialogModeSettings">
+      <position value="20px 34px"/>
+      <textColor value="$preset_fs25_colorMainHighlight"/>
+    </Profile>
+  </GUIProfiles>
+</GUI>
