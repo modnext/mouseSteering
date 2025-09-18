@@ -75,6 +75,7 @@ function MouseSteeringVehicle:onLoad(savegame)
   spec.isSteeringPaused = false
   spec.isCameraRotating = false
   spec.isHUDForcedVisible = nil
+  spec.wasUserToggled = false
 
   -- initialize steering values
   spec.inputValue = 0
@@ -333,8 +334,13 @@ end
 function MouseSteeringVehicle:onEnterVehicle()
   local spec = self.spec_mouseSteeringVehicle
 
-  -- update state if this vehicle was toggled
-  spec.isUsed = spec.settings.default or spec.mouseSteering:isVehicleSaved(self)
+  -- apply default/saved only if user hasn't toggled in this session
+  if not spec.wasUserToggled then
+    spec.isUsed = spec.settings.default or spec.mouseSteering:isVehicleSaved(self)
+  end
+
+  -- update action events and controlled vehicle
+  MouseSteeringVehicle.updateActionEvents(self)
   self:setMouseSteeringControlled(true)
 
   -- sync axis when enabled
@@ -368,7 +374,9 @@ function MouseSteeringVehicle:updateMouseSteeringState(updateControlledVehicle)
 
   -- update state
   local wasEnabled = spec.isUsed
-  spec.isUsed = spec.settings.default or spec.mouseSteering:isVehicleSaved(self)
+  if not spec.wasUserToggled then
+    spec.isUsed = spec.settings.default or spec.mouseSteering:isVehicleSaved(self)
+  end
 
   -- sync axis when enabled
   if spec.isUsed and not wasEnabled then
@@ -383,6 +391,9 @@ function MouseSteeringVehicle:updateMouseSteeringState(updateControlledVehicle)
       self:setMouseSteeringControlled(false)
     end
   end
+
+  -- refresh action events text/visibility based on current state
+  MouseSteeringVehicle.updateActionEvents(self)
 end
 
 ---Called when default setting is changed
@@ -418,6 +429,7 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
   local spec = self.spec_mouseSteeringVehicle
 
   spec.isUsed = not spec.isUsed
+  spec.wasUserToggled = true
 
   -- check if auto-save is enabled
   if spec.settings.autoSave then
@@ -558,14 +570,10 @@ function MouseSteeringVehicle.updateActionEvents(self)
     -- toggle mouse steering
     local toggleAction = spec.actionEvents[InputAction.TOGGLE_MOUSE_STEERING_CONTROL]
     if toggleAction ~= nil then
-      local isActive = not spec.settings.default
-      binding:setActionEventActive(toggleAction.actionEventId, isActive)
-
-      if isActive then
-        local textKey = spec.isUsed and spec.enabledTexts.deactivate or spec.enabledTexts.activate
-        local text = string.format(g_i18n:getText("mouseSteering_mode_format"), textKey)
-        binding:setActionEventText(toggleAction.actionEventId, text)
-      end
+      binding:setActionEventActive(toggleAction.actionEventId, true)
+      local textKey = spec.isUsed and spec.enabledTexts.deactivate or spec.enabledTexts.activate
+      local text = string.format(g_i18n:getText("mouseSteering_mode_format"), textKey)
+      binding:setActionEventText(toggleAction.actionEventId, text)
     end
 
     -- rotate camera
