@@ -17,6 +17,7 @@ body:
       label: Version
       description: Select the version of the modification where you encountered the issue.
       options:
+        - 1.2.0.1
         - 1.2.0.0
       default: 0
     validations:
@@ -28,6 +29,7 @@ body:
       label: Game Version
       description: What version of the game are you playing?
       options:
+        - 1.13.0.0
         - 1.11.0.1
         - Legacy (< 1.11.0.1)
       default: 0
