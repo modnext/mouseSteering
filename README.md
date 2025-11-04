@@ -1,5 +1,3 @@
-> **ℹ️ Info** This modification is exclusively distributed through **GitHub** and **ModHub** only - avoid link sharing sites that earn ad revenue from my work without permission.
-
 ![Mouse Steering for Farming Simulator](.github/assets/banner.jpg 'Mouse Steering for Farming Simulator')
 
 <p align="center">
