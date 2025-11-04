@@ -15,6 +15,7 @@ MouseSteeringVehicle = {}
 -- @return boolean hasPrerequisite true if all prerequisite specializations are loaded
 function MouseSteeringVehicle.prerequisitesPresent(specializations)
   return SpecializationUtil.hasSpecialization(Drivable, specializations)
+      and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
 end
 
 ---Initializes specialization XML schema
@@ -595,8 +596,12 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec)
 
   -- calculate normalized axis value
   local axisValue = 0
-  if self.maxRotTime ~= nil and self.minRotTime ~= nil then
-    axisValue = rotatedTime < 0 and rotatedTime / -self.maxRotTime / steeringDirection or rotatedTime / self.minRotTime / steeringDirection
+  if self.maxRotTime ~= nil and self.minRotTime ~= nil and self.maxRotTime ~= 0 and self.minRotTime ~= 0 then
+    if rotatedTime < 0 then
+      axisValue = rotatedTime / -self.maxRotTime / steeringDirection
+    else
+      axisValue = rotatedTime / self.minRotTime / steeringDirection
+    end
   end
 
   -- get settings and controller
