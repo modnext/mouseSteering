@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="101">
+<modDesc descVersion="104">
   <author>aaw3k</author>
-  <version>1.2.0.1</version>
+  <version>1.2.0.2</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -14,6 +14,9 @@
   <description>
     <en><![CDATA[Enables mouse-based control of vehicle steering, with fully configurable sensitivity, linearity, dead zone, smoothness, and more.
 
+Changelog Version 1.2.0.2:
+- Fixed error with fishing boats
+
 Changelog Version 1.2.0.1:
 - Improved session persistence across enter/leave
 - Added per-vehicle toggle even when Default=ON (Default applies only initially)
@@ -24,6 +27,9 @@ Changelog Version 1.2.0.0:
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
     <de><![CDATA[Ermöglicht die Steuerung der Fahrzeuglenkung per Maus mit vollständig konfigurierbarer Empfindlichkeit, Linearität, Totzone, Laufruhe und mehr.
+
+Änderungsprotokoll Version 1.2.0.2:
+- Fehler mit Fischerbooten behoben
 
 Änderungsprotokoll Version 1.2.0.1:
 - Verbessert Sitzungsbeständigkeit beim Ein-/Aussteigen
@@ -36,6 +42,9 @@ For more information or to report a bug, please visit GitHub (modnext/mouseSteer
 Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die GitHub (modnext/mouseSteering).]]></de>
     <fr><![CDATA[Permet de contrôler la direction du véhicule à l'aide de la souris, avec une sensibilité, une linéarité, une zone morte, une fluidité et bien plus encore entièrement configurables.
 
+Journal des modifications version 1.2.0.2:
+- Correction erreur avec bateaux de pêche
+
 Journal des modifications version 1.2.0.1:
 - Amélioré persistance en session à l’entrée/sortie
 - Ajouté bascule par véhicule même avec Défaut=ACTIF (Défaut seulement initial)
@@ -47,6 +56,9 @@ Journal des modifications version 1.2.0.0:
 Pour plus d'informations ou pour signaler un bug, veuillez visiter la page GitHub (modnext/mouseSteering).]]></fr>
     <pl><![CDATA[Umożliwia sterowanie kierownicą pojazdu za pomocą myszy, z możliwością pełnej konfiguracji czułości, liniowości, martwej strefy, płynności i nie tylko.
 
+Lista zmian w wersji 1.2.0.2:
+- Naprawiono błąd z łodziami rybackimi
+
 Lista zmian w wersji 1.2.0.1:
 - Ulepszono trwałość stanu przy wsiadaniu/wysiadaniu
 - Dodano przełączanie per pojazd nawet przy Domyślnie=ON (domyślne tylko początkowo)
@@ -57,6 +69,9 @@ Lista zmian w wersji 1.2.0.0:
 
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (modnext/mouseSteering).]]></pl>
     <ru><![CDATA[Обеспечивает управление рулевым управлением автомобиля с помощью мыши с полностью настраиваемой чувствительностью, линейностью, мертвой зоной, плавностью и другими параметрами.
+
+Журнал изменений 1.2.0.2:
+- Исправлена ошибка с рыболовными лодками
 
 Журнал изменений версии 1.2.0.1:
 - Улучшено сохранение состояния при входе/выходе

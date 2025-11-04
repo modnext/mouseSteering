@@ -594,7 +594,10 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec)
   local steeringDirection = (self.getSteeringDirection ~= nil) and self:getSteeringDirection() or 1
 
   -- calculate normalized axis value
-  local axisValue = rotatedTime < 0 and rotatedTime / -self.maxRotTime / steeringDirection or rotatedTime / self.minRotTime / steeringDirection
+  local axisValue = 0
+  if self.maxRotTime ~= nil and self.minRotTime ~= nil then
+    axisValue = rotatedTime < 0 and rotatedTime / -self.maxRotTime / steeringDirection or rotatedTime / self.minRotTime / steeringDirection
+  end
 
   -- get settings and controller
   local settings = spec.settings
