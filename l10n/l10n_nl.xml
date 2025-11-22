@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Stuurbesturing"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Voertuig opslaan/verwijderen"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Camera draaien"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Camera centreren"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Activeren"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Interface"/>
+    <e k="mouseSteering_ui_camera" v="Camera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Camera Volgt Besturing"/>
+    <e k="mouseSteering_ui_off" v="Uit"/>
+    <e k="mouseSteering_ui_subtle" v="Subtiel"/>
+    <e k="mouseSteering_ui_normal" v="Normaal"/>
+    <e k="mouseSteering_ui_strong" v="Sterk"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Indicator"/>
     <e k="mouseSteering_ui_indicatorMode" v="Indicatormodus"/>
     <e k="mouseSteering_ui_both" v="Buiten en binnen"/>
     <e k="mouseSteering_ui_inside" v="Binnen"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Indicator weergeven bij achterom kijken (binnen)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera draait om de stuurbeweging te volgen in de cabine."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selecteert hoe de stuurindicator wordt weergegeven op de HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Toont de huidige stuurhoek als tekst op het scherm in de indicator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Toont de indicator bij achteruitkijken in het binnenzicht."/>

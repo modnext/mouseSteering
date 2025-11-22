@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Управление рулем"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Сохранить/удалить транспортное средство"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Поворот камеры"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Центрировать камеру"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Активировать"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Интерфейс"/>
+    <e k="mouseSteering_ui_camera" v="Камера"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Камера Следует За Рулем"/>
+    <e k="mouseSteering_ui_off" v="Выкл"/>
+    <e k="mouseSteering_ui_subtle" v="Легко"/>
+    <e k="mouseSteering_ui_normal" v="Обычно"/>
+    <e k="mouseSteering_ui_strong" v="Сильно"/>
+    <e k="mouseSteering_ui_max" v="Максимум"/>
+    <e k="mouseSteering_ui_indicator" v="Индикатор"/>
     <e k="mouseSteering_ui_indicatorMode" v="Режим индикатора"/>
     <e k="mouseSteering_ui_both" v="Снаружи и внутри"/>
     <e k="mouseSteering_ui_inside" v="Внутри"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Показать индикатор при взгляде назад (внутри)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Камера поворачивается вслед за поворотом руля внутри кабины."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Выбирает способ отображения индикатора рулевого управления на HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Отображает текущий угол поворота руля в виде текста на экране в индикаторе."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Отображает индикатор при взгляде назад в режиме внутреннего обзора."/>

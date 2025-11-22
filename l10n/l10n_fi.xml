@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ohjaus"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Tallenna/poista ajoneuvo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kierrä kameraa"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Keskitä kamera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivoi"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Käyttöliittymä"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera seuraa ohjausta"/>
+    <e k="mouseSteering_ui_off" v="Pois"/>
+    <e k="mouseSteering_ui_subtle" v="Hienovarainen"/>
+    <e k="mouseSteering_ui_normal" v="Normaali"/>
+    <e k="mouseSteering_ui_strong" v="Voimakas"/>
+    <e k="mouseSteering_ui_max" v="Maksimi"/>
+    <e k="mouseSteering_ui_indicator" v="Ilmaisin"/>
     <e k="mouseSteering_ui_indicatorMode" v="Ilmaisintila"/>
     <e k="mouseSteering_ui_both" v="Ulkopuoli ja sisäpuoli"/>
     <e k="mouseSteering_ui_inside" v="Sisäpuoli"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Näytä ilmaisin, kun katsot taakse (sisäpuoli)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera kääntyy seuraamaan rattia ohjaamon sisällä."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Valitsee, miten ohjausindikaattori näytetään HUD:ssa."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Näyttää nykyisen ohjauskulman tekstinä indikaattorissa."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Näyttää indikaattorin, kun katsotaan taaksepäin sisäkuvassa."/>

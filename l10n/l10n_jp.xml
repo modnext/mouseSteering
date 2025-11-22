@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="ステアリング制御"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="車両の保存/削除"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="カメラの回転"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="カメラを中央に"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="有効化"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="インターフェース"/>
+    <e k="mouseSteering_ui_camera" v="カメラ"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="カメラがステアリングを追従"/>
+    <e k="mouseSteering_ui_off" v="オフ"/>
+    <e k="mouseSteering_ui_subtle" v="微弱"/>
+    <e k="mouseSteering_ui_normal" v="通常"/>
+    <e k="mouseSteering_ui_strong" v="強"/>
+    <e k="mouseSteering_ui_max" v="最大"/>
+    <e k="mouseSteering_ui_indicator" v="インジケーター"/>
     <e k="mouseSteering_ui_indicatorMode" v="インジケーターモード"/>
     <e k="mouseSteering_ui_both" v="外側と内側"/>
     <e k="mouseSteering_ui_inside" v="内側"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="振り返った時（内側）にインジケーターを表示"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="キャビン内でカメラがハンドル操作を追従して回転します。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD上のステアリングインジケーターの表示方法を選択します。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="インジケーター内に現在のステアリング角度を画面上のテキストとして表示します。"/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="室内ビューで後ろを振り返った際にインジケーターを表示します。"/>

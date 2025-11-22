@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kormányzás vezérlése"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Jármű mentése/eltávolítása"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera forgatása"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamera középre"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktiválás"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Felület"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera követi a kormányzást"/>
+    <e k="mouseSteering_ui_off" v="Ki"/>
+    <e k="mouseSteering_ui_subtle" v="Finom"/>
+    <e k="mouseSteering_ui_normal" v="Normál"/>
+    <e k="mouseSteering_ui_strong" v="Erős"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Jelző"/>
     <e k="mouseSteering_ui_indicatorMode" v="Jelző mód"/>
     <e k="mouseSteering_ui_both" v="Kívül és belül"/>
     <e k="mouseSteering_ui_inside" v="Belül"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Jelző megjelenítése hátrafelé nézéskor (belül)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="A kamera forog, hogy kövesse a kormánykerék mozgását a kabinon belül."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Kiválasztja, hogyan jelenik meg a kormányzási jelző a HUD-on."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Megjeleníti az aktuális kormányzási szöget szövegként a jelzőben."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Megjeleníti a jelzőt, ha hátrafelé nézünk a belső nézetben."/>

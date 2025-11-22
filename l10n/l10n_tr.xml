@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Direksiyon Kontrolü"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Aracı Kaydet/Sil"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamerayı Döndür"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamerayı ortala"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Etkinleştir"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Arayüz"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Direksiyonu Takip Eder"/>
+    <e k="mouseSteering_ui_off" v="Kapalı"/>
+    <e k="mouseSteering_ui_subtle" v="Hafif"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Güçlü"/>
+    <e k="mouseSteering_ui_max" v="Maksimum"/>
+    <e k="mouseSteering_ui_indicator" v="Gösterge"/>
     <e k="mouseSteering_ui_indicatorMode" v="Gösterge Modu"/>
     <e k="mouseSteering_ui_both" v="Dış ve İç"/>
     <e k="mouseSteering_ui_inside" v="İç"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Geriye Bakarken Göstergeyi Göster (İç)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera, kabin içindeki direksiyon hareketini takip etmek için döner."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Direksiyon göstergesinin HUD'da nasıl gösterileceğini seçer."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mevcut direksiyon açısını göstergede ekran metni olarak gösterir."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="İç görüşte geriye bakarken göstergeyi gösterir."/>

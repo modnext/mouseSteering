@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="조향 제어"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="차량 저장/제거"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="카메라 회전"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="카메라 중앙"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="활성화"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="인터페이스"/>
+    <e k="mouseSteering_ui_camera" v="카메라"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="카메라가 조향 추적"/>
+    <e k="mouseSteering_ui_off" v="끔"/>
+    <e k="mouseSteering_ui_subtle" v="약함"/>
+    <e k="mouseSteering_ui_normal" v="보통"/>
+    <e k="mouseSteering_ui_strong" v="강함"/>
+    <e k="mouseSteering_ui_max" v="최대"/>
+    <e k="mouseSteering_ui_indicator" v="표시기"/>
     <e k="mouseSteering_ui_indicatorMode" v="표시기 모드"/>
     <e k="mouseSteering_ui_both" v="외부 및 내부"/>
     <e k="mouseSteering_ui_inside" v="내부"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="뒤돌아볼 때 표시기 표시 (내부)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="카메라가 캐빈 내부에서 핸들 조향을 따라 회전합니다."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD에 스티어링 표시기가 표시되는 방식을 선택합니다."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="표시기에 현재 스티어링 각도를 화면 텍스트로 표시합니다."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="내부 시점으로 뒤를 돌아볼 때 표시기를 표시합니다."/>

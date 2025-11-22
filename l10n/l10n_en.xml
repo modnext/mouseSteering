@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Steering Control"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Save/Remove Vehicle"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotate Camera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Center Camera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Activate"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="HUD"/>
+    <e k="mouseSteering_ui_camera" v="Camera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Camera Follow Steering"/>
+    <e k="mouseSteering_ui_off" v="Off"/>
+    <e k="mouseSteering_ui_subtle" v="Subtle"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Strong"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Indicator"/>
     <e k="mouseSteering_ui_indicatorMode" v="Indicator Mode"/>
     <e k="mouseSteering_ui_both" v="Outside and Inside"/>
     <e k="mouseSteering_ui_inside" v="Inside"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Show Indicator When Looking Back (Inside)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera rotates to follow wheel steering inside the cabin."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selects how the steering indicator is shown on the HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Shows the current steering angle as on-screen text in the indicator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Shows the indicator when looking back in inside view."/>

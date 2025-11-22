@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Sterowanie Kierownicą"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Zapisz/Usuń Pojazd"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Obróć Kamerę"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Wycentruj Kamerę"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktywuj"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Interfejs"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Śledzi Skręt"/>
+    <e k="mouseSteering_ui_off" v="Wyłączona"/>
+    <e k="mouseSteering_ui_subtle" v="Subtelna"/>
+    <e k="mouseSteering_ui_normal" v="Normalna"/>
+    <e k="mouseSteering_ui_strong" v="Silna"/>
+    <e k="mouseSteering_ui_max" v="Maksymalna"/>
+    <e k="mouseSteering_ui_indicator" v="Wskaźnik"/>
     <e k="mouseSteering_ui_indicatorMode" v="Tryb Wskaźnika"/>
     <e k="mouseSteering_ui_both" v="Na Zewnątrz i Wewnątrz"/>
     <e k="mouseSteering_ui_inside" v="Wewnątrz"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Pokaż Wskaźnik Podczas Patrzenia do Tyłu (Wewnątrz)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera obraca się zgodnie ze skrętem kół wewnątrz kabiny."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Wybiera sposób wyświetlania wskaźnika skrętu na HUDzie."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Pokazuje aktualny kąt skrętu jako tekst na ekranie we wskaźniku."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Pokazuje wskaźnik podczas patrzenia do tyłu w widoku wewnętrznym."/>

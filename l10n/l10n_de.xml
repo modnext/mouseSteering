@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Lenksteuerung"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Fahrzeug speichern/entfernen"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera drehen"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamera zentrieren"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivieren"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Anzeige"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera folgt Lenkung"/>
+    <e k="mouseSteering_ui_off" v="Aus"/>
+    <e k="mouseSteering_ui_subtle" v="Subtil"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Stark"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Anzeige"/>
     <e k="mouseSteering_ui_indicatorMode" v="Anzeigemodus"/>
     <e k="mouseSteering_ui_both" v="Außen und innen"/>
     <e k="mouseSteering_ui_inside" v="Innen"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Anzeige beim Zurückblicken (innen) anzeigen"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera dreht sich beim Lenken in der Kabine mit."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Wählt aus, wie die Lenkungsanzeige auf dem HUD angezeigt wird."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Zeigt den aktuellen Lenkwinkel als Text auf dem Bildschirm in der Anzeige an."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zeigt die Anzeige beim Blick zurück in die Innenansicht an."/>

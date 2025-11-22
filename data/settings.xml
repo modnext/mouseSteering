@@ -11,6 +11,9 @@
   <smoothness>0.000000</smoothness>
   <deadzone>0.000000</deadzone>
 
+  <!-- Camera -->
+  <cameraRotationInside>off</cameraRotationInside>  <!-- Options: off, subtle, normal, strong, max -->
+
   <!-- HUD Indicator -->
   <indicatorMode>both</indicatorMode>  <!-- Options: both, inside, outside, off -->
   <indicatorText>true</indicatorText>

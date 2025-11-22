@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="方向控制"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="儲存/移除載具"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋轉鏡頭"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="置中攝影機"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="啟用"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="介面"/>
+    <e k="mouseSteering_ui_camera" v="攝影機"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="攝影機跟隨轉向"/>
+    <e k="mouseSteering_ui_off" v="關閉"/>
+    <e k="mouseSteering_ui_subtle" v="輕微"/>
+    <e k="mouseSteering_ui_normal" v="正常"/>
+    <e k="mouseSteering_ui_strong" v="強烈"/>
+    <e k="mouseSteering_ui_max" v="最大"/>
+    <e k="mouseSteering_ui_indicator" v="指示器"/>
     <e k="mouseSteering_ui_indicatorMode" v="指示器模式"/>
     <e k="mouseSteering_ui_both" v="外部與內部"/>
     <e k="mouseSteering_ui_inside" v="內部模式"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="回頭查看時顯示指示器（內部模式）"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="攝影機在駕駛艙內旋轉以跟隨方向盤轉向。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="選擇方向指示器在HUD上的顯示方式。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="在指示器中以螢幕文字顯示當前轉向角度。"/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="於內視角回頭時顯示指示器。"/>

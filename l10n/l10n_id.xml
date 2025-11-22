@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kontrol Kemudi"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Simpan/Hapus Kendaraan"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Putar Kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Pusatkan kamera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktifkan"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Antarmuka"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Mengikuti Kemudi"/>
+    <e k="mouseSteering_ui_off" v="Mati"/>
+    <e k="mouseSteering_ui_subtle" v="Halus"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Kuat"/>
+    <e k="mouseSteering_ui_max" v="Maksimal"/>
+    <e k="mouseSteering_ui_indicator" v="Indikator"/>
     <e k="mouseSteering_ui_indicatorMode" v="Mode Indikator"/>
     <e k="mouseSteering_ui_both" v="Luar dan Dalam"/>
     <e k="mouseSteering_ui_inside" v="Dalam"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Tampilkan Indikator Saat Melihat ke Belakang (Dalam)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera berputar mengikuti kemudi setir di dalam kabin."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Memilih cara indikator kemudi ditampilkan di HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Menampilkan sudut kemudi saat ini sebagai teks di layar dalam indikator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Menampilkan indikator saat melihat ke belakang dalam tampilan dalam."/>
