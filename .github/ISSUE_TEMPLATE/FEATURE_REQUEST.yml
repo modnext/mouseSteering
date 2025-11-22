@@ -1,0 +1,20 @@
+name: "⭐ Feature or enhancement request"
+description: Share your ideas for new functionality or improvements.
+type: "Feature"
+labels:
+  - enhancement
+assignees:
+  - aaw3k
+body:
+  - type: textarea
+    attributes:
+      label: Feature description
+      placeholder: Describe what you would like to see added or improved. How should it work?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Use case
+      placeholder: When would you use this feature? How would it improve your gameplay experience?
+    validations:
+      required: true
