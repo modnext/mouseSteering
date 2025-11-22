@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Управління кермом"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Зберегти/Видалити транспортний засіб"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Повернути камеру"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Центрувати камеру"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Активувати"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Інтерфейс"/>
+    <e k="mouseSteering_ui_camera" v="Камера"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Камера слідує за кермом"/>
+    <e k="mouseSteering_ui_off" v="Вимкнено"/>
+    <e k="mouseSteering_ui_subtle" v="Ледь помітно"/>
+    <e k="mouseSteering_ui_normal" v="Нормально"/>
+    <e k="mouseSteering_ui_strong" v="Сильно"/>
+    <e k="mouseSteering_ui_max" v="Максимум"/>
+    <e k="mouseSteering_ui_indicator" v="Індикатор"/>
     <e k="mouseSteering_ui_indicatorMode" v="Режим індикатора"/>
     <e k="mouseSteering_ui_both" v="Зовні та всередині"/>
     <e k="mouseSteering_ui_inside" v="Всередині"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Показати індикатор при погляді назад (всередині)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Камера обертається, щоб слідувати за поворотом керма всередині кабіни."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Вибирає спосіб відображення індикатора керування на HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Показує поточний кут повороту керма у вигляді тексту на екрані в індикаторі."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Показує індикатор при погляді назад у внутрішньому вигляді."/>

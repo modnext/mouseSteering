@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controlo de direção"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Guardar/Remover veículo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rodar câmara"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrar câmara"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Ativar"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Interface"/>
+    <e k="mouseSteering_ui_camera" v="Câmara"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Câmara Segue a Direção"/>
+    <e k="mouseSteering_ui_off" v="Desligado"/>
+    <e k="mouseSteering_ui_subtle" v="Subtil"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Forte"/>
+    <e k="mouseSteering_ui_max" v="Máximo"/>
+    <e k="mouseSteering_ui_indicator" v="Indicador"/>
     <e k="mouseSteering_ui_indicatorMode" v="Modo Indicador"/>
     <e k="mouseSteering_ui_both" v="Exterior e Interior"/>
     <e k="mouseSteering_ui_inside" v="Interior"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Mostrar Indicador ao Olhar para Trás (Interior)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="A câmara roda para seguir a direção do volante dentro da cabine."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Seleciona como o indicador de direção é mostrado no HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mostra o ângulo de direção atual como texto na tela no indicador."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra o indicador ao olhar para trás na vista interna."/>

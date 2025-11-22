@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ovládání řízení"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Uložit/odstranit vozidlo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Otočit kameru"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Vycentrovat kameru"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivovat"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Rozhraní"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera sleduje řízení"/>
+    <e k="mouseSteering_ui_off" v="Vypnuto"/>
+    <e k="mouseSteering_ui_subtle" v="Jemné"/>
+    <e k="mouseSteering_ui_normal" v="Normální"/>
+    <e k="mouseSteering_ui_strong" v="Silné"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Indikátor"/>
     <e k="mouseSteering_ui_indicatorMode" v="Režim indikátoru"/>
     <e k="mouseSteering_ui_both" v="Venku a uvnitř"/>
     <e k="mouseSteering_ui_inside" v="Uvnitř"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Zobrazit indikátor při pohledu zpět (uvnitř)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera se otáčí, aby sledovala řízení volantu uvnitř kabiny."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Vybere, jak se indikátor řízení zobrazí na HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Zobrazí aktuální úhel řízení jako text na obrazovce v indikátoru."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zobrazí indikátor při pohledu zpět ve vnitřním zobrazení."/>

@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Styrkontroll"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Spara/ta bort fordon"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotera kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrera kamera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivera"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Gränssnitt"/>
+    <e k="mouseSteering_ui_camera" v="Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Kamera följer styrning"/>
+    <e k="mouseSteering_ui_off" v="Av"/>
+    <e k="mouseSteering_ui_subtle" v="Subtil"/>
+    <e k="mouseSteering_ui_normal" v="Normal"/>
+    <e k="mouseSteering_ui_strong" v="Stark"/>
+    <e k="mouseSteering_ui_max" v="Maximum"/>
+    <e k="mouseSteering_ui_indicator" v="Indikator"/>
     <e k="mouseSteering_ui_indicatorMode" v="Indikatorläge"/>
     <e k="mouseSteering_ui_both" v="Utanför och inuti"/>
     <e k="mouseSteering_ui_inside" v="Inuti"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Visa indikator när du tittar bakåt (inuti)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kameran roterar för att följa ratten inne i hytten."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Väljer hur styrindikatorn visas på HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Visar aktuell styrvinkel som text på skärmen i indikatorn."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Visar indikatorn när du tittar bakåt i invändig vy."/>

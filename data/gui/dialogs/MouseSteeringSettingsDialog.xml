@@ -116,6 +116,13 @@
       <!-- Page: HUD settings -->
       <GuiElement profile="mouseSteeringSettingsDialogBoxContainer" id="subCategoryPages[2]">
         <ScrollingLayout profile="mouseSteeringSettingsDialogLayout" id="hudSettingsLayout">
+          <Text profile="mouseSteeringSettingsSectionHeader" name="sectionHeader" text="$l10n_mouseSteering_ui_camera"/>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringMultiTextOption profile="mouseSteeringSettingsMultiTextOption" id="cameraRotationInside" onClick="onMultiChanged" texts="$l10n_mouseSteering_ui_off|$l10n_mouseSteering_ui_subtle|$l10n_mouseSteering_ui_normal|$l10n_mouseSteering_ui_strong|$l10n_mouseSteering_ui_max"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_cameraRotationInside"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_cameraRotationInside_desc"/>
+          </Bitmap>
+          <Text profile="mouseSteeringSettingsSectionHeader" name="sectionHeader" text="$l10n_mouseSteering_ui_indicator"/>
           <Bitmap profile="mouseSteeringSettingsContainer">
             <MouseSteeringMultiTextOption profile="mouseSteeringSettingsMultiTextOption" id="indicatorMode" onClick="onMultiChanged" texts="$l10n_mouseSteering_ui_both|$l10n_mouseSteering_ui_inside|$l10n_mouseSteering_ui_outside|$l10n_ui_off"/>
             <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_indicatorMode"/>

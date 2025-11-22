@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controllo sterzo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salva/Rimuovi veicolo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Ruota telecamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centra telecamera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Attiva"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Interfaccia"/>
+    <e k="mouseSteering_ui_camera" v="Fotocamera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Fotocamera Segue la Direzione"/>
+    <e k="mouseSteering_ui_off" v="Disattivato"/>
+    <e k="mouseSteering_ui_subtle" v="Sottile"/>
+    <e k="mouseSteering_ui_normal" v="Normale"/>
+    <e k="mouseSteering_ui_strong" v="Forte"/>
+    <e k="mouseSteering_ui_max" v="Massimo"/>
+    <e k="mouseSteering_ui_indicator" v="Indicatore"/>
     <e k="mouseSteering_ui_indicatorMode" v="Modalità indicatore"/>
     <e k="mouseSteering_ui_both" v="Esterno e interno"/>
     <e k="mouseSteering_ui_inside" v="Interno"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Mostra l'indicatore quando si guarda indietro (interno)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="La fotocamera ruota per seguire lo sterzo all'interno della cabina."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Seleziona la modalità di visualizzazione dell'indicatore di sterzata sull'HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mostra l'angolo di sterzata corrente come testo sullo schermo nell'indicatore."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra l'indicatore quando si guarda indietro nella vista interna."/>

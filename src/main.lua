@@ -30,6 +30,7 @@ local sourceFiles = {
   "src/hud/MouseSteeringIndicatorDisplay.lua",
   -- misc
   "src/misc/AdditionalSpecialization.lua",
+  "src/misc/MouseSteeringCameraRotation.lua",
   "src/misc/MouseSteeringController.lua",
   "src/misc/MouseSteeringMessageTypes.lua",
   "src/misc/VehicleCameraExtension.lua",

@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Điều khiển lái"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Lưu/Xóa phương tiện"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Xoay camera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Căn giữa camera"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Kích hoạt"/>
@@ -58,6 +59,14 @@
 
     <!-- HUD Settings -->
     <e k="mouseSteering_ui_hud" v="Giao diện"/>
+    <e k="mouseSteering_ui_camera" v="Camera"/>
+    <e k="mouseSteering_ui_cameraRotationInside" v="Camera Theo Hướng Lái"/>
+    <e k="mouseSteering_ui_off" v="Tắt"/>
+    <e k="mouseSteering_ui_subtle" v="Nhẹ"/>
+    <e k="mouseSteering_ui_normal" v="Bình thường"/>
+    <e k="mouseSteering_ui_strong" v="Mạnh"/>
+    <e k="mouseSteering_ui_max" v="Tối đa"/>
+    <e k="mouseSteering_ui_indicator" v="Chỉ báo"/>
     <e k="mouseSteering_ui_indicatorMode" v="Chế độ hiển thị chỉ báo"/>
     <e k="mouseSteering_ui_both" v="Bên ngoài và bên trong"/>
     <e k="mouseSteering_ui_inside" v="Bên trong"/>
@@ -66,6 +75,7 @@
     <e k="mouseSteering_ui_indicatorLookBackInside" v="Hiển thị chỉ báo khi nhìn lại (bên trong)"/>
 
     <!-- Descriptions: HUD Settings -->
+    <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera xoay theo hướng lái của vô lăng bên trong cabin."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Chọn cách hiển thị chỉ báo lái trên HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Hiển thị góc lái hiện tại dưới dạng văn bản trên màn hình trong chỉ báo."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Hiển thị chỉ báo khi nhìn lại trong chế độ xem bên trong."/>

@@ -196,6 +196,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.indicatorText:setIsChecked(settings.indicatorText, true)
 
   -- multi-text options
+  self.cameraRotationInside:setState(settings.cameraRotationInside)
   self.indicatorMode:setState(settings.indicatorMode)
 
   -- indicators and controls
