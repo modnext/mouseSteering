@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controlo de direção"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Guardar/Remover veículo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rodar câmara"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Alternar câmara que segue"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrar câmara"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Interface"/>
     <e k="mouseSteering_ui_camera" v="Câmara"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Câmara Segue a Direção"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona morta da câmara"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrar rotação vertical"/>
     <e k="mouseSteering_ui_off" v="Desligado"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="A câmara roda para seguir a direção do volante dentro da cabine."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Limiar de ângulo de direção (em graus) abaixo do qual a câmara não rodará."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Quando ativado, o centramento da câmara repõe a rotação horizontal e vertical. Quando desativado, apenas a rotação horizontal é centrada."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Seleciona como o indicador de direção é mostrado no HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mostra o ângulo de direção atual como texto na tela no indicador."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra o indicador ao olhar para trás na vista interna."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Número máximo de veículos atingido"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="A câmara que segue a direção está desativada. Ative-a nas configurações"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Veículo adicionado com sucesso"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Veículo removido com sucesso"/>
   </elements>

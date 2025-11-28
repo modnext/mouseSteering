@@ -139,7 +139,7 @@ end
 
 ---Sets the slider value
 function MouseSteeringSliderOptionElement:setValue(value)
-  value = math.max(self.minValue, math.min(self.maxValue, value))
+  value = math.max(self.minValue, math.min(self.maxValue, value or self.minValue))
 
   -- find index
   local precision = 100000

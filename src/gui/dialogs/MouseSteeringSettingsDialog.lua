@@ -180,6 +180,8 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.linearity:setValue(settings.linearity)
   self.smoothness:setValue(settings.smoothness)
   self.deadzone:setValue(settings.deadzone)
+  self.cameraRotationDeadZone:setValue(settings.cameraRotationDeadZone)
+  self.cameraRotationDeadZone:setFormatter(function(value) return string.format("%.0f°", value) end)
   self.steeringAssistThreshold:setValue(settings.steeringAssistThreshold)
   -- self.steeringAssistThreshold:setFormatter(function(value) return string.format("%.3f", value) end)
 
@@ -191,6 +193,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.autoSave:setIsChecked(settings.autoSave, true)
   self.default:setIsChecked(settings.default, true)
   self.indicatorLookBackInside:setIsChecked(settings.indicatorLookBackInside, true)
+  self.cameraRotationCenterVertical:setIsChecked(settings.cameraRotationCenterVertical, true)
 
   -- binary options
   self.indicatorText:setIsChecked(settings.indicatorText, true)
@@ -925,8 +928,8 @@ function MouseSteeringSettingsDialog:onClickOpenPageSettingsControls()
   -- locate and highlight the mouse steering controls entry
   for controlIndex, controlData in ipairs(controlsList.delegate.controlsData) do
     if controlData.name == modDisplayTitle then
-      controlsList:makeCellVisible(controlIndex, 3, true)
-      controlsList:setSelectedItem(controlIndex, 3)
+      controlsList:makeCellVisible(controlIndex, 5, true)
+      controlsList:setSelectedItem(controlIndex, 5)
 
       -- set focus to the first action button for better UX
       local targetCell = controlsList:getElementAtSectionIndex(controlIndex, 1)

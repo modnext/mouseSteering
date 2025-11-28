@@ -13,6 +13,8 @@
 
   <!-- Camera -->
   <cameraRotationInside>off</cameraRotationInside>  <!-- Options: off, subtle, normal, strong, max -->
+  <cameraRotationDeadZone>0.000000</cameraRotationDeadZone>
+  <cameraRotationCenterVertical>false</cameraRotationCenterVertical>
 
   <!-- HUD Indicator -->
   <indicatorMode>both</indicatorMode>  <!-- Options: both, inside, outside, off -->

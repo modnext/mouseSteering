@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="조향 제어"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="차량 저장/제거"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="카메라 회전"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="카메라 추적 토글"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="카메라 중앙"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="인터페이스"/>
     <e k="mouseSteering_ui_camera" v="카메라"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="카메라가 조향 추적"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="카메라 데드존"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="수직 회전 중앙"/>
     <e k="mouseSteering_ui_off" v="끔"/>
     <e k="mouseSteering_ui_subtle" v="약함"/>
     <e k="mouseSteering_ui_normal" v="보통"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="카메라가 캐빈 내부에서 핸들 조향을 따라 회전합니다."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="카메라가 회전하지 않는 조향 각도 임계값(도 단위)."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="활성화하면 카메라 센터링이 수평 및 수직 회전을 재설정합니다. 비활성화하면 수평 회전만 중앙에 배치됩니다."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD에 스티어링 표시기가 표시되는 방식을 선택합니다."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="표시기에 현재 스티어링 각도를 화면 텍스트로 표시합니다."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="내부 시점으로 뒤를 돌아볼 때 표시기를 표시합니다."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="최대 차량 수에 도달했습니다"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="카메라 조향 추적이 비활성화되었습니다. 설정에서 활성화하세요"/>
     <e k="mouseSteering_notification_vehicleAdded" v="차량이 성공적으로 추가되었습니다"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="차량이 성공적으로 제거되었습니다"/>
   </elements>

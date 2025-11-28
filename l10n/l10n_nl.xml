@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Stuurbesturing"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Voertuig opslaan/verwijderen"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Camera draaien"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Camera volgt aan/uit"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Camera centreren"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Interface"/>
     <e k="mouseSteering_ui_camera" v="Camera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Volgt Besturing"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Dode zone camera"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Verticale rotatie centreren"/>
     <e k="mouseSteering_ui_off" v="Uit"/>
     <e k="mouseSteering_ui_subtle" v="Subtiel"/>
     <e k="mouseSteering_ui_normal" v="Normaal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera draait om de stuurbeweging te volgen in de cabine."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Drempelwaarde voor stuurhoek (in graden) waaronder de camera niet draait."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Wanneer ingeschakeld, zet camera centreren zowel horizontale als verticale rotatie terug. Wanneer uitgeschakeld, wordt alleen horizontale rotatie gecentreerd."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selecteert hoe de stuurindicator wordt weergegeven op de HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Toont de huidige stuurhoek als tekst op het scherm in de indicator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Toont de indicator bij achteruitkijken in het binnenzicht."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Maximaal aantal voertuigen bereikt"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Camera volgt besturing is uitgeschakeld. Schakel het in de instellingen in"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Voertuig succesvol toegevoegd"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Voertuig succesvol verwijderd"/>
   </elements>

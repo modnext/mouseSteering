@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kormányzás vezérlése"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Jármű mentése/eltávolítása"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera forgatása"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Kamera követésének váltása"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamera középre"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Felület"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera követi a kormányzást"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kamera holtzónája"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Függőleges forgatás középre"/>
     <e k="mouseSteering_ui_off" v="Ki"/>
     <e k="mouseSteering_ui_subtle" v="Finom"/>
     <e k="mouseSteering_ui_normal" v="Normál"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="A kamera forog, hogy kövesse a kormánykerék mozgását a kabinon belül."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Kormányzási szög küszöbérték (fokban), amely alatt a kamera nem forog."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Ha engedélyezve van, a kamera középre helyezése mind a vízszintes, mind a függőleges forgatást visszaállítja. Ha letiltva van, csak a vízszintes forgatás kerül középre."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Kiválasztja, hogyan jelenik meg a kormányzási jelző a HUD-on."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Megjeleníti az aktuális kormányzási szöget szövegként a jelzőben."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Megjeleníti a jelzőt, ha hátrafelé nézünk a belső nézetben."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Elérte a járművek maximális számát"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="A kamera kormányzás követése letiltva van. Engedélyezze a beállításokban"/>
     <e k="mouseSteering_notification_vehicleAdded" v="A jármű hozzáadása sikeres volt"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="A jármű eltávolítása sikeres volt"/>
   </elements>

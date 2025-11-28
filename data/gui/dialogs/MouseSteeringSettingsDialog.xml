@@ -122,6 +122,16 @@
             <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_cameraRotationInside"/>
             <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_cameraRotationInside_desc"/>
           </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainer">
+            <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="cameraRotationDeadZone" onClick="onSliderChanged" minValue="0" stepSize="1" maxValue="30"/>
+            <Text profile="mouseSteeringSettingsTitle" text="$l10n_mouseSteering_ui_cameraRotationDeadZone"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_cameraRotationDeadZone_desc"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="cameraRotationCenterVertical" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_cameraRotationCenterVertical"/>
+            <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_cameraRotationCenterVertical_desc"/>
+          </Bitmap>
           <Text profile="mouseSteeringSettingsSectionHeader" name="sectionHeader" text="$l10n_mouseSteering_ui_indicator"/>
           <Bitmap profile="mouseSteeringSettingsContainer">
             <MouseSteeringMultiTextOption profile="mouseSteeringSettingsMultiTextOption" id="indicatorMode" onClick="onMultiChanged" texts="$l10n_mouseSteering_ui_both|$l10n_mouseSteering_ui_inside|$l10n_mouseSteering_ui_outside|$l10n_ui_off"/>

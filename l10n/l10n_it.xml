@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Controllo sterzo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salva/Rimuovi veicolo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Ruota telecamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Attiva/disattiva fotocamera che segue"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centra telecamera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Interfaccia"/>
     <e k="mouseSteering_ui_camera" v="Fotocamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Fotocamera Segue la Direzione"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona morta della fotocamera"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centra rotazione verticale"/>
     <e k="mouseSteering_ui_off" v="Disattivato"/>
     <e k="mouseSteering_ui_subtle" v="Sottile"/>
     <e k="mouseSteering_ui_normal" v="Normale"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="La fotocamera ruota per seguire lo sterzo all'interno della cabina."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Soglia dell'angolo di sterzata (in gradi) al di sotto della quale la fotocamera non ruota."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Se abilitato, il centraggio della fotocamera ripristina sia la rotazione orizzontale che quella verticale. Se disabilitato, viene centrata solo la rotazione orizzontale."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Seleziona la modalità di visualizzazione dell'indicatore di sterzata sull'HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mostra l'angolo di sterzata corrente come testo sullo schermo nell'indicatore."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Mostra l'indicatore quando si guarda indietro nella vista interna."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Numero massimo di veicoli raggiunto"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Fotocamera che segue la direzione è disabilitata. Abilitala nelle impostazioni"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Veicolo aggiunto con successo"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Veicolo rimosso con successo"/>
   </elements>

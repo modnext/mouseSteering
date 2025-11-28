@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ovládání řízení"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Uložit/odstranit vozidlo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Otočit kameru"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Přepnout sledování kamerou"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Vycentrovat kameru"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Rozhraní"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera sleduje řízení"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Mrtvá zóna sledování kamery"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Vycentrovat vertikální rotaci"/>
     <e k="mouseSteering_ui_off" v="Vypnuto"/>
     <e k="mouseSteering_ui_subtle" v="Jemné"/>
     <e k="mouseSteering_ui_normal" v="Normální"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera se otáčí, aby sledovala řízení volantu uvnitř kabiny."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Prahová hodnota úhlu řízení (ve stupních), pod kterou se kamera neotočí."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Pokud je zapnuto, centrování kamery resetuje horizontální i vertikální rotaci. Pokud je vypnuto, resetuje se pouze horizontální rotace."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Vybere, jak se indikátor řízení zobrazí na HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Zobrazí aktuální úhel řízení jako text na obrazovce v indikátoru."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zobrazí indikátor při pohledu zpět ve vnitřním zobrazení."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Dosáhlo se maximálního počtu vozidel"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Sledování řízení kamerou je vypnuto. Zapněte ji v nastavení"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Vozidlo bylo úspěšně přidáno"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Vozidlo bylo úspěšně odstraněno"/>
   </elements>

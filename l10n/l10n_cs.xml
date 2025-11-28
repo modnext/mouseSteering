@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="方向控制"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="保存/移除车辆"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋转摄像机"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="切换摄像机跟随"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="居中相机"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="界面"/>
     <e k="mouseSteering_ui_camera" v="摄像机"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="摄像机跟随转向"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="摄像机跟随死区"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="居中垂直旋转"/>
     <e k="mouseSteering_ui_off" v="关闭"/>
     <e k="mouseSteering_ui_subtle" v="轻微"/>
     <e k="mouseSteering_ui_normal" v="正常"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="摄像机在驾驶舱内旋转以跟随方向盘转向。"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="转向角度阈值（以度为单位），低于该值摄像机将不会旋转。"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="启用时，摄像机居中会重置水平和垂直旋转。禁用时，仅重置水平旋转。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="选择在HUD上如何显示转向指示器。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="在指示器上以屏幕文本显示当前转向角度。"/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="在内视角回头时显示指示器。"/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="已达到车辆数量上限"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="摄像机跟随转向已禁用。请在设置中启用"/>
     <e k="mouseSteering_notification_vehicleAdded" v="车辆添加成功"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="车辆移除成功"/>
   </elements>

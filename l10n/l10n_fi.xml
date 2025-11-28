@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Ohjaus"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Tallenna/poista ajoneuvo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kierrä kameraa"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Vaihda kameran seuraavaksi"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Keskitä kamera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Käyttöliittymä"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera seuraa ohjausta"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kameran kuollut alue"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Keskitä pystysuora kierto"/>
     <e k="mouseSteering_ui_off" v="Pois"/>
     <e k="mouseSteering_ui_subtle" v="Hienovarainen"/>
     <e k="mouseSteering_ui_normal" v="Normaali"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera kääntyy seuraamaan rattia ohjaamon sisällä."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Ohjauskulman kynnysarvo (asteissa), jonka alapuolella kamera ei kierny."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Kun käytössä, kameran keskitys nollaa sekä vaakasuoran että pystysuoran kiertymisen. Kun pois käytöstä, vain vaakasuora kiertyminen keskitetään."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Valitsee, miten ohjausindikaattori näytetään HUD:ssa."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Näyttää nykyisen ohjauskulman tekstinä indikaattorissa."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Näyttää indikaattorin, kun katsotaan taaksepäin sisäkuvassa."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Ajoneuvojen enimmäismäärä saavutettu"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Kamera seuraava ohjaus on poistettu käytöstä. Ota se käyttöön asetuksissa"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Ajoneuvo lisätty onnistuneesti"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Ajoneuvo poistettu onnistuneesti"/>
   </elements>
