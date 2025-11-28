@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="ステアリング制御"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="車両の保存/削除"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="カメラの回転"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="カメラ追従の切り替え"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="カメラを中央に"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="インターフェース"/>
     <e k="mouseSteering_ui_camera" v="カメラ"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="カメラがステアリングを追従"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="カメラ追従デッドゾーン"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="垂直回転を中央に"/>
     <e k="mouseSteering_ui_off" v="オフ"/>
     <e k="mouseSteering_ui_subtle" v="微弱"/>
     <e k="mouseSteering_ui_normal" v="通常"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="キャビン内でカメラがハンドル操作を追従して回転します。"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="カメラが回転しないステアリング角度のしきい値（度単位）。"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="有効の場合、カメラセンタリングは水平および垂直回転をリセットします。無効の場合は、水平回転のみがセンタリングされます。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD上のステアリングインジケーターの表示方法を選択します。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="インジケーター内に現在のステアリング角度を画面上のテキストとして表示します。"/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="室内ビューで後ろを振り返った際にインジケーターを表示します。"/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="車両の最大数に達しました"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="カメラ追従ステアリングが無効です。設定で有効にしてください"/>
     <e k="mouseSteering_notification_vehicleAdded" v="車両が正常に追加されました"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="車両が正常に削除されました"/>
   </elements>

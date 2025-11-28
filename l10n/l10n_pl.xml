@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Sterowanie Kierownicą"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Zapisz/Usuń Pojazd"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Obróć Kamerę"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Przełącz Śledzenie Kamery"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Wycentruj Kamerę"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Interfejs"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Śledzi Skręt"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Martwa Strefa Śledzenia Kamery"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Wycentruj Obrót Pionowy"/>
     <e k="mouseSteering_ui_off" v="Wyłączona"/>
     <e k="mouseSteering_ui_subtle" v="Subtelna"/>
     <e k="mouseSteering_ui_normal" v="Normalna"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera obraca się zgodnie ze skrętem kół wewnątrz kabiny."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Próg kąta skrętu (w stopniach), poniżej którego kamera nie będzie się obracać."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Po włączeniu centrowanie kamery resetuje zarówno obrót poziomy, jak i pionowy. Po wyłączeniu resetowany jest tylko obrót poziomy."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Wybiera sposób wyświetlania wskaźnika skrętu na HUDzie."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Pokazuje aktualny kąt skrętu jako tekst na ekranie we wskaźniku."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Pokazuje wskaźnik podczas patrzenia do tyłu w widoku wewnętrznym."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Osiągnięto maksymalną liczbę pojazdów"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Śledzenie Skrętu przez Kamerę jest wyłączone. Włącz w ustawieniach"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Pojazd dodany pomyślnie"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Pojazd usunięty pomyślnie"/>
   </elements>

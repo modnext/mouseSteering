@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Управління кермом"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Зберегти/Видалити транспортний засіб"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Повернути камеру"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Переключити камеру слідування"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Центрувати камеру"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Інтерфейс"/>
     <e k="mouseSteering_ui_camera" v="Камера"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Камера слідує за кермом"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Мертва зона камери"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Центрувати вертикальне обертання"/>
     <e k="mouseSteering_ui_off" v="Вимкнено"/>
     <e k="mouseSteering_ui_subtle" v="Ледь помітно"/>
     <e k="mouseSteering_ui_normal" v="Нормально"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Камера обертається, щоб слідувати за поворотом керма всередині кабіни."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Поріг кута керування (в градусах), нижче якого камера не обертатиметься."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Коли ввімкнено, центрування камери скидає як горизонтальне, так і вертикальне обертання. Коли вимкнено, центрується лише горизонтальне обертання."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Вибирає спосіб відображення індикатора керування на HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Показує поточний кут повороту керма у вигляді тексту на екрані в індикаторі."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Показує індикатор при погляді назад у внутрішньому вигляді."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Досягнуто максимальної кількості транспортних засобів"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Камера слідування за кермом вимкнена. Ввімкніть її в налаштуваннях"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Транспортний засіб додано успішно"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Транспортний засіб видалено успішно"/>
   </elements>

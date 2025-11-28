@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="方向控制"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="儲存/移除載具"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋轉鏡頭"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="切換攝影機跟隨"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="置中攝影機"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="介面"/>
     <e k="mouseSteering_ui_camera" v="攝影機"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="攝影機跟隨轉向"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="攝影機跟隨死區"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="置中垂直旋轉"/>
     <e k="mouseSteering_ui_off" v="關閉"/>
     <e k="mouseSteering_ui_subtle" v="輕微"/>
     <e k="mouseSteering_ui_normal" v="正常"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="攝影機在駕駛艙內旋轉以跟隨方向盤轉向。"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="轉向角度閾值（以度為單位），低於該值攝影機將不會旋轉。"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="啟用時，攝影機置中會重設水平和垂直旋轉。停用時，僅重設水平旋轉。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="選擇方向指示器在HUD上的顯示方式。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="在指示器中以螢幕文字顯示當前轉向角度。"/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="於內視角回頭時顯示指示器。"/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="達到車輛上限"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="攝影機跟隨轉向已停用。請在設定中啟用"/>
     <e k="mouseSteering_notification_vehicleAdded" v="車輛新增成功"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="車輛移除成功"/>
   </elements>

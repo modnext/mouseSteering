@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Contrôle de la direction"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Sauvegarder/Supprimer le véhicule"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Tourner la caméra"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Activer/désactiver le suivi par la caméra"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrer la caméra"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="ATH"/>
     <e k="mouseSteering_ui_camera" v="Caméra"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Caméra Suit la Direction"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zone morte de la caméra"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrer la rotation verticale"/>
     <e k="mouseSteering_ui_off" v="Désactivé"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="La caméra tourne pour suivre la direction du volant dans la cabine."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Seuil d'angle de direction (en degrés) en dessous duquel la caméra ne pivotera pas."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Lorsqu'activée, la mise au centre de la caméra réinitialise la rotation horizontale et verticale. Lorsque désactivée, seule la rotation horizontale est centrée."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Choisit comment l'indicateur de direction s'affiche dans le HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Affiche l'angle de direction actuel en texte à l'écran dans l'indicateur."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Affiche l'indicateur quand vous regardez en arrière en vue intérieure."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Nombre Max de Véhicules Atteint"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Le suivi de la direction par la caméra est désactivé. Activez-le dans les paramètres"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Véhicule Ajouté avec Succès"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Véhicule Supprimé avec Succès"/>
   </elements>

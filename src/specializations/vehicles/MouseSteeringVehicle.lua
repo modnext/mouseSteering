@@ -10,15 +10,6 @@ local modName = g_currentModName
 
 MouseSteeringVehicle = {}
 
----
-MouseSteeringVehicle.CAMERA_ROTATION_VALUES = {
-  off = 0,
-  subtle = 0.5,
-  normal = 1,
-  strong = 1.5,
-  max = 2
-}
-
 ---Checks if all prerequisite specializations are loaded
 -- @param specializations table specializations
 -- @return boolean hasPrerequisite true if all prerequisite specializations are loaded
@@ -46,6 +37,7 @@ function MouseSteeringVehicle.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringSaved", MouseSteeringVehicle.setMouseSteeringSaved)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringSteeringPaused", MouseSteeringVehicle.setMouseSteeringSteeringPaused)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringCameraRotating", MouseSteeringVehicle.setMouseSteeringCameraRotating)
+  SpecializationUtil.registerFunction(vehicleType, "setCameraRotationActive", MouseSteeringVehicle.setCameraRotationActive)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringHUD", MouseSteeringVehicle.setMouseSteeringHUD)
   SpecializationUtil.registerFunction(vehicleType, "calculateAxisAndSteering", MouseSteeringVehicle.calculateAxisAndSteering)
   SpecializationUtil.registerFunction(vehicleType, "synchronizeMouseSteeringAxisSide", MouseSteeringVehicle.synchronizeMouseSteeringAxisSide)
@@ -84,6 +76,7 @@ function MouseSteeringVehicle:onLoad(savegame)
   spec.isUsed = false
   spec.isSteeringPaused = false
   spec.isCameraRotating = false
+  spec.cameraRotationActive = true
   spec.isHUDForcedVisible = nil
   spec.wasUserToggled = false
 
@@ -280,12 +273,11 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     end
 
     -- update camera rotation following steering and centering
-    local cameraRotationState = spec.settings.cameraRotationInside or "off"
-    local intensity = MouseSteeringVehicle.CAMERA_ROTATION_VALUES[cameraRotationState]
     local camera = self:getActiveCamera()
     local camIndex = self.spec_enterable and self.spec_enterable.camIndex or 0
 
-    spec.cameraRotation:update(dt, camera, camIndex, intensity)
+    spec.cameraRotation:setSettings(spec.settings, spec.cameraRotationActive)
+    spec.cameraRotation:update(dt, camera, camIndex, spec.isSteeringPaused)
   end
 end
 
@@ -302,10 +294,7 @@ function MouseSteeringVehicle.actionEventCenterCamera(self, actionName, inputVal
   end
 
   local camera = self:getActiveCamera()
-  local cameraRotationState = spec.settings.cameraRotationInside or "off"
-  local intensity = MouseSteeringVehicle.CAMERA_ROTATION_VALUES[cameraRotationState]
-
-  spec.cameraRotation:requestCenter(camera, intensity)
+  spec.cameraRotation:centerCamera(camera)
 end
 
 ---Updates HUD display visibility and content
@@ -492,6 +481,34 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
 end
 
 ---
+function MouseSteeringVehicle.actionEventCameraFollow(self, actionName, inputValue, callbackState, isAnalog)
+  if inputValue ~= 1 then
+    return
+  end
+
+  self:setCameraRotationActive()
+end
+
+---Enables or disables camera follow steering for current vehicle
+function MouseSteeringVehicle:setCameraRotationActive()
+  local spec = self.spec_mouseSteeringVehicle
+
+  -- check if camera rotation is enabled in settings
+  local cameraRotationState = spec.settings.cameraRotationInside or "off"
+
+  -- if trying to enable but global setting is off, show warning
+  if not spec.cameraRotationActive and cameraRotationState == "off" then
+    local warning = g_i18n:getText("mouseSteering_warning_cameraFollowDisabled")
+    if warning ~= nil then
+      g_currentMission:showBlinkingWarning(warning, 2500)
+    end
+    return
+  end
+
+  spec.cameraRotationActive = not spec.cameraRotationActive
+end
+
+---
 function MouseSteeringVehicle.actionEventSaveSteering(self, actionName, inputValue, callbackState, isAnalog)
   if inputValue ~= 1 then
     return
@@ -593,6 +610,11 @@ function MouseSteeringVehicle:onRegisterActionEvents(isActiveForInput, isActiveF
       _, actionEventId = self:addActionEvent(spec.actionEvents, InputAction.TOGGLE_MOUSE_STEERING_ROTATE_CAMERA, self, MouseSteeringVehicle.actionEventRotateCamera, true, true, false, true, nil)
       binding:setActionEventTextPriority(actionEventId, GS_PRIO_NORMAL)
       binding:setActionEventText(actionEventId, g_i18n:getText("mouseSteering_rotateCamera"))
+
+      -- register camera follow toggle (always hidden)
+      _, actionEventId = self:addActionEvent(spec.actionEvents, InputAction.TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW, self, MouseSteeringVehicle.actionEventCameraFollow, false, true, false, true, nil)
+      binding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+      binding:setActionEventTextVisibility(actionEventId, false)
 
       -- register center camera (always hidden)
       _, actionEventId = self:addActionEvent(spec.actionEvents, InputAction.TOGGLE_MOUSE_STEERING_CENTER_CAMERA, self, MouseSteeringVehicle.actionEventCenterCamera, false, true, false, true, nil)

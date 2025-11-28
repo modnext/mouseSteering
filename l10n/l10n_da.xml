@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Styring"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Gem/fjern køretøj"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Drej kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Slå kameraet der følger til/fra"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrer kamera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Interface"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera følger styring"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kameraets døde zone"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrer vertikal rotation"/>
     <e k="mouseSteering_ui_off" v="Fra"/>
     <e k="mouseSteering_ui_subtle" v="Svag"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kameraet roterer for at følge rattet inden i kabinen."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Styrevinkeltærskel (i grader), under hvilken kameraet ikke vil rotere."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Når det er aktiveret, nulstiller kameracentralisering både horisontal og vertikal rotation. Når det er deaktiveret, centraliseres kun horisontal rotation."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Vælger, hvordan styreindikatoren vises på HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Viser den aktuelle styrevinkel som tekst på skærmen i indikatoren."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Viser indikatoren, når man kigger bagud i indvendig visning."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Maksimalt antal køretøjer nået"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Kamera der følger styring er deaktiveret. Aktivér det i indstillinger"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Køretøj tilføjet"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Køretøj fjernet"/>
   </elements>

@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Kontrol Kemudi"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Simpan/Hapus Kendaraan"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Putar Kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Aktifkan/Nonaktifkan Kamera Ikuti"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Pusatkan kamera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Antarmuka"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Mengikuti Kemudi"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona Mati Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Pusatkan Rotasi Vertikal"/>
     <e k="mouseSteering_ui_off" v="Mati"/>
     <e k="mouseSteering_ui_subtle" v="Halus"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera berputar mengikuti kemudi setir di dalam kabin."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Ambang batas sudut kemudi (dalam derajat) di mana kamera tidak akan berputar."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Saat diaktifkan, pemusatan kamera mengatur ulang rotasi horizontal dan vertikal. Saat dinonaktifkan, hanya rotasi horizontal yang dimusatkan."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Memilih cara indikator kemudi ditampilkan di HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Menampilkan sudut kemudi saat ini sebagai teks di layar dalam indikator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Menampilkan indikator saat melihat ke belakang dalam tampilan dalam."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Jumlah maksimum kendaraan tercapai"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Kamera Ikuti Kemudi dinonaktifkan. Aktifkan di pengaturan"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Kendaraan ditambahkan dengan sukses"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Kendaraan dihapus dengan sukses"/>
   </elements>

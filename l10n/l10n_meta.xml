@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v=""/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v=""/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v=""/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v=""/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v=""/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v=""/>
     <e k="mouseSteering_ui_camera" v=""/>
     <e k="mouseSteering_ui_cameraRotationInside" v=""/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v=""/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v=""/>
     <e k="mouseSteering_ui_off" v=""/>
     <e k="mouseSteering_ui_subtle" v=""/>
     <e k="mouseSteering_ui_normal" v=""/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v=""/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v=""/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v=""/>
     <e k="mouseSteering_ui_indicatorMode_desc" v=""/>
     <e k="mouseSteering_ui_indicatorText_desc" v=""/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v=""/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v=""/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v=""/>
     <e k="mouseSteering_notification_vehicleAdded" v=""/>
     <e k="mouseSteering_notification_vehicleRemoved" v=""/>
   </elements>

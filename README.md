@@ -28,11 +28,13 @@
 
 ## Keybindings
 
-| Key        | Action              |
-| ---------- | ------------------- |
-| `Ctrl + .` | Steering Control    |
-| `Ctrl + /` | Save/Remove Vehicle |
-| `Alt`      | Rotate Camera       |
+| Key            | Action                       |
+| -------------- | ---------------------------- |
+| `Ctrl + .`     | Steering Control             |
+| `Ctrl + /`     | Save/Remove Vehicle          |
+| `Alt`          | Rotate Camera                |
+| `Ctrl + ,`     | Toggle Camera Follow         |
+| `Ctrl + Space` | Center Camera                |
 
 **Note:** You can customize these keybindings in the game's Options menu under the "Mouse Steering" section.
 

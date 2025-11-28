@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Lenksteuerung"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Fahrzeug speichern/entfernen"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera drehen"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Kamera Folgt Umschalten"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamera zentrieren"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Anzeige"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera folgt Lenkung"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kamera Folgt Totzone"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Vertikale Rotation Zentrieren"/>
     <e k="mouseSteering_ui_off" v="Aus"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera dreht sich beim Lenken in der Kabine mit."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Lenkwinkelschwelle (in Grad), unter der sich die Kamera nicht dreht."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Wenn aktiviert, setzt die Kamerazentrierung sowohl die horizontale als auch die vertikale Rotation zurück. Wenn deaktiviert, wird nur die horizontale Rotation zurückgesetzt."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Wählt aus, wie die Lenkungsanzeige auf dem HUD angezeigt wird."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Zeigt den aktuellen Lenkwinkel als Text auf dem Bildschirm in der Anzeige an."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Zeigt die Anzeige beim Blick zurück in die Innenansicht an."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Maximale Anzahl an Fahrzeugen erreicht"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Kamera folgt Lenkung ist deaktiviert. Aktivieren Sie es in den Einstellungen"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Fahrzeug erfolgreich hinzugefügt"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Fahrzeug erfolgreich entfernt"/>
   </elements>

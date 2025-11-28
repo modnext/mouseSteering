@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Steering Control"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Save/Remove Vehicle"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotate Camera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Toggle Camera Follow"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Center Camera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="HUD"/>
     <e k="mouseSteering_ui_camera" v="Camera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Follow Steering"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Camera Follow Dead Zone"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Center Vertical Rotation"/>
     <e k="mouseSteering_ui_off" v="Off"/>
     <e k="mouseSteering_ui_subtle" v="Subtle"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera rotates to follow wheel steering inside the cabin."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Steering angle threshold (in degrees) below which the camera will not rotate."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="When enabled, camera centering resets both horizontal and vertical rotation. When disabled, only horizontal rotation is centered."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selects how the steering indicator is shown on the HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Shows the current steering angle as on-screen text in the indicator."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Shows the indicator when looking back in inside view."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Maximum number of vehicles reached"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Camera Follow Steering is disabled. Enable it in settings"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Vehicle added successfully"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Vehicle removed successfully"/>
   </elements>

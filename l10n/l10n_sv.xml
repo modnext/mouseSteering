@@ -5,6 +5,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_CONTROL" v="Styrkontroll"/>
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Spara/ta bort fordon"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotera kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Slå på/av kamera följer"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrera kamera"/>
 
     <!-- Actions -->
@@ -61,6 +62,8 @@
     <e k="mouseSteering_ui_hud" v="Gränssnitt"/>
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera följer styrning"/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kameradödzon"/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrera vertikal rotation"/>
     <e k="mouseSteering_ui_off" v="Av"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
     <e k="mouseSteering_ui_normal" v="Normal"/>
@@ -76,6 +79,8 @@
 
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kameran roterar för att följa ratten inne i hytten."/>
+    <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Styrvinkeltröskel (i grader) under vilken kameran inte roterar."/>
+    <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="När den är aktiverad återställer kameracentrering både horisontell och vertikal rotation. När den är inaktiverad centreras endast horisontell rotation."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Väljer hur styrindikatorn visas på HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Visar aktuell styrvinkel som text på skärmen i indikatorn."/>
     <e k="mouseSteering_ui_indicatorLookBackInside_desc" v="Visar indikatorn när du tittar bakåt i invändig vy."/>
@@ -117,6 +122,7 @@
 
     <!-- Notifications & Warnings -->
     <e k="mouseSteering_warning_vehicleLimit" v="Maximalt antal fordon uppnått"/>
+    <e k="mouseSteering_warning_cameraFollowDisabled" v="Kamera följer styrning är inaktiverad. Aktivera den i inställningar"/>
     <e k="mouseSteering_notification_vehicleAdded" v="Fordon tillagt"/>
     <e k="mouseSteering_notification_vehicleRemoved" v="Fordon borttaget"/>
   </elements>

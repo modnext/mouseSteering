@@ -126,6 +126,7 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (m
     <action name="TOGGLE_MOUSE_STEERING_CONTROL" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
     <action name="TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
     <action name="TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
+    <action name="TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
     <action name="TOGGLE_MOUSE_STEERING_CENTER_CAMERA" category="VEHICLE" axisType="HALF" displayCategory="VEHICLE_MOUSE_STEERING"/>
   </actions>
 
@@ -139,8 +140,11 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (m
     <actionBinding action="TOGGLE_MOUSE_STEERING_ROTATE_CAMERA">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt"/>
     </actionBinding>
-    <actionBinding action="TOGGLE_MOUSE_STEERING_CENTER_CAMERA">
+    <actionBinding action="TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_comma"/>
+    </actionBinding>
+    <actionBinding action="TOGGLE_MOUSE_STEERING_CENTER_CAMERA">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_space"/>
     </actionBinding>
   </inputBinding>
 </modDesc>
