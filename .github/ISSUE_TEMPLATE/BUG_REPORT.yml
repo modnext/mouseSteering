@@ -31,6 +31,7 @@ body:
       label: Game Version
       description: What version of the game are you playing?
       options:
+        - 1.15.0.0
         - 1.14.1.0
         - 1.13.0.1
         - 1.11.0.1
