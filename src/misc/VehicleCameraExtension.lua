@@ -81,14 +81,30 @@ function VehicleCameraExtension:actionEventLookUpDown(superFunc, object, actionN
   if self:canSteerWithMouse(isMouse, object) then
     return superFunc(object, actionName, inputValue, callbackState, isAnalog, isMouse)
   end
-
-  -- no action needed if mouse steering is not allowed
 end
 
----Overwrites the original VehicleCamera functions with mouse steering versions
+---
+function VehicleCameraExtension:updateRotateNodeRotation(superFunc, camera)
+  if camera.isInside and camera.vehicle ~= nil then
+    local spec = camera.vehicle.spec_mouseSteeringVehicle
+
+    if spec ~= nil and spec.isUsed and spec.cameraRotation ~= nil then
+      local cameraRotation = spec.cameraRotation
+      
+      if cameraRotation.baseRotY ~= nil and not spec.isSteeringPaused and not cameraRotation.centering then
+        camera.rotY = cameraRotation.baseRotY + cameraRotation.rotationFactor
+      end
+    end
+  end
+
+  superFunc(camera)
+end
+
+---Applies function hooks to VehicleCamera class
 function VehicleCameraExtension:overwriteGameFunctions()
   self:overwriteFunction(VehicleCamera, "actionEventLookLeftRight", self.actionEventLookLeftRight)
   self:overwriteFunction(VehicleCamera, "actionEventLookUpDown", self.actionEventLookUpDown)
+  self:overwriteFunction(VehicleCamera, "updateRotateNodeRotation", self.updateRotateNodeRotation)
 end
 
 ---Retrieves and resets the accumulated camera movement side displacement

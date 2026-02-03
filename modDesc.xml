@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="105">
   <author>aaw3k</author>
-  <version>1.3.0.0</version>
+  <version>1.3.0.2</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -30,6 +30,10 @@ Changelog Version 1.3.0.0:
 - Added camera centering with smooth ease-out animation
 - Disabled locomotives
 
+Changelog Version 1.3.0.2:
+- Improved inside camera orientation persistence for "Camera Follows Steering"
+- Enabled "Center Camera" action when "Camera Follows Steering" is disabled
+
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
     <de><![CDATA[Ermöglicht die Steuerung der Fahrzeuglenkung per Maus mit vollständig konfigurierbarer Empfindlichkeit, Linearität, Totzone, Laufruhe und mehr.
 
@@ -48,6 +52,10 @@ For more information or to report a bug, please visit GitHub (modnext/mouseSteer
 - Kamerarotation hinzugefügt, um Lenkradbewegungen zu folgen (unterstützt FS25_CabView)
 - Kamerazentrierung mit sanfter Ease-Out-Animation hinzugefügt
 - Lokomotiven deaktiviert
+
+Änderungsprotokoll Version 1.3.0.2:
+- Orientierungsspeicherung der Innenkamera für „Kamera Folgt Lenkung“ verbessert
+- „Kamera zentrieren“ bei deaktiviertem „Kamera Folgt Lenkung“ ermöglicht
 
 Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die GitHub (modnext/mouseSteering).]]></de>
     <fr><![CDATA[Permet de contrôler la direction du véhicule à l'aide de la souris, avec une sensibilité, une linéarité, une zone morte, une fluidité et bien plus encore entièrement configurables.
@@ -68,6 +76,10 @@ Journal des modifications version 1.3.0.0:
 - Ajout du centrage de la caméra avec animation ease-out fluide
 - Locomotives désactivées
 
+Journal des modifications version 1.3.0.2:
+- Amélioration de la persistance de l'orientation de la caméra intérieure (Suivi Direction)
+- Activation de l'action « Centrer la Caméra » lorsque le suivi de direction est désactivé
+
 Pour plus d'informations ou pour signaler un bug, veuillez visiter la page GitHub (modnext/mouseSteering).]]></fr>
     <pl><![CDATA[Umożliwia sterowanie kierownicą pojazdu za pomocą myszy, z możliwością pełnej konfiguracji czułości, liniowości, martwej strefy, płynności i nie tylko.
 
@@ -87,6 +99,10 @@ Lista zmian w wersji 1.3.0.0:
 - Dodano centrowanie kamery z płynną animacją ease-out
 - Wyłączono lokomotywy
 
+Lista zmian w wersji 1.3.0.2:
+- Poprawiono trwałość orientacji kamery wewnętrznej w trybie „Kamera Śledzi Skręt”
+- Umożliwiono wycentrowanie kamery przy wyłączonej opcji „Kamera Śledzi Skręt”
+
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (modnext/mouseSteering).]]></pl>
     <ru><![CDATA[Обеспечивает управление рулевым управлением автомобиля с помощью мыши с полностью настраиваемой чувствительностью, линейностью, мертвой зоной, плавностью и другими параметрами.
 
@@ -105,6 +121,10 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (m
 - Добавлено вращение камеры для отслеживания поворота руля (поддерживает FS25_CabView)
 - Добавлено центрирование камеры с плавной анимацией ease-out
 - Отключены локомотивы
+
+Журнал изменений 1.3.0.2:
+- Улучшено сохранение ориентации внутренней камеры в режиме «Камера Следит за Поворотом»
+- Добавлена возможность центрирования камеры при отключенной опции «Камера Следит за Поворотом»
 
 Для получения дополнительной информации или для сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>

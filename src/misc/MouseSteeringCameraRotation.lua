@@ -520,7 +520,6 @@ function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRo
 
   if savedState ~= nil then
     local origRotY = camera.origRotY or 0
-    -- rotYOffset is the manual offset (user's adjustment), not including steering
     local manualOffset = savedState.rotYOffset
 
     if savedState.preservePosition then
@@ -536,16 +535,15 @@ function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRo
       self.rotationFactor = 0
       self.baseRotY = origRotY + manualOffset
     end
-
-    camera.rotY = self.baseRotY + self.rotationFactor
   else
     -- first time on this camera - start with steering follow active
-    -- camera immediately follows current wheel position
     local origRotY = camera.origRotY or 0
     self.rotationFactor = currentOffset
     self.baseRotY = origRotY
-    camera.rotY = self.baseRotY + self.rotationFactor
   end
+
+  -- set camera.rotY for immediate effect
+  camera.rotY = self.baseRotY + self.rotationFactor
 end
 
 ---Updates camera rotation to follow wheel steering
@@ -594,11 +592,9 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   end
 
   -- if not active, do nothing
-  if not self.isActive then
+  if not self.isActive and not self.centering then
     return
   end
-
-  -- from here on, isActive is true
 
   -- handle pause state changes (alt key)
   local pauseStarted = isPaused and not self.lastIsPaused
