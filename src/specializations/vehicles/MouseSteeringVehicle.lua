@@ -380,6 +380,22 @@ function MouseSteeringVehicle:onEnterVehicle()
       self:synchronizeMouseSteeringAxisSide(false, false)
     end
   end
+
+  -- initialize camera rotation for first frame
+  if spec.cameraRotation ~= nil and self.spec_enterable ~= nil then
+    local enterableSpec = self.spec_enterable
+    local camIndex = enterableSpec.camIndex
+    local camera = enterableSpec.cameras[camIndex]
+    
+    if camera ~= nil and camera.isInside then
+      local intensity = spec.cameraRotation:getIntensity()
+      local deadzoneDegrees = spec.cameraRotation:getDeadzoneDegrees()
+      
+      if intensity > 0 then
+        spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity)
+      end
+    end
+  end
 end
 
 ---Called when leaving a vehicle
@@ -390,6 +406,11 @@ function MouseSteeringVehicle:onLeaveVehicle()
   if spec.isUsed then
     spec.axisSideOnLeave = spec.axisSide
     spec.inputValueOnLeave = spec.inputValue
+  end
+
+  -- save camera state on leave
+  if spec.cameraRotation ~= nil then
+    spec.cameraRotation:resetState(nil)
   end
 
   -- update controlled vehicle
