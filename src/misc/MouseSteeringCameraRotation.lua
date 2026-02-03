@@ -592,11 +592,9 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   end
 
   -- if not active, do nothing
-  if not self.isActive then
+  if not self.isActive and not self.centering then
     return
   end
-
-  -- from here on, isActive is true
 
   -- handle pause state changes (alt key)
   local pauseStarted = isPaused and not self.lastIsPaused
