@@ -178,6 +178,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
   if isEntered and isControlled then
     local isAIActive = (AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE) or false
+    local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
 
     if spec.isUsed then
       local inputBinding = g_inputBinding
@@ -276,7 +277,8 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local camera = self:getActiveCamera()
     local camIndex = self.spec_enterable and self.spec_enterable.camIndex or 0
 
-    spec.cameraRotation:setSettings(spec.settings, spec.cameraRotationActive)
+    local isCameraFollowAllowed = spec.cameraRotationActive and not isWorkerAIActive and (not isAIActive or spec.settings.steeringAssist == true)
+    spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
     spec.cameraRotation:update(dt, camera, camIndex, spec.isSteeringPaused)
   end
 end
@@ -383,14 +385,20 @@ function MouseSteeringVehicle:onEnterVehicle()
 
   -- initialize camera rotation for first frame
   if spec.cameraRotation ~= nil and self.spec_enterable ~= nil then
+    local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
+
+    -- disable camera follow when a worker is controlling the vehicle
+    local isCameraFollowAllowed = spec.cameraRotationActive and not isWorkerAIActive
+    spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
+
     local enterableSpec = self.spec_enterable
     local camIndex = enterableSpec.camIndex
     local camera = enterableSpec.cameras[camIndex]
-    
+
     if camera ~= nil and camera.isInside then
       local intensity = spec.cameraRotation:getIntensity()
       local deadzoneDegrees = spec.cameraRotation:getDeadzoneDegrees()
-      
+
       if intensity > 0 then
         spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity)
       end

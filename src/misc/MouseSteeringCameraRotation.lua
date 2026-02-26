@@ -106,13 +106,7 @@ end
 
 ---Calculates time-adjusted delta for smooth interpolation
 function MouseSteeringCameraRotation:calculateSmoothDelta(diff, smoothingFactor, dt)
-  local targetFrameTime = 16.666
-  return diff * smoothingFactor * (dt / targetFrameTime)
-end
-
----Gets sign of a number (1 for positive/zero, -1 for negative)
-function MouseSteeringCameraRotation:getSign(value)
-  return value >= 0 and 1 or -1
+  return diff * smoothingFactor * (dt / 16.666)
 end
 
 ---Gets CabView rotation limits if mod is active
@@ -196,7 +190,7 @@ function MouseSteeringCameraRotation:calculateSteeringFactor(cameraRotationDeadZ
   end
 
   -- apply exponential curve for smoother response
-  local steerSign = self:getSign(steerFactor)
+  local steerSign = steerFactor >= 0 and 1 or -1
   local normalizedSteer = absSteer - steerFactorThreshold
   local curvedSteer = steerSign * steerFactorMultiplier * (normalizedSteer ^ steerFactorExponent)
 
