@@ -25,5 +25,8 @@
     <slice id="indicatorBar_middle" uvs="14px 46px 4px 4px"/>
     <slice id="indicatorBar_right" uvs="18px 46px 4px 4px"/>
     <slice id="indicatorTextBackground" uvs="58px 14px 40px 17px"/>
+
+    <!-- Speed Control -->
+    <slice id="icon_speedControl" uvs="100px 14px 30px 30px"/>
   </slices>
 </texture>

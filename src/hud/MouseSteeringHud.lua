@@ -21,6 +21,9 @@ function MouseSteeringHud.new(customMt, modDirectory, mission, gui, i18n)
   -- create display components list
   self.displayComponents = {}
 
+  -- initialize HUD extensions
+  self.speedMeterDisplayExtension = SpeedMeterDisplayExtension.new()
+
   return self
 end
 
@@ -31,6 +34,9 @@ function MouseSteeringHud:load()
   -- create display components
   self:createDisplayComponents(uiScale)
 
+  -- load speed meter display extension
+  self.speedMeterDisplayExtension:load()
+
   -- subscribe to UI scale changes
   g_messageCenter:subscribe(MessageType.SETTING_CHANGED[GameSettings.SETTING.UI_SCALE], self.onUIScaleChanged, self)
 end
@@ -38,6 +44,12 @@ end
 ---Cleans up the HUD system and unsubscribes from all messages
 function MouseSteeringHud:delete()
   g_messageCenter:unsubscribeAll(self)
+
+  -- delete speed meter display extension
+  if self.speedMeterDisplayExtension ~= nil then
+    self.speedMeterDisplayExtension:delete()
+    self.speedMeterDisplayExtension = nil
+  end
 
   -- delete all display components
   for _, component in pairs(self.displayComponents) do
