@@ -592,6 +592,15 @@ function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRo
 
   -- set camera.rotY for immediate effect
   camera.rotY = self.baseRotY + self.rotationFactor
+
+  -- prevent CabView camera reset on vehicle enter
+  if self.vehicle ~= nil and g_modIsLoaded.FS25_CabView then
+    local cabViewSpec = self.vehicle["spec_FS25_CabView.cabView"]
+
+    if cabViewSpec ~= nil and cabViewSpec.resetView then
+      cabViewSpec.resetView = false
+    end
+  end
 end
 
 ---Updates camera rotation to follow wheel steering
