@@ -30,6 +30,7 @@ function MouseSteeringVehicle.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "updateMouseSteeringHUD", MouseSteeringVehicle.updateMouseSteeringHUD)
   SpecializationUtil.registerFunction(vehicleType, "updateMouseSteeringState", MouseSteeringVehicle.updateMouseSteeringState)
   SpecializationUtil.registerFunction(vehicleType, "getIsMouseSteeringUsed", MouseSteeringVehicle.getIsMouseSteeringUsed)
+  SpecializationUtil.registerFunction(vehicleType, "getIsMouseSteeringSteeringPaused", MouseSteeringVehicle.getIsMouseSteeringSteeringPaused)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringUniqueId", MouseSteeringVehicle.getMouseSteeringUniqueId)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringAxisSide", MouseSteeringVehicle.getMouseSteeringAxisSide)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringControlled", MouseSteeringVehicle.setMouseSteeringControlled)
@@ -784,4 +785,11 @@ end
 function MouseSteeringVehicle:getIsMouseSteeringUsed()
   local spec = self.spec_mouseSteeringVehicle
   return spec.isUsed
+end
+
+---Gets whether mouse steering is currently paused (e.g., during camera rotation)
+-- @return boolean isPaused true if mouse steering is paused
+function MouseSteeringVehicle:getIsMouseSteeringSteeringPaused()
+  local spec = self.spec_mouseSteeringVehicle
+  return spec.isUsed and spec.isSteeringPaused
 end

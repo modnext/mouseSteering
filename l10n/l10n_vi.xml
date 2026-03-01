@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Độ nhạy"/>
     <e k="mouseSteering_ui_invertXAxis" v="Đảo ngược trục X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Điều khiển dựa trên tốc độ"/>
+    <e k="mouseSteering_ui_speedControl" v="Điều Khiển Tốc Độ Bằng Chuột"/>
     <e k="mouseSteering_ui_linearity" v="Độ tuyến tính"/>
     <e k="mouseSteering_ui_smoothness" v="Độ mượt"/>
     <e k="mouseSteering_ui_deadzone" v="Vùng chết"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Điều chỉnh tốc độ phản hồi của điều khiển theo chuyển động chuột."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Đảo ngược trục ngang (X) cho điều khiển."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Điều chỉnh độ nhạy dựa trên tốc độ và góc điều khiển để kiểm soát tốt hơn."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Cho phép bạn điều chỉnh mượt mà tốc độ của xe bằng con lăn chuột."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Lưu ý: Nếu cuộn bị chặn, hãy kiểm tra các mod khác."/>
     <e k="mouseSteering_ui_linearity_desc" v="Điều chỉnh đường cong phản hồi điều khiển. Giá trị cao hơn cho phép kiểm soát chính xác hơn gần trung tâm."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Làm mịn đầu vào chuột để giảm thay đổi đột ngột của hệ thống lái."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Bỏ qua các chuyển động chuột nhỏ gần trung tâm để tránh thay đổi hệ thống lái không mong muốn."/>

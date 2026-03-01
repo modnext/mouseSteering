@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Sensibilitate"/>
     <e k="mouseSteering_ui_invertXAxis" v="Inversare axă X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Direcție bazată pe viteză"/>
+    <e k="mouseSteering_ui_speedControl" v="Control Viteză Mouse"/>
     <e k="mouseSteering_ui_linearity" v="Linearitate"/>
     <e k="mouseSteering_ui_smoothness" v="Fluiditate"/>
     <e k="mouseSteering_ui_deadzone" v="Zona moartă"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Reglează rapiditatea cu care direcția răspunde la mișcarea mouse-ului."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Inversează axa orizontală (X) pentru direcție."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Reglează sensibilitatea în funcție de viteză și unghiul de direcție pentru un control mai bun."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Vă permite să ajustați fin viteza vehiculului folosind rotița mouse-ului."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Notă: Dacă derularea este blocată, verificați alte moduri."/>
     <e k="mouseSteering_ui_linearity_desc" v="Reglează curba de răspuns a direcției. Valorile mai mari oferă un control mai fin în apropierea centrului."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Netezește mișcările mouse-ului pentru a reduce schimbările bruște ale direcției."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignoră mișcările mici ale mouse-ului în apropierea centrului pentru a preveni virarea accidentală."/>

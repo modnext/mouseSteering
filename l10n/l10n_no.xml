@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Følsomhet"/>
     <e k="mouseSteering_ui_invertXAxis" v="Inverter X-aksen"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Hastighetsbasert styring"/>
+    <e k="mouseSteering_ui_speedControl" v="Mus Hastighetskontroll"/>
     <e k="mouseSteering_ui_linearity" v="Linearitet"/>
     <e k="mouseSteering_ui_smoothness" v="Jevnhet"/>
     <e k="mouseSteering_ui_deadzone" v="Dødssone"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Justerer hvor raskt styringen reagerer på musebevegelser."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Inverterer den horisontale (X) aksen for styring."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Justerer følsomheten basert på hastighet og styrevinkel for bedre kontroll."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Lar deg jevnt justere kjøretøyets hastighet ved hjelp av musehjulet."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Merk: Hvis rulling er blokkert, sjekk andre mods."/>
     <e k="mouseSteering_ui_linearity_desc" v="Justerer styringsresponskurven. Høyere verdier gir finere kontroll nær midten."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Jevner ut musinngang for å redusere brå styreendringer."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignorerer små musbevegelser nær midten for å forhindre utilsiktet styring."/>

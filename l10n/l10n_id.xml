@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Sensitivitas"/>
     <e k="mouseSteering_ui_invertXAxis" v="Balik Sumbu X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Pengendalian Berbasis Kecepatan"/>
+    <e k="mouseSteering_ui_speedControl" v="Kontrol Kecepatan Mouse"/>
     <e k="mouseSteering_ui_linearity" v="Linearitas"/>
     <e k="mouseSteering_ui_smoothness" v="Kelancaran"/>
     <e k="mouseSteering_ui_deadzone" v="Zona Mati"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Menyesuaikan seberapa cepat pengendalian merespons gerakan mouse."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Membalik sumbu horizontal (X) untuk kemudi."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Menyesuaikan sensitivitas berdasarkan kecepatan dan sudut kemudi untuk kontrol yang lebih baik."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Memungkinkan Anda mengatur kecepatan kendaraan dengan mulus menggunakan roda mouse."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Catatan: Jika fungsi gulir diblokir, periksa mod lainnya."/>
     <e k="mouseSteering_ui_linearity_desc" v="Menyesuaikan kurva respons kemudi. Nilai yang lebih tinggi memberikan kontrol yang lebih halus di sekitar pusat."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Meratakan masukan mouse untuk mengurangi perubahan kemudi yang tiba-tiba."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Mengabaikan gerakan mouse kecil di dekat pusat untuk mencegah kemudi yang tidak disengaja."/>

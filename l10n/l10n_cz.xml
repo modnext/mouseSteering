@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Citlivost"/>
     <e k="mouseSteering_ui_invertXAxis" v="Obrátit osu X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Řízení založené na rychlosti"/>
+    <e k="mouseSteering_ui_speedControl" v="Ovládání Rychlosti Myší"/>
     <e k="mouseSteering_ui_linearity" v="Linearita"/>
     <e k="mouseSteering_ui_smoothness" v="Plynulost"/>
     <e k="mouseSteering_ui_deadzone" v="Mrtvá zóna"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Upravuje rychlost reakce řízení na pohyb myši."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Invertuje vodorovnou osu (X) pro řízení."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Upravuje citlivost na základě rychlosti a úhlu řízení pro lepší ovládání."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Umožňuje plynule nastavit rychlost vozidla pomocí kolečka myši."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Poznámka: Pokud je scrollování blokováno, zkontrolujte ostatní mody."/>
     <e k="mouseSteering_ui_linearity_desc" v="Upravuje křivku odezvy řízení. Vyšší hodnoty poskytují jemnější ovládání v blízkosti středu."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Vyhlazuje vstupy myši, aby se omezily náhlé změny řízení."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignoruje malé pohyby myši v blízkosti středu, aby se zabránilo neúmyslnému řízení."/>

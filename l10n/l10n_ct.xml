@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="靈敏度"/>
     <e k="mouseSteering_ui_invertXAxis" v="反轉X軸"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="速度導向轉向"/>
+    <e k="mouseSteering_ui_speedControl" v="滑鼠速度控制"/>
     <e k="mouseSteering_ui_linearity" v="線性度"/>
     <e k="mouseSteering_ui_smoothness" v="平滑度"/>
     <e k="mouseSteering_ui_deadzone" v="死區"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="調整滑鼠移動時轉向反應的靈敏度。"/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="反轉橫向（X軸）方向盤操作。"/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="依據車速與轉向角度調節靈敏度，提升操控精準度。"/>
+    <e k="mouseSteering_ui_speedControl_desc" v="允許您使用滑鼠滾輪平滑地調整車輛速度。"/>
+    <e k="mouseSteering_ui_speedControl_warn" v="注意：如果無法滾動，請檢查其他模組。"/>
     <e k="mouseSteering_ui_linearity_desc" v="調整方向盤反應曲線。數值越高，中心位置操控越精細。"/>
     <e k="mouseSteering_ui_smoothness_desc" v="平滑滑鼠輸入以減少方向盤的突兀轉向變化。"/>
     <e k="mouseSteering_ui_deadzone_desc" v="忽略中心附近的小幅度滑鼠移動，防止意外轉向。"/>

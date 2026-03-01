@@ -68,6 +68,11 @@
     <textMaxNumLines value="1"/>
     <textColor value="$preset_fs25_colorGreyText"/>
   </Profile>
+  <Profile name="mouseSteeringSettingsDescriptionWarning" extends="mouseSteeringSettingsDescription">
+    <textColor value="$preset_fs25_colorOrangeDark"/>
+    <textLayoutMode value="resize"/>
+    <textSize value="15px"/>
+  </Profile>
   <Profile name="mouseSteeringSettingsContainerNumLines2" extends="mouseSteeringSettingsContainer">
     <height value="105px"/>
   </Profile>

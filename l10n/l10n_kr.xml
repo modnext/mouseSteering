@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="감도"/>
     <e k="mouseSteering_ui_invertXAxis" v="X축 반전"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="속도 기반 조향"/>
+    <e k="mouseSteering_ui_speedControl" v="마우스 속도 제어"/>
     <e k="mouseSteering_ui_linearity" v="선형성"/>
     <e k="mouseSteering_ui_smoothness" v="부드러움"/>
     <e k="mouseSteering_ui_deadzone" v="데드존"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="마우스 움직임에 대한 조향 반응 속도를 조정합니다."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="조향 시 수평(X) 축을 반전합니다."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="속도와 조향 각도에 따라 감도를 조정하여 제어력을 향상시킵니다."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="마우스 휠을 사용하여 차량의 속도를 부드럽게 조절할 수 있습니다."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="참고: 스크롤이 차단된 경우 다른 모드를 확인하세요."/>
     <e k="mouseSteering_ui_linearity_desc" v="조향 반응 곡선을 조정합니다. 높은 값일수록 중앙 근처에서 정밀한 제어가 가능합니다."/>
     <e k="mouseSteering_ui_smoothness_desc" v="갑작스러운 조향 변화를 줄이기 위해 마우스 입력을 부드럽게 합니다."/>
     <e k="mouseSteering_ui_deadzone_desc" v="의도하지 않은 조향을 방지하기 위해 중앙 근처의 작은 마우스 움직임을 무시합니다."/>

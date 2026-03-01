@@ -77,6 +77,12 @@
             <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_speedBasedSteering_desc"/>
           </Bitmap>
           <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
+            <BinaryOption profile="mouseSteeringSettingsBinaryOption" id="speedControl" onClick="onToggleChanged"/>
+            <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_speedControl"/>
+            <Text profile="mouseSteeringSettingsDescription" text="$l10n_mouseSteering_ui_speedControl_desc" position="20px -1px"/>
+            <Text profile="mouseSteeringSettingsDescriptionWarning" text="$l10n_mouseSteering_ui_speedControl_warn" position="20px -21px"/>
+          </Bitmap>
+          <Bitmap profile="mouseSteeringSettingsContainerNumLines2">
             <MouseSteeringSliderOption profile="mouseSteeringSettingsSliderOption" id="linearity" onClick="onSliderChanged" minValue="0.10" stepSize="0.05" maxValue="3"/>
             <Text profile="mouseSteeringSettingsTitleNumLines2" text="$l10n_mouseSteering_ui_linearity"/>
             <Text profile="mouseSteeringSettingsDescriptionNumLines2" text="$l10n_mouseSteering_ui_linearity_desc"/>

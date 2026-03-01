@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Sensitivity"/>
     <e k="mouseSteering_ui_invertXAxis" v="Invert X-Axis"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Speed-Based Steering"/>
+    <e k="mouseSteering_ui_speedControl" v="Mouse Speed Control"/>
     <e k="mouseSteering_ui_linearity" v="Linearity"/>
     <e k="mouseSteering_ui_smoothness" v="Smoothness"/>
     <e k="mouseSteering_ui_deadzone" v="Deadzone"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Adjusts how quickly steering responds to mouse movement."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Inverts the horizontal (X) axis for steering."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Adjusts sensitivity based on speed and steering angle for better control."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Allows you to smoothly adjust the vehicle&apos;s speed using the mouse wheel."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Note: If scrolling is blocked, check other mods."/>
     <e k="mouseSteering_ui_linearity_desc" v="Adjusts the steering response curve. Higher values give finer control near center."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Smooths mouse input to reduce abrupt steering changes."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignores small mouse movements near center to prevent unintentional steering."/>

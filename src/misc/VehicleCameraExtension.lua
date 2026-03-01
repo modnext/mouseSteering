@@ -83,10 +83,18 @@ function VehicleCameraExtension:actionEventLookUpDown(superFunc, object, actionN
   end
 end
 
+---
+function VehicleCameraExtension:zoomSmoothly(superFunc, object, offset)
+  if self:canSteerWithMouse(true, object) then
+    return superFunc(object, offset)
+  end
+end
+
 ---Applies function hooks to VehicleCamera class
 function VehicleCameraExtension:overwriteGameFunctions()
   self:overwriteFunction(VehicleCamera, "actionEventLookLeftRight", self.actionEventLookLeftRight)
   self:overwriteFunction(VehicleCamera, "actionEventLookUpDown", self.actionEventLookUpDown)
+  self:overwriteFunction(VehicleCamera, "zoomSmoothly", self.zoomSmoothly)
 end
 
 ---Retrieves and resets the accumulated camera movement side displacement

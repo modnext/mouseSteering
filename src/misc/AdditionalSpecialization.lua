@@ -18,16 +18,28 @@ function AdditionalSpecialization.finalizeTypes(self)
   end
 
   -- compose the full specialization name using the mod's name
-  local specialization = modName .. ".mouseSteeringVehicle"
+  local mouseSteeringSpecialization = modName .. ".mouseSteeringVehicle"
+  local mouseSteeringSpeedControlSpecialization = modName .. ".mouseSteeringSpeedControl"
 
-  -- add mouse steering specialization to drivable vehicles (except locomotives)
+  -- iterate types and attach custom specializations
   for typeName, typeEntry in pairs(self:getTypes()) do
     local hasDrivable = SpecializationUtil.hasSpecialization(Drivable, typeEntry.specializations)
     local hasLocomotive = SpecializationUtil.hasSpecialization(Locomotive, typeEntry.specializations)
-    local hasMouseSteering = SpecializationUtil.hasSpecialization(specialization, typeEntry.specializations)
 
-    if hasDrivable and not hasLocomotive and not hasMouseSteering then
-      self:addSpecialization(typeName, specialization)
+    -- attach mouse steering to drivable vehicles (except locomotives)
+    if hasDrivable and not hasLocomotive then
+      local hasMouseSteering = SpecializationUtil.hasSpecialization(mouseSteeringSpecialization, typeEntry.specializations)
+      if not hasMouseSteering then
+        self:addSpecialization(typeName, mouseSteeringSpecialization)
+      end
+    end
+
+    -- attach speed control to drivable vehicles (except locomotives)
+    if hasDrivable and not hasLocomotive then
+      local hasMouseSteeringSpeedControl = SpecializationUtil.hasSpecialization(mouseSteeringSpeedControlSpecialization, typeEntry.specializations)
+      if not hasMouseSteeringSpeedControl then
+        self:addSpecialization(typeName, mouseSteeringSpeedControlSpecialization)
+      end
     end
   end
 end

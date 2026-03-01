@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Hassasiyet"/>
     <e k="mouseSteering_ui_invertXAxis" v="X Ekseni Ters Çevir"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Hıza Dayalı Direksiyon"/>
+    <e k="mouseSteering_ui_speedControl" v="Fare Hız Kontrolü"/>
     <e k="mouseSteering_ui_linearity" v="Doğrusallık"/>
     <e k="mouseSteering_ui_smoothness" v="Pürüzsüzlük"/>
     <e k="mouseSteering_ui_deadzone" v="Ölü Bölge"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Direksiyonun fare hareketine ne kadar hızlı tepki vereceğini ayarlar."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Direksiyon için yatay (X) ekseni ters çevirir."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Daha iyi kontrol için hız ve direksiyon açısına göre hassasiyeti ayarlar."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Fare tekerleğini kullanarak araç hızını sorunsuzca ayarlamanızı sağlar."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Not: Kaydırma engellenmişse diğer modları kontrol edin."/>
     <e k="mouseSteering_ui_linearity_desc" v="Direksiyon tepki eğrisini ayarlar. Daha yüksek değerler, merkezde daha hassas kontrol sağlar."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Ani direksiyon değişikliklerini azaltmak için fare girişini yumuşatır."/>
     <e k="mouseSteering_ui_deadzone_desc" v="İstenmeyen direksiyon hareketlerini önlemek için merkezin yakınındaki küçük fare hareketlerini yok sayar."/>
