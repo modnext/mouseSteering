@@ -15,6 +15,7 @@ MouseSteeringSpeedControl = {}
 -- @return boolean hasPrerequisite true if all prerequisite specializations are loaded
 function MouseSteeringSpeedControl.prerequisitesPresent(specializations)
   return SpecializationUtil.hasSpecialization(Drivable, specializations)
+      and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
 end
 
 ---Register all functions from the specialization that can be called on vehicle level

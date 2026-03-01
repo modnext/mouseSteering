@@ -34,8 +34,8 @@ function AdditionalSpecialization.finalizeTypes(self)
       end
     end
 
-    -- attach speed control to all drivable vehicles
-    if hasDrivable then
+    -- attach speed control to drivable vehicles (except locomotives)
+    if hasDrivable and not hasLocomotive then
       local hasMouseSteeringSpeedControl = SpecializationUtil.hasSpecialization(mouseSteeringSpeedControlSpecialization, typeEntry.specializations)
       if not hasMouseSteeringSpeedControl then
         self:addSpecialization(typeName, mouseSteeringSpeedControlSpecialization)
