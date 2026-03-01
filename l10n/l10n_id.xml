@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Simpan/Hapus Kendaraan"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Putar Kamera"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Aktifkan/Nonaktifkan Kamera Ikuti"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Pusatkan kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Pusatkan / Lihat ke Belakang"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktifkan"/>

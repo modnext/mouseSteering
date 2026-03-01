@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Uložit/odstranit vozidlo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Otočit kameru"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Přepnout sledování kamerou"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Vycentrovat kameru"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Vycentrovat / Pohled Dozadu"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivovat"/>

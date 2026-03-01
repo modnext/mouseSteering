@@ -102,6 +102,10 @@ function MouseSteeringVehicle:onLoad(savegame)
   -- camera rotation controller
   spec.cameraRotation = MouseSteeringCameraRotation.new(self)
 
+  -- double-click detection for center/look-back camera
+  spec.centerCameraLastClickTime = 0
+  spec.centerCameraDoubleClickThreshold = 300
+
   -- create unique identifier
   spec.uniqueId = self:getUniqueId()
 
@@ -284,7 +288,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
   end
 end
 
----Action event handler for centering camera
+---Action event handler for centering camera (single click) and look-back (double click)
 function MouseSteeringVehicle.actionEventCenterCamera(self, actionName, inputValue, callbackState, isAnalog)
   if inputValue ~= 1 then
     return
@@ -296,8 +300,20 @@ function MouseSteeringVehicle.actionEventCenterCamera(self, actionName, inputVal
     return
   end
 
+  -- detect double click
+  local now = g_time
+  local isDoubleClick = (now - spec.centerCameraLastClickTime) < spec.centerCameraDoubleClickThreshold
+  spec.centerCameraLastClickTime = now
+
   local camera = self:getActiveCamera()
-  spec.cameraRotation:centerCamera(camera)
+
+  -- center camera or look back
+  if isDoubleClick then
+    local centerVertical = spec.cameraRotation:getCenterVertical()
+    spec.cameraRotation:lookBack(camera, centerVertical)
+  else
+    spec.cameraRotation:centerCamera(camera)
+  end
 end
 
 ---Updates HUD display visibility and content

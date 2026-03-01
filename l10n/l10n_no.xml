@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Lagre/fjern kjøretøy"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Roter kamera"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Slå på/av kamera som følger"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Sentrer kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Sentrer / Se Bakover"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktiver"/>

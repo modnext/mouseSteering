@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Lưu/Xóa phương tiện"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Xoay camera"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Chuyển đổi theo dõi bằng camera"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Căn giữa camera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Căn giữa / Nhìn ra Sau"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Kích hoạt"/>
