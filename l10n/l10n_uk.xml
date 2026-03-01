@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Зберегти/Видалити транспортний засіб"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Повернути камеру"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Переключити камеру слідування"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Центрувати камеру"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Центрувати / Подивитися Назад"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Активувати"/>

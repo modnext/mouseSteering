@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Aracı Kaydet/Sil"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamerayı Döndür"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Kamera Takipini Aç/Kapat"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamerayı ortala"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Ortala / Geriye Bak"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Etkinleştir"/>

@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Jármű mentése/eltávolítása"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kamera forgatása"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Kamera követésének váltása"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Kamera középre"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Középre / Hátranézés"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktiválás"/>

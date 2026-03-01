@@ -47,6 +47,7 @@ function MouseSteeringCameraRotation.new(vehicle)
   self.lastCenterRotY = nil
   self.lastCenterRotX = nil
   self.centeringRotX = false
+  self.centerDirectDiff = false
 
   return self
 end
@@ -267,6 +268,7 @@ function MouseSteeringCameraRotation:cancelCentering()
   self.lastCenterRotY = nil
   self.lastCenterRotX = nil
   self.centeringRotX = false
+  self.centerDirectDiff = false
 end
 
 ---Resets camera rotation tracking state
@@ -345,6 +347,9 @@ function MouseSteeringCameraRotation:requestCenter(camera, intensity, deadzoneDe
 
   self.centering = true
   self.lastCenterRotY = camera.rotY
+
+  -- to prevent 360 degree spin when returning from 180 lookback
+  self.centerDirectDiff = true
 end
 
 ---Requests camera centering using current settings
@@ -355,6 +360,47 @@ function MouseSteeringCameraRotation:centerCamera(camera)
   local centerVertical = self:getCenterVertical()
 
   self:requestCenter(camera, intensity, deadzoneDegrees, centerVertical)
+end
+
+---Requests camera rotation to look backwards
+-- @param camera table Active camera
+-- @param centerVertical boolean Whether to also center vertical (X) rotation
+function MouseSteeringCameraRotation:lookBack(camera, centerVertical)
+  if camera == nil then
+    return
+  end
+
+  local baseRotY = camera.origRotY or 0
+  local targetRotY
+
+  -- check CabView limits
+  local minRot, maxRot = self:getCabViewLimits(camera)
+  -- look back over right shoulder to mod's rightmost limit
+  if minRot ~= nil and maxRot ~= nil then
+    targetRotY = minRot
+  else
+    targetRotY = baseRotY - math.pi
+  end
+
+  -- set target rotation
+  self.centerTargetRotY = targetRotY
+  self.centeringWithSteering = false
+  self.centerSteeringOffset = 0
+  self.centerDirectDiff = true
+
+  -- setup vertical (X) rotation centering if enabled
+  self.centeringRotX = centerVertical or false
+  if self.centeringRotX then
+    self.centerTargetRotX = camera.origRotX or 0
+    self.lastCenterRotX = camera.rotX
+  else
+    self.centerTargetRotX = nil
+    self.lastCenterRotX = nil
+  end
+
+  -- set centering state
+  self.centering = true
+  self.lastCenterRotY = camera.rotY
 end
 
 ---Requests camera centering to original position (no steering follow)
@@ -382,6 +428,7 @@ function MouseSteeringCameraRotation:requestCenterToOrigin(camera, centerVertica
 
   self.centering = true
   self.lastCenterRotY = camera.rotY
+  self.centerDirectDiff = true
 end
 
 ---Updates camera centering with smooth transition to target
@@ -428,7 +475,14 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
   end
 
   -- calculate differences
-  local diffY = self:getAngleDiff(camera.rotY, self.centerTargetRotY, camera)
+  local diffY
+  if self.centerDirectDiff then
+    -- raw difference without shortest-path jumping to prevent 360 spin
+    diffY = self.centerTargetRotY - camera.rotY
+  else
+    diffY = self:getAngleDiff(camera.rotY, self.centerTargetRotY, camera)
+  end
+
   local diffX = 0
   if self.centeringRotX and self.centerTargetRotX ~= nil then
     diffX = self.centerTargetRotX - camera.rotX

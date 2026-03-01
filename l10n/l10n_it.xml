@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salva/Rimuovi veicolo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Ruota telecamera"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Attiva/disattiva fotocamera che segue"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centra telecamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centra / Guarda Indietro"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Attiva"/>

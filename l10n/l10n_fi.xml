@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Tallenna/poista ajoneuvo"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Kierrä kameraa"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Vaihda kameran seuraavaksi"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Keskitä kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Keskitä / Katso Taakse"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivoi"/>

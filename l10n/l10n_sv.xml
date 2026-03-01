@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Spara/ta bort fordon"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotera kamera"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Slå på/av kamera följer"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrera kamera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrera / Titta Bakåt"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Aktivera"/>

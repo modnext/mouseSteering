@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="Salvare/Eliminare vehicul"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="Rotire cameră"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="Comutare urmărire cameră"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrează camera"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="Centrează / Privire în Spate"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="Activare"/>

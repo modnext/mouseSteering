@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="차량 저장/제거"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="카메라 회전"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="카메라 추적 토글"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="카메라 중앙"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="센터 / 뒤로보기"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="활성화"/>

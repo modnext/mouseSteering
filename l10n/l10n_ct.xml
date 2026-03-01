@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="儲存/移除載具"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="旋轉鏡頭"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="切換攝影機跟隨"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="置中攝影機"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="置中 / 向後看"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="啟用"/>

@@ -6,7 +6,7 @@
     <e k="input_TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE" v="車両の保存/削除"/>
     <e k="input_TOGGLE_MOUSE_STEERING_ROTATE_CAMERA" v="カメラの回転"/>
     <e k="input_TOGGLE_MOUSE_STEERING_CAMERA_FOLLOW" v="カメラ追従の切り替え"/>
-    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="カメラを中央に"/>
+    <e k="input_TOGGLE_MOUSE_STEERING_CENTER_CAMERA" v="センター / 後方確認"/>
 
     <!-- Actions -->
     <e k="mouseSteering_modeSteering_activate" v="有効化"/>
