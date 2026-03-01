@@ -278,7 +278,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local camera = self:getActiveCamera()
     local camIndex = self.spec_enterable and self.spec_enterable.camIndex or 0
 
-    local isCameraFollowAllowed = spec.cameraRotationActive and not isWorkerAIActive and (not isAIActive or spec.settings.steeringAssist == true)
+    local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive and (not isAIActive or spec.settings.steeringAssist == true)
     spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
     spec.cameraRotation:update(dt, camera, camIndex, spec.isSteeringPaused)
   end
@@ -389,7 +389,7 @@ function MouseSteeringVehicle:onEnterVehicle()
     local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
 
     -- disable camera follow when a worker is controlling the vehicle
-    local isCameraFollowAllowed = spec.cameraRotationActive and not isWorkerAIActive
+    local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive
     spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
 
     local enterableSpec = self.spec_enterable
