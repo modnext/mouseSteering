@@ -89,6 +89,7 @@ end
 function MouseSteeringSpeedControl:getSpeedControlEnabled()
   local spec = self.spec_mouseSteeringSpeedControl
 
+  -- get speed control setting
   local speedControlState = spec.settings.speedControl
 
   -- default to false if not set
@@ -103,9 +104,12 @@ end
 -- @return boolean isSpeedControlActive true if speed control is active
 function MouseSteeringSpeedControl:getIsActive()
   local spec = self.spec_mouseSteeringSpeedControl
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
 
-  return speedControlEnabled and spec.isActive
+  -- get speed control setting and mouse steering usage
+  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
+  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
+
+  return speedControlEnabled and isMouseSteeringUsed and spec.isActive
 end
 
 ---Gets display info for HUD
@@ -176,10 +180,13 @@ end
 ---Called on update
 function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
   local spec = self.spec_mouseSteeringSpeedControl
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
 
-  -- force-disable speed control when setting is off
-  if not speedControlEnabled then
+  -- get speed control setting and mouse steering usage
+  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
+  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
+
+  -- force-disable speed control when setting is off or mouse steering is not used
+  if not speedControlEnabled or not isMouseSteeringUsed then
     if spec.isActive then
       MouseSteeringSpeedControl.deactivate(spec)
     end
@@ -223,10 +230,13 @@ end
 ---Overrides cruise control display to show speed control info
 function MouseSteeringSpeedControl:getCruiseControlDisplayInfo(superFunc)
   local spec = self.spec_mouseSteeringSpeedControl
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
 
-  -- show speed control info when active
-  if speedControlEnabled and spec.isActive then
+  -- get speed control setting and mouse steering usage
+  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
+  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
+
+  -- show speed control info when active and mouse steering is used
+  if speedControlEnabled and isMouseSteeringUsed and spec.isActive then
     return math.abs(spec.targetSpeedKmh), true
   end
 
@@ -236,6 +246,8 @@ end
 ---Overrides cruise control state to deactivate speed control when CC is activated
 function MouseSteeringSpeedControl:setCruiseControlState(superFunc, state, noEventSend)
   local spec = self.spec_mouseSteeringSpeedControl
+
+  -- get speed control setting
   local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
 
   -- force-disable speed control when setting is off
@@ -255,10 +267,13 @@ end
 function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, axisSide, doHandbrake, dt)
   local spec = self.spec_mouseSteeringSpeedControl
   local motor = self:getMotor()
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
 
-  -- force-disable speed control when setting is off
-  if not speedControlEnabled then
+  -- get speed control setting and mouse steering usage
+  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
+  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
+
+  -- force-disable speed control when setting is off or mouse steering is not used
+  if not speedControlEnabled or not isMouseSteeringUsed then
     if spec.isActive then
       MouseSteeringSpeedControl.deactivate(spec)
     end
