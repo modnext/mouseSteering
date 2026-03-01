@@ -34,7 +34,7 @@
 | `Ctrl + /`     | Save/Remove Vehicle          |
 | `Alt`          | Rotate Camera                |
 | `Ctrl + ,`     | Toggle Camera Follow         |
-| `Ctrl + Space` | Center Camera                |
+| `Ctrl + Space` | Center / Look Back           |
 
 **Note:** You can customize these keybindings in the game's Options menu under the "Mouse Steering" section.
 
