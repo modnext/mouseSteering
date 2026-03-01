@@ -7,6 +7,7 @@
   <sensitivity>1.000000</sensitivity>
   <invertXAxis>false</invertXAxis>
   <speedBasedSteering>false</speedBasedSteering>
+  <speedControl>false</speedControl>
   <linearity>1.000000</linearity>
   <smoothness>0.000000</smoothness>
   <deadzone>0.000000</deadzone>

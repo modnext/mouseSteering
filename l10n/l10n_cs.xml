@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="灵敏度"/>
     <e k="mouseSteering_ui_invertXAxis" v="反转X轴"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="基于速度的转向"/>
+    <e k="mouseSteering_ui_speedControl" v="鼠标速度控制"/>
     <e k="mouseSteering_ui_linearity" v="线性度"/>
     <e k="mouseSteering_ui_smoothness" v="平滑度"/>
     <e k="mouseSteering_ui_deadzone" v="死区"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="调整转向对鼠标移动的响应速度。"/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="反转转向的水平（X）轴。"/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="根据速度和转向角调整灵敏度，以获得更好的控制。"/>
+    <e k="mouseSteering_ui_speedControl_desc" v="允许您使用鼠标滚轮平滑地调整车辆速度。"/>
+    <e k="mouseSteering_ui_speedControl_warn" v="注意：如果无法滚动，请检查其他模组。"/>
     <e k="mouseSteering_ui_linearity_desc" v="调整转向响应曲线。较高数值在中间位置提供更精细的控制。"/>
     <e k="mouseSteering_ui_smoothness_desc" v="平滑鼠标输入，减少突然的转向变化。"/>
     <e k="mouseSteering_ui_deadzone_desc" v="忽略靠近中心的小幅鼠标移动，防止无意的转向。"/>

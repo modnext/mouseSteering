@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Sensibilidad"/>
     <e k="mouseSteering_ui_invertXAxis" v="Invertir eje X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Dirección basada en velocidad"/>
+    <e k="mouseSteering_ui_speedControl" v="Control de Velocidad del Ratón"/>
     <e k="mouseSteering_ui_linearity" v="Linealidad"/>
     <e k="mouseSteering_ui_smoothness" v="Suavidad"/>
     <e k="mouseSteering_ui_deadzone" v="Zona muerta"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Ajusta qué tan rápido responde la dirección al movimiento del mouse."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Invierte el eje horizontal (X) para la dirección."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Ajusta la sensibilidad según la velocidad y el ángulo de dirección para un mejor control."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Permite ajustar suavemente la velocidad del vehículo usando la rueda del ratón."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Nota: Si el desplazamiento está bloqueado, revisa otros mods."/>
     <e k="mouseSteering_ui_linearity_desc" v="Ajusta la curva de respuesta de la dirección. Valores más altos dan un control más preciso cerca del centro."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Suaviza la entrada del mouse para reducir cambios bruscos de dirección."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignora movimientos pequeños del mouse cerca del centro para evitar dirección no intencional."/>

@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Czułość"/>
     <e k="mouseSteering_ui_invertXAxis" v="Odwróć Oś X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Sterowanie Oparte na Prędkości"/>
+    <e k="mouseSteering_ui_speedControl" v="Regulacja Prędkości Myszką"/>
     <e k="mouseSteering_ui_linearity" v="Liniowość"/>
     <e k="mouseSteering_ui_smoothness" v="Płynność"/>
     <e k="mouseSteering_ui_deadzone" v="Martwa Strefa"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Reguluje szybkość reakcji sterowania na ruch myszy."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Odwraca poziomą oś (X) kierowania."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Dostosowuje czułość w oparciu o prędkość i kąt skrętu kierownicy, zapewniając lepszą kontrolę."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Pozwala na płynną zmianę prędkości pojazdu za pomocą kółka myszy."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Uwaga: Brak reakcji na scroll? Sprawdź konflikty z innymi modami."/>
     <e k="mouseSteering_ui_linearity_desc" v="Dostosowuje krzywą reakcji kierownicy. Wyższe wartości zapewniają większą precyzję sterowania w pobliżu środka."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Wygładza ruchy myszy, aby ograniczyć gwałtowne zmiany kierowania."/>
     <e k="mouseSteering_ui_deadzone_desc" v="Ignoruje niewielkie ruchy myszy w pobliżu środka, aby zapobiec niezamierzonemu kierowaniu."/>

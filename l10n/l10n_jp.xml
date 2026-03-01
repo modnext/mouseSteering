@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="感度"/>
     <e k="mouseSteering_ui_invertXAxis" v="X軸反転"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="速度連動ステアリング"/>
+    <e k="mouseSteering_ui_speedControl" v="マウス速度制御"/>
     <e k="mouseSteering_ui_linearity" v="直線性"/>
     <e k="mouseSteering_ui_smoothness" v="スムースネス"/>
     <e k="mouseSteering_ui_deadzone" v="デッドゾーン"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="マウス操作に対する操舵反応速度を調整します。"/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="ステアリングの水平（X）軸を反転します。"/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="速度とステアリング角度に基づいて感度を調整し、操作性を向上させます。"/>
+    <e k="mouseSteering_ui_speedControl_desc" v="マウスホイールを使用して、車両の速度をスムーズに調整できます。"/>
+    <e k="mouseSteering_ui_speedControl_warn" v="注: スクロールがブロックされている場合は、他のMODを確認してください。"/>
     <e k="mouseSteering_ui_linearity_desc" v="ステアリング応答曲線を調整します。値が高いほど中央付近での微細な操作が可能になります。"/>
     <e k="mouseSteering_ui_smoothness_desc" v="マウス入力を滑らかにし、急激なステアリング変化を軽減します。"/>
     <e k="mouseSteering_ui_deadzone_desc" v="意図しないステアリングを防ぐため、中央付近の微小なマウス操作を無視します。"/>

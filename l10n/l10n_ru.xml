@@ -35,6 +35,7 @@
     <e k="mouseSteering_ui_sensitivity" v="Чувствительность"/>
     <e k="mouseSteering_ui_invertXAxis" v="Инвертировать ось X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Управление по скорости"/>
+    <e k="mouseSteering_ui_speedControl" v="Управление скоростью мышью"/>
     <e k="mouseSteering_ui_linearity" v="Линейность"/>
     <e k="mouseSteering_ui_smoothness" v="Плавная работа"/>
     <e k="mouseSteering_ui_deadzone" v="Мертвая зона"/>
@@ -51,6 +52,8 @@
     <e k="mouseSteering_ui_sensitivity_desc" v="Регулирует скорость реакции управления на движение мыши."/>
     <e k="mouseSteering_ui_invertXAxis_desc" v="Инвертирует горизонтальную (X) ось для управления."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Регулирует чувствительность в зависимости от скорости и угла поворота для лучшего управления."/>
+    <e k="mouseSteering_ui_speedControl_desc" v="Позволяет плавно регулировать скорость транспортного средства с помощью колесика мыши."/>
+    <e k="mouseSteering_ui_speedControl_warn" v="Примечание: Если прокрутка заблокирована, проверьте другие моды."/>
     <e k="mouseSteering_ui_linearity_desc" v="Регулирует кривую отклика рулевого управления. Более высокие значения обеспечивают более точное управление вблизи центра."/>
     <e k="mouseSteering_ui_smoothness_desc" v="сглаживает ввод мыши, чтобы уменьшить резкие изменения рулевого управления."/>
     <e k="mouseSteering_ui_deadzone_desc" v="игнорирует небольшие движения мыши вблизи центра, чтобы предотвратить непреднамеренное рулевое управление."/>

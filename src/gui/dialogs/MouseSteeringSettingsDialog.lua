@@ -188,6 +188,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   -- switches
   self.invertXAxis:setIsChecked(settings.invertXAxis, true)
   self.speedBasedSteering:setIsChecked(settings.speedBasedSteering, true)
+  self.speedControl:setIsChecked(settings.speedControl, true)
   self.steeringAssist:setIsChecked(settings.steeringAssist, true)
   self.steeringAssistLockout:setIsChecked(settings.steeringAssistLockout, true)
   self.autoSave:setIsChecked(settings.autoSave, true)
