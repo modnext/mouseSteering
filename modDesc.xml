@@ -17,10 +17,10 @@
 Hotkeys:
 - Press Left Ctrl + . to toggle Mouse Steering.
 - Press Left Ctrl + , to toggle Camera Follow Steering.
-- Press Left Ctrl + SPACE to center camera or look back (double-click).
+- Press Left Ctrl + SPACE to center camera or double-click to look back.
 - Hold Left Alt key to rotate camera with mouse.
-- Press Left Ctrl + / to set steering as default for the current vehicle (toggle).
-- Use Mouse Wheel to adjust vehicle speed (when active).
+- Press Left Ctrl + / to save/remove steering as default for the current vehicle.
+- Use Mouse Wheel to adjust vehicle speed when active.
 
 Changelog Version 1.2.x:
 - Migrated to FS25 and reworked codebase
@@ -43,10 +43,10 @@ For more information or to report a bug, please visit GitHub (modnext/mouseSteer
 Tastenkombinationen:
 - Drücken Sie Linke Strg + . , um die Maussteuerung umzuschalten.
 - Drücken Sie Linke Strg + , , um die Kamera-Lenkungsfolge umzuschalten.
-- Drücken Sie Linke Strg + LEER, um die Kamera zu zentrieren oder zurückzublicken (Doppelklick).
+- Drücken Sie Linke Strg + LEER, um die Kamera zu zentrieren oder per Doppelklick zurückzublicken.
 - Halten Sie die Taste Linke Alt gedrückt, um die Kamera mit der Maus zu drehen.
-- Drücken Sie Linke Strg + / , um die Steuerung für das aktuelle Fahrzeug als Standard festzulegen (umschalten).
-- Verwenden Sie das Mausrad, um die Fahrzeuggeschwindigkeit anzupassen (wenn aktiv).
+- Drücken Sie Linke Strg + / , um die Steuerung für das aktuelle Fahrzeug als Standard zu speichern/entfernen.
+- Verwenden Sie das Mausrad, um die Fahrzeuggeschwindigkeit anzupassen, wenn aktiv.
 
 Änderungsprotokoll Version 1.2.x:
 - Migration zu FS25 und Codebasis überarbeitet
@@ -69,10 +69,10 @@ Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte Gi
 Raccourcis clavier:
 - Appuyez sur Ctrl Gauche + . pour activer/désactiver la direction à la souris.
 - Appuyez sur Ctrl Gauche + , pour activer/désactiver le suivi de la caméra.
-- Appuyez sur Ctrl Gauche + ESPACE pour centrer la caméra ou regarder en arrière (double-clic).
+- Appuyez sur Ctrl Gauche + ESPACE pour centrer la caméra ou double-cliquez pour regarder en arrière.
 - Maintenez la touche Alt Gauche enfoncée pour faire pivoter la caméra à la souris.
-- Appuyez sur Ctrl Gauche + / pour définir la direction par défaut pour le véhicule actuel (basculer).
-- Utilisez la molette de la souris pour ajuster la vitesse du véhicule (si actif).
+- Appuyez sur Ctrl Gauche + / pour sauvegarder/supprimer la direction par défaut pour le véhicule actuel.
+- Utilisez la molette de la souris pour ajuster la vitesse du véhicule si activé.
 
 Journal des modifications version 1.2.x:
 - Migration vers FS25 et refonte du code
@@ -95,10 +95,10 @@ Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modne
 Skróty klawiszowe:
 - Naciśnij Lewy Ctrl + . , aby włączyć/wyłączyć sterowanie myszą.
 - Naciśnij Lewy Ctrl + , , aby włączyć/wyłączyć śledzenie skrętu przez kamerę.
-- Naciśnij Lewy Ctrl + SPACJA, aby wycentrować kamerę lub spojrzeć w tył (dwuklik).
+- Naciśnij Lewy Ctrl + SPACJA, aby wycentrować kamerę lub kliknij dwukrotnie, aby spojrzeć w tył.
 - Przytrzymaj klawisz Lewy Alt, aby obracać kamerę myszą.
-- Naciśnij Lewy Ctrl + / , aby ustawić sterowanie jako domyślne dla obecnego pojazdu (włącza/wyłącza).
-- Użyj rolki myszy, aby dostosować prędkość pojazdu (gdy włączone).
+- Naciśnij Lewy Ctrl + / , aby zapisać/usunąć sterowanie jako domyślne dla obecnego pojazdu.
+- Użyj rolki myszy, aby dostosować prędkość pojazdu, gdy jest włączone.
 
 Lista zmian w wersji 1.2.x:
 - Migracja do FS25 i przebudowa kodu
@@ -121,10 +121,10 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 Горячие клавиши:
 - Нажмите Левый Ctrl + . , чтобы включить/выключить управление мышью.
 - Нажмите Левый Ctrl + , , чтобы включить/выключить следование камеры за рулем.
-- Нажмите Левый Ctrl + ПРОБЕЛ, чтобы центрировать камеру или посмотреть назад (двойной щелчок).
+- Нажмите Левый Ctrl + ПРОБЕЛ, чтобы центрировать камеру или дважды щелкните, чтобы посмотреть назад.
 - Удерживайте клавишу Левый Alt, чтобы вращать камеру мышью.
-- Нажмите Левый Ctrl + / , чтобы установить управление по умолчанию для текущего транспорта (вкл/выкл).
-- Используйте колесико мыши для регулировки скорости транспорта (когда активно).
+- Нажмите Левый Ctrl + / , чтобы сохранить/удалить управление по умолчанию для текущего транспорта.
+- Используйте колесико мыши для регулировки скорости транспорта, когда оно активно.
 
 Журнал изменений версии 1.2.x:
 - Переход на FS25 и доработка кода
