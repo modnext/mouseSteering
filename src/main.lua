@@ -88,33 +88,30 @@ local function unload()
 end
 
 ---Called when connection loading is finished
-local function onConnectionFinishedLoading(mission, superFunc, connection, x, y, z, viewDistanceCoeff)
-  if not isLoaded() then
-    return superFunc(mission, connection, x, y, z, viewDistanceCoeff)
-  end
+local function onConnectionFinishedLoading(mission, superFunc, connection, ...)
+  superFunc(mission, connection, ...)
 
-  superFunc(mission, connection, x, y, z, viewDistanceCoeff)
-  modEnvironment:onConnectionFinishedLoading(connection)
+  if modEnvironment ~= nil then
+    modEnvironment:onConnectionFinishedLoading(connection)
+  end
 end
 
 ---Called when vehicle is sold in shop
-local function shopControllerSellVehicle(shopController, superFunc, vehicle, isDirectSell)
-  if g_currentMission ~= nil and g_currentMission.mouseSteering ~= nil then
-    g_currentMission.mouseSteering:onVehicleSellDirect(vehicle, isDirectSell)
+local function shopControllerSellVehicle(shopController, superFunc, vehicle, isDirectSell, ...)
+  if modEnvironment ~= nil then
+    modEnvironment:onVehicleSellDirect(vehicle, isDirectSell)
   end
 
-  return superFunc(shopController, vehicle, isDirectSell)
+  return superFunc(shopController, vehicle, isDirectSell, ...)
 end
 
 ---Called when drawing vehicle name in HUD
-local function hudDrawVehicleName(hud, superFunc)
-  local isMouseSteering = g_currentMission.mouseSteering ~= nil and g_currentMission.mouseSteering:getHudVisible()
-
-  if isMouseSteering then
+local function hudDrawVehicleName(hud, superFunc, ...)
+  if modEnvironment ~= nil and modEnvironment:getHudVisible() then
     return
   end
 
-  return superFunc(hud)
+  return superFunc(hud, ...)
 end
 
 -- Init the mod
