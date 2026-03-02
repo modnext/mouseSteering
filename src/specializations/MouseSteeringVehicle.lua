@@ -193,19 +193,24 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         self:setMouseSteeringSteeringPaused(false)
       end
 
-      -- check for active combos
-      local inputDisplayManager = g_inputDisplayManager
-      local useGamepadButtons = (inputBinding:getInputHelpMode() == GS_INPUT_HELP_MODE_GAMEPAD)
-      local hasCombos = next(inputDisplayManager:getComboHelpElements(useGamepadButtons)) ~= nil
+      local isPaused = spec.isSteeringPaused or isUiVisible
 
-      local isComboActive = false
-      if hasCombos then
-        local pressedComboMaskGamepad, pressedComboMaskMouse = inputBinding:getComboCommandPressedMask()
-        local currentPressedMask = useGamepadButtons and pressedComboMaskGamepad or pressedComboMaskMouse
-        isComboActive = currentPressedMask ~= 0
+      -- check for active combos only if not already paused
+      if not isPaused then
+        local inputDisplayManager = g_inputDisplayManager
+        local useGamepadButtons = (inputBinding:getInputHelpMode() == GS_INPUT_HELP_MODE_GAMEPAD)
+        local hasCombos = next(inputDisplayManager:getComboHelpElements(useGamepadButtons)) ~= nil
+
+        if hasCombos then
+          local pressedComboMaskGamepad, pressedComboMaskMouse = inputBinding:getComboCommandPressedMask()
+          local currentPressedMask = useGamepadButtons and pressedComboMaskGamepad or pressedComboMaskMouse
+          
+          if currentPressedMask ~= 0 then
+            isPaused = true
+          end
+        end
       end
 
-      local isPaused = spec.isSteeringPaused or isUiVisible or isComboActive
       local isPowered = self.getIsPowered == nil or self:getIsPowered()
       local movedSide = spec.mouseSteering:getMovedSide()
 
@@ -213,14 +218,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         local speedKmh = (self.getLastSpeed ~= nil) and self:getLastSpeed() or 0
 
         -- update controller with new input values
-        local newRawInput, newAxisValue = spec.controller:update({
-          inputValue = spec.inputValue,
-          axisSide = spec.axisSide,
-          settings = spec.settings,
-          movedSide = movedSide,
-          isPaused = isPaused,
-          speedKmh = speedKmh,
-        }, dt)
+        local newRawInput, newAxisValue = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
 
         -- update input values
         spec.inputValue = newRawInput
@@ -338,13 +336,16 @@ function MouseSteeringVehicle:updateMouseSteeringHUD()
   else
     -- handle visibility mode
     local hudSetting = tostring(spec.settings.indicatorMode)
-    local hudVisibility = {
-      ["both"] = true,
-      ["inside"] = activeCamera.isInside,
-      ["outside"] = not activeCamera.isInside,
-    }
 
-    isVisible = hudVisibility[hudSetting] or false
+    if hudSetting == "both" then
+      isVisible = true
+    elseif hudSetting == "inside" then
+      isVisible = activeCamera.isInside
+    elseif hudSetting == "outside" then
+      isVisible = not activeCamera.isInside
+    else
+      isVisible = false
+    end
 
     -- check backwards view inside cabin
     if isVisible and spec.settings.indicatorLookBackInside and activeCamera.isInside then

@@ -180,23 +180,19 @@ function MouseSteeringController:computeUnifiedSensitivity(speedKmh, steeringAng
   return math.clamp(calculatedSensitivity, self.minSensitivity, self.maxSensitivity)
 end
 
----Validates update parameters and extracts values from context
-function MouseSteeringController:validateUpdateParameters(context, dt)
-  local steerRaw = context.inputValue
-  local axisSide = context.axisSide
-  local settings = context.settings
-
+---Validates update parameters and extracts values
+function MouseSteeringController:validateUpdateParameters(inputValue, axisSide, settings, dt)
   -- validate input parameters
   if not settings then
-    return false, steerRaw, axisSide
+    return false, inputValue, axisSide
   end
 
   -- ensure delta time is reasonable
   if dt and dt < 0 then
-    return false, steerRaw, axisSide
+    return false, inputValue, axisSide
   end
 
-  return true, steerRaw, axisSide
+  return true, inputValue, axisSide
 end
 
 ---Applies deadzone to an input value, returning 0 if within deadzone
@@ -255,16 +251,12 @@ function MouseSteeringController:applyDeadzoneCompensation(currentValue, deadzon
 end
 
 ---Updates the steering controller with new input values and applies all transformations
-function MouseSteeringController:update(context, dt)
-  local isValid, steerRaw, axisSide = self:validateUpdateParameters(context, dt)
+function MouseSteeringController:update(inputValue, axisSide, settings, movedSide, isPaused, speedKmh, dt)
+  local isValid, steerRaw, axisSide = self:validateUpdateParameters(inputValue, axisSide, settings, dt)
+  
   if not isValid then
     return steerRaw, axisSide
   end
-
-  local settings = context.settings
-  local movedSide = context.movedSide
-  local vehicleSpeedKmh = context.speedKmh
-  local isPaused = context.isPaused
 
   -- calculate deadzone parameters
   local deadzoneThreshold, maxInputRange = self:calculateEffectiveDeadzone(settings)
@@ -272,7 +264,7 @@ function MouseSteeringController:update(context, dt)
   -- apply sensitivity and input integration
   if not isPaused then
     local currentSteeringAngle = math.abs(axisSide)
-    local effectiveSensitivityFactor = self:computeEffectiveSensitivity(settings, vehicleSpeedKmh, currentSteeringAngle)
+    local effectiveSensitivityFactor = self:computeEffectiveSensitivity(settings, speedKmh, currentSteeringAngle)
 
     local baseSensitivity = settings.sensitivity or 1.0
     local finalSensitivity = math.max(baseSensitivity * effectiveSensitivityFactor, 0.001)
