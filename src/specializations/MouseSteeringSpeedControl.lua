@@ -147,7 +147,9 @@ function MouseSteeringSpeedControl.onScrollWheel(spec, vehicle, direction)
     if vehicle.getLastSpeed ~= nil then
       local movingDir = vehicle.movingDirection or 0
       local reverserDir = vehicle:getReverserDirection()
-      currentSpeedKmh = vehicle:getLastSpeed() * movingDir * reverserDir
+      local isManualDir = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
+      local currentDir = isManualDir and (motor.currentDirection or 1) or 1
+      currentSpeedKmh = vehicle:getLastSpeed() * movingDir * reverserDir * currentDir
     end
 
     -- eliminate physical jitter at standstill
