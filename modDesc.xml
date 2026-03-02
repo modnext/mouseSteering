@@ -12,131 +12,136 @@
   </title>
 
   <description>
-    <en><![CDATA[Enables mouse-based control of vehicle steering, with fully configurable sensitivity, linearity, dead zone, smoothness, and more.
+    <en><![CDATA[Steer your vehicles with the mouse for a more natural and fluid driving experience. Easily customize sensitivity, linearity, and dead zones via the settings button in the general settings menu. Features include a clear HUD indicator, speed-adaptive steering for better precision at high speeds, and an automatic camera-follow system.
 
-Changelog Version 1.2.0.0:
-- Migrated to FS25
-- Codebase reworked
+Hotkeys:
+- Press Left Ctrl + . to toggle Mouse Steering.
+- Press Left Ctrl + , to toggle Camera Follow Steering.
+- Press Left Ctrl + SPACE to center camera or look back (double-click).
+- Hold Left Alt key to rotate camera with mouse.
+- Press Left Ctrl + / to save or remove vehicle (remembers steering state).
+- Use Mouse Wheel to adjust vehicle speed (when active).
 
-Changelog Version 1.2.0.1:
-- Improved session persistence across enter/leave
-- Added per-vehicle toggle even when Default=ON (Default applies only initially)
-
-Changelog Version 1.2.0.2:
+Changelog Version 1.2.x:
+- Migrated to FS25 and reworked codebase
+- Improved persistence and per-vehicle toggles
 - Fixed error with fishing boats
 
 Changelog Version 1.3.0.0:
-- Added camera rotation to follow wheel steering (supports FS25_CabView)
-- Added camera centering with smooth ease-out animation
+- Added camera rotation and centering
 - Disabled locomotives
 
 Changelog Version 1.3.1.0:
-- Improved inside camera orientation persistence for "Camera Follows Steering"
-- Enabled "Center Camera" action when "Camera Follows Steering" is disabled
-- Added smooth vehicle speed control using the mouse scroll wheel
-- Added camera look-back by double-clicking the "Center / Look Back" action
+- Improved camera orientation and centering
+- Added smooth speed control via mouse wheel
+- Added camera look-back (double-click)
+- Added small optimization improvements
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
-    <de><![CDATA[Ermöglicht die Steuerung der Fahrzeuglenkung per Maus mit vollständig konfigurierbarer Empfindlichkeit, Linearität, Totzone, Laufruhe und mehr.
+    <de><![CDATA[Lenken Sie Ihre Fahrzeuge mit der Maus für ein natürlicheres und flüssigeres Fahrgefühl. Passen Sie Empfindlichkeit, Linearität und Totzonen ganz einfach über die Schaltfläche in den allgemeinen Einstellungen an. Zu den Funktionen gehören eine übersichtliche HUD-Anzeige, eine geschwindigkeitsabhängige Lenkung für mehr Präzision bei hohem Tempo und eine automatische Kamera-Folgefunktion.
 
-Änderungsprotokoll Version 1.2.0.0:
-- Migration zu FS25
-- Codebasis überarbeitet
+Tastenkombinationen:
+- Drücken Sie Linke Strg + . , um die Maussteuerung umzuschalten.
+- Drücken Sie Linke Strg + , , um die Kamera-Lenkungsfolge umzuschalten.
+- Drücken Sie Linke Strg + LEER, um die Kamera zu zentrieren oder zurückzublicken (Doppelklick).
+- Halten Sie die Taste Linke Alt gedrückt, um die Kamera mit der Maus zu drehen.
+- Drücken Sie Linke Strg + / , um das Fahrzeug zu speichern oder zu entfernen (merkt sich den Lenkstatus).
+- Verwenden Sie das Mausrad, um die Fahrzeuggeschwindigkeit anzupassen (wenn aktiv).
 
-Änderungsprotokoll Version 1.2.0.1:
-- Verbessert Sitzungsbeständigkeit beim Ein-/Aussteigen
-- Hinzugefügt Umschalten pro Fahrzeug auch bei Standard=AN (Standard nur initial)
-
-Änderungsprotokoll Version 1.2.0.2:
+Änderungsprotokoll Version 1.2.x:
+- Migration zu FS25 und Codebasis überarbeitet
+- Sitzungsbeständigkeit und Umschalten pro Fahrzeug verbessert
 - Fehler mit Fischerbooten behoben
 
 Änderungsprotokoll Version 1.3.0.0:
-- Kamerarotation hinzugefügt, um Lenkradbewegungen zu folgen (unterstützt FS25_CabView)
-- Kamerazentrierung mit sanfter Ease-Out-Animation hinzugefügt
+- Kamerarotation und Zentrierung hinzugefügt
 - Lokomotiven deaktiviert
 
 Änderungsprotokoll Version 1.3.1.0:
-- Orientierungsspeicherung der Innenkamera für „Kamera Folgt Lenkung“ verbessert
-- „Kamera zentrieren“ bei deaktiviertem „Kamera Folgt Lenkung“ ermöglicht
-- Stufenlose Geschwindigkeitsregelung per Mausrad hinzugefügt
-- Kamerarückblick durch Doppelklick auf die Aktion „Zentrieren / Rückblick“ hinzugefügt
+- Verbesserte Kameraorientierung und Zentrierung
+- Hinzugefügte Geschwindigkeitsregelung via Mausrad
+- Hinzugefügter Kamerarückblick (Doppelklick)
+- Hinzugefügte kleine Optimierungsverbesserungen
 
-Für weitere Informationen oder um einen Fehler zu melden, besuche bitte die GitHub (modnext/mouseSteering).]]></de>
-    <fr><![CDATA[Permet de contrôler la direction du véhicule à l'aide de la souris, avec une sensibilité, une linéarité, une zone morte, une fluidité et bien plus encore entièrement configurables.
+Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte GitHub (modnext/mouseSteering).]]></de>
+    <fr><![CDATA[Dirigez vos véhicules à la souris pour une expérience de conduite plus naturelle et plus fluide. Personnalisez facilement la sensibilité, la linéarité et les zones mortes via le bouton dans les paramètres généraux du jeu. Les fonctionnalités incluent un indicateur HUD clair, une direction progressive pour plus de précision à haute vitesse et un système de suivi automatique de la caméra.
 
-Journal des modifications version 1.2.0.0:
-- Migration vers FS25
-- Révision du code
+Raccourcis clavier:
+- Appuyez sur Ctrl Gauche + . pour activer/désactiver la direction à la souris.
+- Appuyez sur Ctrl Gauche + , pour activer/désactiver le suivi de la caméra.
+- Appuyez sur Ctrl Gauche + ESPACE pour centrer la caméra ou regarder en arrière (double-clic).
+- Maintenez la touche Alt Gauche enfoncée pour faire pivoter la caméra à la souris.
+- Appuyez sur Ctrl Gauche + / pour enregistrer ou supprimer le véhicule (retient l'état de la direction).
+- Utilisez la molette de la souris pour ajuster la vitesse du véhicule (si actif).
 
-Journal des modifications version 1.2.0.1:
-- Amélioré persistance en session à l’entrée/sortie
-- Ajouté bascule par véhicule même avec Défaut=ACTIF (Défaut seulement initial)
-
-Journal des modifications version 1.2.0.2:
-- Correction erreur avec bateaux de pêche
+Journal des modifications version 1.2.x:
+- Migration vers FS25 et refonte du code
+- Amélioration de la persistance de la session par véhicule
+- Correction d'un bug avec les bateaux de pêche
 
 Journal des modifications version 1.3.0.0:
-- Ajout de la rotation de la caméra pour suivre la direction du volant (supporte FS25_CabView)
-- Ajout du centrage de la caméra avec animation ease-out fluide
-- Locomotives désactivées
+- Ajout de la rotation et du centrage de la caméra
+- Désactivation des locomotives
 
 Journal des modifications version 1.3.1.0:
-- Amélioration de la persistance de l'orientation de la caméra intérieure (Suivi Direction)
-- Activation de l'action « Centrer la Caméra » lorsque le suivi de direction est désactivé
-- Ajout du contrôle fluide de la vitesse du véhicule avec la molette de la souris
-- Ajout de la vue arrière de la caméra en double-cliquant sur l'action "Centrer / Regarder derrière"
+- Amélioration de l'orientation et du centrage de la caméra
+- Ajout du contrôle fluide de la vitesse via la molette
+- Ajout de la vue arrière (double-clic)
+- Ajout de petites améliorations d'optimisation
 
-Pour plus d'informations ou pour signaler un bug, veuillez visiter la page GitHub (modnext/mouseSteering).]]></fr>
-    <pl><![CDATA[Umożliwia sterowanie kierownicą pojazdu za pomocą myszy, z możliwością pełnej konfiguracji czułości, liniowości, martwej strefy, płynności i nie tylko.
+Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modnext/mouseSteering).]]></fr>
+    <pl><![CDATA[Steruj pojazdami za pomocą myszki, co sprawia, że jazda jest znacznie bardziej płynna i naturalna. Dostosuj czułość, liniowość i martwe strefy za pomocą przycisku w menu ustawień ogólnych. Funkcje obejmują czytelny wskaźnik HUD, system progresywnego skrętu dla lepszej precyzji przy dużych prędkościach oraz automatyczne śledzenie kierownicy przez kamerę.
 
-Lista zmian w wersji 1.2.0.0:
-- Migracja do FS25
-- Przebudowa kodu
+Skróty klawiszowe:
+- Naciśnij Lewy Ctrl + . , aby włączyć/wyłączyć sterowanie myszą.
+- Naciśnij Lewy Ctrl + , , aby włączyć/wyłączyć śledzenie skrętu przez kamerę.
+- Naciśnij Lewy Ctrl + SPACJA, aby wycentrować kamerę lub spojrzeć w tył (dwuklik).
+- Przytrzymaj klawisz Lewy Alt, aby obracać kamerę myszą.
+- Naciśnij Lewy Ctrl + / , aby zapisać lub usunąć pojazd (zapamiętuje stan sterowania).
+- Użyj rolki myszy, aby dostosować prędkość pojazdu (gdy włączone).
 
-Lista zmian w wersji 1.2.0.1:
-- Ulepszono trwałość stanu przy wsiadaniu/wysiadaniu
-- Dodano przełączanie per pojazd nawet przy Domyślnie=ON (domyślne tylko początkowo)
-
-Lista zmian w wersji 1.2.0.2:
+Lista zmian w wersji 1.2.x:
+- Migracja do FS25 i przebudowa kodu
+- Poprawa trwałości stanu i przełączanie per pojazd
 - Naprawiono błąd z łodziami rybackimi
 
 Lista zmian w wersji 1.3.0.0:
-- Dodano obrót kamery podążający za skrętem kierownicy (wsparcie FS25_CabView)
-- Dodano centrowanie kamery z płynną animacją ease-out
+- Dodano obrót i centrowanie kamery
 - Wyłączono lokomotywy
 
 Lista zmian w wersji 1.3.1.0:
-- Poprawiono trwałość orientacji kamery wewnętrznej w trybie „Kamera Śledzi Skręt”
-- Umożliwiono wycentrowanie kamery przy wyłączonej opcji „Kamera Śledzi Skręt”
-- Dodano płynne sterowanie prędkością pojazdu za pomocą rolki myszy
-- Dodano możliwość patrzenia do tyłu po dwukrotnym kliknięciu akcji „Wycentruj / Spójrz w Tył”
+- Poprawiono orientację i centrowanie kamery
+- Dodano płynne sterowanie prędkością za pomocą rolki myszy
+- Dodano możliwość patrzenia do tyłu (dwuklik)
+- Dodano małe usprawnienia optymalizacyjne
 
-Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź stronę GitHub (modnext/mouseSteering).]]></pl>
-    <ru><![CDATA[Обеспечивает управление рулевым управлением автомобиля с помощью мыши с полностью настраиваемой чувствительностью, линейностью, мертвой зоной, плавностью и другими параметрами.
+Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/mouseSteering).]]></pl>
+    <ru><![CDATA[Управляйте техникой с помощью мыши, что делает вождение гораздо более плавным и естественным. Настраивайте чувствительность, линейность и мертвые зоны через кнопку в общем меню настроек игры. Особенности включают удобный HUD-индикатор, прогрессивное рулевое управление для точности на высоких скоростях и систему автоматического следования камеры за рулем.
 
-Журнал изменений версии 1.2.0.0:
-- Переход на FS25
-- Доработка кода
+Горячие клавиши:
+- Нажмите Левый Ctrl + . , чтобы включить/выключить управление мышью.
+- Нажмите Левый Ctrl + , , чтобы включить/выключить следование камеры за рулем.
+- Нажмите Левый Ctrl + ПРОБЕЛ, чтобы центрировать камеру или посмотреть назад (двойной щелчок).
+- Удерживайте клавишу Левый Alt, чтобы вращать камеру мышью.
+- Нажмите Левый Ctrl + / , чтобы сохранить или удалить транспорт (запоминает состояние управления).
+- Используйте колесико мыши для регулировки скорости транспорта (когда активно).
 
-Журнал изменений версии 1.2.0.1:
-- Улучшено сохранение состояния при входе/выходе
-- Добавлено переключение для каждого ТС даже при ВКЛ по умолчанию (только изначально)
-
-Журнал изменений 1.2.0.2:
+Журнал изменений версии 1.2.x:
+- Переход на FS25 и доработка кода
+- Улучшено сохранение состояния и переключение для каждого ТС
 - Исправлена ошибка с рыболовными лодками
 
-Журнал изменений 1.3.0.0:
-- Добавлено вращение камеры для отслеживания поворота руля (поддерживает FS25_CabView)
-- Добавлено центрирование камеры с плавной анимацией ease-out
+Журнал изменений версии 1.3.0.0:
+- Добавлено вращение и центрирование камеры
 - Отключены локомотивы
 
-Журнал изменений 1.3.1.0:
-- Улучшено сохранение ориентации внутренней камеры в режиме «Камера Следит за Поворотом»
-- Добавлена возможность центрирования камеры при отключенной опции «Камера Следит за Поворотом»
-- Добавлено плавное управление скоростью автомобиля с помощью колесика мыши
-- Добавлен обзор камеры назад двойным щелчком по действию "Центрировать / Посмотреть назад"
+Журнал изменений версии 1.3.1.0:
+- Улучшена ориентация и центрирование камеры
+- Добавлено плавное управление скоростью с помощью колесика мыши
+- Добавлен обзор назад (двойной щелчок)
+- Добавлены небольшие улучшения оптимизации
 
-Для получения дополнительной информации или для сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
+Для получения дополнительной информации или сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>
 
   <l10n filenamePrefix="l10n/l10n"/>
