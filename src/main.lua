@@ -19,6 +19,7 @@ local sourceFiles = {
   --events
   "src/events/MouseSteeringConnectToServerEvent.lua",
   "src/events/MouseSteeringVehicleSoldEvent.lua",
+  "src/events/SetMouseSteeringSpeedControlStateEvent.lua",
   -- gui
   "src/gui/dialogs/MouseSteeringSettingsDialog.lua",
   "src/gui/elements/MouseSteeringMultiTextOptionElement.lua",

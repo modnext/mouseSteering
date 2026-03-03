@@ -24,6 +24,7 @@ function MouseSteeringSpeedControl.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlIsActive", MouseSteeringSpeedControl.getIsActive)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlDisplayInfo", MouseSteeringSpeedControl.getDisplayInfo)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlEnabled", MouseSteeringSpeedControl.getSpeedControlEnabled)
+  SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringSpeedControlState", MouseSteeringSpeedControl.setMouseSteeringSpeedControlState)
 end
 
 ---Register all function overwritings
@@ -65,6 +66,35 @@ function MouseSteeringSpeedControl:onLeaveVehicle(wasEntered)
   local spec = self.spec_mouseSteeringSpeedControl
 
   MouseSteeringSpeedControl.deactivate(spec)
+end
+
+---Sets speed control state and synchronizes over network
+-- @param boolean isActive whether speed control is active
+-- @param number targetSpeedKmh target speed in km/h
+-- @param boolean noEventSend if true, skip network event
+function MouseSteeringSpeedControl:setMouseSteeringSpeedControlState(isActive, targetSpeedKmh, noEventSend)
+  local spec = self.spec_mouseSteeringSpeedControl
+
+  spec.isActive = isActive
+  spec.targetSpeedKmh = targetSpeedKmh
+
+  if not isActive then
+    spec.speedInterpolated = nil
+    spec.pedalHeldOnActivation = false
+  end
+
+  -- send network event
+  if noEventSend == nil or not noEventSend then
+    if self.isServer then
+      local ownerConnection = self:getOwnerConnection()
+
+      if ownerConnection ~= nil then
+        ownerConnection:sendEvent(SetMouseSteeringSpeedControlStateEvent.new(self, isActive, targetSpeedKmh))
+      end
+    else
+      g_client:getServerConnection():sendEvent(SetMouseSteeringSpeedControlStateEvent.new(self, isActive, targetSpeedKmh))
+    end
+  end
 end
 
 ---Activates speed control at the given target speed
@@ -128,10 +158,10 @@ function MouseSteeringSpeedControl:getDisplayInfo()
 end
 
 ---Processes a scroll wheel tick
--- @param spec table The specialization spec
 -- @param vehicle table the vehicle
 -- @param direction number scroll direction (+1 or -1)
-function MouseSteeringSpeedControl.onScrollWheel(spec, vehicle, direction)
+function MouseSteeringSpeedControl.onScrollWheel(vehicle, direction)
+  local spec = vehicle.spec_mouseSteeringSpeedControl
   local motor = vehicle:getMotor()
 
   if motor == nil then
@@ -139,6 +169,7 @@ function MouseSteeringSpeedControl.onScrollWheel(spec, vehicle, direction)
   end
 
   local wasInactive = not spec.isActive
+  local targetSpeedKmh = spec.targetSpeedKmh
 
   if wasInactive then
     -- activate at current vehicle speed
@@ -158,12 +189,11 @@ function MouseSteeringSpeedControl.onScrollWheel(spec, vehicle, direction)
     end
 
     -- round toward scroll direction so ±1 always produces a visible change
-    local roundedSpeed = direction > 0 and math.floor(currentSpeedKmh) or math.ceil(currentSpeedKmh)
-    MouseSteeringSpeedControl.activate(spec, roundedSpeed)
+    targetSpeedKmh = direction > 0 and math.floor(currentSpeedKmh) or math.ceil(currentSpeedKmh)
   end
 
   -- always adjust by direction
-  spec.targetSpeedKmh = spec.targetSpeedKmh + direction
+  targetSpeedKmh = targetSpeedKmh + direction
 
   -- clamp to vehicle speed limits
   local maxForward = math.ceil(motor:getMaximumForwardSpeed() * 3.6)
@@ -171,12 +201,15 @@ function MouseSteeringSpeedControl.onScrollWheel(spec, vehicle, direction)
   local isManualDirection = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
   local minSpeed = isManualDirection and 0 or -maxReverse
 
-  spec.targetSpeedKmh = math.clamp(spec.targetSpeedKmh, minSpeed, maxForward)
+  targetSpeedKmh = math.clamp(targetSpeedKmh, minSpeed, maxForward)
 
   -- cancel activation if scroll had no effect (e.g. standing still, scrolling down in manual mode)
-  if wasInactive and spec.targetSpeedKmh == 0 then
-    MouseSteeringSpeedControl.deactivate(spec)
+  if wasInactive and targetSpeedKmh == 0 then
+    return
   end
+
+  -- sync state over network
+  vehicle:setMouseSteeringSpeedControlState(true, targetSpeedKmh)
 end
 
 ---Called on update
@@ -210,12 +243,12 @@ function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInp
 
         if not isCameraRotating then
           if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_UP) then
-            MouseSteeringSpeedControl.onScrollWheel(spec, self, 1)
+            MouseSteeringSpeedControl.onScrollWheel(self, 1)
             scrolled = true
           end
 
           if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_DOWN) then
-            MouseSteeringSpeedControl.onScrollWheel(spec, self, -1)
+            MouseSteeringSpeedControl.onScrollWheel(self, -1)
             scrolled = true
           end
         end
@@ -303,7 +336,7 @@ function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, 
 
   -- deactivate if user presses pedal or vehicle is stopped with 0 target speed
   if hasPedalInput or (targetSpeed == 0 and self:getLastSpeed() < 1) then
-    MouseSteeringSpeedControl.deactivate(spec)
+    self:setMouseSteeringSpeedControlState(false, 0)
   else
     -- interpolate speed limit towards target
     spec.speedInterpolated = spec.speedInterpolated or targetSpeed
