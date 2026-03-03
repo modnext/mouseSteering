@@ -161,6 +161,11 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
   local spec = self.spec_mouseSteeringVehicle
 
   local isEntered = self.getIsEntered ~= nil and self:getIsEntered()
+
+  if not isEntered then
+    return
+  end
+
   local isControlled = self.getIsControlled ~= nil and self:getIsControlled()
 
   -- track AI steering state
@@ -196,7 +201,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
     if spec.isUsed then
       local inputBinding = g_inputBinding
-      local isUiVisible = inputBinding:getShowMouseCursor() or g_gui:getIsGuiVisible()
+      local isUiVisible = inputBinding:getShowMouseCursor() or g_gui.currentGui ~= nil
 
       if isUiVisible and spec.isSteeringPaused then
         self:setMouseSteeringSteeringPaused(false)
@@ -213,7 +218,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         if hasCombos then
           local pressedComboMaskGamepad, pressedComboMaskMouse = inputBinding:getComboCommandPressedMask()
           local currentPressedMask = useGamepadButtons and pressedComboMaskGamepad or pressedComboMaskMouse
-          
+
           if currentPressedMask ~= 0 then
             isPaused = true
           end
@@ -341,30 +346,34 @@ function MouseSteeringVehicle:updateMouseSteeringHUD()
   local ingameMessage = currentMission.hud.ingameMessage
   local contextActionDisplay = currentMission.hud.contextActionDisplay
 
-  -- check for HUD obstruction
-  local isObstructed = ingameMessage:getVisible() or contextActionDisplay:getVisible()
+  -- check conditions
   local isVisible = true
 
-  if not spec.isUsed or isObstructed or not self:getIsMotorStarted() or self:getIsAIActive() or not self:getIsControlled() then
+  if not spec.isUsed or not self:getIsControlled() or self:getIsAIActive() or not self:getIsMotorStarted() then
     isVisible = false
   else
-    -- handle visibility mode
-    local hudSetting = tostring(spec.settings.indicatorMode)
+    local isObstructed = ingameMessage:getVisible() or contextActionDisplay:getVisible()
 
-    if hudSetting == "both" then
-      isVisible = true
-    elseif hudSetting == "inside" then
-      isVisible = activeCamera.isInside
-    elseif hudSetting == "outside" then
-      isVisible = not activeCamera.isInside
-    else
+    if isObstructed then
       isVisible = false
-    end
+    else
+      local hudSetting = tostring(spec.settings.indicatorMode)
 
-    -- check backwards view inside cabin
-    if isVisible and spec.settings.indicatorLookBackInside and activeCamera.isInside then
-      local rotY = math.deg(activeCamera.rotY - activeCamera.origRotY) % 360
-      isVisible = (rotY >= 120 and rotY <= 240)
+      if hudSetting == "both" then
+        isVisible = true
+      elseif hudSetting == "inside" then
+        isVisible = activeCamera.isInside
+      elseif hudSetting == "outside" then
+        isVisible = not activeCamera.isInside
+      else
+        isVisible = false
+      end
+
+      -- check backwards view inside cabin
+      if isVisible and spec.settings.indicatorLookBackInside and activeCamera.isInside then
+        local rotY = math.deg(activeCamera.rotY - activeCamera.origRotY) % 360
+        isVisible = (rotY >= 120 and rotY <= 240)
+      end
     end
   end
 
@@ -592,7 +601,7 @@ function MouseSteeringVehicle:setMouseSteeringSaved()
   -- determine action and notification
   local action = isSaved and "removeVehicle" or "addVehicle"
   local notification
-  
+
   if isSaved then
     notification = "vehicleRemoved"
   elseif not isMaxVehiclesReached then
