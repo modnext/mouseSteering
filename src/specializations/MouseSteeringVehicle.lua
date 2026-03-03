@@ -76,6 +76,7 @@ function MouseSteeringVehicle:onLoad(savegame)
   -- initialize state flags
   spec.isUsed = false
   spec.isSteeringPaused = false
+  spec.lastIsPaused = false
   spec.isCameraRotating = false
   spec.cameraRotationActive = true
   spec.isHUDForcedVisible = nil
@@ -97,6 +98,7 @@ function MouseSteeringVehicle:onLoad(savegame)
 
   -- initialize AI tracking
   spec.aiSteeringWasActive = false
+  spec.lastIsAIActive = false
   spec.aiSteeringLastEnableTime = -math.huge
 
   -- camera rotation controller
@@ -159,6 +161,11 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
   local spec = self.spec_mouseSteeringVehicle
 
   local isEntered = self.getIsEntered ~= nil and self:getIsEntered()
+
+  if not isEntered then
+    return
+  end
+
   local isControlled = self.getIsControlled ~= nil and self:getIsControlled()
 
   -- track AI steering state
@@ -185,27 +192,45 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local isAIActive = (AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE) or false
     local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
 
+    -- track AI transitions
+    local currentAIActive = isAIActive or isWorkerAIActive
+    if spec.lastIsAIActive and not currentAIActive and spec.isUsed then
+      self:synchronizeMouseSteeringAxisSide(false, false)
+    end
+    spec.lastIsAIActive = currentAIActive
+
     if spec.isUsed then
       local inputBinding = g_inputBinding
-      local isUiVisible = inputBinding:getShowMouseCursor() or g_gui:getIsGuiVisible()
+      local isUiVisible = inputBinding:getShowMouseCursor() or g_gui.currentGui ~= nil
 
       if isUiVisible and spec.isSteeringPaused then
         self:setMouseSteeringSteeringPaused(false)
       end
 
-      -- check for active combos
-      local inputDisplayManager = g_inputDisplayManager
-      local useGamepadButtons = (inputBinding:getInputHelpMode() == GS_INPUT_HELP_MODE_GAMEPAD)
-      local hasCombos = next(inputDisplayManager:getComboHelpElements(useGamepadButtons)) ~= nil
+      local isPaused = spec.isSteeringPaused or isUiVisible
 
-      local isComboActive = false
-      if hasCombos then
-        local pressedComboMaskGamepad, pressedComboMaskMouse = inputBinding:getComboCommandPressedMask()
-        local currentPressedMask = useGamepadButtons and pressedComboMaskGamepad or pressedComboMaskMouse
-        isComboActive = currentPressedMask ~= 0
+      -- check for active combos only if not already paused
+      if not isPaused then
+        local inputDisplayManager = g_inputDisplayManager
+        local useGamepadButtons = (inputBinding:getInputHelpMode() == GS_INPUT_HELP_MODE_GAMEPAD)
+        local hasCombos = next(inputDisplayManager:getComboHelpElements(useGamepadButtons)) ~= nil
+
+        if hasCombos then
+          local pressedComboMaskGamepad, pressedComboMaskMouse = inputBinding:getComboCommandPressedMask()
+          local currentPressedMask = useGamepadButtons and pressedComboMaskGamepad or pressedComboMaskMouse
+
+          if currentPressedMask ~= 0 then
+            isPaused = true
+          end
+        end
       end
 
-      local isPaused = spec.isSteeringPaused or isUiVisible or isComboActive
+      -- track pause transition (from paused to unpaused) to freeze wheel position
+      if spec.lastIsPaused and not isPaused then
+        self:synchronizeMouseSteeringAxisSide(false, false)
+      end
+      spec.lastIsPaused = isPaused
+
       local isPowered = self.getIsPowered == nil or self:getIsPowered()
       local movedSide = spec.mouseSteering:getMovedSide()
 
@@ -213,14 +238,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         local speedKmh = (self.getLastSpeed ~= nil) and self:getLastSpeed() or 0
 
         -- update controller with new input values
-        local newRawInput, newAxisValue = spec.controller:update({
-          inputValue = spec.inputValue,
-          axisSide = spec.axisSide,
-          settings = spec.settings,
-          movedSide = movedSide,
-          isPaused = isPaused,
-          speedKmh = speedKmh,
-        }, dt)
+        local newRawInput, newAxisValue = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
 
         -- update input values
         spec.inputValue = newRawInput
@@ -260,8 +278,6 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       if self.setSteeringInput ~= nil then
         self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
       end
-    else
-      self:synchronizeMouseSteeringAxisSide(false, false)
     end
 
     -- update HUD and camera
@@ -274,7 +290,8 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
     self:setMouseSteeringCameraRotating(not shouldDisableRotation)
 
-    if isAIActive or (spec.isCameraRotating and spec.isUsed) then
+    -- keep axis in sync while GPS steering assist controls the wheels
+    if isAIActive and spec.isUsed then
       self:synchronizeMouseSteeringAxisSide(false, false)
     end
 
@@ -329,27 +346,34 @@ function MouseSteeringVehicle:updateMouseSteeringHUD()
   local ingameMessage = currentMission.hud.ingameMessage
   local contextActionDisplay = currentMission.hud.contextActionDisplay
 
-  -- check for HUD obstruction
-  local isObstructed = ingameMessage:getVisible() or contextActionDisplay:getVisible()
+  -- check conditions
   local isVisible = true
 
-  if not spec.isUsed or isObstructed or not self:getIsMotorStarted() or self:getIsAIActive() or not self:getIsControlled() then
+  if not spec.isUsed or not self:getIsControlled() or self:getIsAIActive() or not self:getIsMotorStarted() then
     isVisible = false
   else
-    -- handle visibility mode
-    local hudSetting = tostring(spec.settings.indicatorMode)
-    local hudVisibility = {
-      ["both"] = true,
-      ["inside"] = activeCamera.isInside,
-      ["outside"] = not activeCamera.isInside,
-    }
+    local isObstructed = ingameMessage:getVisible() or contextActionDisplay:getVisible()
 
-    isVisible = hudVisibility[hudSetting] or false
+    if isObstructed then
+      isVisible = false
+    else
+      local hudSetting = tostring(spec.settings.indicatorMode)
 
-    -- check backwards view inside cabin
-    if isVisible and spec.settings.indicatorLookBackInside and activeCamera.isInside then
-      local rotY = math.deg(activeCamera.rotY - activeCamera.origRotY) % 360
-      isVisible = (rotY >= 120 and rotY <= 240)
+      if hudSetting == "both" then
+        isVisible = true
+      elseif hudSetting == "inside" then
+        isVisible = activeCamera.isInside
+      elseif hudSetting == "outside" then
+        isVisible = not activeCamera.isInside
+      else
+        isVisible = false
+      end
+
+      -- check backwards view inside cabin
+      if isVisible and spec.settings.indicatorLookBackInside and activeCamera.isInside then
+        local rotY = math.deg(activeCamera.rotY - activeCamera.origRotY) % 360
+        isVisible = (rotY >= 120 and rotY <= 240)
+      end
     end
   end
 
@@ -506,6 +530,11 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
   spec.isUsed = not spec.isUsed
   spec.wasUserToggled = true
 
+  -- sync axis immediately when enabled so wheels don't jump calculation
+  if spec.isUsed then
+    self:synchronizeMouseSteeringAxisSide(false, false)
+  end
+
   -- check if auto-save is enabled
   if spec.settings.autoSave then
     if spec.isUsed then
@@ -572,6 +601,7 @@ function MouseSteeringVehicle:setMouseSteeringSaved()
   -- determine action and notification
   local action = isSaved and "removeVehicle" or "addVehicle"
   local notification
+
   if isSaved then
     notification = "vehicleRemoved"
   elseif not isMaxVehiclesReached then
