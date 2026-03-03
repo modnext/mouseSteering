@@ -86,6 +86,13 @@ end
 ---
 function VehicleCameraExtension:zoomSmoothly(superFunc, object, offset)
   if self:canSteerWithMouse(true, object) then
+    local spec = object and object.vehicle and object.vehicle.spec_mouseSteeringVehicle
+    
+    -- check if mouse steering is active
+    if spec and spec.isUsed and spec.settings.speedControl and not spec.isSteeringPaused then
+      return
+    end
+
     return superFunc(object, offset)
   end
 end
