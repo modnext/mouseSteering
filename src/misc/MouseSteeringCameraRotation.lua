@@ -474,6 +474,12 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
     self.centerSteeringOffset = steeringOffset
   end
 
+  -- adjust target to shortest path if no CabView limits apply
+  local minRot, maxRot = self:getCabViewLimits(camera)
+  if minRot == nil or maxRot == nil then
+    self.centerTargetRotY = camera.rotY + self:normalizeAngleDiff(self.centerTargetRotY - camera.rotY)
+  end
+
   -- calculate differences
   local diffY
   if self.centerDirectDiff then
