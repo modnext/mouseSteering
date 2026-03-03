@@ -76,6 +76,7 @@ function MouseSteeringVehicle:onLoad(savegame)
   -- initialize state flags
   spec.isUsed = false
   spec.isSteeringPaused = false
+  spec.lastIsPaused = false
   spec.isCameraRotating = false
   spec.cameraRotationActive = true
   spec.isHUDForcedVisible = nil
@@ -97,6 +98,7 @@ function MouseSteeringVehicle:onLoad(savegame)
 
   -- initialize AI tracking
   spec.aiSteeringWasActive = false
+  spec.lastIsAIActive = false
   spec.aiSteeringLastEnableTime = -math.huge
 
   -- camera rotation controller
@@ -185,6 +187,13 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local isAIActive = (AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE) or false
     local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
 
+    -- track AI transitions
+    local currentAIActive = isAIActive or isWorkerAIActive
+    if spec.lastIsAIActive and not currentAIActive and spec.isUsed then
+      self:synchronizeMouseSteeringAxisSide(false, false)
+    end
+    spec.lastIsAIActive = currentAIActive
+
     if spec.isUsed then
       local inputBinding = g_inputBinding
       local isUiVisible = inputBinding:getShowMouseCursor() or g_gui:getIsGuiVisible()
@@ -210,6 +219,12 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
           end
         end
       end
+
+      -- track pause transition (from paused to unpaused) to freeze wheel position
+      if spec.lastIsPaused and not isPaused then
+        self:synchronizeMouseSteeringAxisSide(false, false)
+      end
+      spec.lastIsPaused = isPaused
 
       local isPowered = self.getIsPowered == nil or self:getIsPowered()
       local movedSide = spec.mouseSteering:getMovedSide()
@@ -258,8 +273,6 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       if self.setSteeringInput ~= nil then
         self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
       end
-    else
-      self:synchronizeMouseSteeringAxisSide(false, false)
     end
 
     -- update HUD and camera
@@ -272,7 +285,8 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
     self:setMouseSteeringCameraRotating(not shouldDisableRotation)
 
-    if isAIActive or (spec.isCameraRotating and spec.isUsed) then
+    -- keep axis in sync while GPS steering assist controls the wheels
+    if isAIActive and spec.isUsed then
       self:synchronizeMouseSteeringAxisSide(false, false)
     end
 
@@ -507,6 +521,11 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
   spec.isUsed = not spec.isUsed
   spec.wasUserToggled = true
 
+  -- sync axis immediately when enabled so wheels don't jump calculation
+  if spec.isUsed then
+    self:synchronizeMouseSteeringAxisSide(false, false)
+  end
+
   -- check if auto-save is enabled
   if spec.settings.autoSave then
     if spec.isUsed then
@@ -573,6 +592,7 @@ function MouseSteeringVehicle:setMouseSteeringSaved()
   -- determine action and notification
   local action = isSaved and "removeVehicle" or "addVehicle"
   local notification
+  
   if isSaved then
     notification = "vehicleRemoved"
   elseif not isMaxVehiclesReached then
