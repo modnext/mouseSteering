@@ -34,7 +34,7 @@ function MouseSteeringCameraRotation.new(vehicle)
   self.lastIsPaused = false
   self.lastIsActive = false
 
-  -- per-camera position storage (key = camIndex, value = {rotYOffset, followSteering, preservePosition})
+  -- per-camera position storage
   -- rotYOffset is relative to camera.origRotY (forward direction)
   self.savedCameraStates = {}
 
@@ -214,6 +214,16 @@ function MouseSteeringCameraRotation:calculateSteeringOffset(steeringFactor, int
   return steeringFactor * steerOffsetScale * intensity
 end
 
+---Calculates the current steering-driven Y rotation offset
+function MouseSteeringCameraRotation:getCurrentSteeringOffset(cameraRotationDeadZoneDegrees, intensity)
+  if intensity == nil or intensity <= 0 then
+    return 0
+  end
+
+  local steeringFactor = self:calculateSteeringFactor(cameraRotationDeadZoneDegrees)
+  return self:calculateSteeringOffset(steeringFactor, intensity)
+end
+
 ---Saves current camera state for later restoration
 function MouseSteeringCameraRotation:saveCameraState(camIndex, camera, rotYOffset, followSteering, preservePosition)
   if camIndex == nil or camera == nil then
@@ -223,7 +233,8 @@ function MouseSteeringCameraRotation:saveCameraState(camIndex, camera, rotYOffse
   self.savedCameraStates[camIndex] = {
     rotYOffset = rotYOffset,
     followSteering = followSteering,
-    preservePosition = preservePosition or false
+    preservePosition = preservePosition or false,
+    savedRotY = camera.rotY or 0
   }
 end
 
@@ -235,14 +246,68 @@ end
 ---Calculates current rotation state as offset from forward direction
 -- Returns manualOffset (user's manual camera adjustment) and followSteering flag
 function MouseSteeringCameraRotation:calculateCurrentState(camera)
-  local epsilon = 0.001
-
   local origRotY = camera.origRotY or 0
   -- manualOffset is only the user's manual adjustment, not including steering follow
   local manualOffset = (self.baseRotY or origRotY) - origRotY
-  local followSteering = math.abs(self.rotationFactor) > epsilon
+  local followSteering = not self:isLookingBackwards(camera)
 
   return manualOffset, followSteering
+end
+
+---Checks whether the camera is close to a neutral forward/follow position
+function MouseSteeringCameraRotation:isNeutralCameraRotation(camera, targetRotY, threshold)
+  if camera == nil then
+    return false
+  end
+
+  local currentRotY = camera.rotY or 0
+  local origRotY = camera.origRotY or 0
+  local neutralThreshold = threshold or 0.05
+
+  local diffFromTarget = math.abs(self:getAngleDiff(currentRotY, targetRotY, camera))
+  local diffFromOrigin = math.abs(self:getAngleDiff(currentRotY, origRotY, camera))
+
+  return diffFromTarget < neutralThreshold or diffFromOrigin < neutralThreshold
+end
+
+---Checks whether follow activation should recenter instead of preserving a manual offset
+function MouseSteeringCameraRotation:shouldCenterOnActivation(camera, camIndex, targetRotY)
+  if camera == nil or camIndex == nil then
+    return false
+  end
+
+  if self:isNeutralCameraRotation(camera, targetRotY) then
+    return true
+  end
+
+  local savedState = self:getSavedCameraState(camIndex)
+  if savedState == nil or savedState.savedRotY == nil then
+    return false
+  end
+
+  if savedState.followSteering ~= true or savedState.preservePosition then
+    return false
+  end
+
+  if math.abs(savedState.rotYOffset or 0) >= 0.05 then
+    return false
+  end
+
+  local currentRotY = camera.rotY or 0
+  local diffFromSaved = math.abs(self:getAngleDiff(currentRotY, savedState.savedRotY, camera))
+
+  return diffFromSaved < 0.1
+end
+
+---Takes the current camera rotation as the active manual base rotation
+function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffset)
+  local origRotY = camera.origRotY or 0
+  local currentRotY = camera.rotY or 0
+
+  self.rotationFactor = steeringOffset or 0
+  self.baseRotY = currentRotY - self.rotationFactor
+
+  return self:getAngleDiff(origRotY, self.baseRotY, camera)
 end
 
 ---Finalizes centering and updates internal state
@@ -323,8 +388,7 @@ function MouseSteeringCameraRotation:requestCenter(camera, intensity, deadzoneDe
 
   -- determine centering target based on intensity and camera type
   if intensity > 0 and camera.isInside then
-    local steeringFactor = self:calculateSteeringFactor(deadzoneDegrees)
-    local steeringOffset = self:calculateSteeringOffset(steeringFactor, intensity)
+    local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
 
     self.centerTargetRotY = baseRotY + steeringOffset
     self.centeringWithSteering = true
@@ -467,8 +531,7 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
   -- update target dynamically if centering with steering follow
   if self.centeringWithSteering and intensity and intensity > 0 then
     local baseRotY = camera.origRotY or 0
-    local steeringFactor = self:calculateSteeringFactor(cameraRotationDeadZoneDegrees)
-    local steeringOffset = self:calculateSteeringOffset(steeringFactor, intensity)
+    local steeringOffset = self:getCurrentSteeringOffset(cameraRotationDeadZoneDegrees, intensity)
 
     self.centerTargetRotY = baseRotY + steeringOffset
     self.centerSteeringOffset = steeringOffset
@@ -567,8 +630,7 @@ function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRo
   self.lastCamIndex = camIndex
   self.lastInsideCamera = camera
 
-  local steeringFactor = self:calculateSteeringFactor(cameraRotationDeadZoneDegrees)
-  local currentOffset = self:calculateSteeringOffset(steeringFactor, intensity)
+  local currentOffset = self:getCurrentSteeringOffset(cameraRotationDeadZoneDegrees, intensity)
 
   local savedState = self:getSavedCameraState(camIndex)
 
@@ -636,9 +698,22 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
     if self.centering then
       self:cancelCentering()
     end
-    -- start centering to steering follow position
-    if camera ~= nil and self:isValidInsideCamera(camera) and intensity > 0 then
-      self:requestCenter(camera, intensity, deadzoneDegrees, centerVertical)
+
+    if camera ~= nil and self:isValidInsideCamera(camera) then
+      local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
+      local targetRotY = (camera.origRotY or 0) + steeringOffset
+
+      if intensity > 0 and self:shouldCenterOnActivation(camera, camIndex, targetRotY) then
+        self:requestCenter(camera, intensity, deadzoneDegrees, centerVertical)
+      else
+        -- player introduced a manual offset; preserve it instead of recentering on activation
+        local manualOffset = self:setCurrentCameraAsBase(camera, steeringOffset)
+        local preservePos = self:isLookingBackwards(camera)
+
+        self.lastCamIndex = camIndex
+        self.lastInsideCamera = camera
+        self:saveCameraState(camIndex, camera, manualOffset, intensity > 0, preservePos)
+      end
     end
   end
 
@@ -646,10 +721,15 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   if justDeactivated then
     if self.centering then
       self:cancelCentering()
-    end
-    -- freeze current position
-    if self.baseRotY ~= nil and camera ~= nil then
-      camera.rotY = self.baseRotY + self.rotationFactor
+      -- update baseRotY to exactly where the camera is right now, so it doesn't snap back
+      if self.baseRotY ~= nil and camera ~= nil then
+        self.baseRotY = camera.rotY - self.rotationFactor
+      end
+    else
+      -- freeze current position
+      if self.baseRotY ~= nil and camera ~= nil then
+        camera.rotY = self.baseRotY + self.rotationFactor
+      end
     end
     self:resetState(camIndex)
   end
@@ -680,13 +760,10 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   -- camera will continue steering follow from this position
   if pauseEnded then
     if camera ~= nil and self:isValidInsideCamera(camera) then
-      local steeringFactor = self:calculateSteeringFactor(deadzoneDegrees)
-      local currentSteeringOffset = self:calculateSteeringOffset(steeringFactor, intensity)
+      local currentSteeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
 
-      -- set baseRotY so that baseRotY + currentSteeringOffset = camera.rotY
-      -- this means camera stays exactly where it is
-      self.baseRotY = camera.rotY - currentSteeringOffset
-      self.rotationFactor = currentSteeringOffset
+      -- keep the current camera position and continue from it
+      self:setCurrentCameraAsBase(camera, currentSteeringOffset)
     end
     return
   end
@@ -724,8 +801,7 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   local rotationMaxDeltaPerMs = 0.002
 
   -- normal steering follow update
-  local steeringFactor = self:calculateSteeringFactor(deadzoneDegrees)
-  local targetOffset = self:calculateSteeringOffset(steeringFactor, intensity)
+  local targetOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
 
   -- apply user adjustments
   self:applyUserMovement(camera)
