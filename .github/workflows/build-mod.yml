@@ -1,0 +1,25 @@
+name: Build Mod Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Build mod archive (ZIP)
+        run: |
+          zip -r FS25_mouseSteering.zip src/ l10n/ data/ modDesc.xml icon_mouseSteering.dds
+
+      - name: Upload mod release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: FS25_mouseSteering.zip
