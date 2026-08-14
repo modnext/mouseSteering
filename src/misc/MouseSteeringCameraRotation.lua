@@ -35,11 +35,11 @@ function MouseSteeringCameraRotation.new(vehicle)
   self.lastIsActive = false
 
   -- per-camera position storage
-  -- rotYOffset is relative to camera.origRotY (forward direction)
   self.savedCameraStates = {}
 
   -- centering state
   self.centering = false
+  self.centeringCamera = nil
   self.centerTargetRotY = nil
   self.centerTargetRotX = nil
   self.centeringWithSteering = false
@@ -47,7 +47,6 @@ function MouseSteeringCameraRotation.new(vehicle)
   self.lastCenterRotY = nil
   self.lastCenterRotX = nil
   self.centeringRotX = false
-  self.centerDirectDiff = false
 
   return self
 end
@@ -57,7 +56,7 @@ end
 -- @param isActive boolean Whether camera follow steering is active
 function MouseSteeringCameraRotation:setSettings(settings, isActive)
   self.settings = settings
-  self.isActive = isActive or false
+  self.isActive = isActive == true
 end
 
 ---Gets intensity value from current settings
@@ -86,7 +85,7 @@ function MouseSteeringCameraRotation:getCenterVertical()
   if not self.settings then
     return false
   end
-  return self.settings.cameraRotationCenterVertical or false
+  return self.settings.cameraRotationCenterVertical == true
 end
 
 ---Checks if camera is valid and inside
@@ -94,20 +93,30 @@ function MouseSteeringCameraRotation:isValidInsideCamera(camera)
   return camera ~= nil and camera.isInside == true
 end
 
----Normalizes angle difference to shortest path (-pi to pi)
+---Normalizes an angle difference to the shortest path (-pi to pi)
 function MouseSteeringCameraRotation:normalizeAngleDiff(diff)
-  while diff > math.pi do
-    diff = diff - 2 * math.pi
-  end
-  while diff < -math.pi do
-    diff = diff + 2 * math.pi
-  end
-  return diff
+  return MathUtil.getValidLimit(diff)
 end
 
----Calculates time-adjusted delta for smooth interpolation
+---Calculates a frame-rate independent delta for smooth interpolation
 function MouseSteeringCameraRotation:calculateSmoothDelta(diff, smoothingFactor, dt)
-  return diff * smoothingFactor * (dt / 16.666)
+  if dt <= 0 or diff == 0 then
+    return 0
+  end
+
+  local FRAME_DURATION_MS = 1000 / 60
+  local smoothingAmount = 1 - math.pow(1 - smoothingFactor, dt / FRAME_DURATION_MS)
+  return diff * smoothingAmount
+end
+
+---Gets the CabView specialization for this vehicle, when available
+function MouseSteeringCameraRotation:getCabViewSpec()
+  if self.vehicle == nil or g_modIsLoaded == nil or not g_modIsLoaded.FS25_CabView then
+    return nil
+  end
+
+  local CAB_VIEW_SPEC_NAME = "spec_FS25_CabView.cabView"
+  return self.vehicle[CAB_VIEW_SPEC_NAME]
 end
 
 ---Gets CabView rotation limits if mod is active
@@ -116,25 +125,15 @@ function MouseSteeringCameraRotation:getCabViewLimits(camera)
     return nil, nil
   end
 
-  if not g_modIsLoaded.FS25_CabView then
-    return nil, nil
-  end
-
-  local vehicle = self.vehicle
-  if vehicle == nil then
-    return nil, nil
-  end
-
-  local cabViewSpec = vehicle["spec_FS25_CabView.cabView"]
+  local cabViewSpec = self:getCabViewSpec()
   if cabViewSpec == nil or cabViewSpec.rotationOffset == nil then
     return nil, nil
   end
 
-  local cabViewMinRotBase = -0.1 * math.pi
-  local cabViewMaxRotBase = 2.1 * math.pi
-
+  local CAB_VIEW_MIN_ROTATION = -0.1 * math.pi
+  local CAB_VIEW_MAX_ROTATION = 2.1 * math.pi
   local offset = cabViewSpec.rotationOffset
-  return cabViewMinRotBase + offset, cabViewMaxRotBase + offset
+  return CAB_VIEW_MIN_ROTATION + offset, CAB_VIEW_MAX_ROTATION + offset
 end
 
 ---Calculates shortest angle difference respecting CabView limits
@@ -145,15 +144,20 @@ function MouseSteeringCameraRotation:getAngleDiff(from, to, camera)
     -- CabView active - clamp target and calculate direct difference
     local targetClamped = math.clamp(to, minRot, maxRot)
     return targetClamped - from
-  else
-    -- no CabView - use shortest path
-    return self:normalizeAngleDiff(to - from)
   end
+
+  -- no CabView - use the shortest path provided by the game API
+  return self:normalizeAngleDiff(to - from)
 end
 
 ---Calculates normalized steering factor for camera rotation
--- Returns value between -1 and 1 with deadzone applied
+-- Returns a signed curved factor with the configured deadzone applied
 function MouseSteeringCameraRotation:calculateSteeringFactor(cameraRotationDeadZoneDegrees)
+  local STEERING_FACTOR_THRESHOLD = 0.1
+  local STEERING_FACTOR_MULTIPLIER = 1.524
+  local STEERING_FACTOR_EXPONENT = 2
+  local MAX_STEERING_ANGLE_DEGREES = 50
+
   local vehicle = self.vehicle
   if vehicle == nil then
     return 0
@@ -164,39 +168,33 @@ function MouseSteeringCameraRotation:calculateSteeringFactor(cameraRotationDeadZ
     return 0
   end
 
-  -- calculate raw steering factor
-  local steerFactor = 0
+  -- normalize the signed steering time against the matching rotation limit
+  local rotationLimit
   if rotatedTime > 0 then
-    local maxRotTime = vehicle.maxRotTime
-    if maxRotTime and maxRotTime > 0 then
-      steerFactor = rotatedTime / maxRotTime
-    end
+    rotationLimit = vehicle.maxRotTime
   else
-    local minRotTime = vehicle.minRotTime
-    if minRotTime and minRotTime < 0 then
-      steerFactor = -(rotatedTime / minRotTime)
-    end
+    rotationLimit = -(vehicle.minRotTime or 0)
   end
 
-  -- steering factor calculation parameters
-  local steerFactorThreshold = 0.1
-  local steerFactorMultiplier = 1.524
-  local steerFactorExponent = 2
-  local maxSteeringAngleDegrees = 50.0
+  if rotationLimit == nil or rotationLimit <= 0 then
+    return 0
+  end
+
+  local steerFactor = rotatedTime / rotationLimit
 
   -- apply threshold deadzone
   local absSteer = math.abs(steerFactor)
-  if absSteer < steerFactorThreshold then
+  if absSteer < STEERING_FACTOR_THRESHOLD then
     return 0
   end
 
   -- apply exponential curve for smoother response
   local steerSign = steerFactor >= 0 and 1 or -1
-  local normalizedSteer = absSteer - steerFactorThreshold
-  local curvedSteer = steerSign * steerFactorMultiplier * (normalizedSteer ^ steerFactorExponent)
+  local normalizedSteer = absSteer - STEERING_FACTOR_THRESHOLD
+  local curvedSteer = steerSign * STEERING_FACTOR_MULTIPLIER * (normalizedSteer ^ STEERING_FACTOR_EXPONENT)
 
   -- apply camera rotation dead zone
-  local cameraDeadZone = cameraRotationDeadZoneDegrees / maxSteeringAngleDegrees
+  local cameraDeadZone = (cameraRotationDeadZoneDegrees or 0) / MAX_STEERING_ANGLE_DEGREES
   local absCurved = math.abs(curvedSteer)
 
   if absCurved < cameraDeadZone then
@@ -210,8 +208,8 @@ end
 
 ---Calculates steering offset for given steering factor and intensity
 function MouseSteeringCameraRotation:calculateSteeringOffset(steeringFactor, intensity)
-  local steerOffsetScale = 0.5
-  return steeringFactor * steerOffsetScale * intensity
+  local STEERING_OFFSET_SCALE = 0.5
+  return steeringFactor * STEERING_OFFSET_SCALE * intensity
 end
 
 ---Calculates the current steering-driven Y rotation offset
@@ -233,8 +231,7 @@ function MouseSteeringCameraRotation:saveCameraState(camIndex, camera, rotYOffse
   self.savedCameraStates[camIndex] = {
     rotYOffset = rotYOffset,
     followSteering = followSteering,
-    preservePosition = preservePosition or false,
-    savedRotY = camera.rotY or 0
+    preservePosition = preservePosition or false
   }
 end
 
@@ -254,51 +251,6 @@ function MouseSteeringCameraRotation:calculateCurrentState(camera)
   return manualOffset, followSteering
 end
 
----Checks whether the camera is close to a neutral forward/follow position
-function MouseSteeringCameraRotation:isNeutralCameraRotation(camera, targetRotY, threshold)
-  if camera == nil then
-    return false
-  end
-
-  local currentRotY = camera.rotY or 0
-  local origRotY = camera.origRotY or 0
-  local neutralThreshold = threshold or 0.05
-
-  local diffFromTarget = math.abs(self:getAngleDiff(currentRotY, targetRotY, camera))
-  local diffFromOrigin = math.abs(self:getAngleDiff(currentRotY, origRotY, camera))
-
-  return diffFromTarget < neutralThreshold or diffFromOrigin < neutralThreshold
-end
-
----Checks whether follow activation should recenter instead of preserving a manual offset
-function MouseSteeringCameraRotation:shouldCenterOnActivation(camera, camIndex, targetRotY)
-  if camera == nil or camIndex == nil then
-    return false
-  end
-
-  if self:isNeutralCameraRotation(camera, targetRotY) then
-    return true
-  end
-
-  local savedState = self:getSavedCameraState(camIndex)
-  if savedState == nil or savedState.savedRotY == nil then
-    return false
-  end
-
-  if savedState.followSteering ~= true or savedState.preservePosition then
-    return false
-  end
-
-  if math.abs(savedState.rotYOffset or 0) >= 0.05 then
-    return false
-  end
-
-  local currentRotY = camera.rotY or 0
-  local diffFromSaved = math.abs(self:getAngleDiff(currentRotY, savedState.savedRotY, camera))
-
-  return diffFromSaved < 0.1
-end
-
 ---Takes the current camera rotation as the active manual base rotation
 function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffset)
   local origRotY = camera.origRotY or 0
@@ -308,6 +260,16 @@ function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffs
   self.baseRotY = currentRotY - self.rotationFactor
 
   return self:getAngleDiff(origRotY, self.baseRotY, camera)
+end
+
+---Preserves the current camera view as the base for steering follow
+function MouseSteeringCameraRotation:preserveCurrentCamera(camera, camIndex, steeringOffset, followSteering)
+  local manualOffset = self:setCurrentCameraAsBase(camera, steeringOffset)
+  local preservePosition = self:isLookingBackwards(camera)
+
+  self.lastCamIndex = camIndex
+  self.lastInsideCamera = camera
+  self:saveCameraState(camIndex, camera, manualOffset, followSteering == true, preservePosition)
 end
 
 ---Finalizes centering and updates internal state
@@ -322,7 +284,7 @@ function MouseSteeringCameraRotation:finalizeCentering(camera)
 
   -- save state for current camera
   if self.lastCamIndex ~= nil then
-    local rotYOffset, followSteering = self:calculateCurrentState(camera)
+    local rotYOffset = self:calculateCurrentState(camera)
     self:saveCameraState(self.lastCamIndex, camera, rotYOffset, self.centeringWithSteering, false)
   end
 end
@@ -330,23 +292,46 @@ end
 ---Cancels active centering operation
 function MouseSteeringCameraRotation:cancelCentering()
   self.centering = false
+  self.centeringCamera = nil
+  self.centerTargetRotY = nil
+  self.centerTargetRotX = nil
+  self.centeringWithSteering = false
+  self.centerSteeringOffset = 0
   self.lastCenterRotY = nil
   self.lastCenterRotX = nil
   self.centeringRotX = false
-  self.centerDirectDiff = false
+end
+
+---Starts a centering operation with a consistent state for both camera axes
+function MouseSteeringCameraRotation:startCentering(camera, targetRotY, centerVertical, followSteering, steeringOffset)
+  self.centering = true
+  self.centeringCamera = camera
+  self.centerTargetRotY = targetRotY
+  self.centeringWithSteering = followSteering == true
+  self.centerSteeringOffset = steeringOffset or 0
+  self.lastCenterRotY = camera.rotY
+
+  self.centeringRotX = centerVertical == true
+  if self.centeringRotX then
+    self.centerTargetRotX = camera.origRotX or 0
+    self.lastCenterRotX = camera.rotX
+  else
+    self.centerTargetRotX = nil
+    self.lastCenterRotX = nil
+  end
 end
 
 ---Resets camera rotation tracking state
 function MouseSteeringCameraRotation:resetState(camIndex)
+  local hadCameraState = self.centering or self.baseRotY ~= nil or self.lastInsideCamera ~= nil
+
   -- finalize centering if active
-  if self.centering and self.centerTargetRotY ~= nil and self.lastInsideCamera ~= nil then
+  if self.centering and self.centerTargetRotY ~= nil and self.centeringCamera == self.lastInsideCamera then
     self:finalizeCentering(self.lastInsideCamera)
   end
 
   -- clear centering state
-  self.centering = false
-  self.centerTargetRotY = nil
-  self.lastCenterRotY = nil
+  self:cancelCentering()
 
   -- save state for previous camera
   if self.lastCamIndex ~= nil and self.baseRotY ~= nil and self.lastInsideCamera ~= nil then
@@ -360,13 +345,15 @@ function MouseSteeringCameraRotation:resetState(camIndex)
   self.lastInsideCamera = nil
   self.lastCamIndex = camIndex
   self.rotationFactor = 0
+
+  return hadCameraState
 end
 
 ---Updates saved camera states when going to outside camera
 -- For cameras that are not looking backwards, enable steering follow
 -- so they will track steering when returning to inside
 function MouseSteeringCameraRotation:updateStatesForOutsideCamera()
-  for idx, state in pairs(self.savedCameraStates) do
+  for _, state in pairs(self.savedCameraStates) do
     if not state.preservePosition then
       -- not looking backwards - enable steering follow but keep position offset
       state.followSteering = true
@@ -385,35 +372,18 @@ function MouseSteeringCameraRotation:requestCenter(camera, intensity, deadzoneDe
   end
 
   local baseRotY = camera.origRotY or 0
+  local targetRotY = baseRotY
+  local followSteering = false
+  local steeringOffset = 0
 
   -- determine centering target based on intensity and camera type
   if intensity > 0 and camera.isInside then
-    local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
-
-    self.centerTargetRotY = baseRotY + steeringOffset
-    self.centeringWithSteering = true
-    self.centerSteeringOffset = steeringOffset
-  else
-    self.centerTargetRotY = baseRotY
-    self.centeringWithSteering = false
-    self.centerSteeringOffset = 0
+    steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
+    targetRotY = baseRotY + steeringOffset
+    followSteering = true
   end
 
-  -- setup vertical (X) rotation centering if enabled
-  self.centeringRotX = centerVertical or false
-  if self.centeringRotX then
-    self.centerTargetRotX = camera.origRotX or 0
-    self.lastCenterRotX = camera.rotX
-  else
-    self.centerTargetRotX = nil
-    self.lastCenterRotX = nil
-  end
-
-  self.centering = true
-  self.lastCenterRotY = camera.rotY
-
-  -- to prevent 360 degree spin when returning from 180 lookback
-  self.centerDirectDiff = true
+  self:startCentering(camera, targetRotY, centerVertical, followSteering, steeringOffset)
 end
 
 ---Requests camera centering using current settings
@@ -446,25 +416,7 @@ function MouseSteeringCameraRotation:lookBack(camera, centerVertical)
     targetRotY = baseRotY - math.pi
   end
 
-  -- set target rotation
-  self.centerTargetRotY = targetRotY
-  self.centeringWithSteering = false
-  self.centerSteeringOffset = 0
-  self.centerDirectDiff = true
-
-  -- setup vertical (X) rotation centering if enabled
-  self.centeringRotX = centerVertical or false
-  if self.centeringRotX then
-    self.centerTargetRotX = camera.origRotX or 0
-    self.lastCenterRotX = camera.rotX
-  else
-    self.centerTargetRotX = nil
-    self.lastCenterRotX = nil
-  end
-
-  -- set centering state
-  self.centering = true
-  self.lastCenterRotY = camera.rotY
+  self:startCentering(camera, targetRotY, centerVertical, false, 0)
 end
 
 ---Requests camera centering to original position (no steering follow)
@@ -476,44 +428,28 @@ function MouseSteeringCameraRotation:requestCenterToOrigin(camera, centerVertica
     return
   end
 
-  self.centerTargetRotY = camera.origRotY or 0
-  self.centeringWithSteering = false
-  self.centerSteeringOffset = 0
-
-  -- setup vertical (X) rotation centering if enabled
-  self.centeringRotX = centerVertical or false
-  if self.centeringRotX then
-    self.centerTargetRotX = camera.origRotX or 0
-    self.lastCenterRotX = camera.rotX
-  else
-    self.centerTargetRotX = nil
-    self.lastCenterRotX = nil
-  end
-
-  self.centering = true
-  self.lastCenterRotY = camera.rotY
-  self.centerDirectDiff = true
+  self:startCentering(camera, camera.origRotY or 0, centerVertical, false, 0)
 end
 
 ---Updates camera centering with smooth transition to target
 function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, cameraRotationDeadZoneDegrees)
+  local ROTATION_EPSILON = 0.001
+  local CENTERING_SMOOTHING_FACTOR = 0.05
+
   if not self.centering then
     return
   end
 
-  -- validate state
-  if camera == nil or self.centerTargetRotY == nil then
+  -- cancel if the request no longer belongs to the active camera
+  if camera == nil or camera ~= self.centeringCamera or self.centerTargetRotY == nil then
     self:cancelCentering()
     return
   end
 
-  local epsilon = 0.001
-  local centeringSmoothingFactor = 0.05
-
   -- detect manual camera movement by user (horizontal Y axis)
   if self.lastCenterRotY ~= nil then
     local userMovementY = math.abs(camera.rotY - self.lastCenterRotY)
-    if userMovementY > epsilon then
+    if userMovementY > ROTATION_EPSILON then
       self:cancelCentering()
       return
     end
@@ -522,7 +458,7 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
   -- detect manual camera movement by user (vertical X axis)
   if self.centeringRotX and self.lastCenterRotX ~= nil then
     local userMovementX = math.abs(camera.rotX - self.lastCenterRotX)
-    if userMovementX > epsilon then
+    if userMovementX > ROTATION_EPSILON then
       self:cancelCentering()
       return
     end
@@ -540,26 +476,20 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
   -- adjust target to shortest path if no CabView limits apply
   local minRot, maxRot = self:getCabViewLimits(camera)
   if minRot == nil or maxRot == nil then
-    self.centerTargetRotY = camera.rotY + self:normalizeAngleDiff(self.centerTargetRotY - camera.rotY)
+    local shortestDiff = MathUtil.getAngleDifference(self.centerTargetRotY, camera.rotY)
+    self.centerTargetRotY = camera.rotY + shortestDiff
   end
 
-  -- calculate differences
-  local diffY
-  if self.centerDirectDiff then
-    -- raw difference without shortest-path jumping to prevent 360 spin
-    diffY = self.centerTargetRotY - camera.rotY
-  else
-    diffY = self:getAngleDiff(camera.rotY, self.centerTargetRotY, camera)
-  end
-
+  -- the target has already been normalized or clamped, so a direct delta is safe
+  local diffY = self.centerTargetRotY - camera.rotY
   local diffX = 0
   if self.centeringRotX and self.centerTargetRotX ~= nil then
     diffX = self.centerTargetRotX - camera.rotX
   end
 
   -- check if target reached (both axes if rotX centering is enabled)
-  local reachedY = math.abs(diffY) < epsilon
-  local reachedX = not self.centeringRotX or math.abs(diffX) < epsilon
+  local reachedY = math.abs(diffY) < ROTATION_EPSILON
+  local reachedX = not self.centeringRotX or math.abs(diffX) < ROTATION_EPSILON
 
   if reachedY and reachedX then
     camera.rotY = self.centerTargetRotY
@@ -571,7 +501,7 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
   else
     -- ease-out interpolation for Y axis
     if not reachedY then
-      local deltaY = self:calculateSmoothDelta(diffY, centeringSmoothingFactor, dt)
+      local deltaY = self:calculateSmoothDelta(diffY, CENTERING_SMOOTHING_FACTOR, dt)
       camera.rotY = camera.rotY + deltaY
     else
       camera.rotY = self.centerTargetRotY
@@ -580,7 +510,7 @@ function MouseSteeringCameraRotation:updateCentering(dt, camera, intensity, came
 
     -- ease-out interpolation for X axis
     if self.centeringRotX and not reachedX then
-      local deltaX = self:calculateSmoothDelta(diffX, centeringSmoothingFactor, dt)
+      local deltaX = self:calculateSmoothDelta(diffX, CENTERING_SMOOTHING_FACTOR, dt)
       camera.rotX = camera.rotX + deltaX
       self.lastCenterRotX = camera.rotX
     elseif self.centeringRotX and self.centerTargetRotX ~= nil then
@@ -593,31 +523,31 @@ end
 ---Checks if player is manually looking backwards (more than 90 degrees from forward)
 -- Only checks manual camera rotation, excluding automatic steering follow
 function MouseSteeringCameraRotation:isLookingBackwards(camera)
+  local BACKWARDS_ROTATION_THRESHOLD = math.pi / 2
+
   if camera == nil or camera.origRotY == nil then
     return false
   end
 
-  local backwardsThreshold = math.pi / 2
-
   local referenceRotY = self.baseRotY or camera.rotY
   local diff = self:getAngleDiff(camera.origRotY, referenceRotY, camera)
 
-  return math.abs(diff) > backwardsThreshold
+  return math.abs(diff) > BACKWARDS_ROTATION_THRESHOLD
 end
 
 ---Detects and applies user manual camera adjustments
 -- Returns the movement amount applied to baseRotY
 function MouseSteeringCameraRotation:applyUserMovement(camera)
+  local ROTATION_EPSILON = 0.001
+
   if self.baseRotY == nil then
     return 0
   end
 
-  local epsilon = 0.001
-
   local expectedRotY = self.baseRotY + self.rotationFactor
   local userMovement = camera.rotY - expectedRotY
 
-  if math.abs(userMovement) > epsilon then
+  if math.abs(userMovement) > ROTATION_EPSILON then
     self.baseRotY = self.baseRotY + userMovement
     return userMovement
   end
@@ -631,43 +561,22 @@ function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRo
   self.lastInsideCamera = camera
 
   local currentOffset = self:getCurrentSteeringOffset(cameraRotationDeadZoneDegrees, intensity)
-
   local savedState = self:getSavedCameraState(camIndex)
+  local origRotY = camera.origRotY or 0
+  local manualOffset = savedState ~= nil and (savedState.rotYOffset or 0) or 0
 
-  if savedState ~= nil then
-    local origRotY = camera.origRotY or 0
-    local manualOffset = savedState.rotYOffset
+  self.baseRotY = origRotY + manualOffset
 
-    if savedState.preservePosition then
-      -- looking backwards - restore exact position, no steering follow
-      self.rotationFactor = 0
-      self.baseRotY = origRotY + manualOffset
-    elseif savedState.followSteering then
-      -- restore with steering follow from manual offset position
-      self.baseRotY = origRotY + manualOffset
-      self.rotationFactor = currentOffset
-    else
-      -- restore exact position without steering follow
-      self.rotationFactor = 0
-      self.baseRotY = origRotY + manualOffset
-    end
-  else
-    -- first time on this camera - start with steering follow active
-    local origRotY = camera.origRotY or 0
-    self.rotationFactor = currentOffset
-    self.baseRotY = origRotY
-  end
+  local shouldFollowSteering = savedState == nil or (savedState.followSteering and not savedState.preservePosition)
+  self.rotationFactor = shouldFollowSteering and currentOffset or 0
 
   -- set camera.rotY for immediate effect
   camera.rotY = self.baseRotY + self.rotationFactor
 
   -- prevent CabView camera reset on vehicle enter
-  if self.vehicle ~= nil and g_modIsLoaded.FS25_CabView then
-    local cabViewSpec = self.vehicle["spec_FS25_CabView.cabView"]
-
-    if cabViewSpec ~= nil and cabViewSpec.resetView then
-      cabViewSpec.resetView = false
-    end
+  local cabViewSpec = self:getCabViewSpec()
+  if cabViewSpec ~= nil and cabViewSpec.resetView then
+    cabViewSpec.resetView = false
   end
 end
 
@@ -677,14 +586,19 @@ end
 -- @param camIndex number Current camera index
 -- @param isPaused boolean Whether steering is paused (alt key held)
 function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
+  local ROTATION_SMOOTHING_FACTOR = 0.06
+  local ROTATION_MAX_DELTA_PER_MS = 0.002
+
   -- get settings values
   local intensity = self:getIntensity()
   local deadzoneDegrees = self:getDeadzoneDegrees()
-  local centerVertical = self:getCenterVertical()
+  local isInsideCamera = self:isValidInsideCamera(camera)
+  isPaused = isPaused == true
 
   -- handle camera change
+  local stateResetForCameraChange = false
   if self.lastCamIndex ~= nil and self.lastCamIndex ~= camIndex then
-    self:resetState(camIndex)
+    stateResetForCameraChange = self:resetState(camIndex)
   end
 
   -- handle active state changes (toggle camera follow steering)
@@ -693,49 +607,35 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   local justDeactivated = not self.isActive and wasActive
   self.lastIsActive = self.isActive
 
-  -- when activating, cancel any pending operations and start centering to steering follow
+  -- activating follow must never recenter the camera; preserve the current view
   if justActivated then
     if self.centering then
       self:cancelCentering()
     end
 
-    if camera ~= nil and self:isValidInsideCamera(camera) then
+    if isInsideCamera then
       local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
-      local targetRotY = (camera.origRotY or 0) + steeringOffset
-
-      if intensity > 0 and self:shouldCenterOnActivation(camera, camIndex, targetRotY) then
-        self:requestCenter(camera, intensity, deadzoneDegrees, centerVertical)
-      else
-        -- player introduced a manual offset; preserve it instead of recentering on activation
-        local manualOffset = self:setCurrentCameraAsBase(camera, steeringOffset)
-        local preservePos = self:isLookingBackwards(camera)
-
-        self.lastCamIndex = camIndex
-        self.lastInsideCamera = camera
-        self:saveCameraState(camIndex, camera, manualOffset, intensity > 0, preservePos)
-      end
+      self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0)
     end
   end
 
-  -- when deactivating, just freeze current position (no centering)
+  -- when deactivating, capture the current position without writing to the camera
   if justDeactivated then
     if self.centering then
       self:cancelCentering()
-      -- update baseRotY to exactly where the camera is right now, so it doesn't snap back
-      if self.baseRotY ~= nil and camera ~= nil then
-        self.baseRotY = camera.rotY - self.rotationFactor
-      end
-    else
-      -- freeze current position
-      if self.baseRotY ~= nil and camera ~= nil then
-        camera.rotY = self.baseRotY + self.rotationFactor
-      end
     end
+
+    if self.baseRotY ~= nil and camera ~= nil then
+      self.baseRotY = camera.rotY - self.rotationFactor
+    end
+
     self:resetState(camIndex)
   end
 
   -- if not active, do nothing
   if not self.isActive and not self.centering then
+    -- keep transition tracking synchronized while camera follow is disabled
+    self.lastIsPaused = isPaused
     return
   end
 
@@ -759,27 +659,48 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   -- when exiting pause, take current camera position as manual offset
   -- camera will continue steering follow from this position
   if pauseEnded then
-    if camera ~= nil and self:isValidInsideCamera(camera) then
+    if isInsideCamera then
       local currentSteeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
 
       -- keep the current camera position and continue from it
-      self:setCurrentCameraAsBase(camera, currentSteeringOffset)
+      self:preserveCurrentCamera(camera, camIndex, currentSteeringOffset, intensity > 0)
     end
     return
   end
 
-  -- process centering (for manual center requests)
+  -- associate explicit center/look-back requests with the current inside camera
+  if self.centering and self.centeringCamera == camera and isInsideCamera then
+    self.lastCamIndex = camIndex
+    self.lastInsideCamera = camera
+  end
+
+  -- process centering (only for explicit center/look-back requests)
+  local wasCentering = self.centering
   self:updateCentering(dt, camera, intensity, deadzoneDegrees)
   if self.centering then
     return
   end
 
+  -- if manual input cancelled centering before initialization, keep that new view
+  if wasCentering and self.baseRotY == nil and isInsideCamera then
+    local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
+    self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0)
+    return
+  end
+
   -- validate preconditions
-  if intensity <= 0 or not self:isValidInsideCamera(camera) then
-    self:resetState(camIndex)
-    -- update saved camera states for outside camera
-    -- cameras not looking backwards will follow steering when returning
-    self:updateStatesForOutsideCamera()
+  if intensity <= 0 or not isInsideCamera then
+    local hadCameraState = stateResetForCameraChange
+
+    if self.centering or self.baseRotY ~= nil or self.lastInsideCamera ~= nil then
+      hadCameraState = self:resetState(camIndex) or hadCameraState
+    end
+
+    if hadCameraState then
+      -- cameras not looking backwards resume steering follow after tracking is suspended
+      self:updateStatesForOutsideCamera()
+    end
+
     return
   end
 
@@ -796,10 +717,6 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
     return
   end
 
-  -- camera rotation parameters
-  local rotationSmoothingFactor = 0.06
-  local rotationMaxDeltaPerMs = 0.002
-
   -- normal steering follow update
   local targetOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
 
@@ -808,10 +725,10 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
 
   -- smooth transition to target offset
   local diff = targetOffset - self.rotationFactor
-  local delta = self:calculateSmoothDelta(diff, rotationSmoothingFactor, dt)
+  local delta = self:calculateSmoothDelta(diff, ROTATION_SMOOTHING_FACTOR, dt)
 
   -- clamp to max speed
-  local maxDelta = rotationMaxDeltaPerMs * dt
+  local maxDelta = ROTATION_MAX_DELTA_PER_MS * dt
   delta = math.clamp(delta, -maxDelta, maxDelta)
 
   self.rotationFactor = self.rotationFactor + delta
