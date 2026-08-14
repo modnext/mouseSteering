@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="106">
   <author>aaw3k</author>
-  <version>1.3.1.0</version>
+  <version>1.3.1.1</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -37,6 +37,10 @@ Changelog Version 1.3.1.0:
 - Added camera look-back (double-click)
 - Added small optimization improvements
 
+Changelog Version 1.3.1.1:
+- Fixed unwanted camera centering when camera follow is reactivated
+- Improved camera rotation state handling and smoothing
+
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
     <de><![CDATA[Lenken Sie Ihre Fahrzeuge mit der Maus für ein natürlicheres und flüssigeres Fahrgefühl. Passen Sie Empfindlichkeit, Linearität und Totzonen ganz einfach über die Schaltfläche in den allgemeinen Einstellungen an. Zu den Funktionen gehören eine übersichtliche HUD-Anzeige, eine geschwindigkeitsabhängige Lenkung für mehr Präzision bei hohem Tempo und eine automatische Kamera-Folgefunktion.
 
@@ -62,6 +66,10 @@ Tastenkombinationen:
 - Hinzugefügte Geschwindigkeitsregelung via Mausrad
 - Hinzugefügter Kamerarückblick (Doppelklick)
 - Hinzugefügte kleine Optimierungsverbesserungen
+
+Änderungsprotokoll Version 1.3.1.1:
+- Unerwünschtes Zentrieren der Kamera bei erneuter Aktivierung der Kamerafolge behoben
+- Zustandsverwaltung und Glättung der Kamerarotation verbessert
 
 Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte GitHub (modnext/mouseSteering).]]></de>
     <fr><![CDATA[Dirigez vos véhicules à la souris pour une expérience de conduite plus naturelle et plus fluide. Personnalisez facilement la sensibilité, la linéarité et les zones mortes via le bouton dans les paramètres généraux du jeu. Les fonctionnalités incluent un indicateur HUD clair, une direction progressive pour plus de précision à haute vitesse et un système de suivi automatique de la caméra.
@@ -89,6 +97,10 @@ Journal des modifications version 1.3.1.0:
 - Ajout de la vue arrière (double-clic)
 - Ajout de petites améliorations d'optimisation
 
+Journal des modifications version 1.3.1.1:
+- Correction du centrage indésirable lors de la réactivation du suivi de caméra
+- Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
+
 Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modnext/mouseSteering).]]></fr>
     <pl><![CDATA[Steruj pojazdami za pomocą myszki, co sprawia, że jazda jest znacznie bardziej płynna i naturalna. Dostosuj czułość, liniowość i martwe strefy za pomocą przycisku w menu ustawień ogólnych. Funkcje obejmują czytelny wskaźnik HUD, system progresywnego skrętu dla lepszej precyzji przy dużych prędkościach oraz automatyczne śledzenie kierownicy przez kamerę.
 
@@ -115,6 +127,10 @@ Lista zmian w wersji 1.3.1.0:
 - Dodano możliwość patrzenia do tyłu (dwuklik)
 - Dodano małe usprawnienia optymalizacyjne
 
+Lista zmian w wersji 1.3.1.1:
+- Naprawiono niechciane centrowanie przy ponownym włączeniu śledzenia kamery
+- Ulepszono obsługę stanu i płynność obrotu kamery
+
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/mouseSteering).]]></pl>
     <ru><![CDATA[Управляйте техникой с помощью мыши, что делает вождение гораздо более плавным и естественным. Настраивайте чувствительность, линейность и мертвые зоны через кнопку в общем меню настроек игры. Особенности включают удобный HUD-индикатор, прогрессивное рулевое управление для точности на высоких скоростях и систему автоматического следования камеры за рулем.
 
@@ -140,6 +156,10 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 - Добавлено плавное управление скоростью с помощью колесика мыши
 - Добавлен обзор назад (двойной щелчок)
 - Добавлены небольшие улучшения оптимизации
+
+Журнал изменений версии 1.3.1.1:
+- Исправлено нежелательное центрирование при повторном включении следования камеры
+- Улучшена обработка состояния и сглаживание вращения камеры
 
 Для получения дополнительной информации или сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>
