@@ -40,7 +40,6 @@ function MouseSteeringVehicle.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringCameraRotating", MouseSteeringVehicle.setMouseSteeringCameraRotating)
   SpecializationUtil.registerFunction(vehicleType, "setCameraRotationActive", MouseSteeringVehicle.setCameraRotationActive)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringHUD", MouseSteeringVehicle.setMouseSteeringHUD)
-  SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringPhysicalAxis", MouseSteeringVehicle.getMouseSteeringPhysicalAxis)
   SpecializationUtil.registerFunction(vehicleType, "calculateAxisAndSteering", MouseSteeringVehicle.calculateAxisAndSteering)
   SpecializationUtil.registerFunction(vehicleType, "synchronizeMouseSteeringAxisSide", MouseSteeringVehicle.synchronizeMouseSteeringAxisSide)
 end
@@ -139,30 +138,16 @@ function MouseSteeringVehicle:onReadStream(streamId, _)
   local spec = self.spec_mouseSteeringVehicle
   spec.uniqueId = streamReadString(streamId)
 
-  local maxRotTime = self.maxRotTime
-  local minRotTime = self.minRotTime
-  local canSynchronizeRotatedTime = self.rotatedTimeInterpolator ~= nil and maxRotTime ~= nil and minRotTime ~= nil and maxRotTime ~= 0 and minRotTime ~= 0
+  -- wheels resets the steering interpolator while reading the initial stream
+  local rotatedTime = streamReadFloat32(streamId)
+  self.rotatedTime = rotatedTime
 
-  -- Wheels resets its steering interpolator while reading the initial stream
-  if canSynchronizeRotatedTime then
-    local rotatedTimeRange = math.max(maxRotTime - minRotTime, 0.001)
-    local rotatedTime = streamReadUIntN(streamId, 8) / 255 * rotatedTimeRange + minRotTime
-
-    if math.abs(rotatedTime) < 0.001 then
-      rotatedTime = 0
-    end
-
-    self.rotatedTime = rotatedTime
-    self.rotatedTimeInterpolator:setValue(rotatedTime)
+  local interpolator = self.rotatedTimeInterpolator
+  if interpolator ~= nil then
+    interpolator:setValue(rotatedTime)
   end
 
-  -- Drivable does not include the steering axis in its initial stream
-  local axisSide = streamReadUIntN(streamId, 10) / 1023 * 2 - 1
-  if math.abs(axisSide) < 0.00099 then
-    axisSide = 0
-  end
-
-  spec.axisSide, spec.inputValue = self:calculateAxisAndSteering(spec, axisSide)
+  self:synchronizeMouseSteeringAxisSide()
   self.spec_drivable.axisSide = spec.axisSide
 end
 
@@ -172,18 +157,8 @@ function MouseSteeringVehicle:onWriteStream(streamId, _)
   local spec = self.spec_mouseSteeringVehicle
   streamWriteString(streamId, spec.uniqueId)
 
-  local maxRotTime = self.maxRotTime
-  local minRotTime = self.minRotTime
-  local canSynchronizeRotatedTime = self.rotatedTimeInterpolator ~= nil and maxRotTime ~= nil and minRotTime ~= nil and maxRotTime ~= 0 and minRotTime ~= 0
-
-  if canSynchronizeRotatedTime then
-    local rotatedTimeRange = math.max(maxRotTime - minRotTime, 0.001)
-    local compressedRotatedTime = math.floor(((self.rotatedTime or 0) - minRotTime) / rotatedTimeRange * 255)
-    streamWriteUIntN(streamId, math.clamp(compressedRotatedTime, 0, 255), 8)
-  end
-
-  local compressedAxisSide = math.clamp(self:getMouseSteeringPhysicalAxis() + 1, 0, 2) / 2 * 1023
-  streamWriteUIntN(streamId, compressedAxisSide, 10)
+  -- preserve the physical steering state without axis quantization
+  streamWriteFloat32(streamId, self.rotatedTime or 0)
 end
 
 ---Called on update
@@ -457,8 +432,7 @@ function MouseSteeringVehicle:onEnterVehicle(isControlling)
 
   -- sync axis when enabled
   if spec.isUsed then
-    self:synchronizeMouseSteeringAxisSide()
-    self.spec_drivable.axisSide = spec.axisSide
+    self:synchronizeMouseSteeringAxisSide(self.spec_drivable.axisSide)
 
     -- prime Drivable before its first update after entering
     self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
@@ -773,34 +747,6 @@ function MouseSteeringVehicle.updateActionEvents(self)
   end
 end
 
----Gets the normalized steering axis represented by the current vehicle state
--- @return number axisSide The physical steering axis in the range -1 to 1
-function MouseSteeringVehicle:getMouseSteeringPhysicalAxis()
-  local drivable = self.spec_drivable
-  local fallbackAxis = drivable ~= nil and drivable.axisSide or 0
-  local rotatedTime = self.rotatedTime
-  local maxRotTime = self.maxRotTime
-  local minRotTime = self.minRotTime
-
-  if rotatedTime == nil or maxRotTime == nil or minRotTime == nil or maxRotTime == 0 or minRotTime == 0 then
-    return math.clamp(fallbackAxis, -1, 1)
-  end
-
-  local steeringDirection = self.getSteeringDirection ~= nil and self:getSteeringDirection() or nil
-  if steeringDirection == nil or math.abs(steeringDirection) < 0.001 then
-    return math.clamp(fallbackAxis, -1, 1)
-  end
-
-  local axisSide
-  if rotatedTime < 0 then
-    axisSide = rotatedTime / -maxRotTime / steeringDirection
-  else
-    axisSide = rotatedTime / minRotTime / steeringDirection
-  end
-
-  return math.clamp(axisSide, -1, 1)
-end
-
 ---Calculates axis value and steering input from vehicle state
 -- @param spec table The specialization spec
 -- @param axisOverride number|nil Optional normalized steering axis
@@ -810,7 +756,20 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
   local axisValue = axisOverride
 
   if axisValue == nil then
-    axisValue = self:getMouseSteeringPhysicalAxis()
+    local rotatedTime = self.rotatedTime
+    local maxRotTime = self.maxRotTime
+    local minRotTime = self.minRotTime
+    local steeringDirection = self:getSteeringDirection()
+
+    if rotatedTime ~= nil and maxRotTime ~= nil and minRotTime ~= nil and maxRotTime ~= 0 and minRotTime ~= 0 and steeringDirection ~= nil and steeringDirection ~= 0 then
+      if rotatedTime < 0 then
+        axisValue = rotatedTime / -maxRotTime / steeringDirection
+      else
+        axisValue = rotatedTime / minRotTime / steeringDirection
+      end
+    else
+      axisValue = self.spec_drivable.axisSide or 0
+    end
   end
 
   axisValue = math.clamp(axisValue, -1, 1)
