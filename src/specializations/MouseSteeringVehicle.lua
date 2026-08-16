@@ -275,6 +275,11 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         end
       end
 
+      -- keep the cached player input aligned with the physical steering while AI is in control
+      if isAIActive or isWorkerAIActive then
+        self:synchronizeMouseSteeringAxisSide(false, false)
+      end
+
       -- apply steering input to vehicle
       if self.setSteeringInput ~= nil then
         self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
@@ -290,11 +295,6 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local shouldDisableRotation = (isAIActive and spec.settings.steeringAssist and isSteeringAssist) or (ignoreSelectionIgnoreAI and isPlayerControlled and not isAIActive)
 
     self:setMouseSteeringCameraRotating(not shouldDisableRotation)
-
-    -- keep axis in sync while GPS steering assist controls the wheels
-    if isAIActive and spec.isUsed then
-      self:synchronizeMouseSteeringAxisSide(false, false)
-    end
 
     -- update camera rotation following steering and centering
     local camera = self:getActiveCamera()
