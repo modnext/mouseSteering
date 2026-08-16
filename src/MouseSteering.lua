@@ -223,6 +223,11 @@ function MouseSteering:loadSettingsFromXMLFile()
     end
   end
 
+  -- keep existing settings files on the original target-speed behavior
+  if settings.speedControlMode ~= "targetSpeed" and settings.speedControlMode ~= "pedalPercent" then
+    settings.speedControlMode = "targetSpeed"
+  end
+
   xmlFile:delete()
 
   return true

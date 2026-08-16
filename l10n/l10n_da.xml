@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="Inverter X-akse"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Hastighedsbaseret styring"/>
     <e k="mouseSteering_ui_speedControl" v="Mus Hastighedskontrol"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Kontroltilstand"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Målhastighed"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Pedal %"/>
     <e k="mouseSteering_ui_linearity" v="Linearitet"/>
     <e k="mouseSteering_ui_smoothness" v="Glidende"/>
     <e k="mouseSteering_ui_deadzone" v="Dødzone"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Inverterer den vandrette (X) akse for styring."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Justerer følsomheden baseret på hastighed og styrevinkel for bedre kontrol."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Giver dig mulighed for gnidningsløst at justere køretøjets hastighed ved hjælp af musehjulet."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Vælg, om musehjulet styrer målhastigheden eller den virtuelle pedal."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Bemærk: Hvis rulning er blokeret, skal du kontrollere andre mods."/>
     <e k="mouseSteering_ui_linearity_desc" v="Justerer styrekurven. Højere værdier giver finere kontrol nær midten."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Udjævner musens input for at reducere pludselige ændringer i styringen."/>

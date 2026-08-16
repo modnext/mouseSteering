@@ -200,6 +200,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.indicatorText:setIsChecked(settings.indicatorText, true)
 
   -- multi-text options
+  self.speedControlMode:setState(settings.speedControlMode or "targetSpeed")
   self.cameraRotationInside:setState(settings.cameraRotationInside)
   self.indicatorMode:setState(settings.indicatorMode)
 
@@ -310,6 +311,11 @@ end
 ---Updates the enabled/disabled state of dynamic controls based on current settings
 function MouseSteeringSettingsDialog:updateDynamicControls()
   local currentSettings = self.settings
+
+  -- control mode is only relevant while mouse-wheel speed control is enabled
+  if self.speedControlMode ~= nil then
+    self:setOptionDisabledWithIcon(self.speedControlMode, currentSettings.speedControl ~= true)
+  end
 
   -- auto-save is disabled when default mode is active (mutually exclusive)
   if self.autoSave ~= nil then

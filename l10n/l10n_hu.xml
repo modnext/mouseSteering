@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="X-tengely megfordítása"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Sebességalapú kormányzás"/>
     <e k="mouseSteering_ui_speedControl" v="Egér Sebességszabályzó"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Vezérlési mód"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Célsebesség"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Pedál %"/>
     <e k="mouseSteering_ui_linearity" v="Linearitás"/>
     <e k="mouseSteering_ui_smoothness" v="Sima"/>
     <e k="mouseSteering_ui_deadzone" v="Holtzóna"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Megfordítja a kormányzás vízszintes (X) tengelyét."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="A sebesség és a kormányzási szög alapján állítja be az érzékenységet a jobb irányítás érdekében."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Lehetővé teszi a jármű sebességének fokozatmentes beállítását az egér görgőjével."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Válassza ki, hogy az egérgörgő a célsebességet vagy a virtuális pedált vezérelje."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Megjegyzés: Ha a görgetés blokkolva van, ellenőrizze a többi módot."/>
     <e k="mouseSteering_ui_linearity_desc" v="Beállítja a kormányzás reakciógörbéjét. A magasabb értékek finomabb irányítást biztosítanak a középpont közelében."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Kisimítja az egér bevitelét, hogy csökkentsék a hirtelen kormányváltozásokat."/>

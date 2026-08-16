@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="Käännä X-akseli"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Nopeuteen perustuva ohjaus"/>
     <e k="mouseSteering_ui_speedControl" v="Hiiren Nopeudensäädin"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Ohjaustila"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Tavoitenopeus"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Poljin %"/>
     <e k="mouseSteering_ui_linearity" v="Lineaarisuus"/>
     <e k="mouseSteering_ui_smoothness" v="Sujuva"/>
     <e k="mouseSteering_ui_deadzone" v="Kuollut alue"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Kääntää vaakasuoran (X) akselin ohjausta varten."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Säätää herkkyyttä nopeuden ja ohjauskulman perusteella paremman hallinnan saavuttamiseksi."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Antaa sinun säätää ajoneuvon nopeutta sujuvasti hiiren rullalla."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Valitse, ohjaako hiiren rulla tavoitenopeutta vai virtuaalista poljinta."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Huomautus: Jos vieritys on estetty, tarkista muut modit."/>
     <e k="mouseSteering_ui_linearity_desc" v="Säätää ohjauksen vastekäyrää. Suuremmat arvot antavat tarkemman hallinnan keskiasennon lähellä."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Tasoittaa hiiren liikkeitä jyrkkien ohjausmuutosten vähentämiseksi."/>

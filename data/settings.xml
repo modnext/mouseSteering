@@ -8,6 +8,7 @@
   <invertXAxis>false</invertXAxis>
   <speedBasedSteering>false</speedBasedSteering>
   <speedControl>false</speedControl>
+  <speedControlMode>targetSpeed</speedControlMode> <!-- Options: targetSpeed, pedalPercent -->
   <linearity>1.000000</linearity>
   <smoothness>0.000000</smoothness>
   <deadzone>0.000000</deadzone>
