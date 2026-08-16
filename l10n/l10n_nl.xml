@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="X-as omkeren"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Op snelheid gebaseerd sturen"/>
     <e k="mouseSteering_ui_speedControl" v="Muis Snelheidsregeling"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Bedieningsmodus"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Doelsnelheid"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Pedaal %"/>
     <e k="mouseSteering_ui_linearity" v="Lineariteit"/>
     <e k="mouseSteering_ui_smoothness" v="Soepelheid"/>
     <e k="mouseSteering_ui_deadzone" v="Dode zone"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Keert de horizontale (X) as voor sturen om."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Past de gevoeligheid aan op basis van snelheid en stuurhoek voor betere controle."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Biedt u de mogelijkheid om de voertuigsnelheid soepel aan te passen met het muiswiel."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Kies of het muiswiel de doelsnelheid of het virtuele pedaal regelt."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Opmerking: Als scrollen is geblokkeerd, controleer dan andere mods."/>
     <e k="mouseSteering_ui_linearity_desc" v="Past de stuurresponscurve aan. Hogere waarden zorgen voor fijnere controle in het midden."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Maakt muisinvoer vloeiender om abrupte stuurveranderingen te verminderen."/>

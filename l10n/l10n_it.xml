@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="Inverti asse X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Sterzo basato sulla velocità"/>
     <e k="mouseSteering_ui_speedControl" v="Controllo Velocità col Mouse"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Modalità di controllo"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Velocità obiettivo"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Pedale %"/>
     <e k="mouseSteering_ui_linearity" v="Linearità"/>
     <e k="mouseSteering_ui_smoothness" v="Scorrevolezza"/>
     <e k="mouseSteering_ui_deadzone" v="Zona morta"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Inverte l'asse orizzontale (X) per lo sterzo."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Regola la sensibilità in base alla velocità e all'angolo di sterzata per un controllo migliore."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Ti permette di regolare dolcemente la velocità del veicolo usando la rotellina del mouse."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Scegli se la rotellina del mouse controlla la velocità obiettivo o il pedale virtuale."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Nota: Se lo scorrimento è bloccato, controlla altre mod."/>
     <e k="mouseSteering_ui_linearity_desc" v="Regola la curva di risposta dello sterzo. Valori più alti offrono un controllo più preciso vicino al centro."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Rende più fluido l'input del mouse per ridurre i cambiamenti bruschi dello sterzo."/>

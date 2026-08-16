@@ -8,14 +8,16 @@
 -- name of the mod
 local modName = g_currentModName
 
-MouseSteeringSpeedControl = {}
+MouseSteeringSpeedControl = {
+  MODE_TARGET_SPEED = "targetSpeed",
+  MODE_PEDAL_PERCENT = "pedalPercent",
+}
 
 ---Checks if all prerequisite specializations are loaded
 -- @param specializations table specializations
 -- @return boolean hasPrerequisite true if all prerequisite specializations are loaded
 function MouseSteeringSpeedControl.prerequisitesPresent(specializations)
-  return SpecializationUtil.hasSpecialization(Drivable, specializations)
-      and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
+  return SpecializationUtil.hasSpecialization(Drivable, specializations) and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
 end
 
 ---Register all functions from the specialization that can be called on vehicle level
@@ -24,7 +26,9 @@ function MouseSteeringSpeedControl.registerFunctions(vehicleType)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlIsActive", MouseSteeringSpeedControl.getIsActive)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlDisplayInfo", MouseSteeringSpeedControl.getDisplayInfo)
   SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlEnabled", MouseSteeringSpeedControl.getSpeedControlEnabled)
+  SpecializationUtil.registerFunction(vehicleType, "getMouseSteeringSpeedControlMode", MouseSteeringSpeedControl.getControlMode)
   SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringSpeedControlState", MouseSteeringSpeedControl.setMouseSteeringSpeedControlState)
+  SpecializationUtil.registerFunction(vehicleType, "setMouseSteeringSpeedControlModeState", MouseSteeringSpeedControl.setMouseSteeringSpeedControlModeState)
 end
 
 ---Register all function overwritings
@@ -39,6 +43,7 @@ end
 -- @param vehicleType table vehicle type
 function MouseSteeringSpeedControl.registerEventListeners(vehicleType)
   SpecializationUtil.registerEventListener(vehicleType, "onLoad", MouseSteeringSpeedControl)
+  SpecializationUtil.registerEventListener(vehicleType, "onEnterVehicle", MouseSteeringSpeedControl)
   SpecializationUtil.registerEventListener(vehicleType, "onUpdate", MouseSteeringSpeedControl)
   SpecializationUtil.registerEventListener(vehicleType, "onLeaveVehicle", MouseSteeringSpeedControl)
 end
@@ -53,89 +58,161 @@ function MouseSteeringSpeedControl:onLoad(savegame)
   spec.mouseSteering = g_currentMission.mouseSteering
   spec.settings = spec.mouseSteering.settings
 
-  -- initialize state flags
+  -- initialize state
   spec.isActive = false
+  spec.activeMode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
   spec.targetSpeedKmh = 0
+  spec.targetPedalPercent = 0
   spec.speedInterpolated = nil
-  spec.pedalHeldOnActivation = false
+  spec.ignoredPedalDirection = 0
+  spec.ignoredPedalDirectionObserved = false
+  spec.ignoredPedalGraceTime = 0
+end
+
+---Called when entering a vehicle
+-- @param isControlling boolean true for the locally controlled player (unused)
+function MouseSteeringSpeedControl:onEnterVehicle(_)
+  -- discard state left by a previous owner before accepting new input
+  if self.isServer then
+    MouseSteeringSpeedControl.requestDeactivation(self)
+  end
 end
 
 ---Called when leaving a vehicle
 -- @param wasEntered boolean true if the vehicle was entered
 function MouseSteeringSpeedControl:onLeaveVehicle(wasEntered)
-  local spec = self.spec_mouseSteeringSpeedControl
-
-  MouseSteeringSpeedControl.deactivate(spec)
+  MouseSteeringSpeedControl.requestDeactivation(self)
 end
 
----Sets speed control state and synchronizes over network
+---Sets the legacy target-speed state and synchronizes it over the network
 -- @param boolean isActive whether speed control is active
 -- @param number targetSpeedKmh target speed in km/h
 -- @param boolean noEventSend if true, skip network event
 function MouseSteeringSpeedControl:setMouseSteeringSpeedControlState(isActive, targetSpeedKmh, noEventSend)
+  self:setMouseSteeringSpeedControlModeState(isActive, MouseSteeringSpeedControl.MODE_TARGET_SPEED, targetSpeedKmh, 0, noEventSend)
+end
+
+---Sets the active control mode and synchronizes it over the network
+-- @param boolean isActive whether speed control is active
+-- @param string mode active control mode
+-- @param number targetValue target speed in km/h or pedal position in percent
+-- @param number ignoredPedalDirection physical pedal direction held during activation
+-- @param boolean noEventSend if true, skip network event
+function MouseSteeringSpeedControl:setMouseSteeringSpeedControlModeState(isActive, mode, targetValue, ignoredPedalDirection, noEventSend)
   local spec = self.spec_mouseSteeringSpeedControl
+  local motor = self:getMotor()
+  local ignoredPedalGraceDuration = 250
 
-  spec.isActive = isActive
-  spec.targetSpeedKmh = targetSpeedKmh
-
-  if not isActive then
-    spec.speedInterpolated = nil
-    spec.pedalHeldOnActivation = false
+  -- normalize mode and target before changing authoritative state
+  if mode ~= MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    mode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
   end
 
-  -- send network event
-  if noEventSend == nil or not noEventSend then
+  isActive = isActive == true and motor ~= nil
+  targetValue = tonumber(targetValue) or 0
+  targetValue = targetValue >= 0 and math.floor(targetValue + 0.5) or math.ceil(targetValue - 0.5)
+
+  if isActive then
+    if mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+      local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
+      local minPedalPercent = isManualDirection and 0 or -100
+
+      targetValue = math.clamp(targetValue, minPedalPercent, 100)
+      isActive = targetValue ~= 0
+    else
+      local maxForward = math.ceil(motor:getMaximumForwardSpeed() * 3.6)
+      local maxReverse = math.ceil(motor:getMaximumBackwardSpeed() * 3.6)
+      local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
+      local minSpeed = isManualDirection and 0 or -maxReverse
+
+      targetValue = math.clamp(targetValue, minSpeed, maxForward)
+    end
+  end
+
+  if not isActive then
+    targetValue = 0
+  end
+
+  local modeChanged = spec.activeMode ~= mode
+
+  spec.isActive = isActive
+  spec.activeMode = mode
+  spec.targetSpeedKmh = mode == MouseSteeringSpeedControl.MODE_TARGET_SPEED and targetValue or 0
+  spec.targetPedalPercent = mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT and targetValue or 0
+  spec.ignoredPedalDirection = isActive and math.clamp(math.sign(tonumber(ignoredPedalDirection) or 0), -1, 1) or 0
+
+  if spec.ignoredPedalDirection ~= 0 then
+    spec.ignoredPedalDirectionObserved = false
+    spec.ignoredPedalGraceTime = ignoredPedalGraceDuration
+  else
+    spec.ignoredPedalDirectionObserved = false
+    spec.ignoredPedalGraceTime = 0
+  end
+
+  if not isActive or modeChanged or mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    spec.speedInterpolated = nil
+  end
+
+  -- send normalized state over the network
+  if noEventSend ~= true then
+    local event = SetMouseSteeringSpeedControlStateEvent.new(self, spec.isActive, spec.activeMode, mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT and spec.targetPedalPercent or spec.targetSpeedKmh, spec.ignoredPedalDirection)
+
     if self.isServer then
       local ownerConnection = self:getOwnerConnection()
 
       if ownerConnection ~= nil then
-        ownerConnection:sendEvent(SetMouseSteeringSpeedControlStateEvent.new(self, isActive, targetSpeedKmh))
+        ownerConnection:sendEvent(event)
       end
-    else
-      g_client:getServerConnection():sendEvent(SetMouseSteeringSpeedControlStateEvent.new(self, isActive, targetSpeedKmh))
+    elseif g_client ~= nil then
+      g_client:getServerConnection():sendEvent(event)
     end
   end
 end
 
----Activates speed control at the given target speed
--- @param spec table The specialization spec
--- @param speedKmh number target speed in km/h
-function MouseSteeringSpeedControl.activate(spec, speedKmh)
-  spec.isActive = true
-  spec.targetSpeedKmh = speedKmh
+---Requests synchronized deactivation if the control is active
+-- @param vehicle table vehicle instance
+function MouseSteeringSpeedControl.requestDeactivation(vehicle)
+  local spec = vehicle.spec_mouseSteeringSpeedControl
+
+  if spec ~= nil and spec.isActive then
+    vehicle:setMouseSteeringSpeedControlModeState(false, spec.activeMode, 0, 0)
+  end
 end
 
----Deactivates speed control
--- @param spec table The specialization spec
-function MouseSteeringSpeedControl.deactivate(spec)
-  spec.isActive = false
-  spec.targetSpeedKmh = 0
-  spec.speedInterpolated = nil
-  spec.pedalHeldOnActivation = false
+---Clears the temporary physical-pedal handoff state
+-- @param spec table speed-control specialization state
+function MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
+  spec.ignoredPedalDirection = 0
+  spec.ignoredPedalDirectionObserved = false
+  spec.ignoredPedalGraceTime = 0
 end
 
 ---Gets whether speed control is enabled in settings
 -- @return boolean isSpeedControlEnabled true if speed control is enabled
 function MouseSteeringSpeedControl:getSpeedControlEnabled()
   local spec = self.spec_mouseSteeringSpeedControl
-
-  -- get speed control setting
   local speedControlState = spec.settings.speedControl
 
-  -- default to false if not set
-  if speedControlState == nil then
-    speedControlState = false
+  return speedControlState == true
+end
+
+---Gets the configured control mode
+-- @return string mode configured control mode
+function MouseSteeringSpeedControl:getControlMode()
+  local spec = self.spec_mouseSteeringSpeedControl
+  local mode = spec.settings.speedControlMode
+
+  if mode ~= MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    mode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
   end
 
-  return speedControlState
+  return mode
 end
 
 ---Gets whether speed control is active
 -- @return boolean isSpeedControlActive true if speed control is active
 function MouseSteeringSpeedControl:getIsActive()
   local spec = self.spec_mouseSteeringSpeedControl
-
-  -- get speed control setting and mouse steering usage
   local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
   local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
 
@@ -143,29 +220,33 @@ function MouseSteeringSpeedControl:getIsActive()
 end
 
 ---Gets display info for HUD
--- @return number speed in km/h
+-- @return number value target speed in km/h or pedal position in percent
 -- @return boolean isActive is active
+-- @return string mode active control mode
 function MouseSteeringSpeedControl:getDisplayInfo()
   local spec = self.spec_mouseSteeringSpeedControl
 
-  -- return 0 if inactive
   if not spec.isActive then
-    return 0, false
+    return 0, false, spec.activeMode
   end
 
-  -- return absolute target speed
-  return math.abs(spec.targetSpeedKmh), true
+  if spec.activeMode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    return spec.targetPedalPercent, true, spec.activeMode
+  end
+
+  return math.abs(spec.targetSpeedKmh), true, spec.activeMode
 end
 
----Processes a scroll wheel tick
--- @param vehicle table the vehicle
+---Calculates a target-speed change for one scroll-wheel tick
+-- @param vehicle table vehicle instance
 -- @param direction number scroll direction (+1 or -1)
-function MouseSteeringSpeedControl.onScrollWheel(vehicle, direction)
+-- @return number|nil targetSpeedKmh adjusted target or nil when activation has no effect
+function MouseSteeringSpeedControl.getAdjustedTargetSpeed(vehicle, direction)
   local spec = vehicle.spec_mouseSteeringSpeedControl
   local motor = vehicle:getMotor()
 
   if motor == nil then
-    return
+    return nil
   end
 
   local wasInactive = not spec.isActive
@@ -192,7 +273,6 @@ function MouseSteeringSpeedControl.onScrollWheel(vehicle, direction)
     targetSpeedKmh = direction > 0 and math.floor(currentSpeedKmh) or math.ceil(currentSpeedKmh)
   end
 
-  -- always adjust by direction
   targetSpeedKmh = targetSpeedKmh + direction
 
   -- clamp to vehicle speed limits
@@ -203,155 +283,238 @@ function MouseSteeringSpeedControl.onScrollWheel(vehicle, direction)
 
   targetSpeedKmh = math.clamp(targetSpeedKmh, minSpeed, maxForward)
 
-  -- cancel activation if scroll had no effect (e.g. standing still, scrolling down in manual mode)
   if wasInactive and targetSpeedKmh == 0 then
-    return
+    return nil
   end
 
-  -- sync state over network
-  vehicle:setMouseSteeringSpeedControlState(true, targetSpeedKmh)
+  return targetSpeedKmh
+end
+
+---Calculates a pedal-position change for one scroll-wheel tick
+-- @param vehicle table vehicle instance
+-- @param direction number scroll direction (+1 or -1)
+-- @param pedalAxis number current physical pedal input
+-- @return number|nil targetPedalPercent adjusted target or nil when activation has no effect
+function MouseSteeringSpeedControl.getAdjustedPedalPercent(vehicle, direction, pedalAxis)
+  local spec = vehicle.spec_mouseSteeringSpeedControl
+  local wasInactive = not spec.isActive
+  local isManualDirection = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
+  local targetPedalPercent = spec.targetPedalPercent
+  local pedalStep = 5
+
+  pedalAxis = math.clamp(tonumber(pedalAxis) or 0, -1, 1)
+
+  if wasInactive then
+    -- never reinterpret an already pressed brake/reverse pedal as a latched target
+    if pedalAxis < -0.01 then
+      return nil
+    end
+
+    local currentPedalPercent = (isManualDirection and math.max(pedalAxis, 0) or pedalAxis) * 100
+
+    if math.abs(currentPedalPercent) < 1 then
+      currentPedalPercent = 0
+    end
+
+    -- start from the physical pedal and move to the next visible 5% step
+    targetPedalPercent = direction > 0
+      and math.floor(currentPedalPercent / pedalStep) * pedalStep
+      or math.ceil(currentPedalPercent / pedalStep) * pedalStep
+  end
+
+  targetPedalPercent = targetPedalPercent + direction * pedalStep
+  targetPedalPercent = math.clamp(targetPedalPercent, isManualDirection and 0 or -100, 100)
+
+  if wasInactive and targetPedalPercent == 0 then
+    return nil
+  end
+
+  return targetPedalPercent
+end
+
+---Processes a scroll-wheel tick
+-- @param vehicle table vehicle instance
+-- @param direction number scroll direction (+1 or -1)
+-- @param pedalAxis number current physical pedal input
+-- @return boolean stateChanged true when the target was changed
+function MouseSteeringSpeedControl.onScrollWheel(vehicle, direction, pedalAxis)
+  local spec = vehicle.spec_mouseSteeringSpeedControl
+  local wasInactive = not spec.isActive
+  local mode = wasInactive and vehicle:getMouseSteeringSpeedControlMode() or spec.activeMode
+  local targetValue
+
+  direction = direction >= 0 and 1 or -1
+  pedalAxis = tonumber(pedalAxis) or 0
+
+  if mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    targetValue = MouseSteeringSpeedControl.getAdjustedPedalPercent(vehicle, direction, pedalAxis)
+  else
+    mode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
+    targetValue = MouseSteeringSpeedControl.getAdjustedTargetSpeed(vehicle, direction)
+  end
+
+  if targetValue == nil then
+    return false
+  end
+
+  local ignoredPedalDirection = spec.ignoredPedalDirection
+
+  if wasInactive and math.abs(pedalAxis) > 0.01 then
+    ignoredPedalDirection = math.sign(pedalAxis)
+  end
+
+  local isActive = mode == MouseSteeringSpeedControl.MODE_TARGET_SPEED or targetValue ~= 0
+
+  vehicle:setMouseSteeringSpeedControlModeState(isActive, mode, targetValue, ignoredPedalDirection)
+
+  return true
 end
 
 ---Called on update
 function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
-  local spec = self.spec_mouseSteeringSpeedControl
-
-  -- get speed control setting and mouse steering usage
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
-  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
-
-  -- force-disable speed control when setting is off or mouse steering is not used
-  if not speedControlEnabled or not isMouseSteeringUsed then
-    if spec.isActive then
-      MouseSteeringSpeedControl.deactivate(spec)
-    end
-
+  if not self.isClient or self.getIsEntered == nil or not self:getIsEntered() then
     return
   end
 
-  if self.isClient and (self.getIsEntered ~= nil and self:getIsEntered()) and not g_gui:getIsGuiVisible() then
-    if self.isActiveForInputIgnoreSelectionIgnoreAI then
-      if self:getIsVehicleControlledByPlayer() then
-        -- track if gas/brake is held when scrolling
-        local drivable = self.spec_drivable
-        local pedalActive = drivable ~= nil and math.abs(drivable.axisForward) > 0.01
+  local spec = self.spec_mouseSteeringSpeedControl
+  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
+  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
+  local configuredMode = self:getMouseSteeringSpeedControlMode()
 
-        local scrolled = false
+  -- client settings gate activation; the server executes the synchronized runtime state
+  if not speedControlEnabled or not isMouseSteeringUsed or (spec.isActive and spec.activeMode ~= configuredMode) then
+    MouseSteeringSpeedControl.requestDeactivation(self)
+    return
+  end
 
-        -- block speed control if camera rotation is currently active
-        local isCameraRotating = self.getIsMouseSteeringSteeringPaused ~= nil and self:getIsMouseSteeringSteeringPaused()
+  if not self:getIsVehicleControlledByPlayer() then
+    MouseSteeringSpeedControl.requestDeactivation(self)
+    return
+  end
 
-        if not isCameraRotating then
-          if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_UP) then
-            MouseSteeringSpeedControl.onScrollWheel(self, 1)
-            scrolled = true
-          end
+  local drivable = self.spec_drivable
+  local pedalAxis = drivable ~= nil and drivable.axisForward or 0
+  local pedalActive = math.abs(pedalAxis) > 0.01
 
-          if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_DOWN) then
-            MouseSteeringSpeedControl.onScrollWheel(self, -1)
-            scrolled = true
-          end
-        end
+  -- stop ignoring the activation input after release or an opposite pedal input
+  if spec.ignoredPedalDirection ~= 0 and (not pedalActive or math.sign(pedalAxis) ~= spec.ignoredPedalDirection) then
+    MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
+  end
 
-        -- if just activated while pedal was held, mark it
-        if scrolled and spec.isActive and pedalActive then
-          spec.pedalHeldOnActivation = true
-        end
-      end
-    end
+  if g_gui:getIsGuiVisible() or not self.isActiveForInputIgnoreSelectionIgnoreAI then
+    return
+  end
+
+  local isCameraRotating = self.getIsMouseSteeringSteeringPaused ~= nil and self:getIsMouseSteeringSteeringPaused()
+
+  if isCameraRotating then
+    return
+  end
+
+  if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_UP) then
+    MouseSteeringSpeedControl.onScrollWheel(self, 1, pedalAxis)
+  elseif Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_DOWN) then
+    MouseSteeringSpeedControl.onScrollWheel(self, -1, pedalAxis)
   end
 end
 
----Overrides cruise control display to show speed control info
+---Overrides cruise-control display info to show the active mouse-wheel target
 function MouseSteeringSpeedControl:getCruiseControlDisplayInfo(superFunc)
   local spec = self.spec_mouseSteeringSpeedControl
-
-  -- get speed control setting and mouse steering usage
   local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
   local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
 
-  -- show speed control info when active and mouse steering is used
   if speedControlEnabled and isMouseSteeringUsed and spec.isActive then
-    return math.abs(spec.targetSpeedKmh), true
+    local value, _, mode = self:getMouseSteeringSpeedControlDisplayInfo()
+
+    if mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT and g_i18n ~= nil then
+      local unitFactor = g_i18n:getSpeed(1)
+
+      if unitFactor ~= 0 then
+        -- keep integer percentages stable after the HUD applies its unit conversion
+        local displayEpsilon = value >= 0 and 0.001 or -0.001
+
+        value = (value + displayEpsilon) / unitFactor
+      end
+    end
+
+    return value, true
   end
 
   return superFunc(self)
 end
 
----Overrides cruise control state to deactivate speed control when CC is activated
+---Overrides cruise-control state to deactivate mouse-wheel control when CC is activated
 function MouseSteeringSpeedControl:setCruiseControlState(superFunc, state, noEventSend)
   local spec = self.spec_mouseSteeringSpeedControl
 
-  -- get speed control setting
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
-
-  -- force-disable speed control when setting is off
-  if not speedControlEnabled and spec.isActive then
-    MouseSteeringSpeedControl.deactivate(spec)
-  end
-
-  -- deactivate speed control when built-in cruise control is turned on
   if spec.isActive and state ~= Drivable.CRUISECONTROL_STATE_OFF then
-    MouseSteeringSpeedControl.deactivate(spec)
+    MouseSteeringSpeedControl.requestDeactivation(self)
   end
 
   return superFunc(self, state, noEventSend)
 end
 
----Overrides updateVehiclePhysics to set motor speed limit when speed control is active
+---Overrides vehicle physics to apply the active target-speed or pedal-position mode
 function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, axisSide, doHandbrake, dt)
   local spec = self.spec_mouseSteeringSpeedControl
   local motor = self:getMotor()
 
-  -- get speed control setting and mouse steering usage
-  local speedControlEnabled = self:getMouseSteeringSpeedControlEnabled()
-  local isMouseSteeringUsed = self.getIsMouseSteeringUsed ~= nil and self:getIsMouseSteeringUsed()
-
-  -- force-disable speed control when setting is off or mouse steering is not used
-  if not speedControlEnabled or not isMouseSteeringUsed then
-    if spec.isActive then
-      MouseSteeringSpeedControl.deactivate(spec)
-    end
-
-    return superFunc(self, axisForward, axisSide, doHandbrake, dt)
-  end
-
-  -- skip if speed control is not active or no motor
   if not spec.isActive or motor == nil then
     return superFunc(self, axisForward, axisSide, doHandbrake, dt)
   end
 
-  -- detect user pedal input
+  -- detect the untouched physical pedal input before applying the virtual target
   local hasPedalInput = math.abs(axisForward) > 0.01
 
-  -- ignore first pedal release if pedal was held during activation
-  if spec.pedalHeldOnActivation then
-    if not hasPedalInput then
-      spec.pedalHeldOnActivation = false
+  if spec.ignoredPedalDirection ~= 0 then
+    spec.ignoredPedalGraceTime = math.max((spec.ignoredPedalGraceTime or 0) - dt, 0)
+
+    if hasPedalInput then
+      local isIgnoredDirection = math.sign(axisForward) == spec.ignoredPedalDirection
+
+      if isIgnoredDirection and (spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime > 0) then
+        spec.ignoredPedalDirectionObserved = true
+        hasPedalInput = false
+      else
+        MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
+      end
+    elseif spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime == 0 then
+      MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
     end
-    hasPedalInput = false
   end
 
-  local targetSpeed = math.abs(spec.targetSpeedKmh)
+  if spec.activeMode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
+    local hasInvalidDirection = isManualDirection and spec.targetPedalPercent < 0
+    local isMotorUnavailable = (self.getIsMotorStarted ~= nil and not self:getIsMotorStarted()) or (self.getCanMotorRun ~= nil and not self:getCanMotorRun())
 
-  -- deactivate if user presses pedal or vehicle is stopped with 0 target speed
-  if hasPedalInput or (targetSpeed == 0 and self:getLastSpeed() < 1) then
-    self:setMouseSteeringSpeedControlState(false, 0)
-  else
-    -- interpolate speed limit towards target
-    spec.speedInterpolated = spec.speedInterpolated or targetSpeed
-
-    if targetSpeed ~= spec.speedInterpolated then
-      local diff = targetSpeed - spec.speedInterpolated
-      local dir = math.sign(diff)
-      local limit = dir == 1 and math.min or math.max
-
-      spec.speedInterpolated = limit(spec.speedInterpolated + dt * 0.0025 * math.max(1, math.abs(diff)) * dir, targetSpeed)
+    if hasPedalInput or doHandbrake or hasInvalidDirection or isMotorUnavailable then
+      self:setMouseSteeringSpeedControlModeState(false, spec.activeMode, 0, 0)
+    else
+      -- WheelsUtil performs the native accelerator smoothing
+      axisForward = spec.targetPedalPercent / 100
     end
+  else
+    local targetSpeed = math.abs(spec.targetSpeedKmh)
 
-    -- apply motor speed limit and override forward axis
-    motor:setSpeedLimit(math.min(spec.speedInterpolated, motor:getSpeedLimit()))
-    axisForward = spec.targetSpeedKmh == 0 and 0 or (spec.targetSpeedKmh >= 0 and 1 or -1)
+    if hasPedalInput or (targetSpeed == 0 and self:getLastSpeed() < 1) then
+      self:setMouseSteeringSpeedControlModeState(false, spec.activeMode, 0, 0)
+    else
+      -- preserve the existing smooth target-speed behavior
+      spec.speedInterpolated = spec.speedInterpolated or targetSpeed
+
+      if targetSpeed ~= spec.speedInterpolated then
+        local diff = targetSpeed - spec.speedInterpolated
+        local dir = math.sign(diff)
+        local limit = dir == 1 and math.min or math.max
+
+        spec.speedInterpolated = limit(spec.speedInterpolated + dt * 0.0025 * math.max(1, math.abs(diff)) * dir, targetSpeed)
+      end
+
+      motor:setSpeedLimit(math.min(spec.speedInterpolated, motor:getSpeedLimit()))
+      axisForward = spec.targetSpeedKmh == 0 and 0 or (spec.targetSpeedKmh >= 0 and 1 or -1)
+    end
   end
 
   return superFunc(self, axisForward, axisSide, doHandbrake, dt)

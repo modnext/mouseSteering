@@ -22,41 +22,59 @@ end
 ---Create new instance of event
 -- @param table vehicle vehicle
 -- @param boolean isActive speed control active state
--- @param number targetSpeedKmh target speed in km/h
-function SetMouseSteeringSpeedControlStateEvent.new(vehicle, isActive, targetSpeedKmh)
+-- @param string mode active control mode
+-- @param number targetValue target speed in km/h or pedal position in percent
+-- @param number ignoredPedalDirection physical pedal direction held during activation
+function SetMouseSteeringSpeedControlStateEvent.new(vehicle, isActive, mode, targetValue, ignoredPedalDirection)
   local self = SetMouseSteeringSpeedControlStateEvent.emptyNew()
 
   self.vehicle = vehicle
   self.isActive = isActive
-  self.targetSpeedKmh = targetSpeedKmh
+  self.mode = mode
+  self.targetValue = targetValue
+  self.ignoredPedalDirection = ignoredPedalDirection
 
   return self
 end
 
----Called on client side on join
+---Called when event data is received
 -- @param integer streamId streamId
 -- @param Connection connection connection
 function SetMouseSteeringSpeedControlStateEvent:readStream(streamId, connection)
   self.vehicle = NetworkUtil.readNodeObject(streamId)
   self.isActive = streamReadBool(streamId)
-  self.targetSpeedKmh = streamReadInt16(streamId)
+  self.mode = streamReadBool(streamId) and MouseSteeringSpeedControl.MODE_PEDAL_PERCENT or MouseSteeringSpeedControl.MODE_TARGET_SPEED
+  self.targetValue = streamReadInt16(streamId)
+  self.ignoredPedalDirection = streamReadUIntN(streamId, 2) - 1
 
   self:run(connection)
 end
 
----Called on server side on join
+---Writes event data to the stream
 -- @param integer streamId streamId
 -- @param Connection connection connection
 function SetMouseSteeringSpeedControlStateEvent:writeStream(streamId, connection)
   NetworkUtil.writeNodeObject(streamId, self.vehicle)
   streamWriteBool(streamId, self.isActive)
-  streamWriteInt16(streamId, self.targetSpeedKmh)
+  streamWriteBool(streamId, self.mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT)
+  streamWriteInt16(streamId, self.targetValue)
+  streamWriteUIntN(streamId, math.clamp(math.sign(self.ignoredPedalDirection or 0), -1, 1) + 1, 2)
 end
 
----Run action on receiving side
+---Applies an authorized state change
 -- @param Connection connection connection
 function SetMouseSteeringSpeedControlStateEvent:run(connection)
-  if self.vehicle ~= nil and self.vehicle:getIsSynchronized() then
-    self.vehicle:setMouseSteeringSpeedControlState(self.isActive, self.targetSpeedKmh, true)
+  if self.vehicle == nil or not self.vehicle:getIsSynchronized() then
+    return
   end
+
+  local isFromServer = connection:getIsServer()
+
+  -- only the server or the connection controlling this vehicle may change its state
+  if not isFromServer and self.vehicle:getOwnerConnection() ~= connection then
+    return
+  end
+
+  -- client requests are normalized by the server and echoed to the owner
+  self.vehicle:setMouseSteeringSpeedControlModeState(self.isActive, self.mode, self.targetValue, self.ignoredPedalDirection, isFromServer)
 end

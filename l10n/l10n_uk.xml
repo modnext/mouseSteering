@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v="Інвертувати вісь X"/>
     <e k="mouseSteering_ui_speedBasedSteering" v="Керування на основі швидкості"/>
     <e k="mouseSteering_ui_speedControl" v="Керування швидкістю мишею"/>
+    <e k="mouseSteering_ui_speedControlMode" v="Режим керування"/>
+    <e k="mouseSteering_ui_targetSpeed" v="Цільова швидкість"/>
+    <e k="mouseSteering_ui_pedalPercent" v="Педаль %"/>
     <e k="mouseSteering_ui_linearity" v="Лінійність"/>
     <e k="mouseSteering_ui_smoothness" v="Плавність"/>
     <e k="mouseSteering_ui_deadzone" v="Мертва зона"/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v="Інвертує горизонтальну (X) вісь керування."/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v="Регулює чутливість на основі швидкості та кута повороту для кращого контролю."/>
     <e k="mouseSteering_ui_speedControl_desc" v="Дозволяє плавно регулювати швидкість транспортного засобу за допомогою коліщатка миші."/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v="Виберіть, чим керує коліщатко миші: цільовою швидкістю чи віртуальною педаллю."/>
     <e k="mouseSteering_ui_speedControl_warn" v="Примітка: Якщо прокрутка заблокована, перевірте інші моди."/>
     <e k="mouseSteering_ui_linearity_desc" v="Регулює криву реакції керування. Більші значення забезпечують більш точний контроль поблизу центру."/>
     <e k="mouseSteering_ui_smoothness_desc" v="Згладжує введення мишею, щоб зменшити різкі зміни керування."/>

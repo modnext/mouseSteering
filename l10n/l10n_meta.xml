@@ -36,6 +36,9 @@
     <e k="mouseSteering_ui_invertXAxis" v=""/>
     <e k="mouseSteering_ui_speedBasedSteering" v=""/>
     <e k="mouseSteering_ui_speedControl" v=""/>
+    <e k="mouseSteering_ui_speedControlMode" v=""/>
+    <e k="mouseSteering_ui_targetSpeed" v=""/>
+    <e k="mouseSteering_ui_pedalPercent" v=""/>
     <e k="mouseSteering_ui_linearity" v=""/>
     <e k="mouseSteering_ui_smoothness" v=""/>
     <e k="mouseSteering_ui_deadzone" v=""/>
@@ -53,6 +56,7 @@
     <e k="mouseSteering_ui_invertXAxis_desc" v=""/>
     <e k="mouseSteering_ui_speedBasedSteering_desc" v=""/>
     <e k="mouseSteering_ui_speedControl_desc" v=""/>
+    <e k="mouseSteering_ui_speedControlMode_desc" v=""/>
     <e k="mouseSteering_ui_speedControl_warn" v=""/>
     <e k="mouseSteering_ui_linearity_desc" v=""/>
     <e k="mouseSteering_ui_smoothness_desc" v=""/>
