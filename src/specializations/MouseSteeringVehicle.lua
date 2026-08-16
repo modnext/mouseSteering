@@ -235,14 +235,15 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       local movedSide = spec.mouseSteering:getMovedSide()
 
       if isPowered then
-        local speedKmh = (self.getLastSpeed ~= nil) and self:getLastSpeed() or 0
+        local speedKmh = 0
 
-        -- update controller with new input values
-        local newRawInput, newAxisValue = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
+        -- vehicle speed only affects newly integrated mouse movement
+        if spec.settings.speedBasedSteering and movedSide ~= 0 and not isPaused and self.getLastSpeed ~= nil then
+          speedKmh = self:getLastSpeed()
+        end
 
-        -- update input values
-        spec.inputValue = newRawInput
-        spec.axisSide = newAxisValue
+        -- update controller and store both steering representations
+        spec.inputValue, spec.axisSide = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
       else
         local mouseMoved = movedSide ~= 0 and not isPaused
 
@@ -750,9 +751,10 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec)
   local settings = spec.settings
   local controller = spec.controller
 
-  -- calculate deadzone and apply transformations
+  -- reverse the same transformations used by the controller update
   local deadzoneThreshold = controller:calculateEffectiveDeadzone(settings)
-  local normalizedValue = controller:reverseLinearity(axisValue, settings.linearity or 1.0)
+  local linearity = controller:getEffectiveLinearity(settings)
+  local normalizedValue = controller:reverseLinearity(axisValue, linearity)
   local steerRaw = controller:reverseDeadzone(normalizedValue, deadzoneThreshold)
 
   return axisValue, steerRaw
