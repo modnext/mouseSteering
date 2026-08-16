@@ -423,6 +423,9 @@ function MouseSteeringVehicle:onEnterVehicle()
     else
       self:synchronizeMouseSteeringAxisSide(false, false)
     end
+
+    -- prime Drivable before its first update after entering
+    self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- initialize camera rotation for first frame
@@ -454,8 +457,12 @@ function MouseSteeringVehicle:onLeaveVehicle()
 
   -- store current axis values
   if spec.isUsed then
+    self:synchronizeMouseSteeringAxisSide(false, false)
     spec.axisSideOnLeave = spec.axisSide
     spec.inputValueOnLeave = spec.inputValue
+
+    -- discard input that Drivable has not consumed before leaving
+    self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- save camera state on leave
