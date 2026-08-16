@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="106">
   <author>aaw3k</author>
-  <version>1.3.1.1</version>
+  <version>1.3.2.0</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -37,9 +37,10 @@ Changelog Version 1.3.1.0:
 - Added camera look-back (double-click)
 - Added small optimization improvements
 
-Changelog Version 1.3.1.1:
+Changelog Version 1.3.2.0:
 - Fixed unwanted camera centering when camera follow is reactivated
 - Improved camera rotation state handling and smoothing
+- Improved mouse steering input processing for smoother and more consistent steering
 - Added an alternative Pedal % mode for mouse speed control
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
@@ -68,9 +69,10 @@ Tastenkombinationen:
 - Hinzugefügter Kamerarückblick (Doppelklick)
 - Hinzugefügte kleine Optimierungsverbesserungen
 
-Änderungsprotokoll Version 1.3.1.1:
+Änderungsprotokoll Version 1.3.2.0:
 - Unerwünschtes Zentrieren der Kamera bei erneuter Aktivierung der Kamerafolge behoben
 - Zustandsverwaltung und Glättung der Kamerarotation verbessert
+- Maussteuerung für ein gleichmäßigeres und konsistenteres Lenkverhalten verbessert
 - Alternativen Pedal-%-Modus für die Geschwindigkeitsregelung per Maus hinzugefügt
 
 Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte GitHub (modnext/mouseSteering).]]></de>
@@ -99,9 +101,10 @@ Journal des modifications version 1.3.1.0:
 - Ajout de la vue arrière (double-clic)
 - Ajout de petites améliorations d'optimisation
 
-Journal des modifications version 1.3.1.1:
+Journal des modifications version 1.3.2.0:
 - Correction du centrage indésirable lors de la réactivation du suivi de caméra
 - Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
+- Amélioration du traitement de la direction à la souris pour une conduite plus fluide et régulière
 - Ajout d'un mode alternatif Pédale % pour le contrôle de la vitesse à la souris
 
 Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modnext/mouseSteering).]]></fr>
@@ -130,9 +133,10 @@ Lista zmian w wersji 1.3.1.0:
 - Dodano możliwość patrzenia do tyłu (dwuklik)
 - Dodano małe usprawnienia optymalizacyjne
 
-Lista zmian w wersji 1.3.1.1:
+Lista zmian w wersji 1.3.2.0:
 - Naprawiono niechciane centrowanie przy ponownym włączeniu śledzenia kamery
 - Ulepszono obsługę stanu i płynność obrotu kamery
+- Ulepszono obsługę sterowania myszką, zapewniając płynniejsze i bardziej spójne skręcanie
 - Dodano alternatywny tryb Pedał % do regulacji prędkości myszką
 
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/mouseSteering).]]></pl>
@@ -161,9 +165,10 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 - Добавлен обзор назад (двойной щелчок)
 - Добавлены небольшие улучшения оптимизации
 
-Журнал изменений версии 1.3.1.1:
+Журнал изменений версии 1.3.2.0:
 - Исправлено нежелательное центрирование при повторном включении следования камеры
 - Улучшена обработка состояния и сглаживание вращения камеры
+- Улучшена обработка управления мышью для более плавного и стабильного рулевого управления
 - Добавлен альтернативный режим «Педаль %» для управления скоростью мышью
 
 Для получения дополнительной информации или сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>

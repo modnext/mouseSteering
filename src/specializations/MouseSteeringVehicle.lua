@@ -235,14 +235,15 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       local movedSide = spec.mouseSteering:getMovedSide()
 
       if isPowered then
-        local speedKmh = (self.getLastSpeed ~= nil) and self:getLastSpeed() or 0
+        local speedKmh = 0
 
-        -- update controller with new input values
-        local newRawInput, newAxisValue = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
+        -- vehicle speed only affects newly integrated mouse movement
+        if spec.settings.speedBasedSteering and movedSide ~= 0 and not isPaused and self.getLastSpeed ~= nil then
+          speedKmh = self:getLastSpeed()
+        end
 
-        -- update input values
-        spec.inputValue = newRawInput
-        spec.axisSide = newAxisValue
+        -- update controller and store both steering representations
+        spec.inputValue, spec.axisSide = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
       else
         local mouseMoved = movedSide ~= 0 and not isPaused
 
@@ -274,6 +275,11 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
         end
       end
 
+      -- keep the cached player input aligned with the physical steering while AI is in control
+      if isAIActive or isWorkerAIActive then
+        self:synchronizeMouseSteeringAxisSide(false, false)
+      end
+
       -- apply steering input to vehicle
       if self.setSteeringInput ~= nil then
         self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
@@ -289,11 +295,6 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     local shouldDisableRotation = (isAIActive and spec.settings.steeringAssist and isSteeringAssist) or (ignoreSelectionIgnoreAI and isPlayerControlled and not isAIActive)
 
     self:setMouseSteeringCameraRotating(not shouldDisableRotation)
-
-    -- keep axis in sync while GPS steering assist controls the wheels
-    if isAIActive and spec.isUsed then
-      self:synchronizeMouseSteeringAxisSide(false, false)
-    end
 
     -- update camera rotation following steering and centering
     local camera = self:getActiveCamera()
@@ -422,6 +423,9 @@ function MouseSteeringVehicle:onEnterVehicle()
     else
       self:synchronizeMouseSteeringAxisSide(false, false)
     end
+
+    -- prime Drivable before its first update after entering
+    self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- initialize camera rotation for first frame
@@ -453,8 +457,12 @@ function MouseSteeringVehicle:onLeaveVehicle()
 
   -- store current axis values
   if spec.isUsed then
+    self:synchronizeMouseSteeringAxisSide(false, false)
     spec.axisSideOnLeave = spec.axisSide
     spec.inputValueOnLeave = spec.inputValue
+
+    -- discard input that Drivable has not consumed before leaving
+    self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- save camera state on leave
@@ -750,9 +758,10 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec)
   local settings = spec.settings
   local controller = spec.controller
 
-  -- calculate deadzone and apply transformations
+  -- reverse the same transformations used by the controller update
   local deadzoneThreshold = controller:calculateEffectiveDeadzone(settings)
-  local normalizedValue = controller:reverseLinearity(axisValue, settings.linearity or 1.0)
+  local linearity = controller:getEffectiveLinearity(settings)
+  local normalizedValue = controller:reverseLinearity(axisValue, linearity)
   local steerRaw = controller:reverseDeadzone(normalizedValue, deadzoneThreshold)
 
   return axisValue, steerRaw
