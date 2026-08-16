@@ -86,10 +86,6 @@ function MouseSteeringVehicle:onLoad(savegame)
   spec.inputValue = 0
   spec.axisSide = 0
 
-  -- store steering state for transitions
-  spec.axisSideOnLeave = 0
-  spec.inputValueOnLeave = 0
-
   -- load UI text strings
   spec.enabledTexts = {
     activate = g_i18n:getText("mouseSteering_modeSteering_activate"),
@@ -138,18 +134,31 @@ end
 
 ---Called on client side on join
 -- @param streamId number stream id
--- @param connection any connection instance
-function MouseSteeringVehicle:onReadStream(streamId, connection)
+function MouseSteeringVehicle:onReadStream(streamId, _)
   local spec = self.spec_mouseSteeringVehicle
   spec.uniqueId = streamReadString(streamId)
+
+  -- wheels resets the steering interpolator while reading the initial stream
+  local rotatedTime = streamReadFloat32(streamId)
+  self.rotatedTime = rotatedTime
+
+  local interpolator = self.rotatedTimeInterpolator
+  if interpolator ~= nil then
+    interpolator:setValue(rotatedTime)
+  end
+
+  self:synchronizeMouseSteeringAxisSide()
+  self.spec_drivable.axisSide = spec.axisSide
 end
 
 ---Called on server side on join
 -- @param streamId number stream id
--- @param connection any connection instance
-function MouseSteeringVehicle:onWriteStream(streamId, connection)
+function MouseSteeringVehicle:onWriteStream(streamId, _)
   local spec = self.spec_mouseSteeringVehicle
   streamWriteString(streamId, spec.uniqueId)
+
+  -- preserve the physical steering state without axis quantization
+  streamWriteFloat32(streamId, self.rotatedTime or 0)
 end
 
 ---Called on update
@@ -195,7 +204,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
     -- track AI transitions
     local currentAIActive = isAIActive or isWorkerAIActive
     if spec.lastIsAIActive and not currentAIActive and spec.isUsed then
-      self:synchronizeMouseSteeringAxisSide(false, false)
+      self:synchronizeMouseSteeringAxisSide()
     end
     spec.lastIsAIActive = currentAIActive
 
@@ -227,7 +236,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
       -- track pause transition (from paused to unpaused) to freeze wheel position
       if spec.lastIsPaused and not isPaused then
-        self:synchronizeMouseSteeringAxisSide(false, false)
+        self:synchronizeMouseSteeringAxisSide()
       end
       spec.lastIsPaused = isPaused
 
@@ -277,7 +286,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
       -- keep the cached player input aligned with the physical steering while AI is in control
       if isAIActive or isWorkerAIActive then
-        self:synchronizeMouseSteeringAxisSide(false, false)
+        self:synchronizeMouseSteeringAxisSide()
       end
 
       -- apply steering input to vehicle
@@ -404,7 +413,12 @@ function MouseSteeringVehicle:setMouseSteeringControlled(isEntering)
 end
 
 ---Called when entering a vehicle
-function MouseSteeringVehicle:onEnterVehicle()
+-- @param isControlling boolean true for the locally controlled player
+function MouseSteeringVehicle:onEnterVehicle(isControlling)
+  if not isControlling then
+    return
+  end
+
   local spec = self.spec_mouseSteeringVehicle
 
   -- apply default/saved only if user hasn't toggled in this session
@@ -418,11 +432,7 @@ function MouseSteeringVehicle:onEnterVehicle()
 
   -- sync axis when enabled
   if spec.isUsed then
-    if self.isClient then
-      self:synchronizeMouseSteeringAxisSide(true, true)
-    else
-      self:synchronizeMouseSteeringAxisSide(false, false)
-    end
+    self:synchronizeMouseSteeringAxisSide(self.spec_drivable.axisSide)
 
     -- prime Drivable before its first update after entering
     self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
@@ -452,16 +462,17 @@ function MouseSteeringVehicle:onEnterVehicle()
 end
 
 ---Called when leaving a vehicle
-function MouseSteeringVehicle:onLeaveVehicle()
+-- @param wasEntered boolean true for the locally controlled player
+function MouseSteeringVehicle:onLeaveVehicle(wasEntered)
+  if not wasEntered then
+    return
+  end
+
   local spec = self.spec_mouseSteeringVehicle
 
-  -- store current axis values
+  -- preserve current steering and discard pending input
   if spec.isUsed then
-    self:synchronizeMouseSteeringAxisSide(false, false)
-    spec.axisSideOnLeave = spec.axisSide
-    spec.inputValueOnLeave = spec.inputValue
-
-    -- discard input that Drivable has not consumed before leaving
+    self:synchronizeMouseSteeringAxisSide()
     self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
 
@@ -487,7 +498,7 @@ function MouseSteeringVehicle:updateMouseSteeringState(updateControlledVehicle)
 
   -- sync axis when enabled
   if spec.isUsed and not wasEnabled then
-    self:synchronizeMouseSteeringAxisSide(false, false)
+    self:synchronizeMouseSteeringAxisSide()
   end
 
   -- update controlled vehicle if requested
@@ -540,7 +551,7 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
 
   -- sync axis immediately when enabled so wheels don't jump calculation
   if spec.isUsed then
-    self:synchronizeMouseSteeringAxisSide(false, false)
+    self:synchronizeMouseSteeringAxisSide()
   end
 
   -- check if auto-save is enabled
@@ -738,21 +749,30 @@ end
 
 ---Calculates axis value and steering input from vehicle state
 -- @param spec table The specialization spec
+-- @param axisOverride number|nil Optional normalized steering axis
 -- @return number axisValue The calculated axis value
 -- @return number steerRaw The calculated raw steering input
-function MouseSteeringVehicle:calculateAxisAndSteering(spec)
-  local rotatedTime = self.rotatedTime or 0
-  local steeringDirection = (self.getSteeringDirection ~= nil) and self:getSteeringDirection() or 1
+function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
+  local axisValue = axisOverride
 
-  -- calculate normalized axis value
-  local axisValue = 0
-  if self.maxRotTime ~= nil and self.minRotTime ~= nil and self.maxRotTime ~= 0 and self.minRotTime ~= 0 then
-    if rotatedTime < 0 then
-      axisValue = rotatedTime / -self.maxRotTime / steeringDirection
+  if axisValue == nil then
+    local rotatedTime = self.rotatedTime
+    local maxRotTime = self.maxRotTime
+    local minRotTime = self.minRotTime
+    local steeringDirection = self:getSteeringDirection()
+
+    if rotatedTime ~= nil and maxRotTime ~= nil and minRotTime ~= nil and maxRotTime ~= 0 and minRotTime ~= 0 and steeringDirection ~= nil and steeringDirection ~= 0 then
+      if rotatedTime < 0 then
+        axisValue = rotatedTime / -maxRotTime / steeringDirection
+      else
+        axisValue = rotatedTime / minRotTime / steeringDirection
+      end
     else
-      axisValue = rotatedTime / self.minRotTime / steeringDirection
+      axisValue = self.spec_drivable.axisSide or 0
     end
   end
+
+  axisValue = math.clamp(axisValue, -1, 1)
 
   -- get settings and controller
   local settings = spec.settings
@@ -767,41 +787,11 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec)
   return axisValue, steerRaw
 end
 
----Synchronizes the mouse steering axis with the vehicle's steering
--- @param useConservativeThreshold boolean If true, uses higher threshold (for vehicle entry)
--- @param useStoredLeaveState boolean If true, compares with stored leave state when available
--- @return boolean updated True if values were updated, false if filtered out
-function MouseSteeringVehicle:synchronizeMouseSteeringAxisSide(useConservativeThreshold, useStoredLeaveState)
+---Synchronizes the mouse steering controller with the vehicle's steering
+-- @param axisOverride number|nil Optional authoritative normalized steering axis
+function MouseSteeringVehicle:synchronizeMouseSteeringAxisSide(axisOverride)
   local spec = self.spec_mouseSteeringVehicle
-
-  -- calculate axis value and steering input
-  local axisValue, steerRaw = self:calculateAxisAndSteering(spec)
-
-  -- get comparison values
-  local currentAxisSide = spec.axisSide
-  local axisSideOnLeave = useStoredLeaveState and spec.axisSideOnLeave or 0
-
-  -- determine comparison value
-  local comparisonValue = (axisSideOnLeave ~= 0 and axisSideOnLeave) or currentAxisSide
-  local updateThreshold = useConservativeThreshold and 0.01 or 0.001
-
-  -- check if update needed
-  if math.abs(axisValue - comparisonValue) > updateThreshold then
-    -- update values when significant change
-    spec.axisSide = axisValue
-    spec.inputValue = steerRaw
-
-    -- clear leave state if used
-    if useStoredLeaveState then
-      spec.axisSideOnLeave = 0
-      spec.inputValueOnLeave = 0
-    end
-
-    return true
-  end
-
-  -- no significant change
-  return false
+  spec.axisSide, spec.inputValue = self:calculateAxisAndSteering(spec, axisOverride)
 end
 
 ---Overrides steering input to handle mouse steering
