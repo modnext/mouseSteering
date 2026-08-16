@@ -41,6 +41,7 @@ Changelog Version 1.3.2.0:
 - Fixed unwanted camera centering when camera follow is reactivated
 - Improved camera rotation state handling and smoothing
 - Improved mouse steering input processing for smoother and more consistent steering
+- Improved steering synchronization when joining a multiplayer game or re-entering a vehicle
 - Added an alternative Pedal % mode for mouse speed control
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
@@ -73,6 +74,7 @@ Tastenkombinationen:
 - Unerwünschtes Zentrieren der Kamera bei erneuter Aktivierung der Kamerafolge behoben
 - Zustandsverwaltung und Glättung der Kamerarotation verbessert
 - Maussteuerung für ein gleichmäßigeres und konsistenteres Lenkverhalten verbessert
+- Lenkungssynchronisierung beim Beitritt zu einem Mehrspielerspiel und beim erneuten Einsteigen in ein Fahrzeug verbessert
 - Alternativen Pedal-%-Modus für die Geschwindigkeitsregelung per Maus hinzugefügt
 
 Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte GitHub (modnext/mouseSteering).]]></de>
@@ -105,6 +107,7 @@ Journal des modifications version 1.3.2.0:
 - Correction du centrage indésirable lors de la réactivation du suivi de caméra
 - Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
 - Amélioration du traitement de la direction à la souris pour une conduite plus fluide et régulière
+- Amélioration de la synchronisation de la direction lors de la connexion à une partie multijoueur et de la remontée dans un véhicule
 - Ajout d'un mode alternatif Pédale % pour le contrôle de la vitesse à la souris
 
 Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modnext/mouseSteering).]]></fr>
@@ -137,6 +140,7 @@ Lista zmian w wersji 1.3.2.0:
 - Naprawiono niechciane centrowanie przy ponownym włączeniu śledzenia kamery
 - Ulepszono obsługę stanu i płynność obrotu kamery
 - Ulepszono obsługę sterowania myszką, zapewniając płynniejsze i bardziej spójne skręcanie
+- Poprawiono synchronizację skrętu przy dołączaniu do gry wieloosobowej i ponownym wsiadaniu do pojazdu
 - Dodano alternatywny tryb Pedał % do regulacji prędkości myszką
 
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/mouseSteering).]]></pl>
@@ -169,6 +173,7 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 - Исправлено нежелательное центрирование при повторном включении следования камеры
 - Улучшена обработка состояния и сглаживание вращения камеры
 - Улучшена обработка управления мышью для более плавного и стабильного рулевого управления
+- Улучшена синхронизация рулевого управления при подключении к многопользовательской игре и повторной посадке в транспорт
 - Добавлен альтернативный режим «Педаль %» для управления скоростью мышью
 
 Для получения дополнительной информации или сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
