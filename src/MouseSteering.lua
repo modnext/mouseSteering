@@ -94,20 +94,32 @@ end
 
 ---Called on client side on join
 -- @param streamId number the stream id
--- @param connection table the connection instance
-function MouseSteering:readStream(streamId, connection)
+-- @param connection table unused connection instance
+-- @param applyState boolean true only for state received from the server
+function MouseSteering:readStream(streamId, _, applyState)
   local numVehicleSells = streamReadUInt8(streamId)
-  self.vehicleSells = {}
+  local vehicleSells = {}
 
   -- read vehicle sells from stream
   for _ = 1, numVehicleSells do
     local vehicleUniqueId = streamReadString(streamId)
     local farmId = streamReadUIntN(streamId, FarmManager.FARM_ID_SEND_NUM_BITS)
-    self:addSoldVehicle(vehicleUniqueId, farmId)
+
+    if not string.isNilOrWhitespace(vehicleUniqueId) then
+      vehicleSells[vehicleUniqueId] = farmId
+    end
   end
 
-  -- cleanup if limit exceeded after loading from stream
-  self:cleanupVehicleSellsIfNeeded()
+  if applyState then
+    self.vehicleSells = {}
+
+    for vehicleUniqueId, farmId in pairs(vehicleSells) do
+      self:addSoldVehicle(vehicleUniqueId, farmId)
+    end
+
+    -- cleanup if limit exceeded after loading from stream
+    self:cleanupVehicleSellsIfNeeded()
+  end
 end
 
 ---Called on server side on join
@@ -465,7 +477,11 @@ function MouseSteering:getCurrentFarmVehicles(farmId)
 
   for _, vehicle in ipairs(self.mission.vehicleSystem.vehicles) do
     if vehicle:getOwnerFarmId() == farmId and vehicle.getMouseSteeringUniqueId ~= nil then
-      currentFarmVehicles[vehicle:getMouseSteeringUniqueId()] = vehicle
+      local uniqueId = vehicle:getMouseSteeringUniqueId()
+
+      if not string.isNilOrWhitespace(uniqueId) then
+        currentFarmVehicles[uniqueId] = vehicle
+      end
     end
   end
 
@@ -687,22 +703,11 @@ function MouseSteering:onVehicleSoldNetworkMessage(vehicleUniqueId, farmId)
   self:addSoldVehicle(vehicleUniqueId, farmId, true)
 end
 
----Called on direct vehicle sell
--- @param vehicle table the vehicle being sold
--- @param isDirectSell boolean whether this was a direct sell
-function MouseSteering:onVehicleSellDirect(vehicle, isDirectSell)
-  if vehicle ~= nil and vehicle.getMouseSteeringUniqueId ~= nil then
-    local vehicleUniqueId = vehicle:getMouseSteeringUniqueId()
-    local ownerFarmId = vehicle:getOwnerFarmId()
-
-    if vehicleUniqueId ~= nil and ownerFarmId ~= nil then
-      -- add to sold vehicles tracking immediately
-      self:addSoldVehicle(vehicleUniqueId, ownerFarmId)
-
-      -- if we're a client, send event to server so others update their lists too
-      if not self.isServer then
-        g_client:getServerConnection():sendEvent(MouseSteeringVehicleSoldEvent.new(vehicleUniqueId, ownerFarmId))
-      end
-    end
+---Called after an authoritative vehicle sale succeeds on the server
+-- @param vehicleUniqueId string unique identifier of the sold vehicle
+-- @param ownerFarmId number farm that owned the sold vehicle
+function MouseSteering:onVehicleSold(vehicleUniqueId, ownerFarmId)
+  if self.isServer and not string.isNilOrWhitespace(vehicleUniqueId) and ownerFarmId ~= nil then
+    self:addSoldVehicle(vehicleUniqueId, ownerFarmId)
   end
 end

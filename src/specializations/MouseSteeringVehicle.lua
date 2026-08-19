@@ -14,8 +14,7 @@ MouseSteeringVehicle = {}
 -- @param specializations table specializations
 -- @return boolean hasPrerequisite true if all prerequisite specializations are loaded
 function MouseSteeringVehicle.prerequisitesPresent(specializations)
-  return SpecializationUtil.hasSpecialization(Drivable, specializations)
-      and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
+  return SpecializationUtil.hasSpecialization(Drivable, specializations) and not SpecializationUtil.hasSpecialization(Locomotive, specializations)
 end
 
 ---Initializes specialization XML schema
@@ -54,6 +53,7 @@ end
 -- @param vehicleType table vehicle type
 function MouseSteeringVehicle.registerEventListeners(vehicleType)
   SpecializationUtil.registerEventListener(vehicleType, "onLoad", MouseSteeringVehicle)
+  SpecializationUtil.registerEventListener(vehicleType, "onLoadEnd", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onUpdate", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onReadStream", MouseSteeringVehicle)
   SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", MouseSteeringVehicle)
@@ -102,7 +102,6 @@ function MouseSteeringVehicle:onLoad(savegame)
 
   -- double-click detection for center/look-back camera
   spec.centerCameraLastClickTime = 0
-  spec.centerCameraDoubleClickThreshold = 300
 
   -- create unique identifier
   spec.uniqueId = self:getUniqueId()
@@ -117,48 +116,105 @@ function MouseSteeringVehicle:onLoad(savegame)
   g_messageCenter:subscribe(MouseSteeringMessageType.VEHICLE_TOGGLE, MouseSteeringVehicle.onVehicleToggle, self)
 end
 
----Called on delete
-function MouseSteeringVehicle:onDelete()
-  g_messageCenter:unsubscribe(MouseSteeringMessageType.SETTING_CHANGED.DEFAULT, self)
-  g_messageCenter:unsubscribe(MouseSteeringMessageType.VEHICLE_TOGGLE, self)
+---Resolves and caches the vehicle identifier once the base vehicle has one
+-- @param vehicle table vehicle instance
+-- @return string|nil uniqueId resolved vehicle identifier
+function MouseSteeringVehicle.resolveUniqueId(vehicle)
+  local spec = vehicle.spec_mouseSteeringVehicle
+  local uniqueId = spec.uniqueId
+
+  if type(uniqueId) ~= "string" or string.isNilOrWhitespace(uniqueId) then
+    uniqueId = vehicle:getUniqueId()
+
+    if type(uniqueId) == "string" and not string.isNilOrWhitespace(uniqueId) then
+      spec.uniqueId = uniqueId
+    else
+      uniqueId = nil
+    end
+  end
+
+  return uniqueId
+end
+
+---Called after the base vehicle has been added to VehicleSystem
+function MouseSteeringVehicle:onLoadEnd()
+  MouseSteeringVehicle.resolveUniqueId(self)
 end
 
 ---Saves vehicle data to XML file
 -- @param xmlFile any XML file instance
 -- @param key string XML key path
 -- @param usedModNames table used mod names
-function MouseSteeringVehicle:saveToXMLFile(xmlFile, key, usedModNames)
-  local spec = self.spec_mouseSteeringVehicle
-  xmlFile:setValue(key .. "#uniqueId", spec.uniqueId)
+function MouseSteeringVehicle:saveToXMLFile(xmlFile, key, _)
+  local uniqueId = MouseSteeringVehicle.resolveUniqueId(self)
+
+  if uniqueId ~= nil then
+    xmlFile:setValue(key .. "#uniqueId", uniqueId)
+  end
+end
+
+---Checks whether a value is a finite number
+-- @param value any value to validate
+-- @return boolean isFinite true when the value is a finite number
+function MouseSteeringVehicle.isFiniteNumber(value)
+  return type(value) == "number" and MathUtil.isFinite(value)
+end
+
+---Returns a finite steering rotation value within the vehicle limits
+-- @param vehicle table vehicle instance
+-- @param value any steering rotation value
+-- @return number rotatedTime sanitized steering rotation value
+function MouseSteeringVehicle.sanitizeRotatedTime(vehicle, value)
+  if not MouseSteeringVehicle.isFiniteNumber(value) then
+    return 0
+  end
+
+  local minRotTime = vehicle.minRotTime
+  local maxRotTime = vehicle.maxRotTime
+
+  if MouseSteeringVehicle.isFiniteNumber(minRotTime) and MouseSteeringVehicle.isFiniteNumber(maxRotTime) and minRotTime <= maxRotTime then
+    return math.clamp(value, minRotTime, maxRotTime)
+  end
+
+  return value
 end
 
 ---Called on client side on join
 -- @param streamId number stream id
-function MouseSteeringVehicle:onReadStream(streamId, _)
-  local spec = self.spec_mouseSteeringVehicle
-  spec.uniqueId = streamReadString(streamId)
+function MouseSteeringVehicle:onReadStream(streamId, connection)
+  if connection.isServer then
+    local spec = self.spec_mouseSteeringVehicle
+    local networkUniqueId = streamReadString(streamId)
 
-  -- wheels resets the steering interpolator while reading the initial stream
-  local rotatedTime = streamReadFloat32(streamId)
-  self.rotatedTime = rotatedTime
+    if type(networkUniqueId) == "string" and not string.isNilOrWhitespace(networkUniqueId) then
+      spec.uniqueId = networkUniqueId
+    else
+      MouseSteeringVehicle.resolveUniqueId(self)
+    end
 
-  local interpolator = self.rotatedTimeInterpolator
-  if interpolator ~= nil then
-    interpolator:setValue(rotatedTime)
+    -- Wheels resets the steering interpolator while reading the initial stream
+    local rotatedTime = MouseSteeringVehicle.sanitizeRotatedTime(self, streamReadFloat32(streamId))
+    self.rotatedTime = rotatedTime
+
+    local interpolator = self.rotatedTimeInterpolator
+    if interpolator ~= nil then
+      interpolator:setValue(rotatedTime)
+    end
+
+    self:synchronizeMouseSteeringAxisSide()
+    self.spec_drivable.axisSide = spec.axisSide
   end
-
-  self:synchronizeMouseSteeringAxisSide()
-  self.spec_drivable.axisSide = spec.axisSide
 end
 
 ---Called on server side on join
 -- @param streamId number stream id
-function MouseSteeringVehicle:onWriteStream(streamId, _)
-  local spec = self.spec_mouseSteeringVehicle
-  streamWriteString(streamId, spec.uniqueId)
+function MouseSteeringVehicle:onWriteStream(streamId, connection)
+  if not connection.isServer then
+    streamWriteString(streamId, MouseSteeringVehicle.resolveUniqueId(self) or "")
 
-  -- preserve the physical steering state without axis quantization
-  streamWriteFloat32(streamId, self.rotatedTime or 0)
+    -- preserve the physical steering state without axis quantization
+    streamWriteFloat32(streamId, MouseSteeringVehicle.sanitizeRotatedTime(self, self.rotatedTime))
+  end
 end
 
 ---Called on update
@@ -166,19 +222,19 @@ end
 -- @param isActiveForInput boolean true if vehicle is active for input
 -- @param isActiveForInputIgnoreSelection boolean true if vehicle is active for input ignoring selection
 -- @param isSelected boolean true if vehicle is selected
-function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
+function MouseSteeringVehicle:onUpdate(dt, _, _, _)
   local spec = self.spec_mouseSteeringVehicle
 
-  local isEntered = self.getIsEntered ~= nil and self:getIsEntered()
-
-  if not isEntered then
+  if not self:getIsEntered() then
     return
   end
 
-  local isControlled = self.getIsControlled ~= nil and self:getIsControlled()
-
   -- track AI steering state
-  local aiState = (self.getAIAutomaticSteeringState ~= nil) and self:getAIAutomaticSteeringState() or nil
+  local aiState
+  if self.getAIAutomaticSteeringState ~= nil then
+    aiState = self:getAIAutomaticSteeringState()
+  end
+
   local isSteeringAssist = self.getAIModeSelection ~= nil and self:getAIModeSelection() == AIModeSelection.MODE.STEERING_ASSIST
 
   -- record AI transitions
@@ -197,9 +253,9 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
   -- passenger rotation camera
   spec.isCameraRotating = true
 
-  if isEntered and isControlled then
-    local isAIActive = (AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE) or false
-    local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
+  if self:getIsControlled() then
+    local isAIActive = AIAutomaticSteering ~= nil and aiState == AIAutomaticSteering.STATE.ACTIVE
+    local isWorkerAIActive = self:getIsAIActive()
 
     -- track AI transitions
     local currentAIActive = isAIActive or isWorkerAIActive
@@ -240,27 +296,26 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       end
       spec.lastIsPaused = isPaused
 
-      local isPowered = self.getIsPowered == nil or self:getIsPowered()
+      local isPowered, powerWarning = self:getIsPowered()
       local movedSide = spec.mouseSteering:getMovedSide()
 
       if isPowered then
         local speedKmh = 0
 
         -- vehicle speed only affects newly integrated mouse movement
-        if spec.settings.speedBasedSteering and movedSide ~= 0 and not isPaused and self.getLastSpeed ~= nil then
+        if spec.settings.speedBasedSteering and movedSide ~= 0 and not isPaused then
           speedKmh = self:getLastSpeed()
         end
 
         -- update controller and store both steering representations
         spec.inputValue, spec.axisSide = spec.controller:update(spec.inputValue, spec.axisSide, spec.settings, movedSide, isPaused, speedKmh, dt)
-      else
-        local mouseMoved = movedSide ~= 0 and not isPaused
+      elseif movedSide ~= 0 and not isPaused then
+        if powerWarning == nil then
+          powerWarning = self:getCanMotorRun() and g_i18n:getText("warning_motorNotStarted") or self:getMotorNotAllowedWarning()
+        end
 
-        if mouseMoved then
-          local warning = self:getCanMotorRun() and g_i18n:getText("warning_motorNotStarted") or self:getMotorNotAllowedWarning()
-          if warning ~= nil then
-            g_currentMission:showBlinkingWarning(warning, 2000)
-          end
+        if powerWarning ~= nil then
+          g_currentMission:showBlinkingWarning(powerWarning, 2000)
         end
       end
 
@@ -290,9 +345,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
       end
 
       -- apply steering input to vehicle
-      if self.setSteeringInput ~= nil then
-        self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
-      end
+      self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
     end
 
     -- update HUD and camera
@@ -307,7 +360,7 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 
     -- update camera rotation following steering and centering
     local camera = self:getActiveCamera()
-    local camIndex = self.spec_enterable and self.spec_enterable.camIndex or 0
+    local camIndex = self.spec_enterable.camIndex
 
     local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive and (not isAIActive or spec.settings.steeringAssist == true)
     spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
@@ -316,30 +369,27 @@ function MouseSteeringVehicle:onUpdate(dt, isActiveForInput, isActiveForInputIgn
 end
 
 ---Action event handler for centering camera (single click) and look-back (double click)
-function MouseSteeringVehicle.actionEventCenterCamera(self, actionName, inputValue, callbackState, isAnalog)
-  if inputValue ~= 1 then
-    return
-  end
+function MouseSteeringVehicle.actionEventCenterCamera(self, _, inputValue, _, _)
+  if inputValue == 1 then
+    local spec = self.spec_mouseSteeringVehicle
 
-  local spec = self.spec_mouseSteeringVehicle
+    if spec.isUsed then
+      -- detect double click
+      local now = g_time
+      local doubleClickThreshold = 300
+      local isDoubleClick = (now - spec.centerCameraLastClickTime) < doubleClickThreshold
+      spec.centerCameraLastClickTime = now
 
-  if not spec.isUsed then
-    return
-  end
+      local camera = self:getActiveCamera()
 
-  -- detect double click
-  local now = g_time
-  local isDoubleClick = (now - spec.centerCameraLastClickTime) < spec.centerCameraDoubleClickThreshold
-  spec.centerCameraLastClickTime = now
-
-  local camera = self:getActiveCamera()
-
-  -- center camera or look back
-  if isDoubleClick then
-    local centerVertical = spec.cameraRotation:getCenterVertical()
-    spec.cameraRotation:lookBack(camera, centerVertical)
-  else
-    spec.cameraRotation:centerCamera(camera)
+      -- center camera or look back
+      if isDoubleClick then
+        local centerVertical = spec.cameraRotation:getCenterVertical()
+        spec.cameraRotation:lookBack(camera, centerVertical)
+      else
+        spec.cameraRotation:centerCamera(camera)
+      end
+    end
   end
 end
 
@@ -439,24 +489,19 @@ function MouseSteeringVehicle:onEnterVehicle(isControlling)
   end
 
   -- initialize camera rotation for first frame
-  if spec.cameraRotation ~= nil and self.spec_enterable ~= nil then
-    local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
+  local isWorkerAIActive = self:getIsAIActive()
+  local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive
+  spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
 
-    -- disable camera follow when a worker is controlling the vehicle
-    local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive
-    spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
+  local camIndex = self.spec_enterable.camIndex
+  local camera = self:getActiveCamera()
 
-    local enterableSpec = self.spec_enterable
-    local camIndex = enterableSpec.camIndex
-    local camera = enterableSpec.cameras[camIndex]
+  if camera ~= nil and camera.isInside then
+    local intensity = spec.cameraRotation:getIntensity()
 
-    if camera ~= nil and camera.isInside then
-      local intensity = spec.cameraRotation:getIntensity()
+    if intensity > 0 then
       local deadzoneDegrees = spec.cameraRotation:getDeadzoneDegrees()
-
-      if intensity > 0 then
-        spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity)
-      end
+      spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity)
     end
   end
 end
@@ -477,9 +522,7 @@ function MouseSteeringVehicle:onLeaveVehicle(wasEntered)
   end
 
   -- save camera state on leave
-  if spec.cameraRotation ~= nil then
-    spec.cameraRotation:resetState(nil)
-  end
+  spec.cameraRotation:resetState(nil)
 
   -- update controlled vehicle
   self:setMouseSteeringControlled(false)
@@ -505,7 +548,7 @@ function MouseSteeringVehicle:updateMouseSteeringState(updateControlledVehicle)
   if updateControlledVehicle then
     if spec.isUsed then
       self:setMouseSteeringControlled(true)
-    elseif not spec.isUsed and wasEnabled then
+    elseif wasEnabled then
       self:setMouseSteeringControlled(false)
     end
   end
@@ -516,12 +559,9 @@ end
 
 ---Called when default setting is changed
 -- @param value any new value
-function MouseSteeringVehicle:onDefaultSettingChanged(value)
-  if self.getIsEntered ~= nil and self:getIsEntered() then
+function MouseSteeringVehicle:onDefaultSettingChanged(_)
+  if self:getIsEntered() then
     self:updateMouseSteeringState(false)
-
-    -- update action event activity
-    MouseSteeringVehicle.updateActionEvents(self)
   end
 end
 
@@ -534,12 +574,10 @@ function MouseSteeringVehicle:onVehicleToggle(vehicle)
 end
 
 ---
-function MouseSteeringVehicle.actionEventSteering(self, actionName, inputValue, callbackState, isAnalog)
-  if inputValue ~= 1 then
-    return
+function MouseSteeringVehicle.actionEventSteering(self, _, inputValue, _, _)
+  if inputValue == 1 then
+    self:setMouseSteeringUsed()
   end
-
-  self:setMouseSteeringUsed()
 end
 
 ---Enables or disables mouse steering
@@ -575,12 +613,10 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
 end
 
 ---
-function MouseSteeringVehicle.actionEventCameraFollow(self, actionName, inputValue, callbackState, isAnalog)
-  if inputValue ~= 1 then
-    return
+function MouseSteeringVehicle.actionEventCameraFollow(self, _, inputValue, _, _)
+  if inputValue == 1 then
+    self:setCameraRotationActive()
   end
-
-  self:setCameraRotationActive()
 end
 
 ---Enables or disables camera follow steering for current vehicle
@@ -596,19 +632,16 @@ function MouseSteeringVehicle:setCameraRotationActive()
     if warning ~= nil then
       g_currentMission:showBlinkingWarning(warning, 2500)
     end
-    return
+  else
+    spec.cameraRotationActive = not spec.cameraRotationActive
   end
-
-  spec.cameraRotationActive = not spec.cameraRotationActive
 end
 
 ---
-function MouseSteeringVehicle.actionEventSaveSteering(self, actionName, inputValue, callbackState, isAnalog)
-  if inputValue ~= 1 then
-    return
+function MouseSteeringVehicle.actionEventSaveSteering(self, _, inputValue, _, _)
+  if inputValue == 1 then
+    self:setMouseSteeringSaved()
   end
-
-  self:setMouseSteeringSaved()
 end
 
 ---Saves or removes the vehicle from the saved vehicles list
@@ -639,7 +672,7 @@ function MouseSteeringVehicle:setMouseSteeringSaved()
 end
 
 ---
-function MouseSteeringVehicle.actionEventRotateCamera(self, actionName, inputValue, callbackState, isAnalog)
+function MouseSteeringVehicle.actionEventRotateCamera(self, _, inputValue, _, _)
   self:setMouseSteeringSteeringPaused(inputValue == 1)
 end
 
@@ -682,13 +715,12 @@ end
 ---Register action events for mouse steering controls
 -- @param isActiveForInput boolean true if active for input
 -- @param isActiveForInputIgnoreSelection boolean true if active for input ignoring selection
-function MouseSteeringVehicle:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnoreSelection)
+function MouseSteeringVehicle:onRegisterActionEvents(_, _)
   if self.isClient then
     local spec = self.spec_mouseSteeringVehicle
-
     self:clearActionEventsTable(spec.actionEvents)
 
-    -- register when player in vehicle and AI not active
+    -- register when player is controlling the vehicle and AI is inactive
     if self:getIsActiveForInput(true, true) and self:getIsEntered() and not self:getIsAIActive() then
       local binding = g_inputBinding
 
@@ -772,6 +804,14 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
     end
   end
 
+  if not MouseSteeringVehicle.isFiniteNumber(axisValue) then
+    axisValue = self.spec_drivable.axisSide
+  end
+
+  if not MouseSteeringVehicle.isFiniteNumber(axisValue) then
+    axisValue = 0
+  end
+
   axisValue = math.clamp(axisValue, -1, 1)
 
   -- get settings and controller
@@ -798,38 +838,36 @@ end
 function MouseSteeringVehicle:setSteeringInput(superFunc, inputValue, isAnalog, deviceCategory)
   local spec = self.spec_mouseSteeringVehicle
 
-  if not spec.isUsed then
+  if spec.isUsed then
+    -- update Drivable input directly when mouse steering is enabled
+    local lastInputValues = self.spec_drivable.lastInputValues
+    lastInputValues.axisSteer = inputValue
+
+    if inputValue ~= 0 then
+      lastInputValues.axisSteerIsAnalog = isAnalog
+      lastInputValues.axisSteerDeviceCategory = deviceCategory
+    end
+  else
     return superFunc(self, inputValue, isAnalog, deviceCategory)
-  end
-
-  -- update drivable spec directly when mouse steering enabled
-  local drivable = self.spec_drivable
-  drivable.lastInputValues.axisSteer = inputValue
-
-  if inputValue ~= 0 then
-    drivable.lastInputValues.axisSteerIsAnalog = isAnalog
-    drivable.lastInputValues.axisSteerDeviceCategory = deviceCategory
   end
 end
 
 ---Gets the current mouse steering axis value
 -- @return number axis value
 function MouseSteeringVehicle:getMouseSteeringAxisSide()
-  local spec = self.spec_mouseSteeringVehicle
-  return spec.axisSide
+  return self.spec_mouseSteeringVehicle.axisSide
 end
 
 ---Gets the unique identifier for this vehicle
 -- @return string uniqueId vehicle unique identifier
 function MouseSteeringVehicle:getMouseSteeringUniqueId()
-  return self.spec_mouseSteeringVehicle.uniqueId
+  return MouseSteeringVehicle.resolveUniqueId(self)
 end
 
 ---Gets whether mouse steering is currently used/enabled
 -- @return boolean isUsed true if mouse steering is enabled
 function MouseSteeringVehicle:getIsMouseSteeringUsed()
-  local spec = self.spec_mouseSteeringVehicle
-  return spec.isUsed
+  return self.spec_mouseSteeringVehicle.isUsed
 end
 
 ---Gets whether mouse steering is currently paused (e.g., during camera rotation)
