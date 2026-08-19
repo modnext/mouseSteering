@@ -47,6 +47,7 @@ end
 -- @param vehicleType table vehicle type
 function MouseSteeringVehicle.registerOverwrittenFunctions(vehicleType)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "setSteeringInput", MouseSteeringVehicle.setSteeringInput)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "updateSteeringWheel", MouseSteeringVehicle.updateSteeringWheel)
 end
 
 ---Register event listeners
@@ -214,6 +215,53 @@ function MouseSteeringVehicle:onWriteStream(streamId, connection)
 
     -- preserve the physical steering state without axis quantization
     streamWriteFloat32(streamId, MouseSteeringVehicle.sanitizeRotatedTime(self, self.rotatedTime))
+  end
+end
+
+---Uses the full-precision local steering axis for the first-person steering wheel
+-- @param superFunc function original steering wheel update function
+-- @param steeringWheel table|nil steering wheel configuration
+-- @param dt number delta time since last call in ms
+-- @param direction number steering wheel rotation direction
+function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, direction)
+  local spec = self.spec_mouseSteeringVehicle
+  local drivableSpec = self.spec_drivable
+
+  local isLocalVehicle = self.isClient and not self.isServer and g_localPlayer ~= nil and g_localPlayer:getCurrentVehicle() == self
+  local camera = isLocalVehicle and self:getActiveCamera() or nil
+  local isLocalFirstPerson = camera ~= nil and camera.isInside and not camera.isPassengerCamera
+  local visualRotatedTime
+
+  if isLocalFirstPerson and spec.isUsed then
+    local isAIActive = self:getIsAIActive()
+
+    if not isAIActive and AIAutomaticSteering ~= nil and self.getAIAutomaticSteeringState ~= nil then
+      isAIActive = self:getAIAutomaticSteeringState() == AIAutomaticSteering.STATE.ACTIVE
+    end
+
+    local axisSide = drivableSpec.axisSide
+    local steeringDirection = self:getSteeringDirection()
+    local minRotTime = self.minRotTime
+    local maxRotTime = self.maxRotTime
+
+    if not isAIActive and MouseSteeringVehicle.isFiniteNumber(axisSide) and MouseSteeringVehicle.isFiniteNumber(steeringDirection) and steeringDirection ~= 0 and MouseSteeringVehicle.isFiniteNumber(minRotTime) and MouseSteeringVehicle.isFiniteNumber(maxRotTime) and minRotTime ~= 0 and maxRotTime ~= 0 then
+      axisSide = math.clamp(axisSide, -1, 1) * steeringDirection
+
+      if axisSide < 0 then
+        visualRotatedTime = math.min(-maxRotTime * axisSide, maxRotTime)
+      else
+        visualRotatedTime = math.max(minRotTime * axisSide, minRotTime)
+      end
+    end
+  end
+
+  if visualRotatedTime ~= nil then
+    local networkRotatedTime = self.rotatedTime
+    self.rotatedTime = MouseSteeringVehicle.sanitizeRotatedTime(self, visualRotatedTime)
+    superFunc(self, steeringWheel, dt, direction)
+    self.rotatedTime = networkRotatedTime
+  else
+    superFunc(self, steeringWheel, dt, direction)
   end
 end
 
