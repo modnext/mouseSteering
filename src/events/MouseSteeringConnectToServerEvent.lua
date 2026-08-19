@@ -27,16 +27,17 @@ function MouseSteeringConnectToServerEvent.new()
   return self
 end
 
----Called on client side on join
+---Reads the initial state payload and applies only server-authoritative data
 -- @param streamId number the stream id
 -- @param connection table the connection instance
 function MouseSteeringConnectToServerEvent:readStream(streamId, connection)
-  g_currentMission.mouseSteering:readStream(streamId, connection)
+  local isFromServer = connection ~= nil and connection:getIsServer()
+  g_currentMission.mouseSteering:readStream(streamId, connection, isFromServer)
 
   self:run(connection)
 end
 
----Called on server side on join
+---Writes the initial state payload
 -- @param streamId number the stream id
 -- @param connection table the connection instance
 function MouseSteeringConnectToServerEvent:writeStream(streamId, connection)

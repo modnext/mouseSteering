@@ -64,17 +64,20 @@ end
 ---Applies an authorized state change
 -- @param Connection connection connection
 function SetMouseSteeringSpeedControlStateEvent:run(connection)
-  if self.vehicle == nil or not self.vehicle:getIsSynchronized() then
+  local vehicle = self.vehicle
+  local spec = vehicle ~= nil and vehicle.spec_mouseSteeringSpeedControl or nil
+
+  if connection == nil or spec == nil or vehicle.getIsSynchronized == nil or not vehicle:getIsSynchronized() or vehicle.getOwnerConnection == nil or vehicle.setMouseSteeringSpeedControlModeState == nil then
     return
   end
 
   local isFromServer = connection:getIsServer()
 
   -- only the server or the connection controlling this vehicle may change its state
-  if not isFromServer and self.vehicle:getOwnerConnection() ~= connection then
+  if not isFromServer and vehicle:getOwnerConnection() ~= connection then
     return
   end
 
   -- client requests are normalized by the server and echoed to the owner
-  self.vehicle:setMouseSteeringSpeedControlModeState(self.isActive, self.mode, self.targetValue, self.ignoredPedalDirection, isFromServer)
+  vehicle:setMouseSteeringSpeedControlModeState(self.isActive, self.mode, self.targetValue, self.ignoredPedalDirection, isFromServer)
 end

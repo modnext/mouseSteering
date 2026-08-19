@@ -97,13 +97,31 @@ local function onConnectionFinishedLoading(mission, superFunc, connection, ...)
   end
 end
 
----Called when vehicle is sold in shop
-local function shopControllerSellVehicle(shopController, superFunc, vehicle, isDirectSell, ...)
-  if modEnvironment ~= nil then
-    modEnvironment:onVehicleSellDirect(vehicle, isDirectSell)
+---Records a vehicle only after the server authoritatively completes its sale
+local function sellVehicleEventRun(event, superFunc, connection, ...)
+  local saleContext
+
+  if connection ~= nil and not connection:getIsServer() and modEnvironment ~= nil and modEnvironment.isServer then
+    local vehicle = event.vehicle
+
+    if vehicle ~= nil and vehicle.getMouseSteeringUniqueId ~= nil and vehicle.getOwnerFarmId ~= nil and vehicle.getIsBeingDeleted ~= nil then
+      saleContext = {
+        mouseSteering = modEnvironment,
+        vehicle = vehicle,
+        uniqueId = vehicle:getMouseSteeringUniqueId(),
+        ownerFarmId = vehicle:getOwnerFarmId(),
+        wasBeingDeleted = vehicle:getIsBeingDeleted(),
+      }
+    end
   end
 
-  return superFunc(shopController, vehicle, isDirectSell, ...)
+  local result = superFunc(event, connection, ...)
+
+  if saleContext ~= nil and modEnvironment == saleContext.mouseSteering and not saleContext.wasBeingDeleted and saleContext.vehicle:getIsBeingDeleted() and not string.isNilOrWhitespace(saleContext.uniqueId) and saleContext.ownerFarmId ~= nil then
+    saleContext.mouseSteering:onVehicleSold(saleContext.uniqueId, saleContext.ownerFarmId)
+  end
+
+  return result
 end
 
 ---Called when drawing vehicle name in HUD
@@ -123,7 +141,7 @@ local function init()
   FSBaseMission.onConnectionFinishedLoading = Utils.overwrittenFunction(FSBaseMission.onConnectionFinishedLoading, onConnectionFinishedLoading)
   TypeManager.finalizeTypes = Utils.appendedFunction(TypeManager.finalizeTypes, AdditionalSpecialization.finalizeTypes)
 
-  ShopController.sellVehicle = Utils.overwrittenFunction(ShopController.sellVehicle, shopControllerSellVehicle)
+  SellVehicleEvent.run = Utils.overwrittenFunction(SellVehicleEvent.run, sellVehicleEventRun)
   HUD.drawVehicleName = Utils.overwrittenFunction(HUD.drawVehicleName, hudDrawVehicleName)
 end
 

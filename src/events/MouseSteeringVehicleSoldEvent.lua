@@ -32,7 +32,7 @@ function MouseSteeringVehicleSoldEvent.new(vehicleUniqueId, farmId)
   return self
 end
 
----Called on client side on join
+---Reads a sold-vehicle notification
 -- @param streamId number the stream id
 -- @param connection table the connection instance
 function MouseSteeringVehicleSoldEvent:readStream(streamId, connection)
@@ -42,7 +42,7 @@ function MouseSteeringVehicleSoldEvent:readStream(streamId, connection)
   self:run(connection)
 end
 
----Called on server side on join
+---Writes a sold-vehicle notification
 -- @param streamId number the stream id
 -- @param connection table the connection instance
 function MouseSteeringVehicleSoldEvent:writeStream(streamId, connection)
@@ -53,5 +53,7 @@ end
 ---Run action on receiving side
 -- @param connection table the connection instance
 function MouseSteeringVehicleSoldEvent:run(connection)
-  g_messageCenter:publish(MouseSteeringMessageType.VEHICLE_SOLD, self.vehicleUniqueId, self.farmId)
+  if connection ~= nil and connection:getIsServer() and not string.isNilOrWhitespace(self.vehicleUniqueId) then
+    g_messageCenter:publish(MouseSteeringMessageType.VEHICLE_SOLD, self.vehicleUniqueId, self.farmId)
+  end
 end
