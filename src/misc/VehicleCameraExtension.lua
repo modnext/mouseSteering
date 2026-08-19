@@ -51,20 +51,34 @@ function VehicleCameraExtension:overwriteFunction(class, funcName, newFunc)
   end
 end
 
+---Checks if the camera is currently used by the local passenger
+function VehicleCameraExtension:getIsPassengerCamera(object)
+  local isPassengerCamera = object ~= nil and object.isPassengerCamera == true
+
+  if not isPassengerCamera and object ~= nil and object.vehicle ~= nil then
+    local spec = object.vehicle.spec_enterablePassenger
+    isPassengerCamera = spec ~= nil and spec.passengerEntered == true
+  end
+
+  return isPassengerCamera
+end
+
 ---Determines if mouse steering should be allowed for camera control
 -- @param isMouse boolean True if input is from mouse
 -- @param object table The camera object being controlled
 -- @return boolean True if normal camera control should be used, false if mouse steering should take over
 function VehicleCameraExtension:canSteerWithMouse(isMouse, object)
-  if isMouse == nil or object == nil or object.vehicle == nil then
-    return true -- use normal camera control if parameters are invalid
+  local vehicle = object ~= nil and object.vehicle or nil
+  local canUseCamera = true
+
+  if isMouse ~= nil and vehicle ~= nil and not self:getIsPassengerCamera(object) then
+    local spec = vehicle.spec_mouseSteeringVehicle
+    local isMouseSteeringActive = spec ~= nil and spec.isUsed and not spec.isSteeringPaused and not spec.isCameraRotating
+
+    canUseCamera = not isMouseSteeringActive
   end
 
-  -- check if mouse steering is active
-  local spec = object.vehicle.spec_mouseSteeringVehicle
-  local isMouseSteeringActive = spec ~= nil and spec.isUsed and not spec.isSteeringPaused and not spec.isCameraRotating
-
-  return not isMouseSteeringActive
+  return canUseCamera
 end
 
 ---
@@ -86,8 +100,9 @@ end
 ---
 function VehicleCameraExtension:zoomSmoothly(superFunc, object, offset)
   local vehicle = object ~= nil and object.vehicle or nil
+  local isPassengerCamera = self:getIsPassengerCamera(object)
 
-  if vehicle ~= nil and vehicle:getIsAIActive() then
+  if isPassengerCamera or (vehicle ~= nil and vehicle:getIsAIActive()) then
     return superFunc(object, offset)
   elseif self:canSteerWithMouse(true, object) then
     local spec = vehicle ~= nil and vehicle.spec_mouseSteeringVehicle or nil
