@@ -17,8 +17,9 @@ MouseSteeringSettingsDialog = {
 ---
 MouseSteeringSettingsDialog.SUB_CATEGORY = {
   GENERAL_SETTINGS = 1,
-  HUD_SETTINGS = 2,
-  MANAGE_SETTINGS = 3,
+  CAMERA_SETTINGS = 2,
+  HUD_SETTINGS = 3,
+  MANAGE_SETTINGS = 4,
 }
 
 ---
@@ -142,7 +143,7 @@ function MouseSteeringSettingsDialog:update(dt)
 end
 
 ---Updates the subcategory pages based on the selected category
--- @param category number The category to display (GENERAL_SETTINGS, HUD_SETTINGS, or MANAGE_SETTINGS)
+-- @param category number The category to display
 function MouseSteeringSettingsDialog:updateSubCategoryPages(category)
   for index, page in pairs(self.subCategoryPages) do
     page:setVisible(index == category)
@@ -159,6 +160,11 @@ function MouseSteeringSettingsDialog:updateSubCategoryPages(category)
     FocusManager:linkElements(self.pageSelector, FocusManager.TOP, self.generalSettingsLayout.elements[#self.generalSettingsLayout.elements].elements[1])
     FocusManager:linkElements(self.pageSelector, FocusManager.BOTTOM, self.generalSettingsLayout:findFirstFocusable(true))
     self:removeBottomBorders(self.generalSettingsLayout)
+  elseif category == MouseSteeringSettingsDialog.SUB_CATEGORY.CAMERA_SETTINGS then
+    self.settingsSlider:setDataElement(self.cameraSettingsLayout)
+    FocusManager:linkElements(self.pageSelector, FocusManager.TOP, self.cameraSettingsLayout.elements[#self.cameraSettingsLayout.elements].elements[1])
+    FocusManager:linkElements(self.pageSelector, FocusManager.BOTTOM, self.cameraSettingsLayout:findFirstFocusable(true))
+    self:removeBottomBorders(self.cameraSettingsLayout)
   elseif category == MouseSteeringSettingsDialog.SUB_CATEGORY.HUD_SETTINGS then
     self.settingsSlider:setDataElement(self.hudSettingsLayout)
     FocusManager:linkElements(self.pageSelector, FocusManager.TOP, self.hudSettingsLayout.elements[#self.hudSettingsLayout.elements].elements[1])
@@ -876,6 +882,11 @@ end
 ---
 function MouseSteeringSettingsDialog:onClickGeneral()
   self.pageSelector:setState(MouseSteeringSettingsDialog.SUB_CATEGORY.GENERAL_SETTINGS, true)
+end
+
+---
+function MouseSteeringSettingsDialog:onClickCamera()
+  self.pageSelector:setState(MouseSteeringSettingsDialog.SUB_CATEGORY.CAMERA_SETTINGS, true)
 end
 
 ---
