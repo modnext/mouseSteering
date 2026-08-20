@@ -83,6 +83,9 @@ function MouseSteeringSettingsDialog:onGuiSetupFinished()
 
   -- apply data source to vehicles list
   self.vehiclesList:setDataSource(self)
+  self.cameraRotationDeadZone:setFormatter(function(value)
+    return string.format("%.0f°", value)
+  end)
 
   -- setup tabs
   self:setupTabs(self.subCategoryTabs, self.pageSelector, self.subCategoryBox)
@@ -92,6 +95,9 @@ end
 ---Called when the dialog is opened to setup the UI and components
 function MouseSteeringSettingsDialog:onOpen()
   local mission = g_currentMission
+
+  self.mouseSteering = mission.mouseSteering
+  self.settings = self.mouseSteering.settings
 
   -- setup display
   self.vehicleDetailMap:setIngameMap(mission.hud:getIngameMap())
@@ -103,13 +109,24 @@ function MouseSteeringSettingsDialog:onOpen()
   self:updateUISettings()
   self:updateModeSettingsText()
 
-  -- setup input and filter
+  -- setup input
   self:registerInput()
-  if self.customFilter ~= nil then
-    self.ingameMapBase:applyCustomFilter(self.customFilter)
-  end
 
   self.showWelcomeDialogOnNextUpdate = true
+end
+
+---Called when the dialog is closed to save changes and release input handlers
+function MouseSteeringSettingsDialog:onClose()
+  self.showWelcomeDialogOnNextUpdate = false
+  self:unregisterInput()
+
+  local mission = g_currentMission
+  if mission ~= nil and mission.mouseSteering == self.mouseSteering then
+    self.mouseSteering:saveSettingsToXMLFile()
+    self.mouseSteering:saveVehicleToXMLFile()
+  end
+
+  MouseSteeringSettingsDialog:superClass().onClose(self)
 end
 
 ---Updates the dialog each frame
@@ -181,7 +198,6 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.smoothness:setValue(settings.smoothness)
   self.deadzone:setValue(settings.deadzone)
   self.cameraRotationDeadZone:setValue(settings.cameraRotationDeadZone)
-  self.cameraRotationDeadZone:setFormatter(function(value) return string.format("%.0f°", value) end)
   self.steeringAssistThreshold:setValue(settings.steeringAssistThreshold)
   -- self.steeringAssistThreshold:setFormatter(function(value) return string.format("%.3f", value) end)
 
@@ -225,7 +241,7 @@ end
 
 ---Unregisters input event handlers for the dialog
 function MouseSteeringSettingsDialog:unregisterInput()
-  g_inputBinding:removeActionEventsByActionName(InputAction.MENU_MAP_ACTION_1)
+  g_inputBinding:removeActionEventsByTarget(self)
 end
 
 ---
@@ -323,13 +339,13 @@ function MouseSteeringSettingsDialog:updateDynamicControls()
     self:setOptionDisabledWithIcon(self.autoSave, disableAutoSave)
   end
 
-  -- steering assist lockout is disabled when steering assist is active
+  -- lockout is only available while steering assist is enabled
   if self.steeringAssistLockout ~= nil then
     local disableLockout = currentSettings.steeringAssist == false
     self:setOptionDisabledWithIcon(self.steeringAssistLockout, disableLockout)
   end
 
-  -- steering assist threshold is disabled when either steering assist or lockout is active
+  -- threshold is only available while steering assist is enabled
   if self.steeringAssistThreshold ~= nil then
     local disableThreshold = currentSettings.steeringAssist == false
     self:setOptionDisabledWithIcon(self.steeringAssistThreshold, disableThreshold)
@@ -579,7 +595,7 @@ function MouseSteeringSettingsDialog:updateButtons(selectedIndex)
     return
   end
 
-  selectedIndex = selectedIndex or self.vehiclesList.selectedIndex
+  selectedIndex = selectedIndex or self.vehiclesList.selectedIndex or 0
 
   if selectedIndex <= 0 or selectedIndex > #self.visibleVehicles then
     self:setAllButtonsDisabled()
@@ -627,14 +643,15 @@ end
 ---Updates the vehicle detail information displayed in the detail box
 -- @param index number|nil The index of the vehicle to display (optional, uses current selection if not provided)
 function MouseSteeringSettingsDialog:updateItemAttributeData(index)
-  local selectedIndex = index or self.vehiclesList.selectedIndex
+  local selectedIndex = index or self.vehiclesList.selectedIndex or 0
   local selectedVehicleEntry = self.visibleVehicles[selectedIndex]
-  local vehicleData = selectedVehicleEntry.vehicle
+  local vehicleData = selectedVehicleEntry ~= nil and selectedVehicleEntry.vehicle or nil
+  local vehicleHotspot = vehicleData ~= nil and vehicleData:getMapHotspot() or nil
 
   -- check if vehicle has map hotspot for positioning
-  if vehicleData ~= nil and vehicleData:getMapHotspot() ~= nil then
+  if vehicleHotspot ~= nil then
     -- position map on vehicle location
-    local worldX, worldZ = vehicleData:getMapHotspot():getWorldPosition()
+    local worldX, worldZ = vehicleHotspot:getWorldPosition()
     self.vehicleDetailMap:setCenterToWorldPosition(worldX, worldZ)
     self.vehicleDetailMap:setMapZoom(7)
     self.vehicleDetailMap:setMapAlpha(1)
@@ -706,27 +723,37 @@ end
 function MouseSteeringSettingsDialog:populateCellForItemInSection(list, section, index, cell)
   local vehicle = self.visibleVehicles[index]
 
-  cell:getAttribute("icon"):applyProfile(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_ICON].profile)
-  cell:getAttribute("name"):setText(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_NAME].text)
-  cell:getAttribute("licensePlate"):setText(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_LICENSE_PLATE].text)
+  if vehicle ~= nil then
+    cell:getAttribute("icon"):applyProfile(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_ICON].profile)
+    cell:getAttribute("name"):setText(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_NAME].text)
+    cell:getAttribute("licensePlate"):setText(vehicle.columns[MouseSteeringSettingsDialog.COLUMN_LICENSE_PLATE].text)
+  end
 end
 
 ---
 function MouseSteeringSettingsDialog:onListSelectionChanged(list, section, index)
+  local selectedIndex = index or 0
+
   self.lastSelectedList = list
-  self.vehiclesList.selectedIndex = index
+  self.vehiclesList.selectedIndex = selectedIndex
 
-  local selectedVehicleEntry = self.visibleVehicles[index]
-  local selectedVehicle = selectedVehicleEntry.vehicle
+  local selectedVehicleEntry = self.visibleVehicles[selectedIndex]
+  local selectedVehicle = selectedVehicleEntry ~= nil and selectedVehicleEntry.vehicle or nil
 
-  -- configure button text based on vehicle save status
-  local isVehicleSaved = self.mouseSteering:isVehicleSaved(selectedVehicle)
-  local buttonTextKey = isVehicleSaved and self.L10N_SYMBOL.UNSAVE_VEHICLE or self.L10N_SYMBOL.SAVE_VEHICLE
-  local localizedButtonText = self.i18n:getText(buttonTextKey)
-  self.toggleButton:setText(localizedButtonText)
+  if selectedVehicle ~= nil then
+    -- configure button text based on vehicle save status
+    local isVehicleSaved = self.mouseSteering:isVehicleSaved(selectedVehicle)
+    local buttonTextKey = isVehicleSaved and self.L10N_SYMBOL.UNSAVE_VEHICLE or self.L10N_SYMBOL.SAVE_VEHICLE
+    local localizedButtonText = self.i18n:getText(buttonTextKey)
+    self.toggleButton:setText(localizedButtonText)
 
-  self:updateButtons(index)
-  self:updateItemAttributeData(index)
+    self:updateButtons(selectedIndex)
+    self:updateItemAttributeData(selectedIndex)
+  else
+    self:resetToggleButtonText()
+    self:setAllButtonsDisabled()
+    self:setVehicleDetailBoxVisible(false)
+  end
 end
 
 ---
@@ -755,30 +782,18 @@ end
 
 ---Opens the map overview and navigates to the selected vehicle's location
 function MouseSteeringSettingsDialog:onVehicleViewOnMap()
-  local selectedIndex = self.vehiclesList:getSelectedIndexInSection()
+  local selectedIndex = self.vehiclesList:getSelectedIndexInSection() or 0
   local selectedVehicleEntry = self.visibleVehicles[selectedIndex]
-
-  -- open map overview and navigate to vehicle location
-  local gameMenu = g_inGameMenu
-  gameMenu:openMapOverview()
-
-  local mapOverviewPage = gameMenu.pageMapOverview
-  local vehicleHotspot = selectedVehicleEntry.vehicle:getMapHotspot()
+  local selectedVehicle = selectedVehicleEntry ~= nil and selectedVehicleEntry.vehicle or nil
+  local vehicleHotspot = selectedVehicle ~= nil and selectedVehicle:getMapHotspot() or nil
 
   if vehicleHotspot ~= nil then
-    mapOverviewPage:showMapHotspot(vehicleHotspot)
-  end
-end
+    self:close()
 
----Sets the in-game map reference for the vehicle detail map
--- @param inGameMap table The in-game map instance
-function MouseSteeringSettingsDialog:setInGameMap(inGameMap)
-  self.vehicleDetailMap:setIngameMap(inGameMap)
-  self.ingameMapBase = inGameMap
-
-  -- create custom filter if map is available
-  if inGameMap ~= nil then
-    self.customFilter = inGameMap:createCustomFilter(true)
+    -- open map overview and navigate to vehicle location
+    local gameMenu = g_inGameMenu
+    gameMenu:openMapOverview()
+    gameMenu.pageMapOverview:showMapHotspot(vehicleHotspot)
   end
 end
 
@@ -890,7 +905,7 @@ end
 
 ---Handles the toggle button click to save/remove the selected vehicle
 function MouseSteeringSettingsDialog:onClickToggle()
-  local selectedIndex = self.vehiclesList.selectedIndex
+  local selectedIndex = self.vehiclesList.selectedIndex or 0
 
   if selectedIndex > 0 and selectedIndex <= #self.visibleVehicles then
     local selectedVehicleEntry = self.visibleVehicles[selectedIndex]
@@ -911,20 +926,19 @@ end
 
 ---
 function MouseSteeringSettingsDialog:onClickOpenPageSettingsControls()
-  self:onClickBack()
+  self:close()
 
   -- open game settings and controls screens
   local inGameMenu = g_inGameMenu
   inGameMenu:openGameSettingsScreen()
   inGameMenu:openControlsScreen()
 
-  -- if menu.pageSettings ~= nil and menu.pageSettings.pageSelector ~= nil then
-  --   menu.pageSettings.pageSelector:setState(InGameMenuSettingsFrame.SUB_CATEGORY.CONTROLS, true)
-  -- end
-
   -- validate controls list is available
-  local controlsList = inGameMenu.pageSettings.controlsList
-  if controlsList == nil or controlsList.delegate == nil or controlsList.delegate.controlsData == nil then
+  local settingsPage = inGameMenu.pageSettings
+  local controlsList = settingsPage ~= nil and settingsPage.controlsList or nil
+  local controlsData = settingsPage ~= nil and settingsPage.controlsData or nil
+
+  if controlsList == nil or controlsData == nil then
     return
   end
 
@@ -933,16 +947,14 @@ function MouseSteeringSettingsDialog:onClickOpenPageSettingsControls()
   local modDisplayTitle = (modName and modName.title) or "Mouse Steering"
 
   -- locate and highlight the mouse steering controls entry
-  for controlIndex, controlData in ipairs(controlsList.delegate.controlsData) do
-    if controlData.name == modDisplayTitle then
-      controlsList:makeCellVisible(controlIndex, 5, true)
-      controlsList:setSelectedItem(controlIndex, 5)
+  for sectionIndex, sectionData in ipairs(controlsData) do
+    if sectionData.name == modDisplayTitle and #sectionData > 0 then
+      controlsList:makeCellVisible(sectionIndex, 1, true)
+      controlsList:setSelectedItem(sectionIndex, 1)
 
-      -- set focus to the first action button for better UX
-      local targetCell = controlsList:getElementAtSectionIndex(controlIndex, 1)
-      if targetCell ~= nil then
-        FocusManager:setFocus(targetCell:getAttribute("actionButton1"))
-      end
+      settingsPage.nextFocusSection = sectionIndex
+      settingsPage.nextFocusCell = 1
+      settingsPage.nextFocusedButtonName = "actionButton1"
 
       break
     end
@@ -1029,23 +1041,6 @@ function MouseSteeringSettingsDialog:setCallback(callbackFunc, target, args)
   self.callbackFunc = callbackFunc
   self.target = target
   self.callbackArgs = args
-end
-
----Handles the back button click to save settings and close the dialog
-function MouseSteeringSettingsDialog:onClickBack()
-  g_messageCenter:unsubscribeAll(self)
-
-  self.mouseSteering:saveSettingsToXMLFile()
-  self.mouseSteering:saveVehicleToXMLFile()
-
-  -- clean up vehicle detail map and filters
-  self.vehicleDetailMap:onClose()
-  if self.customFilter ~= nil then
-    self.ingameMapBase:removeCustomFilter(self.customFilter)
-  end
-
-  -- close the dialog
-  self:close()
 end
 
 ---
