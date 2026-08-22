@@ -34,6 +34,7 @@ local sourceFiles = {
   "src/misc/AdditionalSpecialization.lua",
   "src/misc/MouseSteeringCameraRotation.lua",
   "src/misc/MouseSteeringController.lua",
+  "src/misc/MouseSteeringInputController.lua",
   "src/misc/MouseSteeringMessageTypes.lua",
   "src/misc/VehicleCameraExtension.lua",
   -- main

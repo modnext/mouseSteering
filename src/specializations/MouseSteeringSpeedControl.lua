@@ -401,20 +401,11 @@ function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInp
     MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
   end
 
-  if g_gui:getIsGuiVisible() or not self.isActiveForInputIgnoreSelectionIgnoreAI then
-    return
-  end
+  local inputController = spec.mouseSteering.inputController
+  local scrollDirection = inputController:getScrollDirection()
 
-  local isCameraRotating = self.getIsMouseSteeringSteeringPaused ~= nil and self:getIsMouseSteeringSteeringPaused()
-
-  if isCameraRotating then
-    return
-  end
-
-  if Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_UP) then
-    MouseSteeringSpeedControl.onScrollWheel(self, 1, pedalAxis)
-  elseif Input.isMouseButtonPressed(Input.MOUSE_BUTTON_WHEEL_DOWN) then
-    MouseSteeringSpeedControl.onScrollWheel(self, -1, pedalAxis)
+  if scrollDirection ~= 0 and inputController:getIsSpeedControlInputCaptured() then
+    MouseSteeringSpeedControl.onScrollWheel(self, scrollDirection, pedalAxis)
   end
 end
 
