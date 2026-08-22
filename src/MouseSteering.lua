@@ -34,8 +34,9 @@ function MouseSteering.new(modName, modDirectory, modSettingsDirectory, mission,
   -- initialize vehicle sells tracking
   self.vehicleSells = {}
 
-  -- initialize camera extensions
+  -- initialize input and camera extensions
   self.vehicleCamera = VehicleCameraExtension.new()
+  self.inputController = MouseSteeringInputController.new(self)
 
   -- initialize gui menu and hud
   self.gui = MouseSteeringGui.new(nil, modDirectory, mission, gui, i18n)
@@ -55,6 +56,7 @@ function MouseSteering:delete()
   g_messageCenter:unsubscribeAll(self)
 
   self.hud:delete()
+  self.inputController:delete()
   self.vehicleCamera:delete()
 end
 
@@ -68,6 +70,7 @@ end
 -- @param mission table the loaded mission
 function MouseSteering:onMissionLoaded(mission)
   self.vehicleCamera:load()
+  self.inputController:load()
 
   -- load settings and vehicles
   self:load()
