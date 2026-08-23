@@ -393,7 +393,8 @@ function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInp
   end
 
   local drivable = self.spec_drivable
-  local pedalAxis = drivable ~= nil and drivable.axisForward or 0
+  -- idle turning generates axisForward internally; it is not physical pedal input
+  local pedalAxis = drivable.idleTurningActive and 0 or drivable.axisForward
   local pedalActive = math.abs(pedalAxis) > 0.01
 
   -- stop ignoring the activation input after release or an opposite pedal input
@@ -455,8 +456,8 @@ function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, 
     return superFunc(self, axisForward, axisSide, doHandbrake, dt)
   end
 
-  -- detect the untouched physical pedal input before applying the virtual target
-  local hasPedalInput = math.abs(axisForward) > 0.01
+  -- idle turning generates axisForward internally and must not cancel the virtual pedal
+  local hasPedalInput = not self.spec_drivable.idleTurningActive and math.abs(axisForward) > 0.01
 
   if spec.ignoredPedalDirection ~= 0 then
     spec.ignoredPedalGraceTime = math.max((spec.ignoredPedalGraceTime or 0) - dt, 0)

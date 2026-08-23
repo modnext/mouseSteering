@@ -46,7 +46,10 @@ end
 ---Register all function overwritings
 -- @param vehicleType table vehicle type
 function MouseSteeringVehicle.registerOverwrittenFunctions(vehicleType)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "getIsVehicleControlledByPlayer", MouseSteeringVehicle.getIsVehicleControlledByPlayer)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "setSteeringInput", MouseSteeringVehicle.setSteeringInput)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "updateSteeringAngle", MouseSteeringVehicle.updateSteeringAngle)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "updateVehiclePhysics", MouseSteeringVehicle.updateVehiclePhysics)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "updateSteeringWheel", MouseSteeringVehicle.updateSteeringWheel)
 end
 
@@ -227,7 +230,7 @@ function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, 
   local spec = self.spec_mouseSteeringVehicle
   local drivableSpec = self.spec_drivable
 
-  local isLocalVehicle = self.isClient and not self.isServer and g_localPlayer ~= nil and g_localPlayer:getCurrentVehicle() == self
+  local isLocalVehicle = self.isClient and g_localPlayer ~= nil and g_localPlayer:getCurrentVehicle() == self
   local camera = isLocalVehicle and self:getActiveCamera() or nil
   local isLocalFirstPerson = camera ~= nil and camera.isInside and not camera.isPassengerCamera
   local visualRotatedTime
@@ -240,6 +243,10 @@ function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, 
     end
 
     local axisSide = drivableSpec.axisSide
+    if drivableSpec.idleTurningAllowed and drivableSpec.idleTurningActive and MouseSteeringVehicle.isFiniteNumber(spec.axisSide) then
+      axisSide = spec.axisSide
+    end
+
     local steeringDirection = self:getSteeringDirection()
     local minRotTime = self.minRotTime
     local maxRotTime = self.maxRotTime
@@ -263,6 +270,105 @@ function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, 
   else
     superFunc(self, steeringWheel, dt, direction)
   end
+end
+
+---Keeps the source idle-turning wheel geometry while mouse steering is active
+-- @param superFunc function original steering angle update function
+-- @param wheel table wheel data
+-- @param dt number delta time since last call in ms
+-- @param steeringAngle number regular steering angle
+-- @return number steeringAngle adjusted steering angle
+function MouseSteeringVehicle:updateSteeringAngle(superFunc, wheel, dt, steeringAngle)
+  steeringAngle = superFunc(self, wheel, dt, steeringAngle)
+
+  local spec = self.spec_mouseSteeringVehicle
+  local drivableSpec = self.spec_drivable
+  local isLocallyControlled = self.getIsEnteredForInput ~= nil and self:getIsEnteredForInput()
+
+  if spec ~= nil and drivableSpec ~= nil and spec.isUsed and isLocallyControlled and drivableSpec.idleTurningActive then
+    local isAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
+    if not isAIActive and AIAutomaticSteering ~= nil and self.getAIAutomaticSteeringState ~= nil then
+      isAIActive = self:getAIAutomaticSteeringState() == AIAutomaticSteering.STATE.ACTIVE
+    end
+
+    local axisSide = MouseSteeringVehicle.isFiniteNumber(spec.axisSide) and spec.axisSide or drivableSpec.axisSide
+    local idleTurningWheels = drivableSpec.idleTurningWheels
+    if not isAIActive and idleTurningWheels ~= nil and math.abs(axisSide or 0) > 0.0001 then
+      for _, wheelData in ipairs(idleTurningWheels) do
+        if wheel.repr == wheelData.wheelNode or wheel.driveNode == wheelData.wheelNode then
+          -- Fixed idle-turning geometry prevents forward creep at partial input.
+          return wheelData.steeringAngle + (wheelData.inverted and math.pi or 0)
+        end
+      end
+    end
+  end
+
+  return steeringAngle
+end
+
+---Synchronizes idle-turning input with mouse steering and virtual pedal control
+-- @param vehicle table vehicle instance
+-- @param axisForward number forward/reverse input
+-- @param axisSide number steering input
+-- @return number axisForward synchronized forward/reverse input
+-- @return number axisSide synchronized steering input
+-- @return boolean isPedalControlActive true when idle turning was replaced by virtual pedal input
+function MouseSteeringVehicle.synchronizeIdleTurningState(vehicle, axisForward, axisSide)
+  local drivableSpec = vehicle.spec_drivable
+  if not drivableSpec.idleTurningActive then
+    return axisForward, axisSide, false
+  end
+
+  local spec = vehicle.spec_mouseSteeringVehicle
+  local speedControlSpec = vehicle.spec_mouseSteeringSpeedControl
+  local isPedalControlActive = speedControlSpec ~= nil and speedControlSpec.isActive and speedControlSpec.activeMode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT
+  local isLocallyControlled = vehicle.getIsEnteredForInput ~= nil and vehicle:getIsEnteredForInput()
+  local idleTurningActive = true
+
+  if isPedalControlActive then
+    if isLocallyControlled and MouseSteeringVehicle.isFiniteNumber(spec.axisSide) then
+      axisSide = spec.axisSide
+    else
+      local steeringDirection = math.sign(drivableSpec.axisForward) * math.sign(drivableSpec.idleTurningDirection or 0)
+      axisSide = steeringDirection == 0 and axisSide or math.abs(axisSide) * steeringDirection
+    end
+
+    axisForward = 0
+    idleTurningActive = false
+  elseif spec.isUsed and isLocallyControlled then
+    local steeringAxis = MouseSteeringVehicle.isFiniteNumber(axisSide) and axisSide or spec.axisSide
+    axisForward = math.sign(axisForward or 0) * math.clamp(math.abs(steeringAxis or 0), 0, 1)
+  end
+
+  if axisForward ~= drivableSpec.axisForward or axisSide ~= drivableSpec.axisSide or idleTurningActive ~= drivableSpec.idleTurningActive then
+    drivableSpec.axisForward = axisForward
+    drivableSpec.axisForwardSend = axisForward
+    drivableSpec.axisSide = axisSide
+    drivableSpec.axisSideSend = axisSide
+    drivableSpec.idleTurningActive = idleTurningActive
+    drivableSpec.idleTurningActiveSend = idleTurningActive
+    vehicle:raiseDirtyFlags(drivableSpec.dirtyFlag)
+  end
+
+  return axisForward, axisSide, isPedalControlActive
+end
+
+---Adjusts idle-turning physics for mouse steering and virtual pedal input
+-- @param superFunc function original vehicle physics update function
+-- @param axisForward number forward/reverse input
+-- @param axisSide number steering input
+-- @param doHandbrake boolean handbrake state
+-- @param dt number delta time since last call in ms
+function MouseSteeringVehicle:updateVehiclePhysics(superFunc, axisForward, axisSide, doHandbrake, dt)
+  local synchronizedAxisForward, synchronizedAxisSide, isPedalControlActive = MouseSteeringVehicle.synchronizeIdleTurningState(self, axisForward, axisSide)
+
+  if isPedalControlActive then
+    axisSide = synchronizedAxisSide
+  else
+    axisForward = synchronizedAxisForward
+  end
+
+  return superFunc(self, axisForward, axisSide, doHandbrake, dt)
 end
 
 ---Called on update
@@ -394,17 +500,29 @@ function MouseSteeringVehicle:onUpdate(dt, _, _, _)
 
       -- apply steering input to vehicle
       self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
+
+      -- Keep idle-turning state compatible with mouse steering and virtual pedal input.
+      local drivableSpec = self.spec_drivable
+      local wasIdleTurningActive = drivableSpec.idleTurningActive
+      MouseSteeringVehicle.synchronizeIdleTurningState(self, drivableSpec.axisForward, drivableSpec.axisSide)
+
+      -- Drivable skips the steering-wheel animation during idle turning when configured in XML.
+      if drivableSpec.idleTurningAllowed and wasIdleTurningActive and not drivableSpec.idleTurningUpdateSteeringWheel and drivableSpec.steeringWheel ~= nil then
+        self:updateSteeringWheel(drivableSpec.steeringWheel, dt, 1)
+      end
     end
 
     -- update HUD and camera
     self:updateMouseSteeringHUD()
 
-    local isPlayerControlled = self:getIsVehicleControlledByPlayer()
-    local ignoreSelectionIgnoreAI = self.isActiveForInputIgnoreSelectionIgnoreAI == true
+    local isActiveForInput = self.isActiveForInputIgnoreSelectionIgnoreAI == true
+    local shouldCaptureMouse = isActiveForInput and self:getIsEnteredForInput() and not isWorkerAIActive
 
-    local shouldDisableRotation = (isAIActive and spec.settings.steeringAssist and isSteeringAssist) or (ignoreSelectionIgnoreAI and isPlayerControlled and not isAIActive)
+    if shouldCaptureMouse and isAIActive then
+      shouldCaptureMouse = spec.settings.steeringAssist and isSteeringAssist
+    end
 
-    self:setMouseSteeringCameraRotating(not shouldDisableRotation)
+    self:setMouseSteeringCameraRotating(not shouldCaptureMouse)
 
     -- update camera rotation following steering and centering
     local camera = self:getActiveCamera()
@@ -566,8 +684,9 @@ function MouseSteeringVehicle:onLeaveVehicle(wasEntered)
   -- preserve current steering and discard pending input
   if spec.isUsed then
     self:synchronizeMouseSteeringAxisSide()
-    self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
+
+  self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
 
   -- save camera state on leave
   spec.cameraRotation:resetState(nil)
@@ -590,6 +709,8 @@ function MouseSteeringVehicle:updateMouseSteeringState(updateControlledVehicle)
   -- sync axis when enabled
   if spec.isUsed and not wasEnabled then
     self:synchronizeMouseSteeringAxisSide()
+  elseif not spec.isUsed and wasEnabled then
+    self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- update controlled vehicle if requested
@@ -638,6 +759,8 @@ function MouseSteeringVehicle:setMouseSteeringUsed()
   -- sync axis immediately when enabled so wheels don't jump calculation
   if spec.isUsed then
     self:synchronizeMouseSteeringAxisSide()
+  else
+    self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
   end
 
   -- check if auto-save is enabled
@@ -834,6 +957,7 @@ end
 -- @return number steerRaw The calculated raw steering input
 function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
   local axisValue = axisOverride
+  local drivableSpec = self.spec_drivable
 
   if axisValue == nil then
     local rotatedTime = self.rotatedTime
@@ -848,12 +972,12 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
         axisValue = rotatedTime / minRotTime / steeringDirection
       end
     else
-      axisValue = self.spec_drivable.axisSide or 0
+      axisValue = drivableSpec.axisSide or 0
     end
   end
 
   if not MouseSteeringVehicle.isFiniteNumber(axisValue) then
-    axisValue = self.spec_drivable.axisSide
+    axisValue = drivableSpec.axisSide
   end
 
   if not MouseSteeringVehicle.isFiniteNumber(axisValue) then
@@ -882,16 +1006,47 @@ function MouseSteeringVehicle:synchronizeMouseSteeringAxisSide(axisOverride)
   spec.axisSide, spec.inputValue = self:calculateAxisAndSteering(spec, axisOverride)
 end
 
+---Keeps local mouse steering input active on vehicle types with AI job control
+function MouseSteeringVehicle:getIsVehicleControlledByPlayer(superFunc)
+  local spec = self.spec_mouseSteeringVehicle
+  local isLocallyControlled = self.getIsEnteredForInput ~= nil and self:getIsEnteredForInput()
+  local isWorkerAIActive = self.getIsAIActive ~= nil and self:getIsAIActive()
+
+  if spec ~= nil and spec.isUsed and isLocallyControlled and not isWorkerAIActive then
+    return true
+  end
+
+  if superFunc ~= nil then
+    return superFunc(self)
+  end
+
+  return false
+end
+
 ---Overrides steering input to handle mouse steering
 function MouseSteeringVehicle:setSteeringInput(superFunc, inputValue, isAnalog, deviceCategory)
   local spec = self.spec_mouseSteeringVehicle
 
-  if spec.isUsed then
+  if spec ~= nil and spec.isUsed then
     -- update Drivable input directly when mouse steering is enabled
-    local lastInputValues = self.spec_drivable.lastInputValues
+    local drivableSpec = self.spec_drivable
+    local lastInputValues = drivableSpec.lastInputValues
+    if not MouseSteeringVehicle.isFiniteNumber(inputValue) then
+      inputValue = 0
+    else
+      inputValue = math.clamp(inputValue, -1, 1)
+    end
+
+    local isZeroInput = math.abs(inputValue) < 0.0001
     lastInputValues.axisSteer = inputValue
 
-    if inputValue ~= 0 then
+    if isZeroInput and drivableSpec.idleTurningAllowed then
+      drivableSpec.idleTurningActive = false
+      drivableSpec.idleTurningDirection = 0
+      drivableSpec.axisSide = 0
+    end
+
+    if not isZeroInput then
       lastInputValues.axisSteerIsAnalog = isAnalog
       lastInputValues.axisSteerDeviceCategory = deviceCategory
     end
