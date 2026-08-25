@@ -913,6 +913,11 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
   local axisValue = axisOverride
   local drivableSpec = self.spec_drivable
 
+  if axisValue == nil and drivableSpec.idleTurningActive then
+    local inputDirection = math.sign(drivableSpec.axisForward * drivableSpec.idleTurningDirection)
+    axisValue = inputDirection == 0 and spec.axisSide or math.abs(drivableSpec.axisSide) * inputDirection
+  end
+
   if axisValue == nil then
     local rotatedTime = self.rotatedTime
     local maxRotTime = self.maxRotTime
@@ -962,7 +967,7 @@ end
 
 ---Keeps local mouse steering input active on vehicle types with AI job control
 function MouseSteeringVehicle:getIsVehicleControlledByPlayer(superFunc)
-      local spec = self.spec_mouseSteeringVehicle
+  local spec = self.spec_mouseSteeringVehicle
 
   if spec.isUsed and self:getIsEnteredForInput() and not self:getIsAIActive() then
     return true
