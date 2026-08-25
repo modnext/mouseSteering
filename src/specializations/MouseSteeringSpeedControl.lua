@@ -68,6 +68,7 @@ function MouseSteeringSpeedControl:onLoad(savegame)
   spec.targetSpeedKmh = 0
   spec.targetPedalPercent = 0
   spec.lastAppliedPedalAxis = nil
+  spec.isApplyingSpeedControlInput = false
   spec.speedInterpolated = nil
   spec.ignoredPedalDirection = 0
   spec.ignoredPedalDirectionObserved = false
@@ -434,11 +435,11 @@ function MouseSteeringSpeedControl:getCruiseControlDisplayInfo(superFunc)
   return superFunc(self)
 end
 
----Overrides cruise-control state to deactivate mouse-wheel control when CC is activated
+---Overrides cruise-control state to mirror native activation and external deactivation
 function MouseSteeringSpeedControl:setCruiseControlState(superFunc, state, noEventSend)
   local spec = self.spec_mouseSteeringSpeedControl
 
-  if spec.isActive and state ~= Drivable.CRUISECONTROL_STATE_OFF then
+  if spec.isActive and (state ~= Drivable.CRUISECONTROL_STATE_OFF or not spec.isApplyingSpeedControlInput) then
     MouseSteeringSpeedControl.requestDeactivation(self)
   end
 
@@ -528,7 +529,10 @@ function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, 
     end
   end
 
+  -- ignore the native CC-off call caused by our own virtual accelerator input
+  spec.isApplyingSpeedControlInput = true
   local acceleration = superFunc(self, axisForward, axisSide, doHandbrake, dt)
+  spec.isApplyingSpeedControlInput = false
 
   if spec.isActive and isPedalMode then
     -- expose the target through Drivable for animation and the update stream
