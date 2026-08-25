@@ -453,8 +453,10 @@ function MouseSteeringVehicle:onUpdate(dt, _, _, _)
         self:synchronizeMouseSteeringAxisSide()
       end
 
-      -- apply steering input to vehicle
-      self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
+      -- do not feed AI-controlled wheel movement back as player steering input
+      if not isAIActive and not isWorkerAIActive then
+        self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
+      end
 
       -- Keep idle-turning input and the skipped steering-wheel animation in sync.
       local drivableSpec = self.spec_drivable
