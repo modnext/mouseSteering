@@ -1023,36 +1023,28 @@ function MouseSteeringVehicle:getIsVehicleControlledByPlayer(superFunc)
   return false
 end
 
----Overrides steering input to handle mouse steering
+---Normalizes mouse steering input before passing it to Drivable
 function MouseSteeringVehicle:setSteeringInput(superFunc, inputValue, isAnalog, deviceCategory)
   local spec = self.spec_mouseSteeringVehicle
 
-  if spec ~= nil and spec.isUsed then
-    -- update Drivable input directly when mouse steering is enabled
+  if not spec.isUsed then
+    return superFunc(self, inputValue, isAnalog, deviceCategory)
+  end
+
+  local steeringInput = MouseSteeringVehicle.isFiniteNumber(inputValue) and math.clamp(inputValue, -1, 1) or 0
+
+  if math.abs(steeringInput) < 0.0001 then
+    steeringInput = 0
+
     local drivableSpec = self.spec_drivable
-    local lastInputValues = drivableSpec.lastInputValues
-    if not MouseSteeringVehicle.isFiniteNumber(inputValue) then
-      inputValue = 0
-    else
-      inputValue = math.clamp(inputValue, -1, 1)
-    end
-
-    local isZeroInput = math.abs(inputValue) < 0.0001
-    lastInputValues.axisSteer = inputValue
-
-    if isZeroInput and drivableSpec.idleTurningAllowed then
+    if drivableSpec.idleTurningAllowed then
       drivableSpec.idleTurningActive = false
       drivableSpec.idleTurningDirection = 0
       drivableSpec.axisSide = 0
     end
-
-    if not isZeroInput then
-      lastInputValues.axisSteerIsAnalog = isAnalog
-      lastInputValues.axisSteerDeviceCategory = deviceCategory
-    end
-  else
-    return superFunc(self, inputValue, isAnalog, deviceCategory)
   end
+
+  return superFunc(self, steeringInput, isAnalog, deviceCategory)
 end
 
 ---Gets the current mouse steering axis value
