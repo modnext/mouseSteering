@@ -159,28 +159,26 @@ function MouseSteeringCameraRotation:calculateSteeringFactor(cameraRotationDeadZ
   local MAX_STEERING_ANGLE_DEGREES = 50
 
   local vehicle = self.vehicle
-  if vehicle == nil then
+  if vehicle == nil or vehicle.getMouseSteeringAxisSide == nil then
     return 0
   end
 
-  local rotatedTime = vehicle.rotatedTime or 0
-  if rotatedTime == 0 then
+  local drivableSpec = vehicle.spec_drivable
+  local axisSide = drivableSpec.axisSide
+  if drivableSpec.idleTurningActive then
+    axisSide = vehicle:getMouseSteeringAxisSide()
+  end
+
+  local steeringDirection = vehicle:getSteeringDirection()
+  local isAxisValid = type(axisSide) == "number" and MathUtil.isFinite(axisSide)
+  local isDirectionValid = type(steeringDirection) == "number" and MathUtil.isFinite(steeringDirection)
+  if not isAxisValid or not isDirectionValid then
     return 0
   end
 
-  -- normalize the signed steering time against the matching rotation limit
-  local rotationLimit
-  if rotatedTime > 0 then
-    rotationLimit = vehicle.maxRotTime
-  else
-    rotationLimit = -(vehicle.minRotTime or 0)
-  end
-
-  if rotationLimit == nil or rotationLimit <= 0 then
-    return 0
-  end
-
-  local steerFactor = rotatedTime / rotationLimit
+  -- Drivable reverses the steering axis when converting it to rotatedTime.
+  -- Use the original mouse axis because idle turning gives both directions the same wheel angle.
+  local steerFactor = -math.clamp(axisSide * steeringDirection, -1, 1)
 
   -- apply threshold deadzone
   local absSteer = math.abs(steerFactor)
@@ -194,7 +192,7 @@ function MouseSteeringCameraRotation:calculateSteeringFactor(cameraRotationDeadZ
   local curvedSteer = steerSign * STEERING_FACTOR_MULTIPLIER * (normalizedSteer ^ STEERING_FACTOR_EXPONENT)
 
   -- apply camera rotation dead zone
-  local cameraDeadZone = (cameraRotationDeadZoneDegrees or 0) / MAX_STEERING_ANGLE_DEGREES
+  local cameraDeadZone = math.clamp((cameraRotationDeadZoneDegrees or 0) / MAX_STEERING_ANGLE_DEGREES, 0, 0.99)
   local absCurved = math.abs(curvedSteer)
 
   if absCurved < cameraDeadZone then

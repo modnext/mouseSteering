@@ -36,6 +36,10 @@ end
 function MouseSteeringSpeedControl.registerOverwrittenFunctions(vehicleType)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "getCruiseControlDisplayInfo", MouseSteeringSpeedControl.getCruiseControlDisplayInfo)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "setCruiseControlState", MouseSteeringSpeedControl.setCruiseControlState)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "getAxisForward", MouseSteeringSpeedControl.getPedalAxisValue)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "getAccelerationAxis", MouseSteeringSpeedControl.getPedalAxisValue)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "getDecelerationAxis", MouseSteeringSpeedControl.getPedalAxisValue)
+  SpecializationUtil.registerOverwrittenFunction(vehicleType, "getAcDecelerationAxis", MouseSteeringSpeedControl.getPedalAxisValue)
   SpecializationUtil.registerOverwrittenFunction(vehicleType, "updateVehiclePhysics", MouseSteeringSpeedControl.updateVehiclePhysics)
 end
 
@@ -63,6 +67,7 @@ function MouseSteeringSpeedControl:onLoad(savegame)
   spec.activeMode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
   spec.targetSpeedKmh = 0
   spec.targetPedalPercent = 0
+  spec.lastAppliedPedalAxis = nil
   spec.speedInterpolated = nil
   spec.ignoredPedalDirection = 0
   spec.ignoredPedalDirectionObserved = false
@@ -72,7 +77,6 @@ end
 ---Called when entering a vehicle
 -- @param isControlling boolean true for the locally controlled player (unused)
 function MouseSteeringSpeedControl:onEnterVehicle(_)
-  -- discard state left by a previous owner before accepting new input
   if self.isServer then
     MouseSteeringSpeedControl.requestDeactivation(self)
   end
@@ -101,20 +105,21 @@ end
 function MouseSteeringSpeedControl:setMouseSteeringSpeedControlModeState(isActive, mode, targetValue, ignoredPedalDirection, noEventSend)
   local spec = self.spec_mouseSteeringSpeedControl
   local motor = self:getMotor()
-  local ignoredPedalGraceDuration = 250
 
   -- normalize mode and target before changing authoritative state
   if mode ~= MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
     mode = MouseSteeringSpeedControl.MODE_TARGET_SPEED
   end
 
+  local isPedalMode = mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT
+
   isActive = isActive == true and motor ~= nil
-  targetValue = tonumber(targetValue) or 0
-  targetValue = targetValue >= 0 and math.floor(targetValue + 0.5) or math.ceil(targetValue - 0.5)
+  targetValue = MathUtil.roundToStep(tonumber(targetValue) or 0, 1)
 
   if isActive then
-    if mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
-      local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
+    local isManualDirection = self:getIsManualDirectionChangeActive()
+
+    if isPedalMode then
       local minPedalPercent = isManualDirection and 0 or -100
 
       targetValue = math.clamp(targetValue, minPedalPercent, 100)
@@ -122,7 +127,6 @@ function MouseSteeringSpeedControl:setMouseSteeringSpeedControlModeState(isActiv
     else
       local maxForward = math.ceil(motor:getMaximumForwardSpeed() * 3.6)
       local maxReverse = math.ceil(motor:getMaximumBackwardSpeed() * 3.6)
-      local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
       local minSpeed = isManualDirection and 0 or -maxReverse
 
       targetValue = math.clamp(targetValue, minSpeed, maxForward)
@@ -137,25 +141,24 @@ function MouseSteeringSpeedControl:setMouseSteeringSpeedControlModeState(isActiv
 
   spec.isActive = isActive
   spec.activeMode = mode
-  spec.targetSpeedKmh = mode == MouseSteeringSpeedControl.MODE_TARGET_SPEED and targetValue or 0
-  spec.targetPedalPercent = mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT and targetValue or 0
-  spec.ignoredPedalDirection = isActive and math.clamp(math.sign(tonumber(ignoredPedalDirection) or 0), -1, 1) or 0
+  spec.targetSpeedKmh = isPedalMode and 0 or targetValue
+  spec.targetPedalPercent = isPedalMode and targetValue or 0
 
-  if spec.ignoredPedalDirection ~= 0 then
-    spec.ignoredPedalDirectionObserved = false
-    spec.ignoredPedalGraceTime = ignoredPedalGraceDuration
-  else
-    spec.ignoredPedalDirectionObserved = false
-    spec.ignoredPedalGraceTime = 0
+  if not isActive or not isPedalMode then
+    spec.lastAppliedPedalAxis = nil
   end
 
-  if not isActive or modeChanged or mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+  spec.ignoredPedalDirection = isActive and math.clamp(math.sign(tonumber(ignoredPedalDirection) or 0), -1, 1) or 0
+  spec.ignoredPedalDirectionObserved = false
+  spec.ignoredPedalGraceTime = spec.ignoredPedalDirection ~= 0 and 250 or 0
+
+  if not isActive or modeChanged or isPedalMode then
     spec.speedInterpolated = nil
   end
 
   -- send normalized state over the network
   if noEventSend ~= true then
-    local event = SetMouseSteeringSpeedControlStateEvent.new(self, spec.isActive, spec.activeMode, mode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT and spec.targetPedalPercent or spec.targetSpeedKmh, spec.ignoredPedalDirection)
+    local event = SetMouseSteeringSpeedControlStateEvent.new(self, spec.isActive, spec.activeMode, targetValue, spec.ignoredPedalDirection)
 
     if self.isServer then
       local ownerConnection = self:getOwnerConnection()
@@ -254,15 +257,11 @@ function MouseSteeringSpeedControl.getAdjustedTargetSpeed(vehicle, direction)
 
   if wasInactive then
     -- activate at current vehicle speed
-    local currentSpeedKmh = 0
-
-    if vehicle.getLastSpeed ~= nil then
-      local movingDir = vehicle.movingDirection or 0
-      local reverserDir = vehicle:getReverserDirection()
-      local isManualDir = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
-      local currentDir = isManualDir and (motor.currentDirection or 1) or 1
-      currentSpeedKmh = vehicle:getLastSpeed() * movingDir * reverserDir * currentDir
-    end
+    local movingDir = vehicle.movingDirection or 0
+    local reverserDir = vehicle:getReverserDirection()
+    local isManualDir = vehicle:getIsManualDirectionChangeActive()
+    local currentDir = isManualDir and (motor.currentDirection or 1) or 1
+    local currentSpeedKmh = vehicle:getLastSpeed() * movingDir * reverserDir * currentDir
 
     -- eliminate physical jitter at standstill
     if math.abs(currentSpeedKmh) < 0.5 then
@@ -278,7 +277,7 @@ function MouseSteeringSpeedControl.getAdjustedTargetSpeed(vehicle, direction)
   -- clamp to vehicle speed limits
   local maxForward = math.ceil(motor:getMaximumForwardSpeed() * 3.6)
   local maxReverse = math.ceil(motor:getMaximumBackwardSpeed() * 3.6)
-  local isManualDirection = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
+  local isManualDirection = vehicle:getIsManualDirectionChangeActive()
   local minSpeed = isManualDirection and 0 or -maxReverse
 
   targetSpeedKmh = math.clamp(targetSpeedKmh, minSpeed, maxForward)
@@ -298,14 +297,13 @@ end
 function MouseSteeringSpeedControl.getAdjustedPedalPercent(vehicle, direction, pedalAxis)
   local spec = vehicle.spec_mouseSteeringSpeedControl
   local wasInactive = not spec.isActive
-  local isManualDirection = vehicle.getIsManualDirectionChangeActive ~= nil and vehicle:getIsManualDirectionChangeActive()
+  local isManualDirection = vehicle:getIsManualDirectionChangeActive()
   local targetPedalPercent = spec.targetPedalPercent
   local pedalStep = 5
 
   pedalAxis = math.clamp(tonumber(pedalAxis) or 0, -1, 1)
 
   if wasInactive then
-    -- never reinterpret an already pressed brake/reverse pedal as a latched target
     if pedalAxis < -0.01 then
       return nil
     end
@@ -393,7 +391,8 @@ function MouseSteeringSpeedControl:onUpdate(dt, isActiveForInput, isActiveForInp
   end
 
   local drivable = self.spec_drivable
-  local pedalAxis = drivable ~= nil and drivable.axisForward or 0
+  -- idle turning generates axisForward internally; it is not physical pedal input
+  local pedalAxis = drivable.idleTurningActive and 0 or drivable.axisForward
   local pedalActive = math.abs(pedalAxis) > 0.01
 
   -- stop ignoring the activation input after release or an opposite pedal input
@@ -446,47 +445,69 @@ function MouseSteeringSpeedControl:setCruiseControlState(superFunc, state, noEve
   return superFunc(self, state, noEventSend)
 end
 
+---Evaluates a native Drivable axis getter against the active pedal target
+-- @param superFunc function original getter
+-- @return number pedalValue native getter result
+function MouseSteeringSpeedControl:getPedalAxisValue(superFunc)
+  local spec = self.spec_mouseSteeringSpeedControl
+
+  if not spec.isActive or spec.activeMode ~= MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
+    return superFunc(self)
+  end
+
+  local drivableSpec = self.spec_drivable
+  local previousAxisForward = drivableSpec.axisForward
+
+  drivableSpec.axisForward = spec.targetPedalPercent / 100
+  local pedalValue = superFunc(self)
+  drivableSpec.axisForward = previousAxisForward
+
+  return pedalValue
+end
+
 ---Overrides vehicle physics to apply the active target-speed or pedal-position mode
 function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, axisSide, doHandbrake, dt)
   local spec = self.spec_mouseSteeringSpeedControl
-  local motor = self:getMotor()
 
-  if not spec.isActive or motor == nil then
+  if not spec.isActive then
     return superFunc(self, axisForward, axisSide, doHandbrake, dt)
   end
 
-  -- detect the untouched physical pedal input before applying the virtual target
-  local hasPedalInput = math.abs(axisForward) > 0.01
+  local drivableSpec = self.spec_drivable
+  local isPedalMode = spec.activeMode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT
+
+  -- idle turning and the previously mirrored target are not physical pedal input
+  local hasPedalInput = not drivableSpec.idleTurningActive and math.abs(axisForward) > 0.01
+
+  if hasPedalInput and spec.lastAppliedPedalAxis ~= nil then
+    hasPedalInput = math.abs(axisForward - spec.lastAppliedPedalAxis) > 0.01
+  end
 
   if spec.ignoredPedalDirection ~= 0 then
     spec.ignoredPedalGraceTime = math.max((spec.ignoredPedalGraceTime or 0) - dt, 0)
+    local isIgnoredPedal = hasPedalInput
+      and math.sign(axisForward) == spec.ignoredPedalDirection
+      and (spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime > 0)
 
-    if hasPedalInput then
-      local isIgnoredDirection = math.sign(axisForward) == spec.ignoredPedalDirection
-
-      if isIgnoredDirection and (spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime > 0) then
-        spec.ignoredPedalDirectionObserved = true
-        hasPedalInput = false
-      else
-        MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
-      end
-    elseif spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime == 0 then
+    if isIgnoredPedal then
+      spec.ignoredPedalDirectionObserved = true
+      hasPedalInput = false
+    elseif hasPedalInput or spec.ignoredPedalDirectionObserved or spec.ignoredPedalGraceTime == 0 then
       MouseSteeringSpeedControl.clearIgnoredPedalState(spec)
     end
   end
 
-  if spec.activeMode == MouseSteeringSpeedControl.MODE_PEDAL_PERCENT then
-    local isManualDirection = self.getIsManualDirectionChangeActive ~= nil and self:getIsManualDirectionChangeActive()
-    local hasInvalidDirection = isManualDirection and spec.targetPedalPercent < 0
-    local isMotorUnavailable = (self.getIsMotorStarted ~= nil and not self:getIsMotorStarted()) or (self.getCanMotorRun ~= nil and not self:getCanMotorRun())
+  if isPedalMode then
+    local hasInvalidDirection = self:getIsManualDirectionChangeActive() and spec.targetPedalPercent < 0
+    local isMotorUnavailable = not self:getIsMotorStarted() or not self:getCanMotorRun()
 
     if hasPedalInput or doHandbrake or hasInvalidDirection or isMotorUnavailable then
       self:setMouseSteeringSpeedControlModeState(false, spec.activeMode, 0, 0)
     else
-      -- WheelsUtil performs the native accelerator smoothing
       axisForward = spec.targetPedalPercent / 100
     end
   else
+    local motor = self:getMotor()
     local targetSpeed = math.abs(spec.targetSpeedKmh)
 
     if hasPedalInput or (targetSpeed == 0 and self:getLastSpeed() < 1) then
@@ -498,15 +519,27 @@ function MouseSteeringSpeedControl:updateVehiclePhysics(superFunc, axisForward, 
       if targetSpeed ~= spec.speedInterpolated then
         local diff = targetSpeed - spec.speedInterpolated
         local dir = math.sign(diff)
-        local limit = dir == 1 and math.min or math.max
 
-        spec.speedInterpolated = limit(spec.speedInterpolated + dt * 0.0025 * math.max(1, math.abs(diff)) * dir, targetSpeed)
+        spec.speedInterpolated = (dir == 1 and math.min or math.max)(spec.speedInterpolated + dt * 0.0025 * math.max(1, math.abs(diff)) * dir, targetSpeed)
       end
 
       motor:setSpeedLimit(math.min(spec.speedInterpolated, motor:getSpeedLimit()))
-      axisForward = spec.targetSpeedKmh == 0 and 0 or (spec.targetSpeedKmh >= 0 and 1 or -1)
+      axisForward = math.sign(spec.targetSpeedKmh)
     end
   end
 
-  return superFunc(self, axisForward, axisSide, doHandbrake, dt)
+  local acceleration = superFunc(self, axisForward, axisSide, doHandbrake, dt)
+
+  if spec.isActive and isPedalMode then
+    -- expose the target through Drivable for animation and the update stream
+    spec.lastAppliedPedalAxis = axisForward
+
+    if drivableSpec.axisForward ~= axisForward or drivableSpec.axisForwardSend ~= axisForward then
+      drivableSpec.axisForward = axisForward
+      drivableSpec.axisForwardSend = axisForward
+      self:raiseDirtyFlags(drivableSpec.dirtyFlag)
+    end
+  end
+
+  return acceleration
 end
