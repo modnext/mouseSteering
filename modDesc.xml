@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="106">
   <author>aaw3k</author>
-  <version>1.3.2.0</version>
+  <version>1.4.0.0</version>
 
   <title>
     <en>Mouse Steering</en>
@@ -37,15 +37,18 @@ Changelog Version 1.3.1.0:
 - Added camera look-back (double-click)
 - Added small optimization improvements
 
-Changelog Version 1.3.2.0:
-- Fixed unwanted camera centering when camera follow is reactivated
-- Improved camera rotation state handling and smoothing
-- Improved mouse steering input processing for smoother and more consistent steering
-- Improved steering synchronization when joining a multiplayer game or re-entering a vehicle
+Changelog Version 1.4.0.0:
 - Added an alternative Pedal % mode for mouse speed control
 - Added a separate camera settings page in the settings dialog
-- Improved multiplayer synchronization and vehicle state handling
 - Added client-side smoothing for first-person steering wheel movement in multiplayer
+- Added mouse steering support for vehicles with differential steering
+- Improved camera rotation state handling and smoothing
+- Improved mouse steering input processing for smoother and more consistent steering
+- Improved mouse wheel input handling to prevent conflicts with camera zoom and other actions
+- Improved steering synchronization when joining a multiplayer game or re-entering a vehicle
+- Improved multiplayer synchronization and vehicle state handling
+- Fixed unwanted camera centering when camera follow is reactivated
+- Various stability improvements and bug fixes
 
 For more information or to report a bug, please visit GitHub (modnext/mouseSteering).]]></en>
     <de><![CDATA[Lenken Sie Ihre Fahrzeuge mit der Maus für ein natürlicheres und flüssigeres Fahrgefühl. Passen Sie Empfindlichkeit, Linearität und Totzonen ganz einfach über die Schaltfläche in den allgemeinen Einstellungen an. Zu den Funktionen gehören eine übersichtliche HUD-Anzeige, eine geschwindigkeitsabhängige Lenkung für mehr Präzision bei hohem Tempo und eine automatische Kamera-Folgefunktion.
@@ -73,15 +76,18 @@ Tastenkombinationen:
 - Hinzugefügter Kamerarückblick (Doppelklick)
 - Hinzugefügte kleine Optimierungsverbesserungen
 
-Änderungsprotokoll Version 1.3.2.0:
-- Unerwünschtes Zentrieren der Kamera bei erneuter Aktivierung der Kamerafolge behoben
-- Zustandsverwaltung und Glättung der Kamerarotation verbessert
-- Maussteuerung für ein gleichmäßigeres und konsistenteres Lenkverhalten verbessert
-- Lenkungssynchronisierung beim Beitritt zu einem Mehrspielerspiel und beim erneuten Einsteigen in ein Fahrzeug verbessert
+Änderungsprotokoll Version 1.4.0.0:
 - Alternativen Pedal-%-Modus für die Geschwindigkeitsregelung per Maus hinzugefügt
 - Separate Kameraseite im Einstellungsdialog hinzugefügt
-- Multiplayer-Synchronisierung und Verarbeitung des Fahrzeugzustands verbessert
 - Clientseitige Glättung der Lenkradbewegung in der Innenansicht im Mehrspielermodus hinzugefügt
+- Maussteuerungsunterstützung für Fahrzeuge mit Differentiallenkung hinzugefügt
+- Zustandsverwaltung und Glättung der Kamerarotation verbessert
+- Maussteuerung für ein gleichmäßigeres und konsistenteres Lenkverhalten verbessert
+- Mausrad-Eingaben verbessert, um Konflikte mit Kamerazoom und anderen Aktionen zu vermeiden
+- Lenkungssynchronisierung beim Beitritt zu einem Mehrspielerspiel und beim erneuten Einsteigen in ein Fahrzeug verbessert
+- Multiplayer-Synchronisierung und Verarbeitung des Fahrzeugzustands verbessert
+- Unerwünschtes Zentrieren der Kamera bei erneuter Aktivierung der Kamerafolge behoben
+- Verschiedene Stabilitätsverbesserungen und Fehlerbehebungen
 
 Für weitere Informationen oder um einen Fehler zu melden, besuchen Sie bitte GitHub (modnext/mouseSteering).]]></de>
     <fr><![CDATA[Dirigez vos véhicules à la souris pour une expérience de conduite plus naturelle et plus fluide. Personnalisez facilement la sensibilité, la linéarité et les zones mortes via le bouton dans les paramètres généraux du jeu. Les fonctionnalités incluent un indicateur HUD clair, une direction progressive pour plus de précision à haute vitesse et un système de suivi automatique de la caméra.
@@ -109,15 +115,18 @@ Journal des modifications version 1.3.1.0:
 - Ajout de la vue arrière (double-clic)
 - Ajout de petites améliorations d'optimisation
 
-Journal des modifications version 1.3.2.0:
-- Correction du centrage indésirable lors de la réactivation du suivi de caméra
-- Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
-- Amélioration du traitement de la direction à la souris pour une conduite plus fluide et régulière
-- Amélioration de la synchronisation de la direction lors de la connexion à une partie multijoueur et de la remontée dans un véhicule
+Journal des modifications version 1.4.0.0:
 - Ajout d'un mode alternatif Pédale % pour le contrôle de la vitesse à la souris
 - Ajout d'une page dédiée aux paramètres de la caméra dans le dialogue des paramètres
-- Amélioration de la synchronisation multijoueur et de la gestion de l'état du véhicule
 - Ajout du lissage côté client du mouvement du volant en vue intérieure en multijoueur
+- Ajout de la prise en charge de la direction à la souris pour les véhicules à direction différentielle
+- Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
+- Amélioration du traitement de la direction à la souris pour une conduite plus fluide et régulière
+- Amélioration de la gestion de la molette de la souris afin d'éviter les conflits avec le zoom de la caméra et d'autres actions
+- Amélioration de la synchronisation de la direction lors de la connexion à une partie multijoueur et de la remontée dans un véhicule
+- Amélioration de la synchronisation multijoueur et de la gestion de l'état du véhicule
+- Correction du centrage indésirable lors de la réactivation du suivi de caméra
+- Diverses améliorations de stabilité et corrections de bugs
 
 Pour plus d'informations ou pour signaler un bug, veuillez visiter GitHub (modnext/mouseSteering).]]></fr>
     <pl><![CDATA[Steruj pojazdami za pomocą myszki, co sprawia, że jazda jest znacznie bardziej płynna i naturalna. Dostosuj czułość, liniowość i martwe strefy za pomocą przycisku w menu ustawień ogólnych. Funkcje obejmują czytelny wskaźnik HUD, system progresywnego skrętu dla lepszej precyzji przy dużych prędkościach oraz automatyczne śledzenie kierownicy przez kamerę.
@@ -145,15 +154,18 @@ Lista zmian w wersji 1.3.1.0:
 - Dodano możliwość patrzenia do tyłu (dwuklik)
 - Dodano małe usprawnienia optymalizacyjne
 
-Lista zmian w wersji 1.3.2.0:
-- Naprawiono niechciane centrowanie przy ponownym włączeniu śledzenia kamery
-- Ulepszono obsługę stanu i płynność obrotu kamery
-- Ulepszono obsługę sterowania myszką, zapewniając płynniejsze i bardziej spójne skręcanie
-- Poprawiono synchronizację skrętu przy dołączaniu do gry wieloosobowej i ponownym wsiadaniu do pojazdu
+Lista zmian w wersji 1.4.0.0:
 - Dodano alternatywny tryb Pedał % do regulacji prędkości myszką
 - Dodano osobną stronę ustawień kamery w oknie ustawień
-- Ulepszono synchronizację w trybie wieloosobowym i obsługę stanu pojazdu
 - Dodano wygładzanie ruchu kierownicy po stronie klienta w widoku z pierwszej osoby w trybie multiplayer
+- Dodano obsługę sterowania myszką dla pojazdów ze sterowaniem różnicowym
+- Ulepszono obsługę stanu i płynność obrotu kamery
+- Ulepszono obsługę sterowania myszką, zapewniając płynniejsze i bardziej spójne skręcanie
+- Poprawiono obsługę rolki myszy, aby zapobiegać konfliktom z zoomem kamery i innymi akcjami
+- Poprawiono synchronizację skrętu przy dołączaniu do gry wieloosobowej i ponownym wsiadaniu do pojazdu
+- Ulepszono synchronizację w trybie wieloosobowym i obsługę stanu pojazdu
+- Naprawiono niechciane centrowanie przy ponownym włączeniu śledzenia kamery
+- Wprowadzono różne ulepszenia stabilności i poprawki błędów
 
 Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/mouseSteering).]]></pl>
     <ru><![CDATA[Управляйте техникой с помощью мыши, что делает вождение гораздо более плавным и естественным. Настраивайте чувствительность, линейность и мертвые зоны через кнопку в общем меню настроек игры. Особенности включают удобный HUD-индикатор, прогрессивное рулевое управление для точности на высоких скоростях и систему автоматического следования камеры за рулем.
@@ -181,15 +193,18 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 - Добавлен обзор назад (двойной щелчок)
 - Добавлены небольшие улучшения оптимизации
 
-Журнал изменений версии 1.3.2.0:
-- Исправлено нежелательное центрирование при повторном включении следования камеры
-- Улучшена обработка состояния и сглаживание вращения камеры
-- Улучшена обработка управления мышью для более плавного и стабильного рулевого управления
-- Улучшена синхронизация рулевого управления при подключении к многопользовательской игре и повторной посадке в транспорт
+Журнал изменений версии 1.4.0.0:
 - Добавлен альтернативный режим «Педаль %» для управления скоростью мышью
 - Добавлена отдельная страница настроек камеры в диалоге настроек
-- Улучшена синхронизация в многопользовательской игре и обработка состояния транспорта
 - Добавлено сглаживание движения рулевого колеса на стороне клиента в виде от первого лица в многопользовательской игре
+- Добавлена поддержка управления мышью для техники с дифференциальным управлением
+- Улучшена обработка состояния и сглаживание вращения камеры
+- Улучшена обработка управления мышью для более плавного и стабильного рулевого управления
+- Улучшена обработка колесика мыши для предотвращения конфликтов с изменением масштаба камеры и другими действиями
+- Улучшена синхронизация рулевого управления при подключении к многопользовательской игре и повторной посадке в транспорт
+- Улучшена синхронизация в многопользовательской игре и обработка состояния транспорта
+- Исправлено нежелательное центрирование при повторном включении следования камеры
+- Внесены различные улучшения стабильности и исправления ошибок
 
 Для получения дополнительной информации или сообщения об ошибке посетите GitHub (modnext/mouseSteering).]]></ru>
   </description>
