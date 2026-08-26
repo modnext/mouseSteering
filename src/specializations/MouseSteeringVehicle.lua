@@ -453,10 +453,8 @@ function MouseSteeringVehicle:onUpdate(dt, _, _, _)
         self:synchronizeMouseSteeringAxisSide()
       end
 
-      -- do not feed AI-controlled wheel movement back as player steering input
-      if not isAIActive and not isWorkerAIActive then
-        self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
-      end
+      -- apply steering input to vehicle
+      self:setSteeringInput(spec.axisSide, true, InputDevice.CATEGORY.WHEEL)
 
       -- Keep idle-turning input and the skipped steering-wheel animation in sync.
       local drivableSpec = self.spec_drivable
@@ -978,7 +976,7 @@ function MouseSteeringVehicle:getIsVehicleControlledByPlayer(superFunc)
   return superFunc(self)
 end
 
----Normalizes mouse steering input before passing it to Drivable
+---Normalizes and applies mouse steering input through Drivable
 function MouseSteeringVehicle:setSteeringInput(superFunc, inputValue, isAnalog, deviceCategory)
   local spec = self.spec_mouseSteeringVehicle
 
@@ -999,7 +997,8 @@ function MouseSteeringVehicle:setSteeringInput(superFunc, inputValue, isAnalog, 
     end
   end
 
-  return superFunc(self, steeringInput, isAnalog, deviceCategory)
+  -- raw mouse movement already handles AI Assist cancellation in onUpdate
+  return Drivable.setSteeringInput(self, steeringInput, isAnalog, deviceCategory)
 end
 
 ---Gets the current mouse steering axis value
