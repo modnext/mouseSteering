@@ -15,6 +15,8 @@
 [![Report Bug](https://img.shields.io/badge/Report-Bug-red.svg)](https://github.com/modnext/mouseSteering/issues)
 [![Releases](https://img.shields.io/github/v/release/modnext/mouseSteering.svg?color=green)](https://github.com/modnext/mouseSteering/releases/)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K31XKORH)
+
 </div>
 
 ## Installation
