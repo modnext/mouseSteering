@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera følger styring"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kameraets dødssone"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatisk kamerasentrering"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Sentrer vertikal rotasjon"/>
     <e k="mouseSteering_ui_off" v="Av"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kameraet roterer for å følge rattbevegelsen inne i førerhuset."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Styrevinkelterskel (i grader) under som kameraet ikke roterer."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Sentrerer blikket mykt mens kameraet følger styringen. Du kan fortsatt se fritt bakover."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Når aktivert, tilbakestiller kamerasentrering både horisontal og vertikal rotasjon. Når deaktivert, er bare horisontal rotasjon sentrert."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Velger hvordan styreindikatoren vises på HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Viser gjeldende styrevinkel som tekst på skjermen i indikatoren."/>

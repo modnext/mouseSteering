@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera seuraa ohjausta"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kameran kuollut alue"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Kameran automaattinen keskitys"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Keskitä pystysuora kierto"/>
     <e k="mouseSteering_ui_off" v="Pois"/>
     <e k="mouseSteering_ui_subtle" v="Hienovarainen"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera kääntyy seuraamaan rattia ohjaamon sisällä."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Ohjauskulman kynnysarvo (asteissa), jonka alapuolella kamera ei kierny."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Keskittää näkymän pehmeästi kameran seuratessa ohjausta. Taaksepäin voi katsoa vapaasti."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Kun käytössä, kameran keskitys nollaa sekä vaakasuoran että pystysuoran kiertymisen. Kun pois käytöstä, vain vaakasuora kiertyminen keskitetään."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Valitsee, miten ohjausindikaattori näytetään HUD:ssa."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Näyttää nykyisen ohjauskulman tekstinä indikaattorissa."/>

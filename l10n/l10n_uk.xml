@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Камера"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Камера слідує за кермом"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Мертва зона камери"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Автоматичне центрування камери"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Центрувати вертикальне обертання"/>
     <e k="mouseSteering_ui_off" v="Вимкнено"/>
     <e k="mouseSteering_ui_subtle" v="Ледь помітно"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Камера обертається, щоб слідувати за поворотом керма всередині кабіни."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Поріг кута керування (в градусах), нижче якого камера не обертатиметься."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Плавно центрує вид, доки камера стежить за поворотом коліс. Погляд назад залишається вільним."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Коли ввімкнено, центрування камери скидає як горизонтальне, так і вертикальне обертання. Коли вимкнено, центрується лише горизонтальне обертання."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Вибирає спосіб відображення індикатора керування на HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Показує поточний кут повороту керма у вигляді тексту на екрані в індикаторі."/>

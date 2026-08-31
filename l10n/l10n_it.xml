@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Fotocamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Fotocamera Segue la Direzione"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona morta della fotocamera"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Centraggio automatico della telecamera"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centra rotazione verticale"/>
     <e k="mouseSteering_ui_off" v="Disattivato"/>
     <e k="mouseSteering_ui_subtle" v="Sottile"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="La fotocamera ruota per seguire lo sterzo all'interno della cabina."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Soglia dell'angolo di sterzata (in gradi) al di sotto della quale la fotocamera non ruota."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Centra gradualmente la visuale mentre la telecamera segue la sterzata. Lo sguardo all'indietro rimane libero."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Se abilitato, il centraggio della fotocamera ripristina sia la rotazione orizzontale che quella verticale. Se disabilitato, viene centrata solo la rotazione orizzontale."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Seleziona la modalità di visualizzazione dell'indicatore di sterzata sull'HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mostra l'angolo di sterzata corrente come testo sullo schermo nell'indicatore."/>

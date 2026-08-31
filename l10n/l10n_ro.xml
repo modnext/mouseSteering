@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Cameră"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Urmărește Direcția"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona moartă a camerei"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Centrare automată a camerei"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrează rotația verticală"/>
     <e k="mouseSteering_ui_off" v="Dezactivat"/>
     <e k="mouseSteering_ui_subtle" v="Subtil"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera se rotește pentru a urmări volanul în interiorul cabinei."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Prag de unghi de direcție (în grade) sub care camera nu se va roti."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Centrează lin vederea cât timp camera urmărește virarea. Privirea în spate rămâne liberă."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Când este activat, centrarea camerei resetează rotația atât orizontală cât și verticală. Când este dezactivat, doar rotația orizontală este centrată."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selectează modul în care indicatorul de direcție este afișat pe HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Afișează unghiul actual de direcție ca text pe ecran în indicator."/>

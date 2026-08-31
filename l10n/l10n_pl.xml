@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Śledzi Skręt"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Martwa Strefa Śledzenia Kamery"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatyczne Centrowanie Kamery"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Wycentruj Obrót Pionowy"/>
     <e k="mouseSteering_ui_off" v="Wyłączona"/>
     <e k="mouseSteering_ui_subtle" v="Subtelna"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera obraca się zgodnie ze skrętem kół wewnątrz kabiny."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Próg kąta skrętu (w stopniach), poniżej którego kamera nie będzie się obracać."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Płynnie centruje widok, gdy kamera podąża za skrętem. Spojrzenie w tył pozostaje swobodne."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Po włączeniu centrowanie kamery resetuje zarówno obrót poziomy, jak i pionowy. Po wyłączeniu resetowany jest tylko obrót poziomy."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Wybiera sposób wyświetlania wskaźnika skrętu na HUDzie."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Pokazuje aktualny kąt skrętu jako tekst na ekranie we wskaźniku."/>

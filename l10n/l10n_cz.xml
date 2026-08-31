@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera sleduje řízení"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Mrtvá zóna sledování kamery"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatické centrování kamery"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Vycentrovat vertikální rotaci"/>
     <e k="mouseSteering_ui_off" v="Vypnuto"/>
     <e k="mouseSteering_ui_subtle" v="Jemné"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera se otáčí, aby sledovala řízení volantu uvnitř kabiny."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Prahová hodnota úhlu řízení (ve stupních), pod kterou se kamera neotočí."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Plynule centruje pohled, dokud kamera sleduje řízení. Pohled dozadu zůstává volný."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Pokud je zapnuto, centrování kamery resetuje horizontální i vertikální rotaci. Pokud je vypnuto, resetuje se pouze horizontální rotace."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Vybere, jak se indikátor řízení zobrazí na HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Zobrazí aktuální úhel řízení jako text na obrazovce v indikátoru."/>

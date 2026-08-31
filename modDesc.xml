@@ -40,6 +40,7 @@ Changelog Version 1.3.1.0:
 Changelog Version 1.4.0.0:
 - Added an alternative Pedal % mode for mouse speed control
 - Added a separate camera settings page in the settings dialog
+- Added optional automatic camera centering while following steering
 - Added client-side smoothing for first-person steering wheel movement in multiplayer
 - Added mouse steering support for vehicles with differential steering
 - Improved camera rotation state handling and smoothing
@@ -79,6 +80,7 @@ Tastenkombinationen:
 Änderungsprotokoll Version 1.4.0.0:
 - Alternativen Pedal-%-Modus für die Geschwindigkeitsregelung per Maus hinzugefügt
 - Separate Kameraseite im Einstellungsdialog hinzugefügt
+- Optionale automatische Kamerazentrierung während der Lenkungsfolge hinzugefügt
 - Clientseitige Glättung der Lenkradbewegung in der Innenansicht im Mehrspielermodus hinzugefügt
 - Maussteuerungsunterstützung für Fahrzeuge mit Differentiallenkung hinzugefügt
 - Zustandsverwaltung und Glättung der Kamerarotation verbessert
@@ -118,6 +120,7 @@ Journal des modifications version 1.3.1.0:
 Journal des modifications version 1.4.0.0:
 - Ajout d'un mode alternatif Pédale % pour le contrôle de la vitesse à la souris
 - Ajout d'une page dédiée aux paramètres de la caméra dans le dialogue des paramètres
+- Ajout d'un centrage automatique optionnel de la caméra pendant le suivi de la direction
 - Ajout du lissage côté client du mouvement du volant en vue intérieure en multijoueur
 - Ajout de la prise en charge de la direction à la souris pour les véhicules à direction différentielle
 - Amélioration de la gestion de l'état et du lissage de la rotation de la caméra
@@ -157,6 +160,7 @@ Lista zmian w wersji 1.3.1.0:
 Lista zmian w wersji 1.4.0.0:
 - Dodano alternatywny tryb Pedał % do regulacji prędkości myszką
 - Dodano osobną stronę ustawień kamery w oknie ustawień
+- Dodano opcjonalne automatyczne centrowanie kamery podczas śledzenia skrętu
 - Dodano wygładzanie ruchu kierownicy po stronie klienta w widoku z pierwszej osoby w trybie multiplayer
 - Dodano obsługę sterowania myszką dla pojazdów ze sterowaniem różnicowym
 - Ulepszono obsługę stanu i płynność obrotu kamery
@@ -196,6 +200,7 @@ Aby uzyskać więcej informacji lub zgłosić błąd, odwiedź GitHub (modnext/m
 Журнал изменений версии 1.4.0.0:
 - Добавлен альтернативный режим «Педаль %» для управления скоростью мышью
 - Добавлена отдельная страница настроек камеры в диалоге настроек
+- Добавлено опциональное автоматическое центрирование камеры при отслеживании поворота колёс
 - Добавлено сглаживание движения рулевого колеса на стороне клиента в виде от первого лица в многопользовательской игре
 - Добавлена поддержка управления мышью для техники с дифференциальным управлением
 - Улучшена обработка состояния и сглаживание вращения камеры

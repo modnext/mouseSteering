@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Camera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Theo Hướng Lái"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Vùng chết camera"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Tự động căn giữa camera"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Căn giữa xoay dọc"/>
     <e k="mouseSteering_ui_off" v="Tắt"/>
     <e k="mouseSteering_ui_subtle" v="Nhẹ"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera xoay theo hướng lái của vô lăng bên trong cabin."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Ngưỡng góc lái (tính bằng độ) dưới đó camera sẽ không xoay."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Đưa góc nhìn về giữa một cách mượt mà khi camera theo hướng lái. Bạn vẫn có thể nhìn tự do về phía sau."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Khi bật, căn giữa camera đặt lại cả xoay ngang và dọc. Khi tắt, chỉ xoay ngang được căn giữa."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Chọn cách hiển thị chỉ báo lái trên HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Hiển thị góc lái hiện tại dưới dạng văn bản trên màn hình trong chỉ báo."/>

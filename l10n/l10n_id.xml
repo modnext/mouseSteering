@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Mengikuti Kemudi"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona Mati Kamera"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Pemusatan Kamera Otomatis"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Pusatkan Rotasi Vertikal"/>
     <e k="mouseSteering_ui_off" v="Mati"/>
     <e k="mouseSteering_ui_subtle" v="Halus"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera berputar mengikuti kemudi setir di dalam kabin."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Ambang batas sudut kemudi (dalam derajat) di mana kamera tidak akan berputar."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Memusatkan pandangan secara halus saat kamera mengikuti kemudi. Pandangan ke belakang tetap bebas."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Saat diaktifkan, pemusatan kamera mengatur ulang rotasi horizontal dan vertikal. Saat dinonaktifkan, hanya rotasi horizontal yang dimusatkan."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Memilih cara indikator kemudi ditampilkan di HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Menampilkan sudut kemudi saat ini sebagai teks di layar dalam indikator."/>
