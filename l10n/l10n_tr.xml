@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera Direksiyonu Takip Eder"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kamera Ölü Bölgesi"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Otomatik Kamera Ortalama"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Dikey Rotasyonu Ortala"/>
     <e k="mouseSteering_ui_off" v="Kapalı"/>
     <e k="mouseSteering_ui_subtle" v="Hafif"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Kamera, kabin içindeki direksiyon hareketini takip etmek için döner."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Kameranın dönmeyeceği direksiyon açısı eşiği (derece cinsinden)."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Kamera direksiyonu takip ederken görünümü yumuşakça ortalar. Arkaya bakış serbest kalır."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Etkinleştirildiğinde, kamera ortalama işlemi hem yatay hem de dikey rotasyonu sıfırlar. Devre dışı bırakıldığında, yalnızca yatay rotasyon ortalanır."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Direksiyon göstergesinin HUD'da nasıl gösterileceğini seçer."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Mevcut direksiyon açısını göstergede ekran metni olarak gösterir."/>

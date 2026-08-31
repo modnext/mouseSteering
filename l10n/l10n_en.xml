@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Camera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Follow Steering"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Camera Follow Dead Zone"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatic Camera Centering"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Center Vertical Rotation"/>
     <e k="mouseSteering_ui_off" v="Off"/>
     <e k="mouseSteering_ui_subtle" v="Subtle"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera rotates to follow wheel steering inside the cabin."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Steering angle threshold (in degrees) below which the camera will not rotate."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Smoothly centers the view while the camera follows steering. Looking backwards remains unrestricted."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="When enabled, camera centering resets both horizontal and vertical rotation. When disabled, only horizontal rotation is centered."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selects how the steering indicator is shown on the HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Shows the current steering angle as on-screen text in the indicator."/>

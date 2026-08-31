@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="카메라"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="카메라가 조향 추적"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="카메라 데드존"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="카메라 자동 중앙 정렬"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="수직 회전 중앙"/>
     <e k="mouseSteering_ui_off" v="끔"/>
     <e k="mouseSteering_ui_subtle" v="약함"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="카메라가 캐빈 내부에서 핸들 조향을 따라 회전합니다."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="카메라가 회전하지 않는 조향 각도 임계값(도 단위)."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="카메라가 조향을 따라가는 동안 시점을 부드럽게 중앙으로 되돌립니다. 뒤를 볼 때는 시점이 자유롭게 유지됩니다."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="활성화하면 카메라 센터링이 수평 및 수직 회전을 재설정합니다. 비활성화하면 수평 회전만 중앙에 배치됩니다."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD에 스티어링 표시기가 표시되는 방식을 선택합니다."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="표시기에 현재 스티어링 각도를 화면 텍스트로 표시합니다."/>

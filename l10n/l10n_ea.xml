@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Cámara"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Cámara Sigue la Dirección"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Zona muerta de la cámara"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Centrado automático de cámara"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Centrar rotación vertical"/>
     <e k="mouseSteering_ui_off" v="Desactivado"/>
     <e k="mouseSteering_ui_subtle" v="Sutil"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="La cámara gira para seguir la dirección del volante dentro de la cabina."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Umbral de ángulo de dirección (en grados) por debajo del cual la cámara no girará."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Centra suavemente la vista mientras la cámara sigue la dirección. Mirar hacia atrás sigue siendo libre."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Cuando está activado, el centrado de la cámara restablece la rotación tanto horizontal como vertical. Cuando está desactivado, solo se centra la rotación horizontal."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selecciona cómo se muestra el indicador de dirección en el HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Muestra el ángulo actual de dirección como texto en pantalla en el indicador."/>

@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Camera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Camera Volgt Besturing"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Dode zone camera"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatische cameracentrering"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Verticale rotatie centreren"/>
     <e k="mouseSteering_ui_off" v="Uit"/>
     <e k="mouseSteering_ui_subtle" v="Subtiel"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="Camera draait om de stuurbeweging te volgen in de cabine."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Drempelwaarde voor stuurhoek (in graden) waaronder de camera niet draait."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Centreert het beeld soepel zolang de camera de stuurbeweging volgt. Achterom kijken blijft vrij."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Wanneer ingeschakeld, zet camera centreren zowel horizontale als verticale rotatie terug. Wanneer uitgeschakeld, wordt alleen horizontale rotatie gecentreerd."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Selecteert hoe de stuurindicator wordt weergegeven op de HUD."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Toont de huidige stuurhoek als tekst op het scherm in de indicator."/>

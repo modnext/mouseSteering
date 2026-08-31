@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="Kamera"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="Kamera követi a kormányzást"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="Kamera holtzónája"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="Automatikus kameraközpontosítás"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="Függőleges forgatás középre"/>
     <e k="mouseSteering_ui_off" v="Ki"/>
     <e k="mouseSteering_ui_subtle" v="Finom"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="A kamera forog, hogy kövesse a kormánykerék mozgását a kabinon belül."/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="Kormányzási szög küszöbérték (fokban), amely alatt a kamera nem forog."/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="Finoman középre igazítja a nézetet, amíg a kamera követi a kormányzást. Hátrafelé továbbra is szabadon nézhet."/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="Ha engedélyezve van, a kamera középre helyezése mind a vízszintes, mind a függőleges forgatást visszaállítja. Ha letiltva van, csak a vízszintes forgatás kerül középre."/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="Kiválasztja, hogyan jelenik meg a kormányzási jelző a HUD-on."/>
     <e k="mouseSteering_ui_indicatorText_desc" v="Megjeleníti az aktuális kormányzási szöget szövegként a jelzőben."/>

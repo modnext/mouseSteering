@@ -216,6 +216,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.autoSave:setIsChecked(settings.autoSave, true)
   self.default:setIsChecked(settings.default, true)
   self.indicatorLookBackInside:setIsChecked(settings.indicatorLookBackInside, true)
+  self.cameraRotationAutoCenter:setIsChecked(settings.cameraRotationAutoCenter == true, true)
   self.cameraRotationCenterVertical:setIsChecked(settings.cameraRotationCenterVertical, true)
 
   -- binary options
@@ -328,11 +329,17 @@ end
 function MouseSteeringSettingsDialog:onMultiChanged(state, element)
   local selectedValue = element.getSettingValue ~= nil and element:getSettingValue() or state
   self.settings[element.id] = selectedValue
+  self:updateDynamicControls()
 end
 
 ---Updates the enabled/disabled state of dynamic controls based on current settings
 function MouseSteeringSettingsDialog:updateDynamicControls()
   local currentSettings = self.settings
+
+  -- automatic centering is only available while the inside camera follows steering
+  if self.cameraRotationAutoCenter ~= nil then
+    self:setOptionDisabledWithIcon(self.cameraRotationAutoCenter, (currentSettings.cameraRotationInside or "off") == "off")
+  end
 
   -- control mode is only relevant while mouse-wheel speed control is enabled
   if self.speedControlMode ~= nil then

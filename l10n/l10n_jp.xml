@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v="カメラ"/>
     <e k="mouseSteering_ui_cameraRotationInside" v="カメラがステアリングを追従"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v="カメラ追従デッドゾーン"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v="カメラの自動センタリング"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v="垂直回転を中央に"/>
     <e k="mouseSteering_ui_off" v="オフ"/>
     <e k="mouseSteering_ui_subtle" v="微弱"/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v="キャビン内でカメラがハンドル操作を追従して回転します。"/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v="カメラが回転しないステアリング角度のしきい値（度単位）。"/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v="カメラがステアリングに追従している間、視点を滑らかに中央へ戻します。後方を見るときは自由に見回せます。"/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v="有効の場合、カメラセンタリングは水平および垂直回転をリセットします。無効の場合は、水平回転のみがセンタリングされます。"/>
     <e k="mouseSteering_ui_indicatorMode_desc" v="HUD上のステアリングインジケーターの表示方法を選択します。"/>
     <e k="mouseSteering_ui_indicatorText_desc" v="インジケーター内に現在のステアリング角度を画面上のテキストとして表示します。"/>

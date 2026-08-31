@@ -70,6 +70,7 @@
     <e k="mouseSteering_ui_camera" v=""/>
     <e k="mouseSteering_ui_cameraRotationInside" v=""/>
     <e k="mouseSteering_ui_cameraRotationDeadZone" v=""/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter" v=""/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical" v=""/>
     <e k="mouseSteering_ui_off" v=""/>
     <e k="mouseSteering_ui_subtle" v=""/>
@@ -87,6 +88,7 @@
     <!-- Descriptions: HUD Settings -->
     <e k="mouseSteering_ui_cameraRotationInside_desc" v=""/>
     <e k="mouseSteering_ui_cameraRotationDeadZone_desc" v=""/>
+    <e k="mouseSteering_ui_cameraRotationAutoCenter_desc" v=""/>
     <e k="mouseSteering_ui_cameraRotationCenterVertical_desc" v=""/>
     <e k="mouseSteering_ui_indicatorMode_desc" v=""/>
     <e k="mouseSteering_ui_indicatorText_desc" v=""/>
