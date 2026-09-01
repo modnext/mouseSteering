@@ -621,7 +621,7 @@ function MouseSteeringVehicle:onEnterVehicle(isControlling)
 
     if intensity > 0 then
       local deadzoneDegrees = spec.cameraRotation:getDeadzoneDegrees()
-      spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity)
+      spec.cameraRotation:initializeCamera(camera, camIndex, deadzoneDegrees, intensity, true)
     end
   end
 end
