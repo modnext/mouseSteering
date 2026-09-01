@@ -133,7 +133,7 @@ function MouseSteeringCameraRotation:getCabViewLimits(camera)
   end
 
   local cabViewSpec = self:getCabViewSpec()
-  if cabViewSpec == nil or cabViewSpec.rotationOffset == nil then
+  if cabViewSpec == nil or cabViewSpec.rotationOffset == nil or cabViewSpec.isInsideCamera ~= true then
     return nil, nil
   end
 
@@ -264,7 +264,7 @@ end
 
 ---Gets the centering correction within the same range as steering follow
 function MouseSteeringCameraRotation:getCenteringOffset(camera, intensity)
-  if not self:getAutoCenter() or intensity <= 0 or self.baseRotY == nil or self:isLookingBackwards(camera) then
+  if not self:getAutoCenter() or intensity <= 0 or self.baseRotY == nil or self.manualRotY == nil or self:isLookingBackwards(camera) then
     return 0
   end
 
@@ -272,18 +272,20 @@ function MouseSteeringCameraRotation:getCenteringOffset(camera, intensity)
 end
 
 ---Takes the current camera rotation as the starting position for steering follow
-function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffset)
+function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffset, centerAutomatically)
   local origRotY = camera.origRotY or 0
   local currentRotY = camera.rotY or 0
+  local autoCenter = self:getAutoCenter() and centerAutomatically ~= false
 
   -- keep the range decision when Alt was held without changing the view
-  if self.baseRotY == nil or self.manualRotY == nil or math.abs(self:getAngleDiff(self.baseRotY + self.rotationFactor, currentRotY, camera)) > 0.001 then
+  if autoCenter and (self.baseRotY == nil or math.abs(self:getAngleDiff(self.baseRotY + self.rotationFactor, currentRotY, camera)) > 0.001) then
     self.manualRotY = currentRotY
   end
 
   -- retain the applied follow angle so steering changes cannot shift the manual range
-  if not self:getAutoCenter() then
+  if not autoCenter then
     self.rotationFactor = steeringOffset or 0
+    self.manualRotY = nil
   end
   self.baseRotY = currentRotY - self.rotationFactor
 
@@ -291,8 +293,8 @@ function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffs
 end
 
 ---Preserves the current camera view as the base for steering follow
-function MouseSteeringCameraRotation:preserveCurrentCamera(camera, camIndex, steeringOffset, followSteering)
-  local manualOffset = self:setCurrentCameraAsBase(camera, steeringOffset)
+function MouseSteeringCameraRotation:preserveCurrentCamera(camera, camIndex, steeringOffset, followSteering, centerAutomatically)
+  local manualOffset = self:setCurrentCameraAsBase(camera, steeringOffset, centerAutomatically)
   local preservePosition = self:isLookingBackwards(camera)
 
   self.lastCamIndex = camIndex
@@ -428,8 +430,8 @@ function MouseSteeringCameraRotation:centerCamera(camera)
 end
 
 ---Requests camera rotation to look backwards
--- @param camera table Active camera
--- @param centerVertical boolean Whether to also center vertical (X) rotation
+-- @param table camera Camera object to manipulate
+-- @param boolean centerVertical Whether to center vertically
 function MouseSteeringCameraRotation:lookBack(camera, centerVertical)
   if camera == nil then
     return
@@ -589,28 +591,32 @@ function MouseSteeringCameraRotation:applyUserMovement(camera)
 end
 
 ---Initializes camera state for a new or restored camera
-function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRotationDeadZoneDegrees, intensity)
+function MouseSteeringCameraRotation:initializeCamera(camera, camIndex, cameraRotationDeadZoneDegrees, intensity, preserveCurrentView)
   self.lastCamIndex = camIndex
   self.lastInsideCamera = camera
 
   local currentOffset = self:getCurrentSteeringOffset(cameraRotationDeadZoneDegrees, intensity)
-  local savedState = self:getSavedCameraState(camIndex)
-  local origRotY = camera.origRotY or 0
-  local manualOffset = savedState ~= nil and (savedState.rotYOffset or 0) or 0
+  if preserveCurrentView then
+    self:setCurrentCameraAsBase(camera, currentOffset, false)
+  else
+    local savedState = self:getSavedCameraState(camIndex)
+    local origRotY = camera.origRotY or 0
+    local manualOffset = savedState ~= nil and (savedState.rotYOffset or 0) or 0
+    local shouldFollowSteering = savedState == nil or (savedState.followSteering and not savedState.preservePosition)
 
-  self.baseRotY = origRotY + manualOffset
+    self.baseRotY = origRotY + manualOffset
+    self.rotationFactor = shouldFollowSteering and currentOffset or 0
+    self.manualRotY = savedState ~= nil and savedState.manualRotY or nil
 
-  local shouldFollowSteering = savedState == nil or (savedState.followSteering and not savedState.preservePosition)
-  self.rotationFactor = shouldFollowSteering and currentOffset or 0
-
-  -- resume automatic centering from the visible angle instead of snapping on camera changes
-  if self:getAutoCenter() and shouldFollowSteering then
-    self.rotationFactor = camera.rotY - self.baseRotY
+    -- a restored inside camera starts centered instead of resuming an old centering transition
+    if self:getAutoCenter() and shouldFollowSteering then
+      self.baseRotY = origRotY
+      self.manualRotY = nil
+    end
   end
 
   -- set camera.rotY for immediate effect
   camera.rotY = self.baseRotY + self.rotationFactor
-  self.manualRotY = savedState ~= nil and savedState.manualRotY or camera.rotY
 
   -- prevent CabView camera reset on vehicle enter
   local cabViewSpec = self:getCabViewSpec()
@@ -654,7 +660,7 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
 
     if isInsideCamera then
       local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
-      self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0)
+      self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0, false)
     end
   end
 
