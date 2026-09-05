@@ -223,7 +223,7 @@ function MouseSteeringSettingsDialog:updateUISettings()
   self.indicatorText:setIsChecked(settings.indicatorText, true)
 
   -- multi-text options
-  self.speedControlMode:setState(settings.speedControlMode or "targetSpeed")
+  self.speedControlMode:setState(settings.speedControlMode == "pedalPercent" and "pedalPercent" or "targetSpeed")
   self.cameraRotationInside:setState(settings.cameraRotationInside)
   self.indicatorMode:setState(settings.indicatorMode)
 
