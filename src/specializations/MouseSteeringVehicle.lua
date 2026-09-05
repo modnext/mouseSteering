@@ -609,8 +609,9 @@ function MouseSteeringVehicle:onEnterVehicle(isControlling)
   end
 
   -- initialize camera rotation for first frame
+  local isAIActive = AIAutomaticSteering ~= nil and self.getAIAutomaticSteeringState ~= nil and self:getAIAutomaticSteeringState() == AIAutomaticSteering.STATE.ACTIVE
   local isWorkerAIActive = self:getIsAIActive()
-  local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive
+  local isCameraFollowAllowed = spec.isUsed and spec.cameraRotationActive and not isWorkerAIActive and (not isAIActive or spec.settings.steeringAssist == true)
   spec.cameraRotation:setSettings(spec.settings, isCameraFollowAllowed)
 
   local camIndex = self.spec_enterable.camIndex
