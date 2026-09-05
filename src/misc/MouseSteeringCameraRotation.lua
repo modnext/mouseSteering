@@ -289,7 +289,7 @@ function MouseSteeringCameraRotation:setCurrentCameraAsBase(camera, steeringOffs
   local autoCenter = self:getAutoCenter() and centerAutomatically ~= false
 
   -- keep the range decision when Alt was held without changing the view
-  if autoCenter and (self.baseRotY == nil or math.abs(self:getAngleDiff(self.baseRotY + self.rotationFactor, currentRotY, camera)) > 0.001) then
+  if autoCenter and (centerAutomatically == true or self.baseRotY == nil or math.abs(self:getAngleDiff(self.baseRotY + self.rotationFactor, currentRotY, camera)) > 0.001) then
     self.manualRotY = currentRotY
   end
 
@@ -312,7 +312,7 @@ function MouseSteeringCameraRotation:preserveCurrentCamera(camera, camIndex, ste
 
   if not autoCenter then
     self.manualRotX = nil
-  elseif self.lastRotX ~= nil and math.abs(currentRotX - self.lastRotX) > 0.001 then
+  elseif centerAutomatically == true or (self.lastRotX ~= nil and math.abs(currentRotX - self.lastRotX) > 0.001) then
     self.manualRotX = currentRotX
   end
   self.lastRotX = currentRotX
@@ -696,7 +696,7 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
   local justDeactivated = not self.isActive and wasActive
   self.lastIsActive = self.isActive
 
-  -- preserve the current view so follow can resume without snapping
+  -- resume from the current view and start automatic centering when enabled
   if justActivated then
     if self.centering then
       self:cancelCentering()
@@ -704,7 +704,7 @@ function MouseSteeringCameraRotation:update(dt, camera, camIndex, isPaused)
 
     if isInsideCamera then
       local steeringOffset = self:getCurrentSteeringOffset(deadzoneDegrees, intensity)
-      self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0, false)
+      self:preserveCurrentCamera(camera, camIndex, steeringOffset, intensity > 0, intensity > 0)
     end
   end
 
