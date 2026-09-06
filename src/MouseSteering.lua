@@ -98,9 +98,13 @@ end
 ---Called on client side on join
 -- @param streamId number the stream id
 -- @param connection table unused connection instance
--- @param applyState boolean true only for state received from the server
-function MouseSteering:readStream(streamId, _, applyState)
+function MouseSteering:readStream(streamId, _)
   local numVehicleSells = streamReadUInt8(streamId)
+
+  if numVehicleSells > self.MAX_VEHICLE_SELLS then
+    return
+  end
+
   local vehicleSells = {}
 
   -- read vehicle sells from stream
@@ -113,16 +117,14 @@ function MouseSteering:readStream(streamId, _, applyState)
     end
   end
 
-  if applyState then
-    self.vehicleSells = {}
+  self.vehicleSells = {}
 
-    for vehicleUniqueId, farmId in pairs(vehicleSells) do
-      self:addSoldVehicle(vehicleUniqueId, farmId)
-    end
-
-    -- cleanup if limit exceeded after loading from stream
-    self:cleanupVehicleSellsIfNeeded()
+  for vehicleUniqueId, farmId in pairs(vehicleSells) do
+    self:addSoldVehicle(vehicleUniqueId, farmId)
   end
+
+  -- cleanup if limit exceeded after loading from stream
+  self:cleanupVehicleSellsIfNeeded()
 end
 
 ---Called on server side on join
@@ -607,13 +609,12 @@ end
 ---Adds vehicle to sold vehicles tracking
 -- @param vehicleUniqueId string unique identifier of the sold vehicle
 -- @param farmId number the farm id that sold the vehicle
--- @param forceRemove boolean|nil optional parameter to force vehicle removal from self.vehicles
-function MouseSteering:addSoldVehicle(vehicleUniqueId, farmId, forceRemove)
+function MouseSteering:addSoldVehicle(vehicleUniqueId, farmId)
   assert(vehicleUniqueId ~= nil, "VehicleUniqueId cannot be nil")
   assert(farmId ~= nil, "FarmId cannot be nil")
 
-  -- prevent duplicate processing - check if already sold (but allow force remove)
-  if self:isVehicleSold(vehicleUniqueId) and not forceRemove then
+  -- prevent duplicate processing
+  if self:isVehicleSold(vehicleUniqueId) then
     return -- already processed, skip
   end
 
@@ -697,8 +698,11 @@ end
 -- @param vehicleUniqueId string unique identifier of the sold vehicle
 -- @param farmId number the farm id that sold the vehicle
 function MouseSteering:onVehicleSoldNetworkMessage(vehicleUniqueId, farmId)
-  -- process vehicle sold notification from network
-  self:addSoldVehicle(vehicleUniqueId, farmId, true)
+  local vehicle = self.vehicles[vehicleUniqueId]
+
+  if vehicle ~= nil and vehicle.farmId == farmId then
+    self:addSoldVehicle(vehicleUniqueId, farmId)
+  end
 end
 
 ---Called after an authoritative vehicle sale succeeds on the server
