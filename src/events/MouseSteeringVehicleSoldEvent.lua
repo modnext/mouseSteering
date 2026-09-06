@@ -53,7 +53,7 @@ end
 ---Run action on receiving side
 -- @param connection table the connection instance
 function MouseSteeringVehicleSoldEvent:run(connection)
-  if connection ~= nil and connection:getIsServer() and not string.isNilOrWhitespace(self.vehicleUniqueId) then
+  if connection:getIsServer() and not string.isNilOrWhitespace(self.vehicleUniqueId) then
     g_messageCenter:publish(MouseSteeringMessageType.VEHICLE_SOLD, self.vehicleUniqueId, self.farmId)
   end
 end
