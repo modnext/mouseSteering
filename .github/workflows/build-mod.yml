@@ -5,21 +5,45 @@ on:
     types: [published]
 
 jobs:
-  build-and-upload:
+  build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Build mod archive (ZIP)
         run: |
           zip -r FS25_mouseSteering.zip src/ l10n/ data/ modDesc.xml icon_mouseSteering.dds
 
+      - name: Store mod archive for publishing
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: FS25_mouseSteering
+          path: FS25_mouseSteering.zip
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: write
+
+    steps:
+      - name: Retrieve mod archive
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: FS25_mouseSteering
+          path: .
+
       - name: Upload mod release asset
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           files: FS25_mouseSteering.zip
