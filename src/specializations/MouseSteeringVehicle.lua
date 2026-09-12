@@ -643,6 +643,10 @@ function MouseSteeringVehicle:onLeaveVehicle(wasEntered)
 
   self:setSteeringInput(0, true, InputDevice.CATEGORY.WHEEL)
 
+  spec.isSteeringPaused = false
+  spec.lastIsPaused = false
+  spec.isCameraRotating = false
+
   -- save camera state on leave
   spec.cameraRotation:resetState(nil)
 
