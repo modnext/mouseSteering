@@ -52,7 +52,7 @@ local function isLoaded()
 end
 
 ---Load the mod
-local function load(mission)
+local function loadMission(mission)
   assert(modEnvironment == nil)
 
   modEnvironment = MouseSteering.new(modName, modDirectory, modSettingsDirectory, mission, g_i18n, g_gui)
@@ -118,7 +118,12 @@ local function sellVehicleEventRun(event, superFunc, connection, ...)
 
   local result = superFunc(event, connection, ...)
 
-  if saleContext ~= nil and modEnvironment == saleContext.mouseSteering and not saleContext.wasBeingDeleted and saleContext.vehicle:getIsBeingDeleted() and not string.isNilOrWhitespace(saleContext.uniqueId) and saleContext.ownerFarmId ~= nil then
+  if saleContext ~= nil
+    and modEnvironment == saleContext.mouseSteering
+    and not saleContext.wasBeingDeleted
+    and saleContext.vehicle:getIsBeingDeleted()
+    and not string.isNilOrWhitespace(saleContext.uniqueId)
+    and saleContext.ownerFarmId ~= nil then
     saleContext.mouseSteering:onVehicleSold(saleContext.uniqueId, saleContext.ownerFarmId)
   end
 
@@ -137,7 +142,7 @@ end
 -- Init the mod
 local function init()
   FSBaseMission.delete = Utils.appendedFunction(FSBaseMission.delete, unload)
-  Mission00.load = Utils.prependedFunction(Mission00.load, load)
+  Mission00.load = Utils.prependedFunction(Mission00.load, loadMission)
   Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, loadedMission)
   FSBaseMission.onConnectionFinishedLoading = Utils.overwrittenFunction(FSBaseMission.onConnectionFinishedLoading, onConnectionFinishedLoading)
   TypeManager.finalizeTypes = Utils.appendedFunction(TypeManager.finalizeTypes, AdditionalSpecialization.finalizeTypes)
