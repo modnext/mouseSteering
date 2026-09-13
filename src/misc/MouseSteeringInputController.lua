@@ -108,7 +108,14 @@ function MouseSteeringInputController:getIsSpeedControlInputCaptured()
 
   local passengerSpec = vehicle.spec_enterablePassenger
 
-  return not (passengerSpec ~= nil and passengerSpec.passengerEntered == true) and not g_gui:getIsGuiVisible() and g_inputBinding:getContextName() == Vehicle.INPUT_CONTEXT_NAME and vehicle:getIsActiveForInput(true) and vehicle:getMotor() ~= nil and vehicle:getMouseSteeringSpeedControlEnabled() and vehicle:getIsMouseSteeringUsed() and not self:getIsCameraRotationInputPressed(vehicle)
+  return not (passengerSpec ~= nil and passengerSpec.passengerEntered == true)
+    and not g_gui:getIsGuiVisible()
+    and g_inputBinding:getContextName() == Vehicle.INPUT_CONTEXT_NAME
+    and vehicle:getIsActiveForInput(true)
+    and vehicle:getMotor() ~= nil
+    and vehicle:getMouseSteeringSpeedControlEnabled()
+    and vehicle:getIsMouseSteeringUsed()
+    and not self:getIsCameraRotationInputPressed(vehicle)
 end
 
 ---Filters direct mouse-wheel polling used by other scripts

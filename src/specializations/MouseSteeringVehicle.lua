@@ -248,7 +248,14 @@ function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, 
     local minRotTime = self.minRotTime
     local maxRotTime = self.maxRotTime
 
-    if not isAIActive and MouseSteeringVehicle.isFiniteNumber(axisSide) and MouseSteeringVehicle.isFiniteNumber(steeringDirection) and steeringDirection ~= 0 and MouseSteeringVehicle.isFiniteNumber(minRotTime) and MouseSteeringVehicle.isFiniteNumber(maxRotTime) and minRotTime ~= 0 and maxRotTime ~= 0 then
+    if not isAIActive
+      and MouseSteeringVehicle.isFiniteNumber(axisSide)
+      and MouseSteeringVehicle.isFiniteNumber(steeringDirection)
+      and steeringDirection ~= 0
+      and MouseSteeringVehicle.isFiniteNumber(minRotTime)
+      and MouseSteeringVehicle.isFiniteNumber(maxRotTime)
+      and minRotTime ~= 0
+      and maxRotTime ~= 0 then
       axisSide = math.clamp(axisSide, -1, 1) * steeringDirection
 
       if axisSide < 0 then
@@ -860,7 +867,10 @@ function MouseSteeringVehicle:onRegisterActionEvents(_, _)
       binding:setActionEventTextPriority(actionEventId, GS_PRIO_NORMAL)
 
       -- always register save/delete vehicle (always hidden)
-      _, actionEventId = self:addActionEvent(spec.actionEvents, InputAction.TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE, self, MouseSteeringVehicle.actionEventSaveSteering, false, true, false, true, nil)
+      _, actionEventId = self:addActionEvent(
+        spec.actionEvents, InputAction.TOGGLE_MOUSE_STEERING_SAVE_DELETE_VEHICLE, self,
+        MouseSteeringVehicle.actionEventSaveSteering, false, true, false, true, nil
+      )
       binding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
       binding:setActionEventTextVisibility(actionEventId, false)
 

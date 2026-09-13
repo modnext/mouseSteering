@@ -67,7 +67,11 @@ function SetMouseSteeringSpeedControlStateEvent:run(connection)
   local vehicle = self.vehicle
   local spec = vehicle ~= nil and vehicle.spec_mouseSteeringSpeedControl or nil
 
-  if connection == nil or spec == nil or vehicle.getIsSynchronized == nil or not vehicle:getIsSynchronized() or vehicle.getOwnerConnection == nil or vehicle.setMouseSteeringSpeedControlModeState == nil then
+  if connection == nil or spec == nil
+    or vehicle.getIsSynchronized == nil
+    or not vehicle:getIsSynchronized()
+    or vehicle.getOwnerConnection == nil
+    or vehicle.setMouseSteeringSpeedControlModeState == nil then
     return
   end
 
