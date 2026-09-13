@@ -234,14 +234,15 @@ function MouseSteeringVehicle:updateSteeringWheel(superFunc, steeringWheel, dt, 
   local isLocalFirstPerson = camera ~= nil and camera.isInside and not camera.isPassengerCamera
   local visualRotatedTime
 
-  if isLocalFirstPerson and spec.isUsed then
+  -- clients keep the same precise animation source when mouse steering is toggled
+  if isLocalFirstPerson and (spec.isUsed or not self.isServer) then
     local isAIActive = self:getIsAIActive()
 
     if not isAIActive and AIAutomaticSteering ~= nil and self.getAIAutomaticSteeringState ~= nil then
       isAIActive = self:getAIAutomaticSteeringState() == AIAutomaticSteering.STATE.ACTIVE
     end
 
-    local axisSide = drivableSpec.idleTurningActive and spec.axisSide or drivableSpec.axisSide
+    local axisSide = spec.isUsed and drivableSpec.idleTurningActive and spec.axisSide or drivableSpec.axisSide
 
     local steeringDirection = self:getSteeringDirection()
     local minRotTime = self.minRotTime
@@ -921,6 +922,15 @@ function MouseSteeringVehicle:calculateAxisAndSteering(spec, axisOverride)
   if axisValue == nil and drivableSpec.idleTurningActive then
     local inputDirection = math.sign(drivableSpec.axisForward * drivableSpec.idleTurningDirection)
     axisValue = inputDirection == 0 and spec.axisSide or math.abs(drivableSpec.axisSide) * inputDirection
+  end
+
+  -- locally controlled clients have a precise axis; rotatedTime is quantized by the server stream
+  if axisValue == nil and self.isClient and not self.isServer and self:getIsEnteredForInput() and not self:getIsAIActive() then
+    local isAIActive = AIAutomaticSteering ~= nil and self.getAIAutomaticSteeringState ~= nil and self:getAIAutomaticSteeringState() == AIAutomaticSteering.STATE.ACTIVE
+
+    if not isAIActive and MouseSteeringVehicle.isFiniteNumber(drivableSpec.axisSide) then
+      axisValue = drivableSpec.axisSide
+    end
   end
 
   if axisValue == nil then
